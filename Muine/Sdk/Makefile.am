@@ -28,7 +28,7 @@ RESOURCES = \
 
 # FIXME MONO_XMLSERIALIZER_THS=no works around Ximian Bugzilla #58194
 AmazonSearchService.cs: Muine/AmazonSearchService.wsdl
-	MONO_XMLSERIALIZER_THS=no wsdl Muine/AmazonSearchService.wsdl -o Muine/AmazonSearchService.cs
+	MONO_XMLSERIALIZER_THS=no wsdl Muine/AmazonSearchService.wsdl -o:Muine/AmazonSearchService.cs
 
 Muine.Sdk.dll: AmazonSearchService.cs 
 	mcs -g -target:library -pkg:gtk-sharp -pkg:gnome-sharp -pkg:gconf-sharp -pkg:glade-sharp /r:System.Web.Services /define:DEBUG_PLUGINS -o Muine.Sdk.dll $(SOURCES) $(RESOURCES)
