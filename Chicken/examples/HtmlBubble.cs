@@ -28,10 +28,20 @@ public class HtmlBubble
     public static void Main (string[] args)
     {
 	Application.Init ();
-	NotificationBubble b = new NotificationBubble ("http://localhost", NotificationSource.Url, NotificationContent.Html);
-	b.ShowAll ();
+	NotificationBubble b = new NotificationBubble ("http://www.gnome.org", NotificationSource.Url, NotificationContent.Html);
+	b.TimeOut = 10000;
+	b.TimerEndedEvent += TimerEnded;
+	b.BubbleWidth = 600;
+	b.BubbleHeight = 80;
+	b.Move (5, 30);
 	b.RenderWithTimer ();
+	b.ShowAll ();
 	Application.Run ();
+    }
+    
+    private static void TimerEnded ()
+    {
+	Application.Quit ();
     }
 }
 

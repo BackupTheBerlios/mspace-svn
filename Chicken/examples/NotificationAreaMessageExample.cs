@@ -33,8 +33,14 @@ namespace Chicken.Examples
 	    msg.BubbleWidth = 250;
 	    msg.BubbleHeight = 50;
 	    msg.TimeOut = 5000; //milliseconds
+	    msg.TimerEndedEvent += TimerEnded;
 	    msg.Notify ();
 	    Application.Run ();
+	}
+
+	private static void TimerEnded ()
+	{
+	    Application.Quit ();
 	}
     }
 
