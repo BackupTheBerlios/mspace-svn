@@ -1,0 +1,6 @@
+instalar scp only ssh gnome
+addgroup dropbox
+mkdir Dropbox
+useradd -d /home/rubiojr/Dropbox -g dropbox -s /usr/bin/scponly sampyjr
+crear el .desktop y personalizarlo
+

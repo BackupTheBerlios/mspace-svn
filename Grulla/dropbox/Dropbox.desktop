@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Encoding=UTF-8
+Name=@MyName@ DropBox
+Type=Link
+URL=sftp://@my-ip@/home/@my-user@/Dropbox
+Terminal=false
+Icon=gnome-fs-share.png
