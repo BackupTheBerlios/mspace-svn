@@ -41,6 +41,7 @@ namespace FastOpen
 	    entry = new CompletionEntry ();
 	    entry.Activated += EntryActivated;
 	    BorderWidth = 12;
+	    DefaultWidth = 300;
 	    Add (entry);
 	    WindowPosition = WindowPosition.Center;
 	    AppContext.Init ();
@@ -48,14 +49,18 @@ namespace FastOpen
 
 	public void EntryActivated (object obj, EventArgs args)
 	{
-	    entry.DeleteSelection ();
-	    if (!entry.BinFound)
+	    if (!entry.BinFound || entry.Text.StartsWith (":"))
 	    	parser.Parse (entry.Text.Substring (1,entry.Text.Length - 1));
 	    else {
+		string[] command = entry.Text.Split (new char[]{' '}, 2);
 		try {
 		    ProcessStartInfo info = new ProcessStartInfo (entry.Text);
-		    info.UseShellExecute = false;
-		    Process process = Process.Start (info);
+		    info.UseShellExecute = true;
+		    Process process;
+		    if (command.Length == 1)
+			process = Process.Start (command[0]);
+		    else 
+			process = Process.Start (command[0], command[1]);
 		} catch {
 		    Console.WriteLine ("ERROR: Launching process.");
 		}
@@ -69,6 +74,12 @@ namespace FastOpen
 	    if (evt.Key == Gdk.Key.Escape)
 		Application.Quit ();
 	    return base.OnKeyPressEvent (evt);
+	}
+
+	protected override bool OnDeleteEvent (Gdk.Event evt)
+	{
+	    Application.Quit ();
+	    return false;
 	}
     }
 }

@@ -26,22 +26,17 @@ namespace FastOpen
 
     public class CompletionEntry : Entry
     {
-	private int oldLength = 0;
-	private bool autocompleting = false;
-	private int current = 0;
-	public bool explored = false;
+	private bool explored = false;
 	private ArrayList binList;
+	private ArrayList pathList;
+	private ArrayList completions = new ArrayList ();
+	private int completionCounter = 0;
+	private char separator = System.IO.Path.DirectorySeparatorChar;
 
-	public CompletionEntry () : base ()
+	private void AutoComplete (string text)
 	{
-	    oldLength = Text.Length;
-	    //TextInserted += OnTextInserted;
-	}
-	
-	private string AutoComplete (string text)
-	{
-	    if (text.StartsWith (":") || text == String.Empty)
-		return null;
+	    completions.Clear ();
+	    completionCounter = 0;
 	    if (!explored)
 	    {
 		string[] paths = Environment.GetEnvironmentVariable ("PATH").Split (System.IO.Path.PathSeparator);
@@ -60,30 +55,80 @@ namespace FastOpen
 	    foreach (string s in binList)
 	    {
 		if (s.StartsWith (text))
-		    return s;
+		{
+		    completions.Add (s);
+		}
 	    }
-	    return null;
+	}
+
+	private void AutoCompletePath (string path)
+	{
+	    completions.Clear ();
+	    completionCounter = 0;
+	    string baseDir = System.IO.Path.GetDirectoryName (path);
+	    string file = System.IO.Path.GetFileName (path);
+	    if (Directory.Exists (baseDir))
+	    {
+		string[] files = Directory.GetFileSystemEntries (baseDir);
+		foreach (string s in files)
+		{
+		    string stripped = System.IO.Path.GetFileName (s);
+		    if (stripped.StartsWith (file))
+			completions.Add (s);
+		}
+	    }
 	}
 
 	protected override bool OnKeyPressEvent (Gdk.EventKey evt)
 	{
 	    base.OnKeyPressEvent (evt);
-	    if (evt.Key == Gdk.Key.BackSpace)
-		return false;
-	    DeleteSelection ();
-	    //Fake speed
-	    if (Text.Length > 2)
-	    {
-		string bin = AutoComplete (Text);
-		if (bin != null)
-		{
-		    int oldLength = Text.Length;
-		    Text = bin;
-		    SelectRegion (oldLength, Text.Length);
-		    binFound = true;
+	    if (AcceptKey (evt)) {
+		DeleteSelection ();
+		int oldLength = Text.Length;
+		string binName;
+
+		if (evt.Key == Gdk.Key.Tab) {	
+		    if (completions.Count > 1) {
+			binName = completions[completionCounter] as string;
+			Text = binName;
+			SelectRegion (oldLength, Text.Length);
+			if (completionCounter < completions.Count - 1) completionCounter++;
+
+		    } else if (completions.Count == 1) {
+			Text = completions[0] as string;
+			Position = Text.Length;	
+		    }
+		    
+		} else if (Text.StartsWith (separator.ToString ())) {
+		    AutoCompletePath (Text);
+		    if (completions.Count > 0) {
+			string first = completions[0] as string;
+			Text = first; 
+			SelectRegion (oldLength, Text.Length);
+		    }
+		} else {
+		    AutoComplete (Text);
+		    if (completions.Count > 0) {
+			    binFound = true;
+			    string first = completions[0] as string;
+			    binName = first;
+			    Text = binName;
+			    SelectRegion (oldLength, Text.Length);
+		    } else
+			binFound = false;
 		}
+		    
 	    }
 	    return true;
+	}
+
+	private bool AcceptKey (Gdk.EventKey evt)
+	{
+	    uint key = evt.KeyValue;
+	    if ((key >= 33 && key <= 126)   || 
+		(evt.Key == Gdk.Key.Tab))
+		return true;
+	    return false;
 	}
 
 	private bool binFound = false;

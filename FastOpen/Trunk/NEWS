@@ -1,0 +1,5 @@
+0.2
+----
+* Autocompletion working
+* fseditor is now included in this package
+* url handling works better
