@@ -49,4 +49,6 @@ SOURCES = \
 ./NotificationAreaIcon.cs\
 ./AlbumsStore.cs\
 ./SkipToWindow.cs\
-./DataView.cs
+./DataView.cs\
+./SongsStore.cs\
+./SongsView.cs

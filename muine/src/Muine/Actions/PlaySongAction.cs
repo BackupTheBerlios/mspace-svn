@@ -25,9 +25,11 @@ public class PlaySongAction : AbstractUIAction
 {
 
     private Song[] songs;
+    private bool addToPlaylist = false;
     
-    public PlaySongAction (Song[] songs)
+    public PlaySongAction (Song[] songs, bool addToPlaylist)
     {
+	this.addToPlaylist = addToPlaylist;
 	this.songs = songs;
 	StockIcon = Stock.Add;
 	Label = AppContext.Catalog.GetString ("Play _Song...");
@@ -35,6 +37,9 @@ public class PlaySongAction : AbstractUIAction
 
     public override void ActionPerformed ()
     {
+	if (addToPlaylist)
+	    AppContext.Playlist.AddRange (songs);
+	AppContext.PlayerBackend.Playing = true;
     }
 }
 

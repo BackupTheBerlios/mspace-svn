@@ -17,35 +17,36 @@
  * Boston, MA 02111-1307, USA.
  */
 
-namespace Gtk.Ext
+using System;
+using Gtk;
+using System.Text;
+using System.Collections;
+
+
+public class SongsStore : DataStore
 {
-    using Gtk;
-    using System;
 
-    public class ActionButton : Button
-    {
-	protected UIAction action;
-
-	public ActionButton (UIAction action) : base ()
+	public SongsStore () : base (typeof (string)) 
 	{
-	    this.action = action;
-	    Sensitive = action.Enabled;
 	}
 
-	protected override void OnActivated ()
+	public override TreeIter AppendMedia (object obj)
 	{
-	    base.OnActivated ();
-	    if (!action.Enabled)
-		return;
-	    action.ActionPerformed ();
+	    Song s = (Song) obj;
+	    StringBuilder builder = new StringBuilder ();
+	    builder.Append ("<b>");
+	    builder.Append (s.Album);
+	    builder.Append ("</b>");
+	    builder.Append ("\n");
+	    builder.Append (StringUtils.JoinHumanReadable (s.Artists));
+	    return base.AppendValues (builder.ToString ());
 	}
 
-	protected override void OnClicked ()
-	{
-	    base.OnClicked ();
-	    if (!action.Enabled)
-		return;
-	    action.ActionPerformed ();
+	public override ICollection Media {
+	    get {
+		return AppContext.DB.Songs.Values;
+	    }
+
 	}
-    }
 }
+

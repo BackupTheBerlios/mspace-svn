@@ -48,14 +48,14 @@ public class AlbumsStore : DataStore
                 else if (AppContext.CoverDB.Loading)
                         pix = AppContext.CoverDB.DownloadingPixbuf;
                 else
-                        pix = new Gdk.Pixbuf (null, "muine-nothing");
+                        pix = new Gdk.Pixbuf (null, "muine-nothing.png");
 
 	    	return base.AppendValues (pix, builder.ToString ());
 	}
     
 	public override ICollection Media {
 	    get {
-		return AppContext.DB.Albums;
+		return AppContext.DB.Albums.Values;
 	}
     }
 }

@@ -31,6 +31,8 @@ public class AddSongAction : AbstractUIAction
 
     public override void ActionPerformed ()
     {
+	//AddMusicWindow win = new AddMusicWindow (new SongsView ());
+	//win.ShowAll ();
     }
 }
 
