@@ -1,4 +1,4 @@
-REFERENCES = -pkg:gtk-sharp /r:$(top_srcdir)/ext/Nini.dll /r:$(top_srcdir)/src/Muine.Sdk.dll
+REFERENCES = -pkg:gtk-sharp /r:$(top_srcdir)/src/Muine.Sdk.dll
 
 SOURCES = GstPlayer.cs
 
