@@ -20,35 +20,58 @@
 
 using System;
 using Gtk;
+using Glade;
 
 [assembly:PluginInfo (
-				"MonitorPlugin",
-				"Monitor Plugin",
-				"Prints all the Muine evets to a tiny gtk interface",
-				PluginType.Passive)]
+			"MonitorPlugin",
+			"Monitor Plugin",
+			"Prints all the Muine evets to a tiny gtk interface",
+			PluginType.Passive)]
 
 
 public class MonitorPlugin : IPlugin
 {
-	public IBusFilter Filter { 
-		get {
-			return new PlayerEventFilter ();
-		}
-		set {
-		}
-	}
-		
-	 public bool MessagePosted(Message msg)
-	 {
-	 	Console.WriteLine("PLUGIN: Message arrived. {0}", msg);
-	 	return true;
-	 }
-	 
-	 private class TestFilter : IBusFilter
-	 {
-	 	public bool Accept (Message msg)
-	 	{
-	 		return true;
-	 	}
-	 }
+    
+    private string gladeFile = "monitor-window.glade";
+
+    public MonitorPlugin ()
+    {
+	InitComponets ();
+    }
+
+    private void InitComponets ()
+    {
+	XML gxml = new XML (null, gladeFile, "window", null);
+	gxml.Autoconnect (this);
+    }
+    
+    public IBusFilter Filter { 
+	    get {
+		    return new TestFilter ();
+	    }
+	    set {
+	    }
+    }
+	    
+     public bool MessagePosted(Message msg)
+     {
+	    return true;
+     }
+     
+     private void ClearClicked (object obj, EventArgs args)
+     {
+     }
+
+     private class TestFilter : IBusFilter
+     {
+	    public bool Accept (Message msg)
+	    {
+		    return true;
+	    }
+     }
+     
+     public static void Main (string[] args)
+     {
+	 new MonitorPlugin ();
+     }
 }

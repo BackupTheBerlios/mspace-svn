@@ -43,4 +43,6 @@ Sdk/muine-sdk.pc
 Muine/Makefile
 Muine/muine
 Muine/muine.exe.config
+Plugins/Makefile
+Plugins/MonitorPlugin/Makefile
 ])
