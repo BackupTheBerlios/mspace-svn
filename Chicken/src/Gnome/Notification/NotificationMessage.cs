@@ -213,7 +213,7 @@ namespace Chicken.Gnome.Notification
 	    StreamWriter writer = new StreamWriter (new FileStream (tmpfile, FileMode.OpenOrCreate, FileAccess.Write));
 	    writer.Write (svg);
 	    writer.Close ();
-	    Image img = new Image (Rsvg.Pixbuf.LoadFromStream (new FileStream (tmpfile, FileMode.Open)));
+	    Image img = new Image (Rsvg.Pixbuf.FromFile(tmpfile));
 	    window.Add (img);
 		
 	}
