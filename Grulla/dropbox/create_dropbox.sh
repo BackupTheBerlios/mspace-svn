@@ -79,10 +79,20 @@ echo $GUEST:$GUEST | chpasswd
 cp Dropbox.desktop $USER-$GUEST-Dropbox.desktop
 
 #reemplaza @USER@ e @IP@ en el fichero Dropbox.desktop
-sed -i "s/@USER@/$USER/" $USER-$GUEST-Dropbox.desktop
-sed -i "s/@GUEST@/$GUEST/" $USER-$GUEST-Dropbox.desktop
-sed -i "s/@IP@/$IP/" $USER-$GUEST-Dropbox.desktop
+#sed -i "s/@USER@/$USER/" $USER-$GUEST-Dropbox.desktop
+#sed -i "s/@GUEST@/$GUEST/" $USER-$GUEST-Dropbox.desktop
+#sed -i "s/@IP@/$IP/" $USER-$GUEST-Dropbox.desktop
 
 zenity --info --title="Proceso finalizado" --text="$GUEST es ahora tu invitado.\nMándale el archivo $USER-$GUEST-Dropbox.desktop creado por\ncorreo y podrá empezar a usar tu buzón."
+
+
+echo "[Desktop Entry]
+Version=1.0
+Encoding=UTF-8
+Name=$USER DropBox
+Type=Link
+URL=sftp://$GUEST@$IP/home/$USER/Dropbox
+Terminal=false
+Icon=gnome-fs-share.png" > $USER-$GUEST-Dropbox.desktop
 
 sudo -u $USER gnome-open mailto:$GUEST_MAIL $USER-$GUEST-Dropbox.desktop
