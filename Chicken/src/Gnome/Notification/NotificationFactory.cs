@@ -20,14 +20,17 @@
 namespace Chicken.Gnome.Notification 
 {
     using System;
-    using Chicken.Gnome.TrayIcon;
     using System.IO;
     using System.Reflection;
+    using System.Text;
 
     public class NotificationFactory
     {
 
-	public static void ShowSvgNotification (string source, NotificationSource nsource, NotificationContent ncontent, int timeout)
+	public static void ShowSvgNotification (string source,
+						NotificationSource nsource,
+						NotificationContent ncontent,
+						int timeout)
 	{
 	    NotificationMessage msg = new NotificationMessage (source, nsource, ncontent);	    
 	    msg.TimeOut = timeout;
@@ -36,7 +39,7 @@ namespace Chicken.Gnome.Notification
 
 	public static void ShowSvgNotification (string source, string header, string body, int timeout)
 	{
-	    ShowSvgNotification (source, NotificationSource.File, header, body, timeout, 200, 50, NotificationType.Info);
+	    ShowSvgNotification (source, NotificationSource.File, header, body, timeout, 200, 75, NotificationType.Info);
 	}
 
 	public static void ShowSvgNotification (string source,
@@ -70,8 +73,7 @@ namespace Chicken.Gnome.Notification
 		    svg = source;
 	    }
 	     
-	    svg = svg.Replace ("@HEADER@", header);
-	    svg = svg.Replace ("@TEXT@", body);
+	    svg = ReplaceMacros (svg, header, body);
 	    NotificationMessage msg = new NotificationMessage (svg, NotificationSource.Text, NotificationContent.Svg);
 	    msg.TimeOut = timeout;
 	    msg.BubbleWidth = width;
@@ -92,7 +94,44 @@ namespace Chicken.Gnome.Notification
 
 	public static void ShowMessageNotification (string header, string body, int timeout, NotificationType type)
 	{
-	    NotificationFactory.ShowMessageNotification (header, body, timeout, 200, 50, type); 
+	    NotificationFactory.ShowMessageNotification (header, body, timeout, 200, 75, type); 
+	}
+
+	private static string ReplaceMacros (string svg, string header, string text)
+	{
+	    
+	    int linenum = 0;
+	    string newsvg = svg;
+	    newsvg = newsvg.Replace ("@HEADER@", header);
+	    string[] lines = new string[3];
+
+	    StringBuilder builder = new StringBuilder ();
+	    for (int i = 0 ; i<text.Length; i++)
+	    {
+		if (text[i] != '%')
+		    builder.Append (text[i]);
+		
+		else {
+		    if (i < text.Length - 1)
+		    {
+			if (text[i+1] == '%' && linenum < 3)
+			{
+			    lines[linenum] = builder.ToString (); 
+			    builder = new StringBuilder ();
+			    linenum++;
+			}
+			    
+		    }
+		}
+		
+	    }
+	    lines[linenum] = builder.ToString (); 
+	    
+	    newsvg = newsvg.Replace ("@LINE1@", lines[0]);
+	    newsvg = newsvg.Replace ("@LINE2@", lines[1]);
+	    newsvg = newsvg.Replace ("@LINE3@", lines[2]);
+	    
+	    return newsvg;
 	}
     }
 
