@@ -18,7 +18,6 @@
   <property name="type_hint">GDK_WINDOW_TYPE_HINT_NORMAL</property>
   <property name="gravity">GDK_GRAVITY_NORTH_WEST</property>
   <property name="has_separator">False</property>
-  <signal name="response" handler="HandleWindowResponse" last_modification_time="Sun, 11 Jan 2004 22:41:37 GMT"/>
   <signal name="delete_event" handler="HandleWindowDeleteEvent" last_modification_time="Sun, 11 Jan 2004 22:41:49 GMT"/>
 
   <child internal-child="vbox">
@@ -42,6 +41,7 @@
 	      <property name="relief">GTK_RELIEF_NORMAL</property>
 	      <property name="focus_on_click">True</property>
 	      <property name="response_id">-7</property>
+	      <signal name="clicked" handler="CloseClicked" last_modification_time="Mon, 02 Aug 2004 23:50:46 GMT"/>
 	      <accelerator key="Escape" modifiers="0" signal="clicked"/>
 	    </widget>
 	  </child>
@@ -55,6 +55,7 @@
 	      <property name="relief">GTK_RELIEF_NORMAL</property>
 	      <property name="focus_on_click">True</property>
 	      <property name="response_id">2</property>
+	      <signal name="clicked" handler="QueueClicked" last_modification_time="Mon, 02 Aug 2004 23:50:35 GMT"/>
 
 	      <child>
 		<widget class="GtkAlignment" id="alignment25">
@@ -128,6 +129,7 @@
 	      <property name="relief">GTK_RELIEF_NORMAL</property>
 	      <property name="focus_on_click">True</property>
 	      <property name="response_id">1</property>
+	      <signal name="clicked" handler="PlayClicked" last_modification_time="Mon, 02 Aug 2004 23:50:17 GMT"/>
 
 	      <child>
 		<widget class="GtkAlignment" id="alignment24">
