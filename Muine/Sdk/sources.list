@@ -8,7 +8,7 @@ SOURCES = \
 ./Bus.Members/PlayerMonitor.cs \
 ./Event.Filters/DatabaseEventFilter.cs \
 ./Event.Filters/PlayerEventFilter.cs\
-./Event.Filters/IBusFilter.cs\
+./Bus/IBusFilter.cs\
 ./Bus.Members/IBusMember.cs\
 ./Bus/Message.cs\
 ./Bus/Bus.cs\
