@@ -12,5 +12,8 @@ PKG_NAME="muine"
     exit 1
 }
 
-autoconf
-automake
+which gnome-autogen.sh || {
+    echo "You need to install gnome-common from the GNOME CVS"
+    exit 1
+}
+REQUIRED_AUTOMAKE_VERSION=1.7 USE_GNOME2_MACROS=1 ACLOCAL_FLAGS="$ACLOCAL_FLAGS" . gnome-autogen.sh
