@@ -25,13 +25,12 @@
     <para>Os habréis dado cuenta de que este es uno de los problemas
     habituales de compartir archivos. Para este fin, existen una buena
     cantidad de tecnologías a nuestra disposición. Unas son muy sencillas de
-    utilizar pero poco seguras, otras mas seguras, pero requieren un cierto
-    nivel de conocimiento sobre la tecnología, unas son mas lentas que otras,
+    utilizar pero poco seguras, otras más seguras, pero requieren un cierto
+    nivel de conocimiento sobre la tecnología, unas son más lentas que otras,
     etc.</para>
 
     <para>La solución que yo propongo aquí, es extremadamente sencilla de
-    utilizar, y creo que es lo suficientemente segura ( aunque no soy un
-    experto en seguridad ).</para>
+    utilizar, y creo que es lo suficientemente segura.</para>
   </section>
 
   <section>
@@ -72,7 +71,7 @@
     automatizados. Podréis encontrar un script que automatiza todo el proceso
     en esta <ulink
     url="http://mspace.berlios.de/Grulla/dropbox/">dirección</ulink>.
-    Explicaré mas adelante como utilizar el script.</para>
+    Explicaré más adelante como utilizar el script.</para>
 
     <para>En principio, los pasos deben realizarse como usuario, salvo que
     indique lo contrario. Los pasos a seguir son los siguientes:</para>
