@@ -8,7 +8,7 @@
     <para>El artículo ha sido escrito con el mayor cuidado posible para que
     los usuarios que tengan poca experiencia con el terminal, puedan seguirlo.
     No obstante, se asume un nivel básico de conocimiento sobre el sistema
-    operativo linux y no entraremos en detalle en los comandos y términos
+    operativo GNU/Linux y no entraremos en detalle en los comandos y términos
     utilizados.</para>
   </section>
 
@@ -69,7 +69,7 @@
     <title>Configuración del sistema y creación del buzón</title>
 
     <para>Los pasos que voy a describir a continuación, pueden ser fácilmente
-    automatizado. Podréis encontrar un script que automatiza todo el proceso
+    automatizados. Podréis encontrar un script que automatiza todo el proceso
     en esta <ulink
     url="http://mspace.berlios.de/Grulla/dropbox/">dirección</ulink>.
     Explicaré mas adelante como utilizar el script.</para>
@@ -109,9 +109,10 @@
 
       <listitem>
         <para>Ahora tenemos que dar permisos a la carpeta para que nuestro
-        invitado pueda escribir y leer en dicha carpeta.</para>
+        invitado pueda escribir y leer en dicha carpeta. Tambien tenemos que
+        cambiarle el grupo a <emphasis>dropbox</emphasis>.</para>
 
-        <para><screen>chmod g+srw ~/Dropbox</screen></para>
+        <para><screen>chmod g+srw ~/Dropbox</screen><screen>chgrp dropbox ~/Dropbox</screen></para>
       </listitem>
 
       <listitem>
@@ -157,14 +158,44 @@ Icon=gnome-fs-share.png</programlisting></para>
   <section>
     <title>Utilización del script para automatizar el proceso</title>
 
-    <para>bla bla bla bla</para>
+    <para>Podéis encontrar un script que automatiza todo esto en
+    http://mspace.berlios.de/Grulla/dropbox. También hay una utilidad que os
+    permite monitorizar la carpeta Dropbox y notifica al usuario cuando le
+    dejan archivos en su buzón. Podéis descargarla en el mismo lugar. Se llama
+    <emphasis>foldermonitor</emphasis>.</para>
 
-    <para></para>
+    <para>Para instalar la utilidad, necesitáis tener instalado mono y Gtk#.
+    Descomprimid el archivo foldermonitor-X.X.X.tar.gz, y desde dentro del
+    directorio, teclead:</para>
+
+    <para><screen>./configure &amp;&amp; make</screen></para>
+
+    <para>Ahora como root teclead:</para>
+
+    <screen>make install</screen>
+
+    <para>Esto instalará <application>foldermonitor en /usr/loca/bin. Para
+    ejecutarlo, simplemente teclead:</application><screen>foldermonitor {ruta del buzón}</screen></para>
+
+    <para>Donde ruta del buzón es el directorio que habéis creado como buzón
+    (~/Dropbox).</para>
+  </section>
+
+  <section>
+    <title>Conclusión</title>
+
+    <para>Espero haber sido lo suficientemente claro y conciso. Si tenéis
+    alguna duda de como funciona todo esto, o algo os ha fallado, no dudéis en
+    suscribiros a la lista de correo de Grulla y preguntar allí vuestras
+    dudas.</para>
   </section>
 
   <section>
     <title>Referencias</title>
 
-    <para></para>
+    <para>Podéis encontrar montones de documentación en español sobre
+    GNU/Linux en:</para>
+
+    <para>http://es.tdlp.org</para>
   </section>
 </chapter>
