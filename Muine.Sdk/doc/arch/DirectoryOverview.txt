@@ -1,0 +1,4 @@
+DataKits/ : the dir to hold the different DataKit implementations.
+PlayerKits/: the dir to hold the different PlayerKit implementations.
+src/ : The core of the framework
+

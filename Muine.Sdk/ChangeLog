@@ -1,5 +1,14 @@
 2004-10-24  Sergio Rubio  <sergio.rubio@hispalinux.es>
 
+	* README:
+	* TODO:
+	* doc/arch/DirectoryOverview.txt:
+	* doc/arch/NamespaceOverview.txt:
+
+	Added some docs.
+
+2004-10-24  Sergio Rubio  <sergio.rubio@hispalinux.es>
+
 	* DataKits/Sqlite/SqliteDataKit.cs: Fixes in tables creation and
 	connection string
 	* DataKits/Sqlite/SqliteMusicDb.cs: Renamed to SqliteDataKit

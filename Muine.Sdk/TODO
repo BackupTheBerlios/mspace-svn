@@ -1,0 +1,25 @@
+Plugin Architecture
+--------------------
+* Add support for a plugin arch. Plugins should be able to be
+loaded and unloaded from user dir or system wide.
+* Plugins have access to the sdk services.
+* Some example plugins:
+	- Exporting playlist as a webservice.
+	- DBus support
+	- Playlist export
+
+
+DataKits
+---------
+* SqliteDataKit is not finished yet.
+
+Add more DataKits
+--------------
+* iPod data kit
+
+Kits improvements
+------------------
+* Add support for changing the kits on the fly, once the Player.Sdk has been
+started. This will allow us to swap the db backends from sqlite to ipoddb if the
+user wants to manage the ipod database.
+

@@ -1,0 +1,19 @@
+Player.Sdk is a framework to easy the development of new Music players. I has a common
+set of features used by most of the players around, such as playlist management, music database,
+playing capabilities and so on.
+
+One of the Player.Sdk goals is to build music player GUIs on top of it. Another goal is portability,
+so OS specific code can be replaced easily (drag'n drop). You won't find platform specefic code inside
+the framework. All the Framework code is fully managed.
+
+Flexibility is another goal of the framework, so a plugin architecture to add new features has been
+developed. This will keep the core of the framework clean and small.
+
+Player.Sdk Core Features:
+* Drag'n drop player backend support.
+* Drag'n drop database backend support.
+* Playlist support.
+* Configuration support.
+* Plug-ins support.
+* Fully managed.
+

@@ -1,0 +1,9 @@
+* Muine.Sdk.Data: abstract data types and Db services.
+
+* Muine.Sdk.Configuration: Basic configuration logic for the framework. Currently I am using Nini (http://nini.sf.net) to keep the config in a .ini file. We could write a Nini backend to use gconf if we want. Although i think it is not necessary ATM.
+
+* Muine.Sdk.Player: player services.
+
+* Muine.Sdk.Playlist: playlist services.
+
+* Muine.Sdk.Services: basic logic to load the kits and so on. 
