@@ -1,0 +1,9 @@
+Sergio Rubio <sergio.rubio@hispalinux.es>
+
+The TrayIcon .Net bindings have been adapted from the Novell ifolder project.
+The Nini Framework is at http://nini.sf.net (Version 0.7 included)
+
+Bug fixes and thanks to:
+Néstor Salceda
+Luis Bosque [MonkeyPop Scripting]
+Dani Baeyens [MonkeyPop Scripting]
