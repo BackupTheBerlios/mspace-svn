@@ -1,6 +1,6 @@
 using System;
-using org.vim.Components.VimEntry.Model;
-namespace org.vim.Main {
+using Vim.Components.VimEntry.Model;
+namespace Vim.Main {
     public class Launcher {
 /**
         IView view;

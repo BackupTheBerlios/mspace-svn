@@ -1,7 +1,7 @@
 /*using System.Collections;
-using org.vim.Components.VimControl.Model;
+using Vim.Components.VimControl.Model;
 
-namespace org.vim.Components.BufferedVimControl.Model {
+namespace Vim.Components.BufferedVimControl.Model {
     //
     //<summary
     //  This interface represents the main component in the Application.

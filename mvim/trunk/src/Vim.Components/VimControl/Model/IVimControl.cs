@@ -2,7 +2,7 @@
 using org.vim.Components.VimBuffer.Model;
 using org.vim.Components.VimEntry.Model;
 
-namespace org.vim.Components.VimControl.Model {
+namespace Vim.Components.VimControl.Model {
 
     //
     //<summary>

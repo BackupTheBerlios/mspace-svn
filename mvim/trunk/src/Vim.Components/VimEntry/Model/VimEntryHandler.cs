@@ -2,7 +2,7 @@ using System;
 using log4net;
 using log4net.Config;
 
-namespace org.vim.Components.VimEntry.Model {
+namespace Vim.Components.VimEntry.Model {
     public class VimEntryHandler : IVimEntryHandler {
         
         private string command;

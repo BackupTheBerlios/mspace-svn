@@ -4,37 +4,57 @@
   <Copyright>To be added.</Copyright>
   <Types>
     <Namespace Name="org.vim.Components.VimBuffer.Model">
+    </Namespace>
+    <Namespace Name="org.vim.Components.VimEntry.Model">
+    </Namespace>
+    <Namespace Name="org.vim.Components.VimEntry.Controller">
+    </Namespace>
+    <Namespace Name="org.vim.Components.VimEntry.View">
+    </Namespace>
+    <Namespace Name="org.vim.Components.BufferedVimControl">
+    </Namespace>
+    <Namespace Name="org.vim.Components.VimControl">
+    </Namespace>
+    <Namespace Name="org.vim.Components.VimBuffer">
+    </Namespace>
+    <Namespace Name="org.vim.Components.VimEntry">
+    </Namespace>
+    <Namespace Name="org.vim.Components">
+    </Namespace>
+    <Namespace Name="org.vim.Main">
+    </Namespace>
+    <Namespace Name="Vim.Components.VimBuffer.Model">
       <Type Name="IVimBuffer" />
       <Type Name="VimBuffer" />
     </Namespace>
-    <Namespace Name="org.vim.Components.VimEntry.Model">
+    <Namespace Name="Vim.Components.VimEntry.Model">
       <Type Name="IVimEntryHandler" />
       <Type Name="VimEntryHandler" />
     </Namespace>
-    <Namespace Name="org.vim.Components.VimEntry.Controller">
+    <Namespace Name="Vim.Components.VimEntry.Controller">
       <Type Name="IVimEntryController" />
       <Type Name="VimEntryController" />
     </Namespace>
-    <Namespace Name="org.vim.Components.VimEntry.View">
+    <Namespace Name="Vim.Components.VimEntry.View">
       <Type Name="IVimEntryView" />
       <Type Name="VimEntryView" />
     </Namespace>
-    <Namespace Name="org.vim.Components.BufferedVimControl">
+    <Namespace Name="Vim.Components.BufferedVimControl">
       <Type Name="BufferedVimMain" />
     </Namespace>
-    <Namespace Name="org.vim.Components.VimControl">
+    <Namespace Name="Vim.Components.VimControl">
       <Type Name="VimControlMain" />
     </Namespace>
-    <Namespace Name="org.vim.Components.VimBuffer">
+    <Namespace Name="Vim.Components.VimBuffer">
       <Type Name="VimBufferMain" />
     </Namespace>
-    <Namespace Name="org.vim.Components.VimEntry">
+    <Namespace Name="Vim.Components.VimEntry">
       <Type Name="VimEntryMain" />
     </Namespace>
-    <Namespace Name="org.vim.Components">
+    <Namespace Name="Vim.Components">
       <Type Name="VimFactory" />
     </Namespace>
-    <Namespace Name="org.vim.Main">
+    <Namespace Name="Vim.Main">
       <Type Name="Launcher" />
     </Namespace>
   </Types>

@@ -3,7 +3,7 @@ using System.Collections;
 using log4net;
 using log4net.Config;
 
-namespace org.vim.Components.BufferedVimControl.Model {
+namespace Vim.Components.BufferedVimControl.Model {
     public class BufferedVimControl : IBufferedVimControl {
         IList controlList;
         ILog log;

@@ -1,4 +1,4 @@
-namespace org.vim.Components.VimEntry.View {
+namespace Vim.Components.VimEntry.View {
     public interface IVimEntryView {
 
     }

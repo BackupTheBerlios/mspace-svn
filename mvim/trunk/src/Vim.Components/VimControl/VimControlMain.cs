@@ -1,4 +1,4 @@
-namespace org.vim.Components.VimControl {
+namespace Vim.Components.VimControl {
     public class VimControlMain {
     }
 }

@@ -1,7 +1,7 @@
 using log4net;
 using log4net.Config;
 
-namespace org.vim.Components {
+namespace Vim.Components {
     public class VimFactory {
         private static VimFactory vimFactory;
         

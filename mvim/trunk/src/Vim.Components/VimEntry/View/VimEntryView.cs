@@ -1,8 +1,8 @@
-using org.vim.Components.VimEntry.Model;
+using Vim.Components.VimEntry.Model;
 using Gtk;
 
 
-namespace org.vim.Components.VimEntry.View {
+namespace Vim.Components.VimEntry.View {
     public class VimEntryView : Gtk.Entry, IVimEntryView {
         IVimEntryHandler vimEntryHandler;
         //IVimEntryController vimEntryController;

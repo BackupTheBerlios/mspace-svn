@@ -15,24 +15,24 @@ resources/log4net.config
 RESOURCES_REFERENCES_BUILD=$(foreach res, $(RESOURCES_REFERENCES),$(addprefix -resource:,$(res)),$(notdir $(res)))
 
 SOURCES_REFERENCES=\
-org.vim.Components/BufferedVimControl/Model/*.cs\
-org.vim.Components/BufferedVimControl/Controller/*.cs\
-org.vim.Components/BufferedVimControl/View/*.cs\
-org.vim.Components/BufferedVimControl/*.cs\
-org.vim.Components/VimControl/Model/*.cs\
-org.vim.Components/VimControl/Controller/*.cs\
-org.vim.Components/VimControl/View/*.cs\
-org.vim.Components/VimControl/*.cs\
-org.vim.Components/VimBuffer/Model/*.cs\
-org.vim.Components/VimBuffer/Controller/*.cs\
-org.vim.Components/VimBuffer/View/*.cs\
-org.vim.Components/VimBuffer/*.cs\
-org.vim.Components/VimEntry/Model/*.cs\
-org.vim.Components/VimEntry/Controller/*.cs\
-org.vim.Components/VimEntry/View/*.cs\
-org.vim.Components/VimEntry/*.cs\
-org.vim.Components/*.cs\
-Launcher.cs \
+Vim.Components/BufferedVimControl/Model/*.cs\
+Vim.Components/BufferedVimControl/Controller/*.cs\
+Vim.Components/BufferedVimControl/View/*.cs\
+Vim.Components/BufferedVimControl/*.cs\
+Vim.Components/VimControl/Model/*.cs\
+Vim.Components/VimControl/Controller/*.cs\
+Vim.Components/VimControl/View/*.cs\
+Vim.Components/VimControl/*.cs\
+Vim.Components/VimBuffer/Model/*.cs\
+Vim.Components/VimBuffer/Controller/*.cs\
+Vim.Components/VimBuffer/View/*.cs\
+Vim.Components/VimBuffer/*.cs\
+Vim.Components/VimEntry/Model/*.cs\
+Vim.Components/VimEntry/Controller/*.cs\
+Vim.Components/VimEntry/View/*.cs\
+Vim.Components/VimEntry/*.cs\
+Vim.Components/*.cs\
+Vim.Main/Launcher.cs \
 AssemblyInfo.cs
 
 SOURCES_REFERENCES_BUILD=$(addprefix $(srcdir)/, $(SOURCES_REFERENCES))

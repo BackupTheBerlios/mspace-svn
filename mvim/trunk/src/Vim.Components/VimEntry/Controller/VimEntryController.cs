@@ -1,7 +1,7 @@
-using org.vim.Components.VimEntry.Model;
-using org.vim.Components.VimEntry.View;
+using Vim.Components.VimEntry.Model;
+using Vim.Components.VimEntry.View;
 
-namespace org.vim.Components.VimEntry.Controller {
+namespace Vim.Components.VimEntry.Controller {
     public class VimEntryController : IVimEntryController {
         
         private IVimEntryHandler vimEntryHandler;

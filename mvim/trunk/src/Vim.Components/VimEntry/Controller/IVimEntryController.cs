@@ -1,5 +1,5 @@
 
-namespace org.vim.Components.VimEntry.Controller {
+namespace Vim.Components.VimEntry.Controller {
     public interface IVimEntryController {
         void Execute (string text);
     }

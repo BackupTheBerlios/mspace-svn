@@ -1,4 +1,4 @@
-namespace org.vim.Components.VimBuffer {
+namespace Vim.Components.VimBuffer {
     public class VimBufferMain {
     }
 }

@@ -1,4 +1,4 @@
-namespace org.vim.Components.VimBuffer.Model {
+namespace Vim.Components.VimBuffer.Model {
     public interface IVimBuffer {
         string Text {get; set;}
     }
