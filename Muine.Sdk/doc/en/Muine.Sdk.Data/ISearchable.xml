@@ -1,0 +1,37 @@
+<Type Name="ISearchable" FullName="Muine.Sdk.Data.ISearchable">
+  <TypeSignature Language="C#" Value="public abstract interface ISearchable" Maintainer="auto" />
+  <AssemblyInfo>
+    <AssemblyName>Muine.Sdk</AssemblyName>
+    <AssemblyPublicKey>
+    </AssemblyPublicKey>
+    <AssemblyVersion>0.0.0.0</AssemblyVersion>
+    <AssemblyCulture>neutral</AssemblyCulture>
+    <Attributes />
+  </AssemblyInfo>
+  <ThreadSafetyStatement>Gtk# is thread aware, but not thread safe; See the <link location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
+  <Docs>
+    <summary>To be added</summary>
+    <remarks>To be added</remarks>
+  </Docs>
+  <Base />
+  <Interfaces />
+  <Attributes />
+  <Members>
+    <Member MemberName="FitsCriteria">
+      <MemberSignature Language="C#" Value="public virtual bool FitsCriteria (string [] searchBits);" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="searchBits" Type="System.String[]" />
+      </Parameters>
+      <Docs>
+        <summary>To be added</summary>
+        <param name="searchBits">a <see cref="T:System.String" /></param>
+        <returns>a <see cref="T:System.Boolean" /></returns>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

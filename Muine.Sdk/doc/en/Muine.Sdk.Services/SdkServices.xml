@@ -1,0 +1,73 @@
+<Type Name="SdkServices" FullName="Muine.Sdk.Services.SdkServices">
+  <TypeSignature Language="C#" Value="public class SdkServices" Maintainer="auto" />
+  <AssemblyInfo>
+    <AssemblyName>Muine.Sdk</AssemblyName>
+    <AssemblyPublicKey>
+    </AssemblyPublicKey>
+    <AssemblyVersion>0.0.0.0</AssemblyVersion>
+    <AssemblyCulture>neutral</AssemblyCulture>
+    <Attributes />
+  </AssemblyInfo>
+  <ThreadSafetyStatement>Gtk# is thread aware, but not thread safe; See the <link location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
+  <Docs>
+    <summary>To be added</summary>
+    <remarks>To be added</remarks>
+  </Docs>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Attributes />
+  <Members>
+    <Member MemberName="Player">
+      <MemberSignature Language="C#" Value="public static Muine.Sdk.Player.IPlayer Player;" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>Muine.Sdk.Player.IPlayer</ReturnType>
+      </ReturnValue>
+      <Parameters>
+      </Parameters>
+      <Docs>
+        <summary>To be added</summary>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="MusicDb">
+      <MemberSignature Language="C#" Value="public static Muine.Sdk.Data.IMusicDb MusicDb;" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>Muine.Sdk.Data.IMusicDb</ReturnType>
+      </ReturnValue>
+      <Parameters>
+      </Parameters>
+      <Docs>
+        <summary>To be added</summary>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Playlist">
+      <MemberSignature Language="C#" Value="public static Muine.Sdk.Playlist.IPlaylist Playlist;" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>Muine.Sdk.Playlist.IPlaylist</ReturnType>
+      </ReturnValue>
+      <Parameters>
+      </Parameters>
+      <Docs>
+        <summary>To be added</summary>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public SdkServices ();" />
+      <MemberType>Constructor</MemberType>
+      <ReturnValue />
+      <Parameters />
+      <Docs>
+        <summary>To be added</summary>
+        <returns>a <see cref="T:Muine.Sdk.Services.SdkServices" /></returns>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>
