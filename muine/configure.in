@@ -126,6 +126,7 @@ src/Makefile
 src/Plugins/Makefile
 src/Plugins/Dashboard/Makefile
 src/Plugins/MonitorPlugin/Makefile
+src/Plugins/MiniPlayer/Makefile
 src/Sdk/Makefile
 src/Sdk/Muine.Sdk.dll.config
 src/Sdk/muine-sdk.pc

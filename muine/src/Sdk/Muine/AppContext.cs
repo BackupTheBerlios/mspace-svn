@@ -21,6 +21,9 @@ using System;
 using Gnome;
 using GConf;
 
+/* 
+ * some of this stuff should be hiddend. Bus should help on this task
+ */
 public class AppContext
 {
     private PluginManager pluginManager = new PluginManager ();

@@ -16,24 +16,44 @@
  * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
  * Boston, MA 02111-1307, USA.
  */
+ 
+public class PlayerAction : ActionMessage
+{
+    public enum ActionType {
+	    Play,
+	    Stop,
+	    Pause,
+	    Next,
+	    Previous,
+	    Volume,
+	    Seek
+    }
+    
+    public PlayerAction (object source, ActionType type) : base (source)
+    {
+    	this.type = type;
+    }
+    
+    private int position = 0;
+    public int Position {
+    	get {
+    		return position;
+    	}
+    }
+    
+    
+    private ActionType type;
+    public ActionType Type {
+    	get {
+    		return type;
+    	}
+    }
 
-using System;
-
-/**
- * A BusMember may cancel an event.
- * We don't need this behaviour right now but it is implemented.
- */
-
-public interface IBusMember {
-     /**
-     * Get the filter to that is used to determine if an event should
-     * to to the member.
-     */
-     IBusFilter Filter { get; set;}
-															   
-    /**
-     * Called when an event is to be posed to the member.
-     */
-    bool MessagePosted(Message evt);                                                                                                               
+    private int volume = 0;
+    public int Volume {
+	get {
+	    return volume;
+	}
+    }
 }
 

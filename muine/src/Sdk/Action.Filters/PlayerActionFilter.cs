@@ -16,24 +16,17 @@
  * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
  * Boston, MA 02111-1307, USA.
  */
-
-using System;
-
-/**
- * A BusMember may cancel an event.
- * We don't need this behaviour right now but it is implemented.
+ 
+ 
+/*
+ * Simple filter for player actions
  */
-
-public interface IBusMember {
-     /**
-     * Get the filter to that is used to determine if an event should
-     * to to the member.
-     */
-     IBusFilter Filter { get; set;}
-															   
-    /**
-     * Called when an event is to be posed to the member.
-     */
-    bool MessagePosted(Message evt);                                                                                                               
+public class PlayerActionFilter : IBusFilter 
+{
+	public bool Accept(Message evt) 
+	{
+		if (evt.GetType () == typeof (PlayerAction))
+			return true;
+		return false;
+	}
 }
-

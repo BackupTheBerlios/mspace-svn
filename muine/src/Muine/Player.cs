@@ -20,7 +20,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-public class Player : GLib.Object
+public class Player : GLib.Object, IBusMember
 {
 
 	private bool stopped = true;
@@ -164,6 +164,53 @@ public class Player : GLib.Object
 	}
 
 	/*
+	 * IBusMember Filter implementation
+	 * Every PlayerAction is accepted.
+	 * More sophisticated filter could be used to restrict
+	 * player actions in some way.
+	 * This could be changed on the fly, depending on the requirements.
+	 */
+
+	private IBusFilter filter = new PlayerActionFilter ();
+	public IBusFilter Filter {
+	    get {
+		return filter;
+	    }
+	    set {
+		this.filter = value;
+	    }
+	}
+
+	/*
+	 * We are using a filter that guarantees every
+	 * msg to be a PlayerAction.
+	 * We downcast it and execute the action.
+	 */
+	public bool MessagePosted (Message msg)
+	{
+	    Console.WriteLine ("Action recived");
+	    PlayerAction action = msg as PlayerAction;
+	    switch (action.Type)
+	    {
+		case PlayerAction.ActionType.Play:
+		    Playing = true;
+		    break;
+		case PlayerAction.ActionType.Stop:
+		    Stop ();
+		    break;
+		case PlayerAction.ActionType.Pause:
+		    Playing = false;
+		    break;
+		case PlayerAction.ActionType.Seek:
+		    Position = action.Position;
+		    break;
+		default:
+		    break;
+	    }
+	    return true;
+	}
+
+	/*
 	 * Main constructor
 	 */
 	public Player () : base (IntPtr.Zero)
@@ -186,6 +233,7 @@ public class Player : GLib.Object
 
 		playing = false;
 		song = null;
+		AppContext.ABus.AddMember (this);
 	}
 
 	~Player ()
