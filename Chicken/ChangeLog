@@ -1,4 +1,9 @@
 2004-10-08  Sergio Rubio  <sergio.rubio@hispalinux.es>
+
+	* examples/Makefile.am: dist fixes
+	* src/Makefile.am: ditto
+
+2004-10-08  Sergio Rubio  <sergio.rubio@hispalinux.es>
 	
 	* configure.in: new release
 	* src/Gnome/Notification/NotificationAreaMessage.cs: Bubble

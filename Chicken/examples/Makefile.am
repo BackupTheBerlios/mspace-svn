@@ -14,4 +14,4 @@ notification-area-message.exe: NotificationAreaMessageExample.cs
 	mcs NotificationAreaMessageExample.cs -o $@ $(REFERENCES)
 
 CLEANFILES = *.exe
-EXTRA_DIST = *.cs
+EXTRA_DIST = *.cs *.svg

@@ -18,4 +18,4 @@ pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = chicken.pc
 
 CLEANFILES = *.dll Chicken.dll.config
-EXTRA_DIST = Chicken.dll.config.in $(CSSOURCES)
+EXTRA_DIST = Chicken.dll.config.in chicken.pc.in sources.list $(CSSOURCES)
