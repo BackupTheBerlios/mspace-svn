@@ -1,7 +1,9 @@
 CSSOURCES=
 CSSOURCES += ./Gnome/TrayIcon/ObjectManager.cs
 CSSOURCES += ./Gnome/TrayIcon/TrayIcon.cs
+CSSOURCES += ./Gnome/TrayIcon/AnimatedTrayIcon.cs
 CSSOURCES += ./Gnome/TrayIcon/BlinkingTrayIcon.cs
+CSSOURCES += ./Gnome/TrayIcon/ShrinkingTrayIcon.cs
 CSSOURCES += ./Gnome/Notification/NotificationMessage.cs
 CSSOURCES += ./Gnome/Notification/NotificationFactory.cs
 CSSOURCES += ./Configuration/Nini/Ini/IniDocument.cs

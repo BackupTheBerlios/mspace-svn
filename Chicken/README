@@ -1,0 +1,8 @@
+INSTALL
+--------
+You will need mono, gtk-sharp, gecko-sharp and monodoc.
+http://mono-project.com
+
+./configure && make && make install
+
+See http://mspace.berlios.de/gunther-user/view.php/page/Chicken-Framework for more info
