@@ -104,28 +104,38 @@ namespace Chicken.Gnome.Notification
 	    string newsvg = svg;
 	    newsvg = newsvg.Replace ("@HEADER@", header);
 	    string[] lines = new string[3];
-
+	    int pcount = 0;
+	    int tokens = 0;
+	    int lasti = 0;
+	    
 	    StringBuilder builder = new StringBuilder ();
-	    for (int i = 0 ; i<text.Length; i++)
+	    for (int i = 0 ; i < text.Length; i++)
 	    {
-		if (text[i] != '%')
+		if (tokens == 2)
+		{
+		    lasti = i;
+		    break;
+		}
+
+		if (text[i] != '%' || pcount > 2)
+		{
 		    builder.Append (text[i]);
-		
+		    pcount = 0;
+		}
 		else {
-		    if (i < text.Length - 1)
-		    {
-			if (text[i+1] == '%' && linenum < 3)
+			pcount++;
+			if (pcount == 2 && linenum < 2)
 			{
+			    tokens++;
 			    lines[linenum] = builder.ToString (); 
 			    builder = new StringBuilder ();
 			    linenum++;
+			    pcount = 0;
 			}
-			    
-		    }
 		}
 		
 	    }
-	    lines[linenum] = builder.ToString (); 
+	    lines[linenum] = text.Substring (lasti); 
 	    
 	    newsvg = newsvg.Replace ("@LINE1@", lines[0]);
 	    newsvg = newsvg.Replace ("@LINE2@", lines[1]);
