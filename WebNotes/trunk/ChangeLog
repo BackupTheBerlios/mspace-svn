@@ -1,5 +1,12 @@
 2004-10-22  Sergio Rubio  <sergio.rubio@hispalinux.es>
 
+	* images/Makefile.am: Added a new image
+	* images/imagers.list:
+	* src/WebNotes/Makefile.in: removed crap
+	* src/WebNotes/WebViewer.cs: Fixed close menu item duplication
+
+2004-10-22  Sergio Rubio  <sergio.rubio@hispalinux.es>
+
 	* NEWS: updated to new version
 	* configure.in: version bumped
 	* src/WebNotes/WebViewer.cs: Added close menu item to the tray.

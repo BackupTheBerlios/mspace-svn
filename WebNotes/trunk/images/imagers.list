@@ -1,3 +1,4 @@
 IMAGERS =
+IMAGERS += /resource:../../images/page.png,page.png
 IMAGERS += /resource:../../images/webnotes-16.png,webnotes-16.png
 IMAGERS += /resource:../../images/webnotes-32.png,webnotes-32.png

@@ -38,6 +38,8 @@ namespace WebNotes
 	[Glade.Widget] private VBox mainBox;
 	[Glade.Widget] private Frame geckoBox;
 	[Glade.Widget] private OptionMenu optionMenu;
+	private string didiwikidir = Environment.GetEnvironmentVariable ("HOME")
+				+ System.IO.Path.DirectorySeparatorChar + ".didiwiki";
 	
 
 	public WebViewer () : base (WindowType.Toplevel)
@@ -68,7 +70,6 @@ namespace WebNotes
 	    
 	    optionMenu.Changed += OptionChanged;
 	    BuildMenu ();
-	    optionMenu.Menu = currentMenu;
 	    int firstPage = list.IndexOf ("WikiHome");
 	    if (firstPage != -1)
 		optionMenu.SetHistory ((uint)firstPage);
@@ -81,29 +82,44 @@ namespace WebNotes
 	    list.Clear ();
 	    if (optionMenu.Menu != null)
 		optionMenu.Menu.Destroy ();
+	    currentMenu = new Menu ();
+	    currentMenu.AttachToWidget (trayIcon, null);
+	    
 	    Menu menu = new Menu ();
-	    string didiwikidir = Environment.GetEnvironmentVariable ("HOME");
-	    didiwikidir += System.IO.Path.DirectorySeparatorChar + ".didiwiki";
 	    string[] files = Directory.GetFiles (didiwikidir);
-	    foreach (string file in files)
+	    for (int i = 0; i < files.Length ; i++)
 	    {
+		string file = files[i];
 		if (!file.EndsWith (".css"))
 		{
 		    string fname = System.IO.Path.GetFileName (file);
 		    MenuItem item = new MenuItem (fname);
-		    item.Activated += ItemActivated;
+		    item.Data["File"] = fname;
+		    item.Data["Position"] = i;
+		    
+		    ImageMenuItem trayMenuItem = new ImageMenuItem (fname);
+		    Image img = new Image ();
+		    img.Pixbuf = new Gdk.Pixbuf (null, "page.png");
+		    img.IconSize = (int)IconSize.Menu;
+		    trayMenuItem.Image = img;
+		    
+		    trayMenuItem.Activated += ItemActivated;
+		    trayMenuItem.Data ["File"] = fname;
+		    trayMenuItem.Data ["Position"] = i;
+		    
 		    menu.Append (item);
+		    currentMenu.Append (trayMenuItem);
 		    list.Add (fname);
 		}
 	    }
-	    menu.Append (new SeparatorMenuItem ());
+
+	    currentMenu.Append (new SeparatorMenuItem ());
 	    ImageMenuItem closeItem = new ImageMenuItem ("_Quit");
 	    closeItem.Image = new Image (Gtk.Stock.Quit, Gtk.IconSize.Menu);
 	    closeItem.Activated += Quit;
-	    menu.Append (closeItem);
+	    currentMenu.Append (closeItem);
 	    optionMenu.Menu = menu;
 	    menu.ShowAll ();
-	    currentMenu = menu;
 	}
 
 	private void ButtonPressed (object obj, ButtonPressEventArgs args)
@@ -115,6 +131,7 @@ namespace WebNotes
 			Present ();
 		    break;
 		case 3:
+		    currentMenu.ShowAll ();
 		    currentMenu.Popup (null, null, null, IntPtr.Zero, 3, Gtk.Global.CurrentEventTime);
 		    break;
 	    }
@@ -132,12 +149,6 @@ namespace WebNotes
 
 	protected override bool OnDeleteEvent (Gdk.Event evt)
 	{
-	    /*bool retVal = base.OnDeleteEvent (evt);
-	    WebNotes.Exit ();
-	    return retVal;
-		Hide ();
-		return base.OnDeleteEvent (evt);
-		*/
 		Hide ();
 		return true;
 	}
@@ -153,9 +164,12 @@ namespace WebNotes
 	    BuildMenu ();
 	}
 
-	private void ItemActivated (object obj, EventArgs args)
+	private void ItemActivated (object sender, EventArgs args)
 	{
-	          Present ();
+		Widget item = (Widget) sender;
+	    	wc.LoadUrl ("http://localhost:8000/" + item.Data["File"]);
+		optionMenu.SetHistory (UInt32.Parse (item.Data["Position"].ToString ()));
+		Present ();
 	}
 	private void Quit (object sender, EventArgs args)
 	{
