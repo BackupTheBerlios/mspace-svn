@@ -39,6 +39,7 @@ AC_OUTPUT([
 Makefile
 Sdk/Makefile
 Sdk/Muine.Sdk.dll.config
+Sdk/muine-sdk.pc
 Muine/Makefile
 Muine/muine
 Muine/muine.exe.config

@@ -37,13 +37,17 @@ all: Muine.Sdk.dll
 
 muinelibdir = $(prefix)/lib/muine
 muinelib_DATA = Muine.Sdk.dll.config Muine.Sdk.dll
+pkgconfigdir = $(libdir)/pkgconfig
+pkgconfig_DATA = muine-sdk.pc
 
 EXTRA_DIST =					\
 	#$(SOURCES)				\
 	Muine/AmazonSearchService.wsdl		\
+	muine-sdk.pc.in				\
 	Muine.Sdk.dll.config.in
 
 CLEANFILES =					\
 	Muine/AmazonSearchService.cs		\
 	Muine.Sdk.dll				\
+	muine-sdk.pc				\
 	Muine.Sdk.dll.config
