@@ -1,0 +1,7 @@
+<xml version="1.0" encoding="utf-8"?>
+<componentmodel>
+    <components>
+        <component name="Prueba" interface="prueba-def.xml"/>
+        <component name="Prueba1" interface="prueba1-def.xml"/>
+    </components>
+</componentmodel>
