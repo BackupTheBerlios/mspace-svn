@@ -55,13 +55,6 @@ namespace Chicken.Gnome.TrayIcon
 	}
 	private void StartBlinking ()
 	{
-	    ShowAll ();
-	    Thread t = new Thread (new ThreadStart (Run));
-	    t.Start ();
-	}
-	
-	public void Run ()
-	{
 	    while (true)
 	    {
 		    Gdk.Threads.Enter ();
@@ -74,6 +67,13 @@ namespace Chicken.Gnome.TrayIcon
 		    Gdk.Threads.Leave ();
 		    Thread.Sleep (frecuency);
 	    }
+	}
+	
+	public virtual void Run ()
+	{
+	    ShowAll ();
+	    Thread t = new Thread (new ThreadStart (StartBlinking));
+	    t.Start ();
 	}
     }
 
