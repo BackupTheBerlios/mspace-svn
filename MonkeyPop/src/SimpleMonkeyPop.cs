@@ -21,52 +21,86 @@ using System;
 using Chicken.Gnome.TrayIcon;
 using Chicken.Gnome.Notification;
 using Gtk;
+using System.Text;
 
 public class SimpleMonkeyPop 
 {
-    static string text;
+    static StringBuilder text = new StringBuilder ();
+    static StringBuilder header = new StringBuilder ();
     static string timeout = "5000";
-    static string header;
     static string file;
+    static NotificationType option;
+    static StringBuilder current = new StringBuilder ();
 
 
     public static void Main (string[] args)
     {
 
+	Console.WriteLine (args.Length);
 	for (int i = 0; i < args.Length ; i++)
 	{
 	    switch (args[i])
 	    {
 		case "--text":
-		    text = args[i+1];
+		    current = text;
 		    break;
 		case "--header":
-		    header = args[i+1];
+		    current = header;
 		    break;
 		case "--timeout":
+		    current = null;
 		    timeout = args[i+1];
 		    break;
 		case "--file":
+		    current = null;
 		    file = args[i+1];
+		    break;
+		case "--info":
+		    current = null;
+		    option = NotificationType.Info;
+		    break;
+		case "--warning":
+		    current = null;
+		    option = NotificationType.Warning;
+		    break;
+		case "--error":
+		    current = null;
+		    option = NotificationType.Error;
+		    break;
+		default:
+		    if (current != null)
+			current.Append (args[i] + " ");
 		    break;
 	    }
 	}
 
-	if ((text == null) && (header == null))
+	if ((text.ToString () == String.Empty) && (header.ToString () == String.Empty))
 	{
-	    Console.WriteLine (
-		    "Usage: monkeypop --text \"string\" --header \"string\" [--timeout miliseconds] [--file svgfile]\n"
-		    );
+	    ShowHelp ();
 	    Environment.Exit (1);
 
 	}
 		
 	Application.Init ();
 	if (file != null)
-	    NotificationFactory.ShowMessageNotification (file, header, text, Int32.Parse (timeout));
+	    NotificationFactory.ShowSvgNotification (file, header.ToString (), text.ToString (), Int32.Parse (timeout));
 	else
-	    NotificationFactory.ShowMessageNotification (null, header, text, Int32.Parse (timeout));
+	    NotificationFactory.ShowMessageNotification (header.ToString (), text.ToString (), Int32.Parse (timeout), option);
 	Application.Run ();
     }
+
+    private static void ShowHelp ()
+    {
+	    Console.WriteLine (
+		    "Usage: monkeypop --text \"string\" --header \"string\" [--timeout miliseconds] [options]\n" +
+		    "Where options are:\n" +
+		    "--file svgfile	Svg file to render as message"	+
+		    "--warning		Show a warning message"		+
+		    "--info		Show an info message" +
+		    "--error		Show an error message"
+		    );
+	    Environment.Exit (1);
+    }
+
 }
 
