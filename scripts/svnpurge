@@ -1,0 +1,25 @@
+#! /bin/bash
+# from http://www.contactor.se/~dast/svnusers/archive-2004-09/0442.shtml
+
+DRYRUN=""
+if [ "$1" = "-n" ]; then
+  DRYRUN="yes"
+  shift
+  echo "DRYRUN MODE"
+fi
+
+IFS='
+'
+for i in `${SVN-svn} status --no-ignore "$@" | sed -n 's/^[I\?] //p'`
+do
+  if [ "${i/,//}" != "$i" -o "${i/%.swp//}" != "$i" ] ; then
+    echo "SKIPPING: $i"
+  else
+    echo "$i"
+    if [ -z "$DRYRUN" ]; then
+      rm -rf "$i"
+    fi
+  fi
+done
+
+
