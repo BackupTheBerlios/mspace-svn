@@ -1,3 +1,15 @@
+2004-10-11  Sergio Rubio  <sergio.rubio@hispalinux.es>
+
+	* debian/README.Debian:
+	* debian/changelog:
+	* debian/compat:
+	* debian/control:
+	* debian/copyright:
+	* debian/dirs:
+	* debian/docs:
+	* debian/rules:
+	First skeleton of the debian package
+
 2004-10-08  Sergio Rubio  <sergio.rubio@hispalinux.es>
 
 	* examples/Makefile.am: dist fixes
