@@ -20,7 +20,7 @@ class AboutWindow (Window):
 	
 	def constructor ():
 		super ("")
-		gxml = XML ("simplep.glade", "aboutWindow", null)
+		gxml = XML (Globals.Resources, "simplep.glade", "aboutWindow", null)
 		gxml.Autoconnect (self)
 		self.Raw = gxml["aboutWindow"].Raw
 		aboutImage.FromPixbuf = Gdk.Pixbuf (Globals.Resources, "SimpleP-full-logo.png")

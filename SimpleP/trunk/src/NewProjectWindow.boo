@@ -26,7 +26,7 @@ class NewProjectWindow (Window):
 	
 	def constructor ():
 		super ("")
-		gxml = XML ("simplep.glade", "newProjectWindow", null)
+		gxml = XML (Globals.Resources, "simplep.glade", "newProjectWindow", null)
 		gxml.Autoconnect (self)
 		home = Environment.GetEnvironmentVariable ("HOME")
 		projectsDir = System.IO.Path.Combine (home, "Projects")

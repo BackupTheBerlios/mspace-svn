@@ -15,7 +15,7 @@ import NLog
 import System
 import Red.Gtk
 
-log = LogManager.GetLogger ("MainWindow")
+log = LogManager.GetLogger ("Run")
 try:
 	Application.Init ()
 	Services.ContextManager.RegisterContext (SourceContext ())

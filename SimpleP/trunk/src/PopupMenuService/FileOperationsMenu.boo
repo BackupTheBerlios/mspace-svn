@@ -8,7 +8,7 @@ class FileOperationsMenu (Menu):
 	gxml as XML
 
 	def constructor ():
-		gxml = XML ("simplep.glade", "fileOperationsMenu", null)
+		gxml = XML (Globals.Resources, "simplep.glade", "fileOperationsMenu", null)
 		gxml.Autoconnect (self)
 		Raw = gxml["fileOperationsMenu"].Raw
 

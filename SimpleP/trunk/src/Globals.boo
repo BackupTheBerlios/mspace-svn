@@ -9,11 +9,12 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 namespace SimpleP
+
 import System.Reflection
 
 class Globals:
 
-	public static SourceExtensions = [".boo", ".cs", ".java", ".c", ".cpp", ".py", ".pl", ".vb", ".php", ".rb"]
-	public static DataExtensions = [".xml"]
-	public static UIExtensions = [".glade"]
+	public final static SourceExtensions = [".boo", ".cs", ".java", ".c", ".cpp", ".py", ".pl", ".vb", ".php", ".rb"]
+	public final static DataExtensions = [".xml"]
+	public final static UIExtensions = [".glade"]
 	public final static Resources = Assembly.Load ("Resources")

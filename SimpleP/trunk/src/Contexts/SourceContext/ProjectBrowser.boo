@@ -25,7 +25,7 @@ class ProjectBrowser (TreeView):
 	gxml as XML
 
 	def constructor (project as Project):
-		gxml = XML ("simplep.glade", "navigatorWidget", null)
+		gxml = XML (Globals.Resources, "simplep.glade", "navigatorWidget", null)
 		gxml.Autoconnect (self)
 		store = ProjectStore ( (typeof (string), typeof (Gdk.Pixbuf), typeof (string), typeof (bool)) )
 		Model = store
