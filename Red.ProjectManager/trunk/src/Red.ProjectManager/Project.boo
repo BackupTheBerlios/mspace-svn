@@ -141,9 +141,9 @@ class Project (IEnumerable):
 			ContentsChanged (self, EventArgs.Empty) if ContentsChanged
 			Save ()
 	
-	def ImportMatchingFiles (pattern as regex):
+	def ImportMatchingFiles (pattern as regex, discardHidden as bool):
 		BeginInit ()
-		for file as string in FileUtils.GetAllDirectoryFiles (Location):
+		for file as string in FileUtils.GetAllDirectoryFiles (Location, discardHidden):
 			//HACK: Dunno how to ask if a File is a directory
 			if not Directory.Exists (file):
 				if pattern:
@@ -159,10 +159,10 @@ class Project (IEnumerable):
 	// Import a list of files that matches the extension list
 	// each extension in the list should not have the dot 
 	// (i.e. .txt is wrong, txt is right)
-	def ImportFiles ([required]extensions as IList):
+	def ImportFiles ([required]extensions as IList, discardHidden as bool):
 		BeginInit ()
 		
-		for file as string in FileUtils.GetAllDirectoryFiles (Location):
+		for file as string in FileUtils.GetAllDirectoryFiles (Location, discardHidden):
 			//HACK: Dunno how to ask if a File is a directory
 			if not Directory.Exists (file):
 				if not fileCollection.Contains (file):
@@ -174,8 +174,8 @@ class Project (IEnumerable):
 		EndInit ()
 		Save ()
 		
-	def ImportFiles ():
-		ImportMatchingFiles (null)
+	def ImportFiles (discardHidden as bool):
+		ImportMatchingFiles (null, discardHidden)
 
 	def GetEnumerator () as IEnumerator:
 		return fileCollection.Values.GetEnumerator ()

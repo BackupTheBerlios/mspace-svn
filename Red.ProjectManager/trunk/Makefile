@@ -1,5 +1,5 @@
 FILES = src/Red.*/*.boo
-all:
+all: update-refs
 	booc $(FILES) -out:build/Red.ProjectManager.dll -target:library -r:ext/Red.dll
 	cp ext/* build/	
 
@@ -10,3 +10,6 @@ html-docs: docs
 	monodocs2html --source:doc --dest:doc-html/
 
 all-docs: docs html-docs
+
+update-refs:
+	cp ../../RedLib/trunk/build/Red.dll ext
