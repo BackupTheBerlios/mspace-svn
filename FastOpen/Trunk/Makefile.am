@@ -12,3 +12,6 @@ EXTRA_DIST =				\
 	TODO
 
 CLEANFILES = fastopen fseditor
+
+release: dist
+	scp FastOpen-$(VERSION).tar.gz shell.berlios.de:~/htdocs/FastOpen/Releases
