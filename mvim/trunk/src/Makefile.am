@@ -5,7 +5,7 @@ rsvg-sharp-2.0
 
 PKG_REFERENCES_BUILD=$(addprefix -pkg:,$(PKG_REFERENCES))
 
-LIB_REFERENCES = lib/log4net.dll 
+LIB_REFERENCES = log4net.dll 
 
 LIB_REFERENCES_BUILD=$(addprefix -reference:,$(LIB_REFERENCES))
 

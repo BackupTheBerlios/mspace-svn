@@ -1,4 +1,4 @@
-namespace Vim.Components.VimBuffer.Model {
+namespace Vim.Components.VimBuffer {
 
     public class VimBuffer : IVimBuffer {
         private string text;

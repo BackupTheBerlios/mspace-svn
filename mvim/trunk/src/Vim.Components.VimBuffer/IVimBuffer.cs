@@ -5,7 +5,7 @@
 //      Néstor Salceda Alonso (wizito@gentelibre.org)
 // (C) 2005
 
-namespace Vim.Components.VimBuffer.Model {
+namespace Vim.Components.VimBuffer {
     //
     //<summary>
     //  We try use same Buffer as SharpDevelop do.
