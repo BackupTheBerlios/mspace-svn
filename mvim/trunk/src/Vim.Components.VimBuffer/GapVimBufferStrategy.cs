@@ -10,7 +10,7 @@ using System;
 using System.Text;
 
 namespace Vim.Components.VimBuffer {
-    public class GapTextBufferStrategy : IVimBufferStrategy {
+    public class GapVimBufferStrategy : IVimBufferStrategy {
         private char[] buffer = new char [0];
 
         int gapBeginOffset = 0;
@@ -134,7 +134,8 @@ namespace Vim.Components.VimBuffer {
         }
         
         /**
-         * Colocación del gap en el buffer.
+         * Colocación del gap en el buffer en la posición offset con la longitud
+         * length.
          */ 
         void PlaceGap (int offset, int length) {
             // Guardamos el valor viejo de la longitud del gap.

@@ -4,4 +4,4 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyVersion("@VERSION@")]
 [assembly: AssemblyTitle ("MonoVim")]
 [assembly: AssemblyDescription ("A little editor, as vim.  Using Mono & GTK#")]
-[assembly: AssemblyCopyright ("Copyright (c) 2005 Néstor Salceda Alonso")]
+[assembly: AssemblyCopyright ("Copyright (c) 2005 Néstor Salceda Alonso & Sergio Rubio")]
