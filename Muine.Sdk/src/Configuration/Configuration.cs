@@ -82,9 +82,14 @@ namespace Muine.Sdk.Configuration
 	public string DataKit {
 	    set {
 	    }
+
+	    get {
+		IConfig config = configSource.Configs["Data"];
+		return config.GetString ("DataKit", "SqliteDataKit");
+	    }
 	}
 
-	public FileStream CreateUserFile (string filename)
+	internal FileStream CreateUserFile (string filename)
 	{
 	    FileStream f = objStore.CreateFile (filename, false);
 	    return f;

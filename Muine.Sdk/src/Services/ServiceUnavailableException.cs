@@ -27,6 +27,8 @@ namespace Muine.Sdk.Services
 	: base (message, innerException)
 	{
 	}
+
+	public ServiceUnavailableException (string message) : base (message) {}
     }
 
 }

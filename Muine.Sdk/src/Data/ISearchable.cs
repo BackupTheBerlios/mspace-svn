@@ -17,8 +17,11 @@
  * Boston, MA 02111-1307, USA.
  */
 
-public interface ISearchable
+namespace Muine.Sdk.Data
 {
-    bool FitsCriteria (string[] searchBits);
+    public interface ISearchable
+    {
+	bool FitsCriteria (string[] searchBits);
+    }
 }
 

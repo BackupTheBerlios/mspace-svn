@@ -17,7 +17,7 @@
  * Boston, MA 02111-1307, USA.
  */
 
-namespace DataKit
+namespace Muine.Sdk.Data.Kits 
 {
     using System;
     using Muine.Sdk.Data;
