@@ -1,0 +1,46 @@
+/*
+ * Copyright (C) 2004 Sergio Rubio <sergio.rubio@hispalinux.es>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public
+ * License along with this program; if not, write to the
+ * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+ * Boston, MA 02111-1307, USA.
+ */
+
+using Gtk;
+using Chicken.Gnome.Notification;
+using System.IO;
+using System;
+using System.Reflection;
+
+public class BubbleExample
+{
+    public static void Main (string[] args)
+    {
+	if (args.Length == 0)
+	{
+	    Console.WriteLine ("Usage: {0} svgfile",Assembly.GetCallingAssembly ().GetName ().Name);
+	    Environment.Exit (1);
+	}
+	else
+	{
+	    if (!File.Exists(args[0]))
+		Console.WriteLine ("File {0} not found!", args[0]);
+	}
+	Application.Init ();
+	NotificationBubble b = new NotificationBubble (args[0], NotificationSource.File, NotificationContent.Svg);
+	b.RenderWithTimer ();
+	Application.Run ();
+    }
+}
+
