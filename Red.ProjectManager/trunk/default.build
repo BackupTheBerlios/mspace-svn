@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+    (c) Néstor Salceda & Sergio Rubio  (Monkey Space Developers)
+    File: 
+        nant.xml
+    Description:
+        base nant file template for automate basic task deployment.
+
+      INSERTAR LA WEB DE MONKEY SPACE Y TAL  
+-->
+
+<project basedir="." default="build" name="Red Project Manager">
+<!-- Properties -->
+   
+    <property name="nant.settings.currentframework" value="mono-1.0"/>
+   
+    <property name="version" value="1.0"/>
+    <property name="description" value="Red Project Management Library"/>
+    <property name="bindir" value="build/"/>
+    <property name="docdir" value="doc/"/>
+
+<!-- Targets -->
+
+    <!-- Elimina los ficheros existentes en bin y en doc -->
+    <target name="clean">
+        <delete dir="${bindir}" if="${directory::exists(bindir)}" failonerror="false"/> 
+        <tstamp/>
+    </target>
+
+    <!-- Crea una nueva jerarquia con bin y doc para la compilación -->
+    <target name="create-skeleton" depends="clean">
+        <mkdir dir="${bindir}"/>
+        <mkdir dir="${docdir}"/>
+        <tstamp/>
+    </target>
+
+    <target name="build"  depends="create-skeleton">
+		<copy todir="ext">
+			<fileset>
+				<include name="../../RedLib/trunk/build/Red.dll"/>
+			</fileset>
+		</copy>
+        <booc target="library" output="${bindir}/Red.ProjectManager.dll">
+			<sources basedir=".">
+				<include name="src/**/*.boo"/>
+			</sources>
+			<references>
+				<include name="ext/Red.dll"/>
+				<include name="System.Xml.dll"/>
+			</references>
+        </booc>
+        <tstamp/>
+    </target>
+
+    <!-- Por defecto compilará el componente y escribirá la documentación-->
+    <target name="all" depends="build,doc">
+        <tstamp/>
+    </target>
+
+    <!-- Documenta el componente y lo guarda en doc-->
+    <target name="doc" depends="build">
+        <tstamp/>
+    </target>
+
+    <!-- Ayuda sobre este fichero -->
+    <target name="usage">
+        <echo>
+            ${description}
+
+            Available task:
+                
+                -all
+                    Compile, and creates binary files.
+
+                -doc
+                    Creates documentation.  ¿Monodoc or ndoc?
+
+                -clean
+                    Delete component binaries.
+                
+                -run
+                    Runs the application.
+               
+                -build
+                    Build component.
+               
+                -all
+                    Builds component and document it.
+                
+                -usage
+                    Show this help.
+        </echo>
+        <tstamp/>
+    </target>
+</project>
