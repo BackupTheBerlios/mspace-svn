@@ -1,5 +1,5 @@
 ASSEMBLIES = /r:../Sdk/Muine.Sdk.dll
-SUBDIRS = MonitorPlugin
+SUBDIRS = MonitorPlugin Dashboard
 
 #all: DashboardFrontend.dll TestPlugin.dll
 #

@@ -32,6 +32,8 @@ using Glade;
 public class MonitorPlugin : IPlugin
 {
     
+    [Glade.Widget] TextView textview;
+    
     private string gladeFile = "monitor-window.glade";
 
     public MonitorPlugin ()
@@ -55,6 +57,7 @@ public class MonitorPlugin : IPlugin
 	    
      public bool MessagePosted(Message msg)
      {
+	    textview.Buffer.Text += "\nEVENT: " + msg.ToString ();
 	    return true;
      }
      
@@ -66,7 +69,9 @@ public class MonitorPlugin : IPlugin
      {
 	    public bool Accept (Message msg)
 	    {
+		if (msg is PlayerEvent)
 		    return true;
+		return false;
 	    }
      }
      

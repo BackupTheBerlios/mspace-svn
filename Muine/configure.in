@@ -45,4 +45,5 @@ Muine/muine
 Muine/muine.exe.config
 Plugins/Makefile
 Plugins/MonitorPlugin/Makefile
+Plugins/Dashboard/Makefile
 ])
