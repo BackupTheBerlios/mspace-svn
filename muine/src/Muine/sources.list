@@ -22,4 +22,14 @@ SOURCES = \
 ./About.cs\
 ./PlayerView.cs\
 ./PlaylistView.cs\
-./PlaylistStore.cs
+./PlaylistStore.cs\
+./Actions/IAction.cs\
+./Actions/UIAction.cs\
+./Actions/PlayAction.cs\
+./Actions/PreviousAction.cs\
+./Actions/AbstractUIAction.cs\
+./Actions/NextAction.cs\
+./Gtk.Ext/ActionMenuItem.cs\
+./Gtk.Ext/ActionButton.cs\
+./Gtk.Ext/ImageButton.cs\
+./GlobalActions.cs
