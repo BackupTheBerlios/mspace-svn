@@ -1,4 +1,0 @@
-CSSOURCES=
-CSSOURCES += ./Configuration/ObjectStore.cs
-CSSOURCES += ./Gnome/TrayIcon/ObjectManager.cs
-CSSOURCES += ./Gnome/TrayIcon/TrayIcon.cs
