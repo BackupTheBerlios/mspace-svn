@@ -1,6 +1,6 @@
 using System;
 using ComponentModel.Interfaces;
-using ComponentModel.Vo;
+using ComponentModel.VO;
 
 namespace ComponentModel {
     public class DefaultComponentModel : IComponentModel {
@@ -9,10 +9,8 @@ namespace ComponentModel {
         public ComponentModelVO VO {
             get {return vO;}
         }
-
         
-        internal DefaultComponentModel () {
-            //Deberá rellenar del xml sus datos
+        public DefaultComponentModel () {
         }
           
     

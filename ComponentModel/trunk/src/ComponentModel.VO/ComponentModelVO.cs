@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 
-namespace ComponentModel.Vo {
+namespace ComponentModel.VO {
     public class ComponentModelVO {
         private string name;
         private string interfaceFile;

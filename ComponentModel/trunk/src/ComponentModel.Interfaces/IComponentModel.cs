@@ -1,5 +1,5 @@
 using System;
-using ComponentModel.Vo;
+using ComponentModel.VO;
 namespace ComponentModel.Interfaces {
     public interface IComponentModel {
         ComponentModelVO VO {get;}
