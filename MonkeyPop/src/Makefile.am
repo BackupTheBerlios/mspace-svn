@@ -1,12 +1,13 @@
-CSSOURCES = MonkeyPop.cs
+CSSOURCES = SimpleMonkeyPop.cs
 REFERECES = -pkg:chicken -pkg:gtk-sharp
-RESOURCES = \
-	/resource:../images/notification.png,notification.png \
-	/resource:../images/notification-white.png,notification-white.png
+#RESOURCES = \
+#	/resource:../images/notification.png,notification.png \
+#	/resource:../images/simple.svg,simple.svg				\
+#	/resource:../images/notification-white.png,notification-white.png
 
 all: MonkeyPop.exe
 
-MonkeyPop.exe:
+MonkeyPop.exe: $(CSSOURCES)
 	mcs $(CSSOURCES) -o $(@) -target:exe $(REFERECES) $(RESOURCES)
 
 monkeypopdir = $(prefix)/lib/MonkeyPop

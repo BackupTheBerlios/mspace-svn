@@ -1,1 +1,1 @@
-EXTRA_DIST = *.png
+EXTRA_DIST = *.png *.svg

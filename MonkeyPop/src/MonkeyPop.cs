@@ -29,6 +29,7 @@ public class MonkeyPop
     static string width = "200";
     static string height = "80";
     static string timeout = "5000";
+    static string svg;
 
 
     public static void Main (string[] args)
@@ -53,14 +54,18 @@ public class MonkeyPop
 		case "--timeout":
 		    timeout = args[i+1];
 		    break;
+		case "--svg":
+		    svg = args[i+1];
+		    break;
 	    }
 	}
 
-	if ((html == null) && (message == null))
+	if ((html == null) && (message == null) && (svg == null))
 	{
 	    Console.WriteLine (
 		    "Usage: traymsg --html file:///path_to_html_file | --message \"string\" [options]\n"	    +
 		    "	--html path_to_file	html file to load in the notification message\n"		    +
+		    "	--svg path to svg file	renders a SVG as a message\n"					    +
 		    "	--message \"string\"	string to display in the notification message\n"		    +
 		    "	--timeout miliseconds	time to wait before message disapears\n"			    +
 		    "	--width	pixels		width of the notification message\n"				    +
@@ -77,8 +82,10 @@ public class MonkeyPop
 	NotificationMessage msg;
 	if (html != null)
 	    msg = new NotificationMessage (html, icon, NotificationType.Html);
-	else
+	else if (message != null)
 	    msg = new NotificationMessage (message, icon, NotificationType.Message);
+	else
+	    msg = new NotificationMessage (svg, icon, NotificationType.Svg);
 	    
 	msg.BubbleWidth = Int32.Parse (width);
 	msg.BubbleHeight = Int32.Parse (height);
