@@ -1,3 +1,8 @@
+2004-10-20  Sergio Rubio  <sergio.rubio@hispalinux.es>
+
+	* NEWS: Updated
+	* configure.in: remove monkeypopd dir. New bugfix version 0.1.2.1
+
 2004-10-12  Sergio Rubio  <sergio.rubio@hispalinux.es>
 
 	* Makefile.am: Removed bin target

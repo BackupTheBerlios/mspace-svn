@@ -1,5 +1,5 @@
 AC_PREREQ(2.59)
-AC_INIT(MonkeyPop, 0.1.2)
+AC_INIT(MonkeyPop, 0.1.2.1)
 
 AM_MAINTAINER_MODE
 
@@ -54,7 +54,6 @@ AC_PATH_PROG(MONO, mono)
 
 AC_OUTPUT([
 Makefile
-monkeypopd/Makefile
 src/Makefile
 images/Makefile
 src/monkeypop
