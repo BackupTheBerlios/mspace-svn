@@ -1,6 +1,5 @@
-#! /bin/bash
+#!/bin/bash
 # from http://www.contactor.se/~dast/svnusers/archive-2004-09/0442.shtml
-
 DRYRUN=""
 if [ "$1" = "-n" ]; then
   DRYRUN="yes"
@@ -8,18 +7,35 @@ if [ "$1" = "-n" ]; then
   echo "DRYRUN MODE"
 fi
 
-IFS='
-'
+FILE=""
 for i in `${SVN-svn} status --no-ignore "$@" | sed -n 's/^[I\?] //p'`
 do
-  if [ "${i/,//}" != "$i" -o "${i/%.swp//}" != "$i" ] ; then
-    echo "SKIPPING: $i"
-  else
-    echo "$i"
-    if [ -z "$DRYRUN" ]; then
-      rm -rf "$i"
+    echo deleting "$i"
+    if [ "${i/,//}" != "$i" -o "${i/%.swp//}" != "$i" ] ; then
+	echo "SKIPPING: $i"
+    else
+	if [ -z "$DRYRUN" ]; then
+	    rm -rf "$i"
+	fi
     fi
-  fi
 done
 
 
+## Perl version | does not work for me (Rubio)
+#use SVN::Client;
+#use Cwd;
+#
+#
+#sub status_func {
+#	my $ctx = shift;
+#	my $node_path = shift;
+#	my $node_status = shift;
+#
+#	if ($node_status->text_status() == $SVN::Wc::Status::missing) {
+#		print "Deleting $node_path\n";
+#		$ctx->delete($node_path, 0);
+#	}
+#}
+#
+#my $ctx = new SVN::Client();
+#$ctx->status(getcwd(), 'WORKING', sub { status_func($ctx, @_) }, 1, 0, 0, 0);
