@@ -1,0 +1,157 @@
+<Type Name="NotificationAreaMessage" FullName="Chicken.Gnome.Notification.NotificationAreaMessage">
+  <TypeSignature Language="C#" Value="public class NotificationAreaMessage" Maintainer="auto" />
+  <AssemblyInfo>
+    <AssemblyName>Chicken</AssemblyName>
+    <AssemblyPublicKey>
+    </AssemblyPublicKey>
+    <AssemblyVersion>0.0.0.0</AssemblyVersion>
+    <AssemblyCulture>neutral</AssemblyCulture>
+    <Attributes />
+  </AssemblyInfo>
+  <ThreadSafetyStatement>Gtk# is thread aware, but not thread safe; See the <link location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
+  <Docs>
+    <summary>
+      <para>
+NotificationAreaMessage shows an animated notification area icon and a notification bubble at the same time.
+</para>
+    </summary>
+    <remarks>
+      <para>
+Example:
+</para>
+      <example>
+        <code lang="C#">
+    using System;
+    using Gtk;
+    using Chicken.Gnome.Notification;
+
+    public class NotificationAreaMessageExample
+    {
+		public static void Main (string[] args)
+		{
+			Application.Init ();
+			NotificationAreaMessage msg = new NotificationAreaMessage 
+					("msg.svg", NotificationSource.File, NotificationContent.Svg);
+			msg.BubbleWidth = 250;
+			msg.BubbleHeight = 50;
+			msg.TimeOut = 5000; //milliseconds
+			msg.TimerEndedEvent += TimeEnded;
+			msg.Notify ();
+			Application.Run ();
+		}
+		
+		private static void TimerEnded ()
+		{
+	    		Application.Quit ();
+		}
+
+    }
+
+  </code>
+      </example>
+      <para>
+See <see cref="T:Chicken.Gnome.Notification.NotificationBubble" /> and <see cref="T:Chicken.Gnome.TrayIcon.AnimatedTrayIcon" />.
+</para>
+    </remarks>
+  </Docs>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Attributes />
+  <Members>
+    <Member MemberName="Notify">
+      <MemberSignature Language="C#" Value="public void Notify ();" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added</summary>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public NotificationAreaMessage (string source, Chicken.Gnome.Notification.NotificationSource sourceType, Chicken.Gnome.Notification.NotificationContent contentType);" />
+      <MemberType>Constructor</MemberType>
+      <ReturnValue />
+      <Parameters>
+        <Parameter Name="source" Type="System.String" />
+        <Parameter Name="sourceType" Type="Chicken.Gnome.Notification.NotificationSource" />
+        <Parameter Name="contentType" Type="Chicken.Gnome.Notification.NotificationContent" />
+      </Parameters>
+      <Docs>
+        <summary>To be added</summary>
+        <param name="source">a <see cref="T:System.String" /></param>
+        <param name="sourceType">a <see cref="T:System.Int32" /></param>
+        <param name="contentType">a <see cref="T:System.Int32" /></param>
+        <returns>a <see cref="T:Chicken.Gnome.Notification.NotificationAreaMessage" /></returns>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TimeOut">
+      <MemberSignature Language="C#" Value="public int TimeOut { set; get; };" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>The timeout of the bubble in milliseconds. After this timeout, the bubble disappears.</summary>
+        <returns>a <see cref="T:System.Int32" /></returns>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="BubbleWidth">
+      <MemberSignature Language="C#" Value="public int BubbleWidth { set; get; };" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>The width of the bubble window in pixels.</summary>
+        <returns>a <see cref="T:System.Int32" /></returns>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="BubbleHeight">
+      <MemberSignature Language="C#" Value="public int BubbleHeight { set; get; };" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>The height of the bubble window in pixels.</summary>
+        <returns>a <see cref="T:System.Int32" /></returns>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TimerEnd" Deprecated="true">
+      <MemberSignature Language="C#" Value="public event Chicken.Gnome.Notification.TimerEndHandler TimerEnd;" />
+      <MemberType>Event</MemberType>
+      <ReturnValue>
+        <ReturnType>Chicken.Gnome.Notification.TimerEndHandler</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added</summary>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TimerEndedEvent">
+      <MemberSignature Language="C#" Value="public event Chicken.Gnome.Notification.TimerEndedHandler TimerEndedEvent;" />
+      <MemberType>Event</MemberType>
+      <ReturnValue>
+        <ReturnType>Chicken.Gnome.Notification.TimerEndedHandler</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added</summary>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

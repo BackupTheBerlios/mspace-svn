@@ -1,0 +1,55 @@
+2004-10-12  Sergio Rubio  <sergio.rubio@hispalinux.es>
+
+	* configure.in: refactored
+	* debian/README.Debian:
+	* debian/changelog:
+	* debian/compat:
+	* debian/control:
+	* debian/dirs:
+	* debian/docs:
+	* debian/fulldeps.control:
+	* debian/libchicken.dirs:
+	* debian/libchicken.docs:
+	* debian/libchicken.files:
+	* debian/libchicken.shlibs.in:
+	* debian/rules: debian package changes
+	* doc/Makefile.am: fixed doc instalation
+	* src/Gnome/TrayIcon/libtrayicon/Makefile.am: fixed compilation fralgs
+
+2004-10-11  Sergio Rubio  <sergio.rubio@hispalinux.es>
+
+	* debian/control: added some deps
+	* debian/libchicken.files: added missing files
+	* debian/libchicken.shlibs.in: likewise
+
+2004-10-11  Sergio Rubio  <sergio.rubio@hispalinux.es>
+
+	* Makefile.am: push fixes
+
+2004-10-11  Sergio Rubio  <sergio.rubio@hispalinux.es>
+
+	* configure.in: removed unnecesary c++ macros
+
+2004-10-11  Sergio Rubio  <sergio.rubio@hispalinux.es>
+
+	* debian/README.Debian:
+	* debian/changelog:
+	* debian/compat:
+	* debian/control:
+	* debian/copyright:
+	* debian/dirs:
+	* debian/docs:
+	* debian/rules:
+	First skeleton of the debian package
+
+2004-10-08  Sergio Rubio  <sergio.rubio@hispalinux.es>
+
+	* examples/Makefile.am: dist fixes
+	* src/Makefile.am: ditto
+
+2004-10-08  Sergio Rubio  <sergio.rubio@hispalinux.es>
+	
+	* configure.in: new release
+	* src/Gnome/Notification/NotificationAreaMessage.cs: Bubble
+	positioning fixed.
+	* src/chicken.pc.in: fixed version macro
