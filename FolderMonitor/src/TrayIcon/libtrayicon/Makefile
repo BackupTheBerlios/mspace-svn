@@ -82,15 +82,15 @@ LIBS =
 LIBTOOL = $(SHELL) $(top_builddir)/libtool
 LN_S = ln -s
 LTLIBOBJS = 
-MAINT = #
-MAINTAINER_MODE_FALSE = 
-MAINTAINER_MODE_TRUE = #
+MAINT = 
+MAINTAINER_MODE_FALSE = #
+MAINTAINER_MODE_TRUE = 
 MAKEINFO = ${SHELL} /home/rubiojr/svn/mspace/FolderMonitor/missing --run makeinfo
 MCS = /opt/mono/bin/mcs
-MCS_FLAGS = 
+MCS_FLAGS = -g
 MONO = /opt/mono/bin/mono
 MONO_CFLAGS = -D_REENTRANT -pthread -I/opt/mono-1.0//include -I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include  
-MONO_FLAGS = 
+MONO_FLAGS = --debug
 MONO_LIBS = -Wl,--export-dynamic -pthread -L/opt/mono-1.0//lib -lmono -lpthread -lm -lgmodule-2.0 -ldl -lgthread-2.0 -lglib-2.0  
 OBJEXT = o
 PACKAGE = foldermonitor
@@ -140,7 +140,7 @@ libexecdir = ${exec_prefix}/libexec
 localstatedir = ${prefix}/var
 mandir = ${prefix}/man
 oldincludedir = /usr/include
-prefix = /opt/mono-extra/
+prefix = /usr/local
 program_transform_name = s,x,x,
 sbindir = ${exec_prefix}/sbin
 sharedstatedir = ${prefix}/com
@@ -197,10 +197,10 @@ all: all-am
 
 .SUFFIXES:
 .SUFFIXES: .c .lo .o .obj
-$(srcdir)/Makefile.in: # Makefile.am  $(top_srcdir)/configure.in $(ACLOCAL_M4)
+$(srcdir)/Makefile.in:  Makefile.am  $(top_srcdir)/configure.in $(ACLOCAL_M4)
 	cd $(top_srcdir) && \
 	  $(AUTOMAKE) --gnu  src/TrayIcon/libtrayicon/Makefile
-Makefile: # $(srcdir)/Makefile.in  $(top_builddir)/config.status
+Makefile:  $(srcdir)/Makefile.in  $(top_builddir)/config.status
 	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@ $(am__depfiles_maybe)
 trayiconlibLTLIBRARIES_INSTALL = $(INSTALL)
 install-trayiconlibLTLIBRARIES: $(trayiconlib_LTLIBRARIES)

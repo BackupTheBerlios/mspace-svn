@@ -1,4 +1,6 @@
-RESOURCES = /resource:../../images/dropbox-changed.png,dropbox-changed.png
+RESOURCES = \
+	    /resource:../../images/dropbox-changed.png,dropbox-changed.png \
+	    /resource:../../images/dropbox-changed-red.png,dropbox-changed-red.png
 
 FolderMonitor.exe: FolderMonitor.cs
 	mcs FolderMonitor.cs -pkg:gtk-sharp /r:../TrayIcon/TrayIcon.dll $(RESOURCES) -o $@

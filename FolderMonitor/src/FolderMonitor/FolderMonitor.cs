@@ -24,6 +24,7 @@ namespace FolderMonitor
     using Gtk;
     using Egg;
     using System.Diagnostics;
+    using System.Threading;
 
     public class FolderMonitor
     {
@@ -36,8 +37,8 @@ namespace FolderMonitor
 	{
 	    this.path = folder;
 	    icon = new TrayIcon ("FolderMonitor");
-	    eBox = new EventBox ();
 	    image = new Image (new Gdk.Pixbuf (null, "dropbox-changed.png"));
+	    eBox = new EventBox ();
 	    eBox.Add (image);
 	    eBox.ButtonPressEvent += ButtonPressed;
 	    icon.Add (eBox);
@@ -58,14 +59,21 @@ namespace FolderMonitor
 		Console.WriteLine ("Use the path of a folder as an argument");
 		Environment.Exit (1);
 	    }
+	    Gdk.Threads.Init ();
 	    Application.Init ();
+	    
 	    FolderMonitor mon = new FolderMonitor (args[0]);
+
+	    Gdk.Threads.Enter ();
 	    Application.Run ();
+	    Gdk.Threads.Leave ();
 	}
 
 	private void OnChanged (object obj, FileSystemEventArgs args)
 	{
 	    icon.ShowAll ();
+	    Thread t = new Thread (new ThreadStart (ChangeIcon));
+	    t.Start ();
 	}
 
 	private void OnRenamed (object obj, RenamedEventArgs args)
@@ -78,6 +86,32 @@ namespace FolderMonitor
 		Process.Start ("nautilus", "file://" + path);
 		icon.Hide ();
         }
+
+	private void ChangeIcon ()
+	{
+	    while (true)
+	    {
+		//for (int i = 16 ; i > 1 ; i--)
+		//{
+		    Gdk.Threads.Enter ();
+		    //image.Pixbuf.ScaleSimple (i, i, Gdk.InterpType.Bilinear);
+		    image.FromPixbuf = new Gdk.Pixbuf (null, "dropbox-changed.png");
+		    //image.QueueDraw ();
+		    Gdk.Threads.Leave ();
+		    Thread.Sleep (100);
+		//}
+
+		//for (int i = 1 ; i < 15 ; i++)
+		//{
+		    Gdk.Threads.Enter ();
+		    //image.Pixbuf.ScaleSimple (i, i, Gdk.InterpType.Bilinear);
+		    image.FromPixbuf = new Gdk.Pixbuf (null, "dropbox-changed-red.png");
+		    //image.QueueDraw ();
+		    Gdk.Threads.Leave ();
+		    Thread.Sleep (100);
+		//}
+	    }
+	}
 
     }
 
