@@ -1,1 +1,1 @@
-SUBDIRS = xchat gaim
+SUBDIRS = xchat 

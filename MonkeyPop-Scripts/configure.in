@@ -10,5 +10,5 @@ AC_PROG_INSTALL
 
 AC_OUTPUT([
 Makefile
-XChat/Makefile
+xchat/Makefile
 ])

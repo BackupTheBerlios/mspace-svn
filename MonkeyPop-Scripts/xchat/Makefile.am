@@ -1,1 +1,1 @@
-EXTRA_DIST = *.py
+EXTRA_DIST = *.py README.es
