@@ -1,0 +1,97 @@
+Sergio Rubio <sergio.rubio@hispalinux.es>
+07/15/2004
+
+CREDITS
+---------
+FastOpen icon has been stolen from the Wasp svg icon theme.
+
+DESCRIPTION
+------------
+FastOpen aims to replace the gnome-panel run dialog, or provide a similar tool to window managers or desktops which does
+not have such functionality (openbox for example). It provides a functionality similar to Konqueror "Web Shortcuts".
+
+FastOpen tries to accomplish the following tasks:
+* Command auto completion.
+* Path autocompletion.
+* "Web shortcuts" feature to translate shortcuts to real URLs.
+* A little shortcuts editor (FSEditor).
+* Command history (Not implemented).
+* gnome-vfs predefined URLs handling ("preferences:", "applications:", "fonts:", etc.).
+
+INSTALATION
+------------
+You need mono and gtk-sharp installed (and the -dev/-devel packages)
+
+./configure
+./make
+./make install
+
+USING FastOpen
+---------------
+For a good time, I recommend you to configure your window manager and assign a keyboard shortcut to FastOpen to open it using
+Alt-F2 for example.
+
+FastOpen comes with some handy shortcuts by default.
+Type :gg:<any text you want here> in the FastOpen dialog and the web browser will be launched with a google search.
+
+:vimtip:<any text you want here>
+Will search vim.org for any tips containing the text.
+
+:wr:<any word you want here>
+Will translate the word using wordreference.com
+
+:dict:<any word you want here>
+Will search dict.org for any description of the work
+
+And there are many more. Open fseditor.exe and try some of them!!
+
+If you want to add more shortcuts, use fseditor
+
+Autocompletion
+---------------
+Do you wanna open gedit? ok type "ge" and press TAB and FastOpen will complete it.
+It also completes when you type. If you press TAB multiple times it will cycle between
+the commands available with this prefix. Try it, it's fun :).
+
+FastOpen tips n'tricks
+-----------------------
+
+* Type a URL and your browser will be launched pointing to that URL
+  Example:
+    type http://mono-project.com
+    or
+    mono-project.com without http://
+
+
+* You can type any of the predefined gnome-vfs URLs
+    preferences:
+    burn:
+    network:
+    applications:
+    favorites:
+    start-here:
+    system-settings:
+  Don't forget the semicolon at the end.
+
+* Add shortcuts to your favorit folder such as Music, Documents, Desktop...
+    Ej:
+	URL: file:/home/rubiojr/Music
+	Shortcut: music
+
+    Ej:
+	URL: file:/home/rubiojr/Documents
+	Shortcut: docs
+
+    If you type any of this shortcuts, your favorite folders will be opened in nautilus ;).
+
+NOTES:
+------
+If you have a useful shortcut and you think it should be include in FastOpen default shortcuts, mail me.
+I'm not a native English speaker so if you find any errors in this document or you think it could be improved,
+don't hesitate and contact me.
+
+Any coments, patches, ideas, etc. 
+<sergio.rubio@hispalinux.es>
+
+Cheers,
+Rubio

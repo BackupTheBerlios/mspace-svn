@@ -1,0 +1,3 @@
+* Command history
+* Parser code is a piece of shit. Refactor/simplify it.
+* CompletionEntry widget code should be easier. Fix it!

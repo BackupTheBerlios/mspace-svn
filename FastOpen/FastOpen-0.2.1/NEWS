@@ -1,0 +1,7 @@
+0.2
+----
+* Autocompletion working
+* fseditor is now included in this package
+* url handling works better
+* shortcuts now use :shortcut: notation
+    i.e. :gg:search this
