@@ -12,7 +12,10 @@ namespace ComponentModel {
         
         public DefaultComponentModel () {
         }
-          
+         
+        internal void SetVO (ComponentModelVO vo) {
+            this.vO = vo;
+        }
     
     }
 }

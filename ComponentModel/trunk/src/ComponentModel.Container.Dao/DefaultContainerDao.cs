@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Reflection;
 using ComponentModel.Interfaces;
 using ComponentModel.Container;
@@ -19,7 +20,8 @@ namespace ComponentModel.Container.Dao {
             }
         }
 
-        public void ProcessAssembly (Assembly assembly) {
+        public ICollection ProcessAssembly (Assembly assembly) {
+            ArrayList list = new ArrayList ();
             Type[] types = assembly.GetTypes ();
             //TODO filter with memberfilter :)
             for (int i = 0; i < types.Length; i++) {
@@ -31,13 +33,24 @@ namespace ComponentModel.Container.Dao {
                         //Deberiamos registrar el tipo en el Container. Y
                         //parsear la información para rellenar su VO.
                         ComponentModelVO componentModelVO = this.fillVO (types[i]);
-
-                        Console.WriteLine (types[i]);
+                        ConstructorInfo constructorInfo = types[i].GetConstructor (null);
+                        DefaultComponentModel defaultComponentModel = (DefaultComponentModel)constructorInfo.Invoke (null);
+                        /**
+                        FieldInfo voFieldInfo = types[i].GetField ("vO", BindingFlags.NonPublic);
+                        voFieldInfo.SetValue (defaultComponentModel, componentModelVO);
+                        */
+                        //TODO Reflect it !!
+                        defaultComponentModel.SetVO (componentModelVO);
+                        list.Add (defaultComponentModel);
                     }
                 }
             }
+            return (ICollection)list;
         }
 
+        /**
+         * Rellenamos el VO con los valores que tenga asociado ese tipo.
+         */
         private ComponentModelVO fillVO (Type type) {
             ComponentModelVO componentModelVO = new ComponentModelVO ();
             ComponentAttribute componentAttribute = (ComponentAttribute)(type.GetCustomAttributes (typeof (ComponentAttribute), true)[0]);

@@ -17,13 +17,24 @@ namespace ComponentModel.Container {
             AppDomain appDomain = AppDomain.CurrentDomain;
             Assembly[] assemblies = appDomain.GetAssemblies ();
             foreach (Assembly ass  in assemblies) {
-                DefaultContainerDao.Instance.ProcessAssembly (ass);
+                ICollection collection = DefaultContainerDao.Instance.ProcessAssembly (ass);
+                RegisterComponent (collection);
             }
             //En cada ensamblado, cargará el / los componente y lo registrará con el
             //nombre que se le ha dado al atributo.
 
         }
 
+        private void RegisterComponent (ICollection collection) {
+            IEnumerator enumerator = collection.GetEnumerator ();
+            while (enumerator.MoveNext ()) {
+                DefaultComponentModel defaultComponentModel = (DefaultComponentModel)enumerator.Current;
+                this.Add (defaultComponentModel); 
+                Console.WriteLine ("Added: " + defaultComponentModel.ToString ());
+                Console.WriteLine (defaultComponentModel.VO.Name);
+            }
+        }
+        
         public static DefaultContainer Instance {
             get {
                 if (instance == null)
@@ -34,8 +45,7 @@ namespace ComponentModel.Container {
 
         public IComponentModel GetComponentByName (string componentName) {
             for (int i = 0; i < componentList.Count; i++) {
-                if ((componentList[i] as IComponentModel).VO.Name.Equals (componentName)) {
-                    
+                if ((componentList[i] as DefaultComponentModel).VO.Name.Equals (componentName)) {
                     return (IComponentModel)componentList[i];
                 }
             }
