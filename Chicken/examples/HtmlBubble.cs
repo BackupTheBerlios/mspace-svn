@@ -29,6 +29,7 @@ public class HtmlBubble
     {
 	Application.Init ();
 	NotificationBubble b = new NotificationBubble ("http://localhost", NotificationSource.Url, NotificationContent.Html);
+	b.ShowAll ();
 	b.RenderWithTimer ();
 	Application.Run ();
     }

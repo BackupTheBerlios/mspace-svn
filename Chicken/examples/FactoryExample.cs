@@ -29,7 +29,7 @@ public class MessageExample
     {
 	Application.Init ();
 	NotificationFactory.ShowMessageNotification 
-	    ("Header", "Body", NotificationType.Info, new TimerEndHandler (TimerEnded));
+	    ("Header", "Body", NotificationType.Info, new TimerEndedHandler (TimerEnded));
 	Application.Run ();
     }
 

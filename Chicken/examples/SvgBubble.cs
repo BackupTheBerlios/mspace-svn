@@ -29,8 +29,16 @@ public class SvgBubble
     {
 	Application.Init ();
 	NotificationBubble b = new NotificationBubble ("msg.svg", NotificationSource.File, NotificationContent.Svg);
+	b.TimeOut = 3000;
+	b.TimerEndedEvent += TimerEnded;
 	b.RenderWithTimer ();
+	b.ShowAll ();
 	Application.Run ();
+    }
+
+    private static void TimerEnded ()
+    {
+	Application.Quit ();
     }
 }
 
