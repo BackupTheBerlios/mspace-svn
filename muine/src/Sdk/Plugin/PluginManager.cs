@@ -33,17 +33,22 @@ public class PluginManager
 {
 	//This info is sensible to the platform. If muine is ported to other OS
 	//this should be changed.
-	private string pluginsDir = Environment.GetEnvironmentVariable ("HOME") +
+	private string userPluginsDir = Environment.GetEnvironmentVariable ("HOME") +
 								+ Path.DirectorySeparatorChar + ".gnome2" +
 								+ Path.DirectorySeparatorChar + "muine" +
 								+ Path.DirectorySeparatorChar + "plugins";
+	private string globalPluginsDir;
 	
 	//This will hold the list of plugins loaded.
 	private ArrayList pluginList = new ArrayList ();
 	
 	public PluginManager ()
 	{
-		InitPluginsDir ();
+		string location = Assembly.GetCallingAssembly ().Location;
+		int lastSlash = location.LastIndexOf (Path.DirectorySeparatorChar);
+		string path = location.Substring (0, lastSlash);
+		globalPluginsDir = path + Path.DirectorySeparatorChar + "plugins";
+		InitUserPluginsDir ();
 	}
 	
 	
@@ -62,11 +67,12 @@ public class PluginManager
 	}
 	
 	// FIXME: should we use a thread to run each plugin?
-	// We should handle the case when there is a plugin that cannot
+	// FIXME: We should handle the case when there is a plugin that cannot
 	// be loaded (Notifiying the user and so).
-	// Should we verify that Plugin Names are unique?
+	// FIXME: We should verify that Plugin Names are unique and the plugin is
+	// not duplicated in userdir and globaldir
 	/*
-	 * Try to load as plugins all the assemblies found in pluginsDir.
+	 * Try to load as plugins all the assemblies found in globalPluginsDir.
 	 * The PluginInfo attribute must be present into the assembly.
 	 * If PluginInfo is not found the plugin is not loaded.
 	 */
@@ -74,7 +80,9 @@ public class PluginManager
 	{
 		if (enabled)
 		{
-			string[] files = Directory.GetFiles (pluginsDir);
+			ArrayList files = new ArrayList ();
+			files.AddRange (Directory.GetFiles (globalPluginsDir));
+			files.AddRange (Directory.GetFiles (userPluginsDir));
 			foreach (string assemblie in files)
 			{
 #if DEBUG_PLUGINS
@@ -132,11 +140,11 @@ public class PluginManager
 	/*
 	 * Checks if the plugins dir exist, if not, we create it.
 	 */
-	private void InitPluginsDir ()
+	private void InitUserPluginsDir ()
 	{
 		try {
-			if (!Directory.Exists (pluginsDir))
-				Directory.CreateDirectory (pluginsDir);
+			if (!Directory.Exists (userPluginsDir))
+				Directory.CreateDirectory (userPluginsDir);
 		} catch {
 			enabled = false;
 #if DEBUG_PLUGINS

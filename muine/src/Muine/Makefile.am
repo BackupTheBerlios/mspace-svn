@@ -25,15 +25,11 @@ muine.exe: $(SOURCES)
 all: muine.exe
 
 muinelibdir = $(prefix)/lib/muine
-muinelib_DATA = muine.exe muine.exe.config
+muinelib_DATA = muine.exe
 
-bin_SCRIPTS = muine
 
 EXTRA_DIST =					\
-	$(SOURCES)				\
-	muine.in				\
-	muine.exe.config.in
+	$(SOURCES)
 
 CLEANFILES =					\
-	muine					\
 	muine.exe

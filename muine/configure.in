@@ -1,4 +1,4 @@
-AC_INIT(src/Muine.cs)
+AC_INIT(src/Muine/Muine.cs)
 
 AM_CONFIG_HEADER(config.h)
 
@@ -123,6 +123,13 @@ libmuine/Makefile
 libmuine/id3-vfs/Makefile
 libmuine/egg/Makefile
 src/Makefile
+src/Plugins/Makefile
+src/Plugins/Dashboard/Makefile
+src/Plugins/MonitorPlugin/Makefile
+src/Sdk/Makefile
+src/Sdk/Muine.Sdk.dll.config
+src/Sdk/muine-sdk.pc
+src/Muine/Makefile
 src/muine
 src/muine.exe.config
 m4/Makefile

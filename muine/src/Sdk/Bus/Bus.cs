@@ -34,7 +34,9 @@ public abstract class Bus
 		{
 		    lock (busMembers)
 			busMembers.Add (member);
-		}			
+		} else {
+		    Console.WriteLine ("WARNING: Member is already in the bus. Skipping");
+		}
     }
 
     public void RemoveMember(IBusMember member)

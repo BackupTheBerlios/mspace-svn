@@ -4,7 +4,7 @@ all: DashboardFrontend.dll
 DashboardFrontend.dll: *.cs
 	mcs /target:library -o $@ $(ASSEMBLIES) *.cs
 
-dashboardfrontendlibdir = ~/.gnome2/muine/plugins
+dashboardfrontendlibdir = @prefix@/lib/muine/plugins
 dashboardfrontendlib_DATA = DashboardFrontend.dll
 
 CLEANFILES =				\

@@ -35,6 +35,7 @@ public class MonitorPlugin : IPlugin
     [Glade.Widget] TextView textview;
     
     private string gladeFile = "monitor-window.glade";
+    private XML gxml;
 
     public MonitorPlugin ()
     {
@@ -43,7 +44,7 @@ public class MonitorPlugin : IPlugin
 
     private void InitComponets ()
     {
-	XML gxml = new XML (null, gladeFile, "window", null);
+	gxml = new XML (null, gladeFile, "window", null);
 	gxml.Autoconnect (this);
     }
     
@@ -63,6 +64,12 @@ public class MonitorPlugin : IPlugin
      
      private void ClearClicked (object obj, EventArgs args)
      {
+	 textview.Buffer.Text = "";
+     }
+     
+     private void CloseClicked (object obj, EventArgs args)
+     {
+	 gxml["window"].Destroy ();
      }
 
      private class TestFilter : IBusFilter

@@ -3,11 +3,14 @@ SUBDIRS = 		\
 	Muine		\
 	Plugins
 
-#EXTRA_DIST =			\
-#	muine.spec.in		\
-#	muine.spec
+muinelibdir = $(prefix)/lib/muine
+muinelib_DATA = muine.exe.config
 
-#DISTCLEANFILES = 		\
-#	intltool-extract 	\
-#	intltool-merge 		\
-#	intltool-update
+bin_SCRIPTS = muine
+
+EXTRA_DIST =					\
+	muine.in				\
+	muine.exe.config.in
+
+CLEANFILES =					\
+	muine

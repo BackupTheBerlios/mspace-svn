@@ -7,7 +7,7 @@ all: MonitorPlugin.dll
 MonitorPlugin.dll: *.cs
 	mcs /target:library -o $@ $(ASSEMBLIES) *.cs $(RESOURCES) -pkg:gtk-sharp -pkg:glade-sharp
 
-monitorpluginlibdir = ~/.gnome2/muine/plugins
+monitorpluginlibdir = @prefix@/lib/muine/plugins
 monitorpluginlib_DATA = MonitorPlugin.dll
 
 CLEANFILES =				\
