@@ -1,8 +1,0 @@
-SOURCES = \
-./Player/IPlayer.cs\
-./Playlist/Playlist.cs\
-./Data/Song.cs\
-./Data/ISearchable.cs\
-./Data/SongMetadata.cs\
-./Configuration/Configuration.cs\
-./Configuration/ObjectStore.cs
