@@ -1,0 +1,42 @@
+<Type Name="FileUtils" FullName="Red.IO.FileUtils">
+  <TypeSignature Language="C#" Value="public class FileUtils" />
+  <AssemblyInfo>
+    <AssemblyName>RedLib</AssemblyName>
+    <AssemblyVersion>1.0.1.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public FileUtils ();" />
+      <MemberType>Constructor</MemberType>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetAllDirectoryFiles">
+      <MemberSignature Language="C#" Value="public static System.Collections.ArrayList GetAllDirectoryFiles (string dir);" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Collections.ArrayList</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="dir" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="dir">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+  <Docs>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+</Type>

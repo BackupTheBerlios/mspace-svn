@@ -1,0 +1,37 @@
+<Type Name="ZipEntryExcludedArgs" FullName="Red.IO.ZipEntryExcludedArgs">
+  <TypeSignature Language="C#" Value="public class ZipEntryExcludedArgs : System.EventArgs" />
+  <AssemblyInfo>
+    <AssemblyName>RedLib</AssemblyName>
+    <AssemblyVersion>1.0.1.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.EventArgs</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public ZipEntryExcludedArgs ();" />
+      <MemberType>Constructor</MemberType>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Entry">
+      <MemberSignature Language="C#" Value="public ICSharpCode.SharpZipLib.Zip.ZipEntry Entry;" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>ICSharpCode.SharpZipLib.Zip.ZipEntry</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+  <Docs>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+</Type>

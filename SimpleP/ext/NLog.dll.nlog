@@ -1,0 +1,9 @@
+<nlog>
+	<appenders>
+            <appender name="report" type="File" filename="report.log" />
+    </appenders>
+	<rules>
+		<logger name="*" levels="Error" appendTo="report"/>
+		<logger name="*" levels="Info,Warn,Debug" appendTo="debug"/>
+	</rules>
+</nlog>

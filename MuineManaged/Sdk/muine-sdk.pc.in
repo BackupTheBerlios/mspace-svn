@@ -1,9 +1,0 @@
-prefix=@prefix@
-exec_prefix=${prefix}
-libdir=${exec_prefix}/lib
-
-
-Name: Muine Sdk
-Description: Software development kit for Muine
-Version: 0.1
-Libs: -r:${libdir}/muine/Muine.Sdk.dll

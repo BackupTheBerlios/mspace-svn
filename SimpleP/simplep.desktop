@@ -1,0 +1,10 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=SimpleP project manager
+Comment=Simple Project Manager
+Exec=@@installdir@@/bin/simplep
+Terminal=false
+Type=Application
+Icon=@@installdir@@/share/pixmaps/simplep/simplep.png
+Categories=Application;Development;
+MimeType=application/x-simplep;

@@ -1,0 +1,20 @@
+<Overview>
+  <Assembly Version="0.0.0.0">Red.ProjectManager</Assembly>
+  <Remarks>To be added.</Remarks>
+  <Copyright>To be added.</Copyright>
+  <Types>
+    <Namespace Name="Red.ProjectManager">
+      <Type Name="Project" />
+      <Type Name="FileAddedArgs" />
+      <Type Name="FileRemovedArgs" />
+      <Type Name="ProjectFile" />
+      <Type Name="ProjectManager" />
+      <Type Name="XmlObject" />
+    </Namespace>
+  </Types>
+  <Attributes>
+    <Attribute>
+      <AttributeName>System.Diagnostics.Debuggable(IsJITTrackingEnabled=True, IsJITOptimizerDisabled=False)</AttributeName>
+    </Attribute>
+  </Attributes>
+</Overview>

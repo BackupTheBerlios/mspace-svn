@@ -1,0 +1,186 @@
+<Type Name="Archiver" FullName="Red.IO.Archiver">
+  <TypeSignature Language="C#" Value="public class Archiver" />
+  <AssemblyInfo>
+    <AssemblyName>RedLib</AssemblyName>
+    <AssemblyVersion>1.0.1.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public Archiver (string name);" />
+      <MemberType>Constructor</MemberType>
+      <Parameters>
+        <Parameter Name="name" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="name">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ZipEntryAdded">
+      <MemberSignature Language="C#" Value="public event ___callable0 ZipEntryAdded;" />
+      <MemberType>Event</MemberType>
+      <ReturnValue>
+        <ReturnType>___callable0</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ZipEntryExcluded">
+      <MemberSignature Language="C#" Value="public event ___callable1 ZipEntryExcluded;" />
+      <MemberType>Event</MemberType>
+      <ReturnValue>
+        <ReturnType>___callable1</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="name">
+      <MemberSignature Language="C#" Value="protected string name;" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="_appendDate">
+      <MemberSignature Language="C#" Value="protected bool _appendDate;" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="_addEntryNotify">
+      <MemberSignature Language="C#" Value="protected bool _addEntryNotify;" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="_excludeEntryNotify">
+      <MemberSignature Language="C#" Value="protected bool _excludeEntryNotify;" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="___ZipEntryAdded">
+      <MemberSignature Language="C#" Value="protected ___callable0 ___ZipEntryAdded;" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>___callable0</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="___ZipEntryExcluded">
+      <MemberSignature Language="C#" Value="protected ___callable1 ___ZipEntryExcluded;" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>___callable1</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="BuildZipFile">
+      <MemberSignature Language="C#" Value="public void BuildZipFile (System.Collections.IList files);" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="files" Type="System.Collections.IList" />
+      </Parameters>
+      <Docs>
+        <param name="files">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="BuildZipFile">
+      <MemberSignature Language="C#" Value="public string BuildZipFile (System.Collections.IList files, System.Collections.IList excludePatterns);" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="files" Type="System.Collections.IList" />
+        <Parameter Name="excludePatterns" Type="System.Collections.IList" />
+      </Parameters>
+      <Docs>
+        <param name="files">To be added.</param>
+        <param name="excludePatterns">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ExcludeEntryNotify">
+      <MemberSignature Language="C#" Value="public bool ExcludeEntryNotify { set; get; };" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AddEntryNotify">
+      <MemberSignature Language="C#" Value="public bool AddEntryNotify { set; get; };" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AppendDate">
+      <MemberSignature Language="C#" Value="public bool AppendDate { set; get; };" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+  <Docs>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+</Type>

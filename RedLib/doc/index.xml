@@ -1,0 +1,29 @@
+<Overview>
+  <Assembly Version="1.0.1.0">RedLib</Assembly>
+  <Remarks>To be added.</Remarks>
+  <Copyright>To be added.</Copyright>
+  <Types>
+    <Namespace Name="Red.IO">
+      <Type Name="FileUtils" />
+    </Namespace>
+    <Namespace Name="Red.Resources">
+      <Type Name="ProcessBuilder" />
+    </Namespace>
+    <Namespace Name="Red.Compression">
+      <Type Name="Archiver" />
+      <Type Name="ZipEntryAddedArgs" />
+      <Type Name="ZipEntryExcludedArgs" />
+    </Namespace>
+  </Types>
+  <Attributes>
+    <Attribute>
+      <AttributeName>System.Diagnostics.Debuggable(IsJITTrackingEnabled=True, IsJITOptimizerDisabled=False)</AttributeName>
+    </Attribute>
+    <Attribute>
+      <AttributeName>System.Reflection.AssemblyDescription(Description="Miscellaneus Components")</AttributeName>
+    </Attribute>
+    <Attribute>
+      <AttributeName>System.Reflection.AssemblyTitle(Title="RedLib Library")</AttributeName>
+    </Attribute>
+  </Attributes>
+</Overview>

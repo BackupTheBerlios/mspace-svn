@@ -1,0 +1,17 @@
+﻿2005-04-04 16:20:46.9697|ERROR|MainWindow|
+Unhandled Exception:
+
+﻿2005-04-04 16:20:47.0086|ERROR|MainWindow|---------------------------------
+﻿2005-04-04 16:20:47.0131|ERROR|MainWindow|
+ 
+﻿2005-04-04 16:20:47.0174|ERROR|MainWindow|---------------------------------
+﻿2005-04-04 16:20:47.0285|ERROR|MainWindow|
+in <0x00043> SimpleP.AboutWindow:.ctor ()
+in <0x0001a> SimpleP.MainWindow:AboutMenuClicked (System.Object sender, System.Object args)
+in (wrapper delegate-invoke) System.MulticastDelegate:invoke_void_object_EventArgs (object,System.EventArgs)
+in <0x00096> GLib.Signal:voidObjectCallback (IntPtr handle, IntPtr gch)
+in (wrapper native-to-managed) GLib.Signal:voidObjectCallback (intptr,intptr)
+in <0x00000> <unknown method>
+in (wrapper managed-to-native) Gtk.Application:gtk_main ()
+in <0x00007> Gtk.Application:Run ()
+in <0x00104> SimpleP.RunModule:Main (System.String[] argv)

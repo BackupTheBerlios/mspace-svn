@@ -1,0 +1,84 @@
+<Type Name="ProcessBuilder" FullName="Red.Resources.ProcessBuilder">
+  <TypeSignature Language="C#" Value="public class ProcessBuilder" />
+  <AssemblyInfo>
+    <AssemblyName>RedLib</AssemblyName>
+    <AssemblyVersion>1.0.1.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public ProcessBuilder ();" />
+      <MemberType>Constructor</MemberType>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".cctor">
+      <MemberSignature Language="C#" Value="public ProcessBuilder ();" />
+      <MemberType>Constructor</MemberType>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="tmpdir">
+      <MemberSignature Language="C#" Value="protected static string tmpdir;" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="BuildProcessFromResource">
+      <MemberSignature Language="C#" Value="public static System.Diagnostics.Process BuildProcessFromResource (string resName, string resFileName, System.Reflection.Assembly asm);" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Diagnostics.Process</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="resName" Type="System.String" />
+        <Parameter Name="resFileName" Type="System.String" />
+        <Parameter Name="asm" Type="System.Reflection.Assembly" />
+      </Parameters>
+      <Docs>
+        <param name="resName">To be added.</param>
+        <param name="resFileName">To be added.</param>
+        <param name="asm">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="BuildProcessFromResource">
+      <MemberSignature Language="C#" Value="public static System.Diagnostics.Process BuildProcessFromResource (string name, System.Reflection.Assembly asm);" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Diagnostics.Process</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="name" Type="System.String" />
+        <Parameter Name="asm" Type="System.Reflection.Assembly" />
+      </Parameters>
+      <Docs>
+        <param name="name">To be added.</param>
+        <param name="asm">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+  <Docs>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+</Type>
