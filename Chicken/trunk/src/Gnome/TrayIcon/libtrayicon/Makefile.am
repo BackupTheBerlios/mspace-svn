@@ -13,7 +13,7 @@ chickenlib_LTLIBRARIES = libchicken.la
 libchicken_la_SOURCES = \
   eggtrayicon.c		
 
-libchicken_la_LDFLAGS = -export-dinamyc -module -avoid-version
+libchicken_la_LDFLAGS = -export-dinamyc -module
 libchicken_la_LIBADD = $(LIBTRAYICON_LIBS)
 
 maintainer-clean-local:

@@ -1,3 +1,8 @@
+2004-10-21  Sergio Rubio  <sergio.rubio@hispalinux.es>
+
+	* src/Gnome/TrayIcon/libtrayicon/Makefile.am: removed -avoid-version
+	to solve packaging issues.
+
 2004-10-12  Sergio Rubio  <sergio.rubio@hispalinux.es>
 
 	* configure.in: refactored
