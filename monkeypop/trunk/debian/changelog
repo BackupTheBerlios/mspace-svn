@@ -1,3 +1,9 @@
+monkeypop (0.1.2-2) unstable; urgency=low
+
+  * Added missing build deps
+
+ -- Sergio Rubio <sergio.rubio@hispalinux.es>  Tue, 12 Oct 2004
+
 monkeypop (0.1.2-1) unstable; urgency=low
 
   * New upstream release.
