@@ -58,6 +58,7 @@ namespace FastOpen
 	{
 	    gxml = new XML (null, "fastopen.glade", "window", null);
 	    gxml.Autoconnect (this);
+	    window.Icon = new Gdk.Pixbuf (null, "fastopen.png");
 	    AppContext.Init ();
 	}
 

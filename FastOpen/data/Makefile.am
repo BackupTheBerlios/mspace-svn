@@ -1,2 +1,4 @@
 EXTRA_DIST =				\
-	fastopenrc		
+	fastopenrc			\
+	fastopen.svg			\
+	fastopen.png
