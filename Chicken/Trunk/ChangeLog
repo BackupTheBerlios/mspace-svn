@@ -1,5 +1,9 @@
 2004-10-11  Sergio Rubio  <sergio.rubio@hispalinux.es>
 
+	* Makefile.am: push fixes
+
+2004-10-11  Sergio Rubio  <sergio.rubio@hispalinux.es>
+
 	* configure.in: removed unnecesary c++ macros
 
 2004-10-11  Sergio Rubio  <sergio.rubio@hispalinux.es>
