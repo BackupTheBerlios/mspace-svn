@@ -1,0 +1,129 @@
+<Type Name="BlinkingTrayIcon" FullName="Chicken.Gnome.TrayIcon.BlinkingTrayIcon">
+  <TypeSignature Language="C#" Value="public class BlinkingTrayIcon : Chicken.Gnome.TrayIcon.TrayIcon, Implementor, IWrapper, IDisposable" Maintainer="auto" />
+  <AssemblyInfo>
+    <AssemblyName>Chicken</AssemblyName>
+    <AssemblyPublicKey>
+    </AssemblyPublicKey>
+    <AssemblyVersion>0.0.0.0</AssemblyVersion>
+    <AssemblyCulture>neutral</AssemblyCulture>
+    <Attributes />
+  </AssemblyInfo>
+  <ThreadSafetyStatement>Gtk# is thread aware, but not thread safe; See the <link location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
+  <Docs>
+    <summary>To be added</summary>
+    <remarks>To be added</remarks>
+  </Docs>
+  <Base>
+    <BaseTypeName>Chicken.Gnome.TrayIcon.TrayIcon</BaseTypeName>
+  </Base>
+  <Interfaces>
+    <Interface>
+      <InterfaceName>Atk.Implementor</InterfaceName>
+    </Interface>
+    <Interface>
+      <InterfaceName>GLib.IWrapper</InterfaceName>
+    </Interface>
+    <Interface>
+      <InterfaceName>System.IDisposable</InterfaceName>
+    </Interface>
+  </Interfaces>
+  <Attributes />
+  <Members>
+    <Member MemberName="Run">
+      <MemberSignature Language="C#" Value="public virtual void Run ();" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added</summary>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor" Deprecated="true">
+      <MemberSignature Language="C#" Value="public BlinkingTrayIcon (string name, Gdk.Pixbuf pix1, Gdk.Pixbuf pix2);" />
+      <MemberType>Constructor</MemberType>
+      <ReturnValue />
+      <Parameters>
+        <Parameter Name="name" Type="System.String" />
+        <Parameter Name="pix1" Type="Gdk.Pixbuf" />
+        <Parameter Name="pix2" Type="Gdk.Pixbuf" />
+      </Parameters>
+      <Docs>
+        <summary>To be added</summary>
+        <param name="name">a <see cref="T:System.String" /></param>
+        <param name="pix1">a <see cref="T:Gdk.Pixbuf" /></param>
+        <param name="pix2">a <see cref="T:Gdk.Pixbuf" /></param>
+        <returns>a <see cref="T:Chicken.Gnome.TrayIcon.BlinkingTrayIcon" /></returns>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Frecuency">
+      <MemberSignature Language="C#" Value="public int Frecuency { set; get; };" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added</summary>
+        <returns>a <see cref="T:System.Int32" /></returns>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TimeOut">
+      <MemberSignature Language="C#" Value="public int TimeOut { set; get; };" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added</summary>
+        <returns>a <see cref="T:System.Int32" /></returns>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ButtonPressEvent">
+      <MemberSignature Language="C#" Value="public event Gtk.ButtonPressEventHandler ButtonPressEvent;" />
+      <MemberType>Event</MemberType>
+      <ReturnValue>
+        <ReturnType>Gtk.ButtonPressEventHandler</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added</summary>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Stop">
+      <MemberSignature Language="C#" Value="public void Stop ();" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added</summary>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public BlinkingTrayIcon (string name, Gdk.Pixbuf trayicon);" />
+      <MemberType>Constructor</MemberType>
+      <ReturnValue />
+      <Parameters>
+        <Parameter Name="name" Type="System.String" />
+        <Parameter Name="trayicon" Type="Gdk.Pixbuf" />
+      </Parameters>
+      <Docs>
+        <summary>To be added</summary>
+        <param name="name">a <see cref="T:System.String" /></param>
+        <param name="trayicon">a <see cref="T:Gdk.Pixbuf" /></param>
+        <returns>a <see cref="T:Chicken.Gnome.TrayIcon.BlinkingTrayIcon" /></returns>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>
