@@ -1,0 +1,34 @@
+SOURCES = \
+./Event/PlayerEvent.cs    \
+./Event/EventBus.cs	    \
+./Event/EventMessage.cs	    \
+./Event/DatabaseEvent.cs    \
+./Event.BusMembers/DatabaseMonitor.cs \
+./Event.BusMembers/EventDebugMonitor.cs \
+./Event.BusMembers/PlayerMonitor.cs \
+./Event.Filters/DatabaseEventFilter.cs \
+./Event.Filters/PlayerEventFilter.cs\
+./Event.Filters/IBusFilter.cs\
+./Bus/IBusMember.cs\
+./Bus/Message.cs\
+./Bus/Bus.cs\
+./Muine/GettextCatalog.cs\
+./Muine/StockIcons.cs\
+./Muine/MarkupUtils.cs\
+./Muine/Metadata.cs\
+./Muine/AppContext.cs\
+./Muine/StringUtils.cs\
+./Muine/SongDatabase.cs\
+./Muine/FileUtils.cs\
+./Muine/Album.cs\
+./Muine/AmazonSearchService.cs\
+./Muine/CoverDatabase.cs\
+./Muine/ActionThread.cs\
+./Muine/Song.cs\
+./Muine/GnomeProxy.cs\
+./Muine/ErrorDialog.cs\
+./Action/ActionMessage.cs\
+./Action/ActionBus.cs\
+./Plugin/PluginInfoAttribute.cs\
+./Plugin/IPlugin.cs\
+./Plugin/PluginManager.cs

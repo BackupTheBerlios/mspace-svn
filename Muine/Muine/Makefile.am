@@ -1,42 +1,21 @@
 CSC = $(MCS) -codepage:utf8 $(MCS_FLAGS)
 
-SOURCES = \
-./About.cs	\
-./AddAlbumWindow.cs	\
-./AddSongWindow.cs	\
-./ColoredCellRendererPixbuf.cs	\
-./CoverImage.cs	\
-./EllipsizingLabel.cs	\
-./FileSelector.cs	\
-./HandleView.cs	\
-./InfoWindow.cs	\
-./KeyUtils.cs	\
-./MessageConnection.cs	\
-./MmKeys.cs	\
-./Muine.cs	\
-./NoMusicFoundWindow.cs	\
-./NotificationAreaIcon.cs	\
-./Player.cs	\
-./PlaylistWindow.cs	\
-./ProgressWindow.cs	\
-./SkipToWindow.cs	\
-./VolumeButton.cs	\
-./YesNoDialog.cs
+include sources.list
 
 RESOURCES = \
-/resource:./images/muine-about.png	\
-/resource:./images/muine-nothing.png	\
-/resource:./images/muine.png	\
-/resource:./glade/AddWindow.glade	\
-/resource:./glade/ErrorDialog.glade	\
-/resource:./glade/GroupEditor.glade	\
-/resource:./glade/InfoWindow.glade	\
-/resource:./glade/NoMusicFoundWindow.glade	\
-/resource:./glade/PlaylistFilling.glade	\
-/resource:./glade/PlaylistWindow.glade	\
-/resource:./glade/ProgressWindow.glade	\
-/resource:./glade/SkipToWindow.glade	\
-/resource:./glade/YesNoDialog.glade
+/resource:images/muine-about.png,muine-about.png	\
+/resource:images/muine-nothing.png,muine-nothing.png	\
+/resource:images/muine.png,muine.png	\
+/resource:glade/AddWindow.glade,AddWindow.glade	\
+/resource:glade/ErrorDialog.glade,ErrorDialog.glade	\
+/resource:glade/GroupEditor.glade,GroupEditor.glade	\
+/resource:glade/InfoWindow.glade,InfoWindow.glade	\
+/resource:glade/NoMusicFoundWindow.glade,NoMusicFoundWindow.glade	\
+/resource:glade/PlaylistFilling.glade,PlaylistFilling.glade	\
+/resource:glade/PlaylistWindow.glade,PlaylistWindow.glade	\
+/resource:glade/ProgressWindow.glade,ProgressWindow.glade	\
+/resource:glade/SkipToWindow.glade,SkipToWindow.glade	\
+/resource:glade/YesNoDialog.glade,YesNoDialog.glade
 
 ASSEMBLIES = /r:../Sdk/Muine.Sdk.dll
 
