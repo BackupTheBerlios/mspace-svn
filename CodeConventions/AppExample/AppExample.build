@@ -73,6 +73,16 @@
     <target name="run" depends="build">
         <csc target="exe" output="${bin}/${component_name}.exe" debug="true"
         verbose="true">
+            <!-- La opción interesante sería que compilara sólo el launcher y
+            que hiciera las llamadas a la dll creada antes.
+            Para ello no se debería incluir el launcher en la compilación y el mainComponent
+            siempre tener un InitApp al que llamar desde un Launcher.cs siempre.
+
+            Ese launcher no tiene que coincidir en namespace ni nada así que
+            tenga que ver con los componentnes.
+
+            //TODO
+            -->
             <sources basedir="${src}">
                 <include name="**/*.cs"/>
             </sources>

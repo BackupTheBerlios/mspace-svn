@@ -14,8 +14,9 @@ namespace AppExample {
         public static void Main () {
             MainComponentComponentModel.Co ();
 
-            //MainComponentComponentModel mc = new MainComponentComponentModel ();
-            //Console.WriteLine ("Hello world"); 
+            MainComponentComponentModel mc = new MainComponentComponentModel ();
+            mc.InitApp ();
+            Console.WriteLine ("Hello world"); 
             Out.Write ("Hello!!");           
         }
     }
