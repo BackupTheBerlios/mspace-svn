@@ -107,8 +107,49 @@ namespace Chicken.Gnome.Notification
 	    if (TimerEndedEvent != null)
 		TimerEndedEvent ();
 	}
-
+	
 	private void PositionBubble ()
+	{
+	    bubble.Realize ();
+	    int tmp1, tmp2, tmp3;
+
+	    bubble.Stick ();
+	    bubble.SkipTaskbarHint = true;
+	    bubble.SkipPagerHint = true;
+	    bubble.TypeHint = Gdk.WindowTypeHint.Dock;
+
+	    // Get the dimensions/position of the widgetToAlignWith
+	    icon.Realize ();
+	    int iconX, iconY;
+	    icon.GdkWindow.GetOrigin (out iconX, out iconY);
+	    int iconWidth, iconHeight;
+	    icon.GdkWindow.GetGeometry (out tmp1, out tmp2, out iconWidth, out iconHeight, out tmp3);
+
+	    // Get the screen dimensions
+	    int screenHeight = Gdk.Screen.Default.Height;
+	    int screenWidth = Gdk.Screen.Default.Width;
+
+	    int newX;
+	    if ((iconX + bubble.BubbleWidth) < screenWidth)
+		// Align to the left of the entry
+		newX = iconX;
+	    else
+		// Align to the right of the entry
+		newX = (iconX + iconWidth) - bubble.BubbleWidth;
+
+	    int extra = 10;
+	    int newY;
+	    if (iconY - iconHeight < 0)
+		newY = iconY + iconHeight + extra;
+	    else
+		newY = screenHeight - iconHeight - bubble.BubbleHeight - extra;
+
+	    // -"Coordinates locked in captain."
+	    // -"Engage."
+	    bubble.Move (newX, newY);
+	}
+
+/*	private void PositionBubble ()
 	{
 	    bubble.Realize ();
 	    int ourWidth;
@@ -151,7 +192,7 @@ namespace Chicken.Gnome.Notification
 	    // -"Coordinates locked in captain."
 	    // -"Engage."
 	    bubble.Move (newX, newY);
-	}
+	}*/
 	
 	private void ButtonPressed (object obj, ButtonPressEventArgs args)
         {
