@@ -1,5 +1,11 @@
 2004-10-11  Sergio Rubio  <sergio.rubio@hispalinux.es>
 
+	* debian/control: added some deps
+	* debian/libchicken.files: added missing files
+	* debian/libchicken.shlibs.in: likewise
+
+2004-10-11  Sergio Rubio  <sergio.rubio@hispalinux.es>
+
 	* Makefile.am: push fixes
 
 2004-10-11  Sergio Rubio  <sergio.rubio@hispalinux.es>
