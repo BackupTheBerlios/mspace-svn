@@ -22,6 +22,7 @@ using Chicken.Gnome.TrayIcon;
 using Chicken.Gnome.Notification;
 using Gtk;
 using System.Text;
+using Mono.GetOptions;
 
 public class SimpleMonkeyPop 
 {
@@ -38,6 +39,9 @@ public class SimpleMonkeyPop
 
     public static void Main (string[] args)
     {
+
+	if (args.Length == 0)
+	    ShowHelp ();
 
 	    switch (args[0])
 	    {
@@ -63,10 +67,11 @@ public class SimpleMonkeyPop
 	}
 
 	//args[0] = --html
-	//args[1] = --content | --file
+	//args[1] = --content | --file | --url
 	//args[2] = html chunk | filename
 	StringBuilder content = new StringBuilder ();
-	string file;
+	string file = null;
+	string url = null;
 	switch (args[1])
 	{
 	    case "--content":
@@ -76,11 +81,22 @@ public class SimpleMonkeyPop
 	    case "--file":
 		file = args[2];
 		break;
+	    case "--url":
+		url = args[2];
+		break;
 	    default:
 		ShowHelp ();
 		break;
 
 	}
+	Application.Init ();
+	if (file != null)
+	    NotificationFactory.ShowHtmlNotification (file, NotificationSource.File);
+	else if (url != null)
+	    NotificationFactory.ShowHtmlNotification (url, NotificationSource.Url);
+	else
+	    NotificationFactory.ShowHtmlNotification (content.ToString (), NotificationSource.Text);
+	Application.Run ();
 	
     }
 
@@ -148,12 +164,14 @@ public class SimpleMonkeyPop
     private static void ShowHelp ()
     {
 	    Console.WriteLine (
-		    "Usage: monkeypop --text \"string\" --header \"string\" [--timeout miliseconds] [options]\n" +
-		    "Where options are:\n" +
-		    "--file svgfile	Svg file to render as message\n"	+
-		    "--warning		Show a warning message\n"		+
-		    "--info		Show an info message\n" +
-		    "--error		Show an error message\n"
+		    "Usage:\n"										+
+		    "	    monkeypop --html --content htmlchunk\n"					+
+		    "	    monkeypop --html --file htmlfile\n"						+
+		    "	    monkeypop --html --url URL\n"						+
+		    "\n"										+
+		    "	    monkeypop --svg --file svgfile\n"						+
+		    "	    monkeypop --svg (--warning | --info | --error) --header header_string --text text_string\n"	+
+		    "\n"
 		    );
 	    Environment.Exit (1);
     }

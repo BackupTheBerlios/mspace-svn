@@ -1,5 +1,5 @@
-CSSOURCES = SimpleMonkeyPop.cs
-REFERECES = -pkg:chicken -pkg:gtk-sharp
+CSSOURCES = MonkeyPop.cs
+REFERECES = -pkg:chicken -pkg:gtk-sharp -r:Mono.GetOptions
 #RESOURCES = \
 #	/resource:../images/notification.png,notification.png \
 #	/resource:../images/simple.svg,simple.svg				\

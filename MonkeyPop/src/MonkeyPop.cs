@@ -18,80 +18,170 @@
  */
 
 using System;    
-using Chicken.Gnome.TrayIcon;
-using Chicken.Gnome.Notification;
 using Gtk;
+using System.Reflection;
+using Mono.GetOptions;
+using Chicken.Gnome.Notification;
+using System.Text;
 
+[assembly: AssemblyTitle ("monkeypop")]
+[assembly: AssemblyVersion ("0.1")]
+[assembly: AssemblyDescription ("Chicken library client example")]
+[assembly: AssemblyCopyright ("Sergio Rubio <sergio.rubio@hispalinux.es")]
+
+// This is text that goes after " [options]" in help output.
+[assembly: Mono.UsageComplement ("")]
+
+// Attributes visible in " -V"
+[assembly: Mono.About("Show desktop notifications from scripts")]
+[assembly: Mono.Author ("Sergio Rubio <sergio.rubio@hispalinux.es>")]
+
+internal class SimpleOptions : Options 
+{
+ 
+    [Option ("Render Html", "html")]
+    public bool html;
+
+    [Option ("Render Svg", "svg")]
+    public bool svg;
+
+    [Option ("Use a warning message", "warning")]
+    public bool warning;
+    [Option ("Use a info message", "info")]
+    public bool info;
+    [Option ("Use an error message", "error")]
+    public bool error;
+    
+    [Option ("Notification header", "header")]
+    public string header;
+    [Option ("Notification text", "text")]
+    public string text;
+
+    [Option ("Content to render (svg or html)", 'c')]
+    public string content = null;
+    [Option ("Render html content from Url", 'u')]
+    public string url = null;
+    [Option ("Render svg or html from file", 'f')]
+    public string file = null;
+
+    [Option ("Bubble message width", 'w')]
+    public int width = 200;
+    [Option ("Bubble message height", 'h')]
+    public int height = 75;
+    [Option ("Notification timeout in miliseconds", 't')]
+    public int timeout = 5000;
+
+    public SimpleOptions ()
+    {
+	base.ParsingMode = OptionsParsingMode.Both;
+    }
+
+}
 public class MonkeyPop
 {
-    static string message;
-    static string html;
-    static string width = "200";
-    static string height = "80";
-    static string timeout = "5000";
-    static string svg;
-
-
     public static void Main (string[] args)
     {
-
-	for (int i = 0; i < args.Length ; i++)
-	{
-	    switch (args[i])
-	    {
-		case "--html":
-		    html = args[i+1];
-		    break;
-		case "--message":
-		    message = args[i+1];
-		    break;
-		case "--width":
-		    width = args[i+1];
-		    break;
-		case "--height":
-		    height = args[i+1];
-		    break;
-		case "--timeout":
-		    timeout = args[i+1];
-		    break;
-		case "--svg":
-		    svg = args[i+1];
-		    break;
-	    }
-	}
-
-	if ((html == null) && (message == null) && (svg == null))
-	{
-	    Console.WriteLine (
-		    "Usage: traymsg --html file:///path_to_html_file | --message \"string\" [options]\n"	    +
-		    "	--html path_to_file	html file to load in the notification message\n"		    +
-		    "	--svg path to svg file	renders a SVG as a message\n"					    +
-		    "	--message \"string\"	string to display in the notification message\n"		    +
-		    "	--timeout miliseconds	time to wait before message disapears\n"			    +
-		    "	--width	pixels		width of the notification message\n"				    +
-		    "	--height pixels		height of the notification message\n"				    
-		    );
-	    Environment.Exit (1);
-
-	}
-		
 	Application.Init ();
-	Gdk.Pixbuf pix1 = new Gdk.Pixbuf (null, "notification.png").ScaleSimple (24, 24, Gdk.InterpType.Nearest);
-	Gdk.Pixbuf pix2 = new Gdk.Pixbuf (null, "notification-white.png").ScaleSimple (24,24, Gdk.InterpType.Nearest);
-	BlinkingTrayIcon icon = new BlinkingTrayIcon ("test", pix1, pix2);
-	NotificationMessage msg;
-	if (html != null)
-	    msg = new NotificationMessage (html, icon, NotificationType.Html);
-	else if (message != null)
-	    msg = new NotificationMessage (message, icon, NotificationType.Message);
-	else
-	    msg = new NotificationMessage (svg, icon, NotificationType.Svg);
+	SimpleOptions options = new SimpleOptions ();
+	options.ProcessArgs (args);
+	bool collecting = false;
+	StringBuilder textbuilder = new StringBuilder ();
+	StringBuilder headerbuilder = new StringBuilder ();
+	foreach (string s in args)
+	{
+	    if (s == "--text")
+	    {
+		collecting = true;
+		continue;
+	    }
+	    else if (s.StartsWith ("--") && collecting)
+	    {
+		collecting = false;
+	    }
+	    if (collecting)
+		textbuilder.Append (s + " ");
+	}
+	options.text = textbuilder.ToString ();
+	foreach (string s in args)
+	{
 	    
-	msg.BubbleWidth = Int32.Parse (width);
-	msg.BubbleHeight = Int32.Parse (height);
-	msg.TimeOut = Int32.Parse (timeout);
-	msg.Notify ();
-	Application.Run ();
+	    if (s == "--header")
+	    {
+		collecting = true;
+		continue;
+	    }
+	    else if (s.StartsWith ("--") && collecting)
+	    {
+		collecting = false;
+	    }
+	    if (collecting)
+		headerbuilder.Append (s + " ");
+	}
+	options.header = headerbuilder.ToString ();
+		
+	
+	if (args.Length == 0)
+	{
+	    options.DoHelp ();
+	    Environment.Exit (1);
+	}
+	
+	if (options.html)
+	{
+	    if (options.content != null)
+	    {
+		NotificationFactory.ShowHtmlNotification 
+		    (options.content, NotificationSource.Text, options.width, options.height, options.timeout);
+		Application.Run ();
+	    }
+	    else if (options.file != null)
+	    {
+		NotificationFactory.ShowHtmlNotification 
+		    (options.file, NotificationSource.File, options.width, options.height, options.timeout);
+		Application.Run ();
+	    }
+	    else if (options.url != null)
+	    {
+		NotificationFactory.ShowHtmlNotification 
+		    (options.url, NotificationSource.Url, options.width, options.height, options.timeout);
+		Application.Run ();
+	    }
+	    else
+		options.DoHelp ();
+	}
+	else if (options.svg)
+	{
+	    if (options.file != null)
+	    {
+		NotificationFactory.ShowSvgNotification 
+		    (options.file, options.header, options.text, options.width, options.height, options.timeout);
+		Application.Run ();
+
+	    } 
+	    else if (options.content != null)
+	    {
+	    }
+	    else if (options.warning)
+	    {
+		NotificationFactory.ShowMessageNotification (options.header, options.text, options.timeout, options.width, options.height, NotificationType.Warning);
+		Application.Run ();
+	    }
+	    else if (options.info)
+	    {
+		NotificationFactory.ShowMessageNotification (options.header, options.text, options.timeout, options.width, options.height, NotificationType.Info);
+		Application.Run ();
+	    } 
+	    else if (options.error)
+	    {
+		NotificationFactory.ShowMessageNotification (options.header, options.text, options.timeout, options.width, options.height, NotificationType.Error);
+		Application.Run ();
+	    }
+	    else
+		options.DoHelp ();
+	}
+	else
+	    options.DoHelp ();
     }
+    
 }
 
