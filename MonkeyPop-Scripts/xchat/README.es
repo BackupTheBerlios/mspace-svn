@@ -15,7 +15,7 @@
 
 
  Modo de empleo:
-	Copiar el script directamente en la carpeta .xchat2 del $HOME
+	Copiar el script y la imagen XChat.svg en la carpeta .xchat2 de tu directorio de usuario.
 
  Este script muetra un popup de monkeypop cada vez que ocurre en xchat cualquiera de los siguienes eventos:
 

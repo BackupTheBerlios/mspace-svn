@@ -15,7 +15,7 @@ Sergio Rubio
 
 INSTALL
 --------
-Copy xchat_popup.py to the XChat user dir (/home/user/.xchat2). Restart XChat if it was open.
+Copy xchat_popup.py and XChat.svg to the XChat user dir (/home/user/.xchat2). Restart XChat if it was open.
 
 USING
 ------
