@@ -1,3 +1,4 @@
+ASSEMBLIES = /r:../../Sdk/Muine.Sdk.dll
 all: DashboardFrontend.dll
 
 DashboardFrontend.dll: *.cs

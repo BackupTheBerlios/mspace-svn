@@ -1,3 +1,4 @@
+ASSEMBLIES = /r:../../Sdk/Muine.Sdk.dll
 RESOURCES =					\
 	/resource:glade/monitor-window.glade,monitor-window.glade
 
