@@ -86,6 +86,7 @@ fi
 
 AC_OUTPUT([
 Makefile
+images/Makefile
 doc/Makefile
 src/Makefile
 src/Chicken.dll.config
