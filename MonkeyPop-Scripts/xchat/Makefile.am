@@ -1,1 +1,1 @@
-EXTRA_DIST = *.py README.es
+EXTRA_DIST = *.py README.es *.svg
