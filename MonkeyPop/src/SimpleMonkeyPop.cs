@@ -32,7 +32,6 @@ public class SimpleMonkeyPop
     static bool insideText = false;
 
     static string timeout = "5000";
-    static string file;
     static NotificationType option;
     static StringBuilder current = new StringBuilder ();
 
@@ -40,76 +39,110 @@ public class SimpleMonkeyPop
     public static void Main (string[] args)
     {
 
-	for (int i = 0; i < args.Length ; i++)
-	{
-	    switch (args[i])
+	    switch (args[0])
 	    {
-		case "--text":
-		    current = text;
-		    insideText = true;
+		case "--html":
+		    DoHtml (args);
 		    break;
-		case "--header":
-		    current = header;
-		    insideText = true;
-		    break;
-		case "--timeout":
-		    current = null;
-		    timeout = args[i+1];
-		    insideText = false;
-		    break;
-		case "--file":
-		    current = null;
-		    file = args[i+1];
-		    insideText = false;
-		    break;
-		case "--info":
-		    current = null;
-		    option = NotificationType.Info;
-		    insideText = false;
-		    break;
-		case "--warning":
-		    current = null;
-		    option = NotificationType.Warning;
-		    insideText = false;
-		    break;
-		case "--error":
-		    current = null;
-		    option = NotificationType.Error;
-		    insideText = false;
-		    break;
-		case "--width":
-		    current = null;
-		    insideText = false;
-		    width = args[i+1];
-		    break;
-		case "--height":
-		    current = null;
-		    insideText = false;
-		    height = args[i+1];
+		case "--svg":
+		    DoSvg (args);
 		    break;
 		default:
-		    if (args[i].StartsWith ("--") && !insideText)
-		    {
-			ShowHelp ();
-		    } else if (current != null)
-			current.Append (args[i] + " ");
+		    ShowHelp ();
 		    break;
 	    }
-	}
+    }
 
-	if ((text.ToString () == String.Empty) && (header.ToString () == String.Empty))
+    private static void DoHtml (string[] args)
+    {
+	/* check if we have at least --html and (--content | --file)*/
+	if (args.Length < 3)
 	{
 	    ShowHelp ();
-	    Environment.Exit (1);
+	    return;
+	}
+
+	//args[0] = --html
+	//args[1] = --content | --file
+	//args[2] = html chunk | filename
+	StringBuilder content = new StringBuilder ();
+	string file;
+	switch (args[1])
+	{
+	    case "--content":
+		for (int i = 2; i < args.Length ; i++)
+		    content.Append (args[i]);
+		break;
+	    case "--file":
+		file = args[2];
+		break;
+	    default:
+		ShowHelp ();
+		break;
 
 	}
+	
+    }
+
+    private static void DoSvg (string[] args)
+    {
+	//args[0] = --svg
+	//args[1] = --content | --file | (--warning|--error|--info)
+	//args[2] = svg chunk | filename | header chunk
+	if (args.Length < 3)
+	{
+	    ShowHelp ();
+	    return;
+	}
+	StringBuilder chunk = new StringBuilder ();
+	StringBuilder text = new StringBuilder ();
+	StringBuilder header = new StringBuilder ();
+	string file = null;
+	switch (args[1])
+	{
+	    case "--content":
+		for (int i = 2; i < args.Length ; i++)
+		    chunk.Append (args[i]);
+		break;
+
+	    case "--file":
+		file = args[2];
+		break;
 		
+	    case "--warning":
+	    case "--info":
+	    case "--error":
+		if (args[2] != "--header")
+		    ShowHelp ();
+		int textpos = -1; 
+		for (int i = 3; i < args.Length ; i++)
+		{
+		    if (args[i] == "--text")
+			textpos = i;
+		}
+		if (textpos != -1)
+		{
+		    for (int i = textpos + 1; i < args.Length; i++)
+			text.Append (args[i] + " ");
+		} else
+		    textpos = args.Length;
+
+		for (int i = 3; i < textpos; i++)
+		    header.Append (args[i] + " ");
+		break;
+		
+	    default:
+		ShowHelp ();
+		break;
+	}
 	Application.Init ();
 	if (file != null)
 	    NotificationFactory.ShowSvgNotification (file, header.ToString (), text.ToString (), Int32.Parse (timeout));
 	else
 	    NotificationFactory.ShowMessageNotification (header.ToString (), text.ToString (), Int32.Parse (timeout), Int32.Parse (width), Int32.Parse (height), option);
 	Application.Run ();
+	
+		
     }
 
     private static void ShowHelp ()
