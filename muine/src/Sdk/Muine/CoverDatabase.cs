@@ -39,6 +39,8 @@ public class CoverDatabase
 	
 	public string amazon_locale;
 
+	private bool loaded = false;
+
 	/*** constructor ***/
 	private IntPtr dbf;
 	private object dbf_box;
@@ -57,7 +59,8 @@ public class CoverDatabase
 			amazon_locale = "us";
 		}
 
-		DirectoryInfo dinfo = new DirectoryInfo (User.DirGet () + "/muine");
+		//FIXME
+		DirectoryInfo dinfo = new DirectoryInfo ("/home/rubiojr/.gnome2/muine");
 		if (!dinfo.Exists) {
 			try {
 				dinfo.Create ();
@@ -121,6 +124,8 @@ public class CoverDatabase
 
 	public void Load ()
 	{
+		if (loaded)
+		    return;
 		thread_done = false;
 
 		loaded_covers = Queue.Synchronized (new Queue ());
@@ -130,6 +135,7 @@ public class CoverDatabase
 		Thread thread = new Thread (new ThreadStart (LoadThread));
 		thread.Priority = ThreadPriority.BelowNormal;
 		thread.Start ();
+		loaded = true;
 	}
 
 	private class LoadedCover {

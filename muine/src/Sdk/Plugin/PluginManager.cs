@@ -53,7 +53,7 @@ public class PluginManager
 	
 	
 	
-	private bool enabled = true;
+	private bool enabled = false;
 	/*
 	 * If Enabled == false, the plugin manager will not load any plugin
 	 */

@@ -8,6 +8,7 @@ noinst_DATA =					\
 	ProgressWindow.glade			\
 	InfoWindow.glade			\
 	PlaylistFilling.glade			\
+	Player.glade			\
 	GroupEditor.glade
 
 EXTRA_DIST = $(noinst_DATA)

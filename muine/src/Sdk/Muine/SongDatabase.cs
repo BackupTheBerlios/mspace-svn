@@ -30,6 +30,7 @@ public class SongDatabase
 	public Hashtable Songs; 
 
 	public Hashtable Albums;
+	public bool loaded = false;
 
 	public delegate void SongAddedHandler (Song song);
 	public event SongAddedHandler SongAdded;
@@ -55,7 +56,8 @@ public class SongDatabase
 
 	public SongDatabase (int version)
 	{
-		DirectoryInfo dinfo = new DirectoryInfo (User.DirGet () + "/muine");
+		//FIXME
+		DirectoryInfo dinfo = new DirectoryInfo ("/home/rubiojr/.gnome2/muine");
 		if (!dinfo.Exists) {
 			try {
 				dinfo.Create ();
@@ -92,6 +94,8 @@ public class SongDatabase
 
 	public void Load ()
 	{
+		if (loaded)
+		    return;
 		db_foreach (dbf, new DecodeFuncDelegate (DecodeFunc), IntPtr.Zero);
 
 		/* add file monitors */
@@ -104,6 +108,7 @@ public class SongDatabase
 
 		foreach (string folder in folders)
 			AddMonitor (folder);
+		loaded = true;
 	}
 
 	/*** storing ***/
@@ -295,43 +300,7 @@ public class SongDatabase
 
 	private void AddMonitor (string folder)
 	{
-	/*
-		FileSystemWatcher watcher = new FileSystemWatcher (folder);
-
-		watcher.NotifyFilter = NotifyFilters.FileName | NotifyFilters.LastWrite |
-		                       NotifyFilters.Size | NotifyFilters.DirectoryName;
-		
-		watcher.IncludeSubdirectories = true;
-		
-		watcher.Changed += new FileSystemEventHandler (HandleFileChanged);
-		watcher.Created += new FileSystemEventHandler (HandleFileCreated);
-		watcher.Deleted += new FileSystemEventHandler (HandleFileDeleted);
-		watcher.Renamed += new RenamedEventHandler (HandleFileRenamed);
-
-		watcher.EnableRaisingEvents = true;
-		*/
 	}
-
-/*
-	private static void HandleFileChanged (object o, FileSystemEventArgs e)
-	{
-		Console.WriteLine (e.FullPath + " changed");
-	}
-
-	private static void HandleFileCreated (object o, FileSystemEventArgs e)
-	{
-		Console.WriteLine (e.FullPath + " created");
-	}
-
-	private static void HandleFileDeleted (object o, FileSystemEventArgs e)
-	{
-		Console.WriteLine (e.FullPath + " deleted");
-	}
-
-	private static void HandleFileRenamed (object o, RenamedEventArgs e)
-	{
-		Console.WriteLine (e.OldFullPath + " renamed to " + e.FullPath);
-	}*/
 
 	/*** the thread that checks for changes on startup ***/
 

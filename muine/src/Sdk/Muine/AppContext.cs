@@ -26,9 +26,11 @@ using GConf;
  */
 public class AppContext
 {
-    private PluginManager pluginManager = new PluginManager ();
+    private static PluginManager pluginManager = new PluginManager ();
 	
     public static readonly EventBus EBus = new EventBus ();
+
+    public static Playlist Playlist = new Playlist ();
     
     public static readonly ActionBus ABus = new ActionBus ();
     
@@ -42,34 +44,54 @@ public class AppContext
 
     public static GettextCatalog Catalog;
     
-    public AppContext ()
+    public static Player PlayerBackend;
+    
+    static AppContext ()
     {
 	StockIcons.Initialize ();
     	pluginManager.LoadPlugins ();
     	Catalog = new GettextCatalog ("muine");
     	/* Init GConf */
-		GConfClient = new GConf.Client ();
-		/* Start the action thread */
-		ActionThread = new ActionThread ();
-		/* Load cover database */
-		try {
-			CoverDB = new CoverDatabase (2);
-		} catch (Exception e) {
-			new ErrorDialog (String.Format (AppContext.Catalog.GetString ("Failed to load the cover database: {0}\n\nExiting..."), e.Message));
+	GConfClient = new GConf.Client ();
+	/* Start the action thread */
+	ActionThread = new ActionThread ();
+	/* Load cover database */
+	try {
+		CoverDB = new CoverDatabase (2);
+	} catch (Exception e) {
+		new ErrorDialog (String.Format (AppContext.Catalog.GetString ("Failed to load the cover database: {0}\n\nExiting..."), e.Message));
 
-			Environment.Exit (0);
-		}
-		
-		/* Load song database */
-		try {
-			DB = new SongDatabase (3);
-		} catch (Exception e) {
-			new ErrorDialog (String.Format (AppContext.Catalog.GetString ("Failed to load the song database: {0}\n\nExiting..."), e.Message));
+		Environment.Exit (0);
+	}
+	
+	/* Load song database */
+	try {
+		DB = new SongDatabase (3);
+	} catch (Exception e) {
+		new ErrorDialog (String.Format (AppContext.Catalog.GetString ("Failed to load the song database: {0}\n\nExiting..."), e.Message));
 
-			Environment.Exit (0);	
-		}
+		Environment.Exit (0);	
+	}
 
+	try {
+                PlayerBackend = new Player (AppContext.Playlist);
+        } catch (Exception e) {                 
+		Console.WriteLine (String.Format (
+						Catalog.GetString ("Failed to initialize the audio backend:\n{0}\n\nExiting..."),
+						e.Message));
+        }
+	int vol;
+        try {
+                vol = (int) GConfClient.Get ("/apps/muine/volume");
+        } catch {
+                vol = 50;
+        }
+	PlayerBackend.Volume = vol;
 
+    }
+
+    public static void Init ()
+    {
     }
 }
 

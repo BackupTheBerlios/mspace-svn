@@ -20,7 +20,7 @@
 using System;
 using System.Collections;
 
-public class Album
+public class Album : ISearchable
 {
 	private string name;
 	public string Name {

@@ -26,7 +26,7 @@ using System.Runtime.InteropServices;
 
 using Gdk;
 
-public class Song
+public class Song : ISearchable
 {
 	private string filename;
 	public string Filename {
@@ -384,6 +384,7 @@ public class Song
 		pointers.Remove (handle);
 	}
 
+	//FIXME: Uncomment GetCoverImage
 	public void Sync (Metadata metadata)
 	{
 		if (metadata.Title.Length > 0)
@@ -404,7 +405,7 @@ public class Song
 		sort_key = null;
 		search_key = null;
 
-		GetCoverImage (metadata);
+		//GetCoverImage (metadata);
 	}
 
 	public Song (string fn)

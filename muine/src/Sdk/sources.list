@@ -31,6 +31,9 @@ SOURCES = \
 ./Muine/Song.cs\
 ./Muine/GnomeProxy.cs\
 ./Muine/ErrorDialog.cs\
+./Muine/Playlist.cs\
+./Muine/Player.cs\
+./Muine/ISearchable.cs\
 ./Plugin/PluginInfoAttribute.cs\
 ./Plugin/IPlugin.cs\
 ./Plugin/PluginManager.cs

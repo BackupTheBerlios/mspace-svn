@@ -130,6 +130,7 @@ src/Plugins/MiniPlayer/Makefile
 src/Sdk/Makefile
 src/Sdk/Muine.Sdk.dll.config
 src/Sdk/muine-sdk.pc
+src/Sdk/test/Makefile
 src/Muine/Makefile
 src/muine
 src/muine.exe.config
