@@ -1,9 +1,0 @@
-prefix=@prefix@
-exec_prefix=${prefix}
-libdir=${exec_prefix}/lib
-
-
-Name: Chicken Framework
-Description: Useful .Net/GNOME components
-Version: @VERSION@
-Libs: -r:${libdir}/@PACKAGE_NAME@.dll
