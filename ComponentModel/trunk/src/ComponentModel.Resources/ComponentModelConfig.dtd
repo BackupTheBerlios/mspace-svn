@@ -1,0 +1,11 @@
+<!-- Data Type Definition for ComponentModel -->
+
+<!ELEMENT componentmodel (components)>
+
+<!ELEMENT components (component+)>
+
+<!ELEMENT component EMPTY>
+<!ATTLIST component
+    name CDATA #REQUIRED
+    interface CDATA #REQUIRED
+>

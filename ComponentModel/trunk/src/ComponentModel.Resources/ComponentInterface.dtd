@@ -1,0 +1,17 @@
+<!ELEMENT component (methods)>
+<!ATTLIST component 
+    class CDATA #REQUIRED
+    exception CDATA #REQUIRED
+>
+<!ELEMENT methods (method+)>
+
+<!ELEMENT method (response)>
+<!ATTLIST method
+    name CDATA #REQUIRED
+>
+
+<!ELEMENT response EMPTY>
+<!ATTLIST response
+    view CDATA #REQUIRED
+    name CDATA #REQUIRED
+>
