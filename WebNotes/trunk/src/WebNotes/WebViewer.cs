@@ -96,6 +96,11 @@ namespace WebNotes
 		    list.Add (fname);
 		}
 	    }
+	    menu.Append (new SeparatorMenuItem ());
+	    ImageMenuItem closeItem = new ImageMenuItem ("_Quit");
+	    closeItem.Image = new Image (Gtk.Stock.Quit, Gtk.IconSize.Menu);
+	    closeItem.Activated += Quit;
+	    menu.Append (closeItem);
 	    optionMenu.Menu = menu;
 	    menu.ShowAll ();
 	    currentMenu = menu;
@@ -127,14 +132,20 @@ namespace WebNotes
 
 	protected override bool OnDeleteEvent (Gdk.Event evt)
 	{
-	    bool retVal = base.OnDeleteEvent (evt);
+	    /*bool retVal = base.OnDeleteEvent (evt);
 	    WebNotes.Exit ();
 	    return retVal;
+		Hide ();
+		return base.OnDeleteEvent (evt);
+		*/
+		Hide ();
+		return true;
 	}
 
 	private void OptionChanged (object obj, EventArgs handler)
 	{
-	    wc.LoadUrl ("http://localhost:8000/" + list[optionMenu.History]);
+		if (optionMenu.History < list.Count)
+	    		wc.LoadUrl ("http://localhost:8000/" + list[optionMenu.History]);
 	}
 
 	private void HandleRefresh (object obj, EventArgs args)
@@ -145,6 +156,10 @@ namespace WebNotes
 	private void ItemActivated (object obj, EventArgs args)
 	{
 	          Present ();
+	}
+	private void Quit (object sender, EventArgs args)
+	{
+	    WebNotes.Exit ();
 	}
     }
 }

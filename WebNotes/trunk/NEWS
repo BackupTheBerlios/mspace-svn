@@ -1,0 +1,5 @@
+1.0.2
+------
+* Updated to Didiwiki 0.5
+* Added close button to the tray icon menu.
+* Clicking the close button in the window hides it.

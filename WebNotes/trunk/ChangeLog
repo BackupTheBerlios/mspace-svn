@@ -1,5 +1,13 @@
 2004-10-22  Sergio Rubio  <sergio.rubio@hispalinux.es>
 
+	* NEWS: updated to new version
+	* configure.in: version bumped
+	* src/WebNotes/WebViewer.cs: Added close menu item to the tray.
+				Closing the window hides it instead.
+					
+
+2004-10-22  Sergio Rubio  <sergio.rubio@hispalinux.es>
+
 	* src/TrayIcon/libtrayicon/Makefile: Crap
 	* src/WebNotes/Makefile: Crap
 	* src/didiwiki/ChangeLog:
