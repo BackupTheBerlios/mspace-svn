@@ -8,10 +8,13 @@ namespace Vim.Test {
         IVimBufferStrategy vimBufferStrategy;
         string text;
         
+        public VimBufferStrategyTest () {
+        }
+        
         [SetUp]
         public void Init () {
             vimBufferStrategy = new GapVimBufferStrategy ();
-            text = "TestingBuffer";
+            text = "TestingBufferALot of Large AND extrangeaseras \t yeahhhh \n";
             vimBufferStrategy.SetContent(text);
         }
         [TearDown]    
@@ -49,6 +52,46 @@ namespace Vim.Test {
             TestLength ();
             TestItemAt ();
         }
-            
+
+        [Test]
+        public void TestInsert2 () {
+            string textInserted = "TexToINsertado\n";
+            vimBufferStrategy.Insert (vimBufferStrategy.Length / 2, textInserted);
+            text = text.Insert (text.Length / 2, textInserted);
+            TestLength ();
+            TestItemAt ();
+        }
+       
+        [Test]
+        public void TestRemove () {
+            int charsToRemove = 4;
+            int oldLength = vimBufferStrategy.Length;
+            vimBufferStrategy.Remove (0, charsToRemove);
+            Assert.AreEqual (vimBufferStrategy.Length, oldLength - charsToRemove );
+            text = text.Remove (0, charsToRemove);
+            TestLength ();
+            TestItemAt ();
+        }
+
+        [Test]
+        public void TestReplace () {
+            string textForReplace = "REEMPLAZANDO !!";
+            int charsToReplace = 4;
+            string auxString = "";
+            vimBufferStrategy.Replace (0, charsToReplace, textForReplace);
+            auxString = text.Substring (0, charsToReplace);
+            text = text.Replace (auxString, textForReplace);
+            TestLength ();
+            TestItemAt ();
+        }
+
+        [Test]
+        public void TextGetText () {
+            string auxString = vimBufferStrategy.GetText (0,5);
+            string auxString1 = text.Substring (0,5);
+            Assert.AreEqual (auxString.Length, auxString1.Length);
+            for (int i = 0; i < auxString.Length; i++) 
+                Assert.AreEqual (auxString[i], auxString1[i]);
+        }
     }
 }
