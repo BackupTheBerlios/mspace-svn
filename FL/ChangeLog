@@ -1,5 +1,9 @@
 2004-09-20  Sergio Rubio  <sergio.rubio@hispalinux.es>
 
+	* configure.in: renamed pkg name
+
+2004-09-20  Sergio Rubio  <sergio.rubio@hispalinux.es>
+
 	* autogen.sh:
 	* configure.in:
 	* src/FLFramework.dll.config.in:
