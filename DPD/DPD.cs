@@ -96,6 +96,24 @@ public class DPD
 	    Console.WriteLine ("File: {0} {1}", file.Key, file.Value);
     }
 
+    public void PrintTotalSize ()
+    {
+	long size = 0;
+	foreach (DictionaryEntry file in md5List)
+	{
+	    try {
+		string fname = ((string) file.Value).Trim ();
+		FileInfo info = new FileInfo (fname);
+		size += info.Length;
+	    } catch (FileNotFoundException e) {
+		Console.WriteLine (e.Message);
+		Console.WriteLine ("ERROR: File not found: {0}", file.Value);
+	    }
+	}
+	Console.WriteLine ("{0} Total size needed... {1} {2}",RED, GREEN, size);
+	Console.WriteLine (RESET);
+    }
+
     public void CopyFiles (string location)
     {
 	foreach (DictionaryEntry file in md5List)
@@ -123,11 +141,16 @@ public class DPD
 	{
 	    //Comparing lists
 	    DPD dpd = new DPD ();
-	    dpd.LoadAndCompare (args[0], args[1]);
-	    dpd.CopyFiles (args[2]);
+	    if (args[0] == "-s")
+		dpd.PrintTotalSize ();
+	    else {
+		dpd.LoadAndCompare (args[0], args[1]);
+		dpd.CopyFiles (args[2]);
+	    }
 	} else {
 	    Console.WriteLine (args.Length);
 	    Console.WriteLine ("Usage: dpd <source-hash> <dest-hash> <dest dir>");
+	    Console.WriteLine ("       dpd -s <source-hash> <dest-hash>");
 	}
 
     }
