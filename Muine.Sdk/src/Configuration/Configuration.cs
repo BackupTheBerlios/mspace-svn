@@ -26,8 +26,8 @@ namespace Muine.Sdk.Configuration
 
     public class Configuration
     {
-	ObjectStore objStore;
-	IConfigSource configSource;
+	private ObjectStore objStore;
+	private IConfigSource configSource;
 
 	private Configuration ()
 	{
@@ -62,8 +62,19 @@ namespace Muine.Sdk.Configuration
 	    return instance;
 	}
 
+	public string UserConfigDir {
+	    get {
+		return objStore.Location;
+	    }
+	}
+
 	public string PlayerKit {
 	    set {
+	    }
+
+	    get {
+		IConfig config = configSource.Configs["Player"];
+		return config.GetString ("PlayerKit", "GstPlayer");
 	    }
 	}
 
@@ -71,7 +82,6 @@ namespace Muine.Sdk.Configuration
 	    set {
 	    }
 	}
-
 	
     }
 
