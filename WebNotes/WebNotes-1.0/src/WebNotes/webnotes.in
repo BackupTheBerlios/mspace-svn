@@ -1,0 +1,4 @@
+#!/bin/bash 
+EXTRAPATH="@prefix@/lib/WebNotes"
+MONO_PATH="$EXTRAPATH:$MONO_PATH" LD_LIBRARY_PATH="$EXTRAPATH:$LD_LIBRARY_PATH" mono @prefix@/lib/WebNotes/WebNotes.exe
+

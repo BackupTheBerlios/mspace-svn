@@ -1,0 +1,3 @@
+CSSOURCES=
+CSSOURCES += ./WebViewer.cs
+CSSOURCES += ./WebNotes.cs

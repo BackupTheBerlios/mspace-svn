@@ -1,0 +1,30 @@
+WebNotes is a didiwiki frontend. No webserver is required.
+Just install and run the nice didiwiki.
+
+REQUIREMENTS
+-------------
+mono >= 1.0
+gtk-sharp >= 1.0
+gecko-sharp >= 0.5
+
+
+INSTALLING
+-----------
+Do it the usual way:
+
+./configure
+make && make install
+
+
+RUNNING
+--------
+You should see a launcher in the start menu (under Applications/Office) called "Personal wiki".
+Just click it!. Also, you can type webnotes in a terminal and press enter.
+
+
+THANKS TO
+----------
+DidiWiki is from Matthew Allum <mallum@o-hand.com>
+Artwork is from the fantastic gartoon icon theme (Created by Zeus <zeussama@yahoo.com>)
+TrayIcon c# bindings from the ifolder project at novell.com
+The Mono, Gtk# and all the community around this free .net implementation. Thanks guys!
