@@ -4,7 +4,6 @@ SOURCES = \
 ./About.cs	\
 ./AddAlbumWindow.cs	\
 ./AddSongWindow.cs	\
-./AmazonSearchService.cs	\
 ./ColoredCellRendererPixbuf.cs	\
 ./CoverImage.cs	\
 ./EllipsizingLabel.cs	\
