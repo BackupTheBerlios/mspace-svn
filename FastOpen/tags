@@ -1,0 +1,34 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.5.4	//
+Changed	src/FastOpenWindow.cs	/^	public void Changed (object obj, EventArgs args)$/;"	m	class:FastOpen.FastOpenWindow
+CommandList	src/CommandList.cs	/^	public CommandList ()$/;"	m	class:FastOpen.CommandList
+CommandList	src/CommandList.cs	/^    public class CommandList : IEnumerable$/;"	c	namespace:FastOpen
+CompleteCommand	src/CommandList.cs	/^	public ArrayList CompleteCommand (string s)$/;"	m	class:FastOpen.CommandList
+EntryActivated	src/FastOpenWindow.cs	/^	public void EntryActivated (object obj, EventArgs args)$/;"	m	class:FastOpen.FastOpenWindow
+FastOpen	src/CommandList.cs	/^namespace FastOpen$/;"	n
+FastOpen	src/FastOpenWindow.cs	/^namespace FastOpen$/;"	n
+FastOpen	src/main.cs	/^namespace FastOpen$/;"	n
+FastOpenWindow	src/FastOpenWindow.cs	/^	public FastOpenWindow ()$/;"	m	class:FastOpen.FastOpenWindow
+FastOpenWindow	src/FastOpenWindow.cs	/^    public class FastOpenWindow$/;"	c	namespace:FastOpen
+GetEnumerator	src/CommandList.cs	/^	public IEnumerator GetEnumerator ()$/;"	m	class:FastOpen.CommandList
+InitComponent	src/CommandList.cs	/^	public void InitComponent ()$/;"	m	class:FastOpen.CommandList
+InitComponent	src/FastOpenWindow.cs	/^	public void InitComponent ()$/;"	m	class:FastOpen.FastOpenWindow
+KeyPressed	src/FastOpenWindow.cs	/^	public void KeyPressed (object obj, KeyPressEventArgs args)$/;"	m	class:FastOpen.FastOpenWindow
+Main	src/main.cs	/^	public static void Main (string[] args)$/;"	m	class:FastOpen.main
+PKGS	Makefile	/^PKGS=		\\$/;"	m
+RESOURCES	Makefile	/^RESOURCES=	\\$/;"	m
+SOURCES	Makefile	/^SOURCES=*.cs$/;"	m
+TextInserted	src/FastOpenWindow.cs	/^	public void TextInserted (object obj, TextInsertedArgs args)$/;"	m	class:FastOpen.FastOpenWindow
+buffer	src/FastOpenWindow.cs	/^	private StringBuilder buffer = new StringBuilder ();$/;"	f	class:FastOpen.FastOpenWindow	file:
+cmdList	src/FastOpenWindow.cs	/^	CommandList cmdList = new CommandList ();$/;"	f	class:FastOpen.FastOpenWindow	file:
+entry	src/FastOpenWindow.cs	/^	[Glade.Widget] Entry entry;$/;"	f	class:FastOpen.FastOpenWindow	file:
+gxml	src/FastOpenWindow.cs	/^	XML gxml;$/;"	f	class:FastOpen.FastOpenWindow	file:
+hash	src/CommandList.cs	/^	private Hashtable hash = new Hashtable ();$/;"	f	class:FastOpen.CommandList	file:
+ignore	src/FastOpenWindow.cs	/^	private bool ignore = false;$/;"	f	class:FastOpen.FastOpenWindow	file:
+main	src/main.cs	/^    public class main$/;"	c	namespace:FastOpen
+predefinedCommands	src/CommandList.cs	/^	string[] predefinedCommands = {$/;"	f	class:FastOpen.CommandList	file:
+window	src/FastOpenWindow.cs	/^	[Glade.Widget] Window window;$/;"	f	class:FastOpen.FastOpenWindow	file:
