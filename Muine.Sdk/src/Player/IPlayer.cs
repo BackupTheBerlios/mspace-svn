@@ -2,6 +2,8 @@
 namespace Muine.Sdk.Player
 {
 
+    using Muine.Sdk.Playlist;
+
 	public enum RepetitionType {
 				    RepeatSong,
 				    RepeatPlaylist
@@ -16,6 +18,7 @@ namespace Muine.Sdk.Player
 	    bool Playing {get; set;}
 	    int Position {get; set;}
 	    int Volume {get; set;}
+	    IPlaylist Playlist {get; set;}
 	    void Play ();
 	    void Pause ();
 	    void Stop ();

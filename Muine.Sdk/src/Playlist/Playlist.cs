@@ -17,12 +17,13 @@
  * Boston, MA 02111-1307, USA.
  */
 
-namespace Muine.Sdk.Player
+namespace Muine.Sdk.Playlist
 {
 
     using System.Collections;
     using System;
     using GLib;
+    using Muine.Sdk.Data;
 
     /* 
      * Custom ArrayList that fires events when the content is modified
@@ -33,85 +34,116 @@ namespace Muine.Sdk.Player
     public delegate void ClearedEventHandler (object obj);
     public delegate void SongChangedEventHandler (object obj, Song song);
 
-    public class Playlist : ArrayList
+    public class Playlist : IPlaylist
     {
 
+	private ArrayList list = new ArrayList ();
 	private int currentSong = 0;
 	
-	public Playlist ()
-	{
-	}
-
-	public void Append (Song song)
-	{
-	    Add (song);
-	}
-
-	/*
-	 * FIXME: Check if the song is overwritten
-	 */
-	public void Prepend (Song song)
-	{
-	    Insert (0, song);
-	    currentSong++;
-	}
-
-	public override int Add (object obj)
+	public int Add (object obj)
 	{
 	    CheckSong (obj);
 	    if (SongAddedEvent != null)
 		SongAddedEvent (this, obj as Song);
-	    return base.Add (obj);
+	    return list.Add (obj);
 	}
 
-	public override void Insert (int index, object obj)
+	public void Insert (int index, object obj)
 	{
 	    CheckSong (obj);
 	    if (SongAddedEvent != null)
 		SongAddedEvent (this, obj as Song);
-	    base.Insert (index, obj);	
+	    list.Insert (index, obj);	
 	    if (index <= currentSong)
 		currentSong++;
 	}
 
-	public override void Remove (object obj)
+	public void Remove (object obj)
 	{
 	    int index = IndexOf (obj);
 	    if (index != -1)
 	    {
 		if (SongRemovedEvent != null)
 		    SongRemovedEvent (this, obj as Song);
-		base.RemoveAt (index);
-		if (index == currentSong || Count == 0)
+		list.RemoveAt (index);
+		if (index == currentSong || list.Count == 0)
 		    currentSong = 0;
 		else if (index < currentSong)
 		    currentSong--;
 	    }
 	}
 
-	public override void Clear ()
+	public void RemoveAt (int index)
+	{
+	    Song song = (Song)list[index];
+	    list.RemoveAt (index);
+	    if (SongRemovedEvent != null)
+		SongRemovedEvent (this, song);
+	}
+
+	public void Clear ()
 	{
 	    if (ClearedEvent != null)
 		ClearedEvent (this);
-	    base.Clear ();
+	    list.Clear ();
 	    currentSong = 0;
 	}
 
-	public override void AddRange (ICollection col)
+	public bool Contains (object obj)
 	{
-	    try {
-		foreach (Song s in col)
-		    Add (s);
-	    } catch {
-		throw new ArgumentException ("You should only append Songs to the playlist");
+	    return list.Contains (obj);
+	}
+
+	public int IndexOf (object obj)
+	{
+	    return list.IndexOf (obj);
+	}
+
+	public bool IsReadOnly {
+	    get {
+		return list.IsReadOnly;
 	    }
+	}
+
+	public bool IsFixedSize {
+	    get {
+		return list.IsFixedSize;
+	    }
+	}
+
+	public int Count {
+	    get {
+		return list.Count;
+	    }
+	}
+
+	public bool IsSynchronized {
+	    get {
+		return list.IsSynchronized;
+	    }
+	}
+
+	public object SyncRoot {
+	    get {
+		return list.SyncRoot;
+	    }
+	}
+
+	public void CopyTo (Array array, int index)
+	{
+	    list.CopyTo (array, index); 
+	}
+
+	public IEnumerator GetEnumerator ()
+	{
+	    return list.GetEnumerator ();
 	}
 
 	public Song Current {
 	    get {
-		if (Count == 0)
+		if (list.Count == 0)
 		    return null;
-		return this[currentSong] as Song;
+		return list[currentSong] as Song;
 	    }
 	    set {
 		int index = IndexOf (value);
@@ -123,15 +155,6 @@ namespace Muine.Sdk.Player
 		}
 		else
 		    Console.WriteLine ("WARNING: Invalid current item in playlist");
-		    
-	    }
-	}
-
-	public Song First {
-	    get {
-		if (Count == 0)
-		    return null;
-		return this[0] as Song;
 	    }
 	}
 
@@ -142,7 +165,7 @@ namespace Muine.Sdk.Player
 	//FIXME: Events
 	public Song Next {
 	    get {
-		if (currentSong == Count - 1 || Count == 0)
+		if (currentSong == list.Count - 1 || list.Count == 0)
 		    return null;
 		return this[currentSong] as Song;
 	    }
@@ -154,17 +177,9 @@ namespace Muine.Sdk.Player
 	 */
 	public Song Previous {
 	    get {
-		if (currentSong == 0 || Count == 0)
+		if (currentSong == 0 || list.Count == 0)
 		    return null;
 		return this[currentSong] as Song;
-	    }
-	}
-
-	public Song Last {
-	    get {
-		if (Count == 0)
-		    return null;
-		return this[Count -1] as Song;
 	    }
 	}
 
@@ -174,6 +189,14 @@ namespace Muine.Sdk.Player
 		throw new ArgumentException ("You should only append Songs to the playlist");
 	}
 
+	public object this[int index] {
+	    get {
+		return list[index];
+	    }
+	    set {
+		throw new NotImplementedException ();
+	    }
+	}
 	public event SongAddedEventHandler SongAddedEvent;
 	public event SongRemovedEventHandler SongRemovedEvent;
 	public event ClearedEventHandler ClearedEvent;

@@ -18,7 +18,7 @@
  */
 
 
-namespace Muine.Sdk.Player
+namespace Muine.Sdk.Data
 {
     using System;
     
