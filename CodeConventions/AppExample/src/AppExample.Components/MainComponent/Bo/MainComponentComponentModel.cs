@@ -5,6 +5,7 @@ using AppExample.Components.Saludator.Bo;
 namespace AppExample.Components.MainComponent.Bo {
     public class MainComponentComponentModel {
         public MainComponentComponentModel () {
+
         }
 
         //Use case initApp

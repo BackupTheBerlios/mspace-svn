@@ -1,7 +1,7 @@
 using System;
 
 namespace AppExample.Components.Saludator.Bo {
-    public class SaludatorComponentModel //:Hypotetic Component Model{
+    public class SaludatorComponentModel {//:Hypotetic Component Model{
         public SaludatorComponentModel () {
         }
 

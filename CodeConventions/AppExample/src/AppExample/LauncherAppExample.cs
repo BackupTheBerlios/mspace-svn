@@ -10,7 +10,8 @@ namespace AppExample {
     
     public class Launcher {
         public static void Main () {
-            new MainComponentComponentHandler ().InitApp ();
+            new MainComponentComponentModel ().InitApp ();
+            //Console.WriteLine ("Hello world"); 
         }
     }
 }
