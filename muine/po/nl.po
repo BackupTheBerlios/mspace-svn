@@ -1,0 +1,775 @@
+# Dutch translation of muine (een muziekspeler)
+# Copyright (C) 2004 The Free Software Foundation
+# This file is distributed under the same license as the muine package.
+# Tino Meinen <a.t.meinen@chello.nl>, 2004.
+# Daniel van Eeden <daniel_e@dds.nl>, 2004.
+#
+# vergeet niet jezelf toe te voegen aan "translator-credits"
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: GNOME 2.6\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-06-22 16:38+0200\n"
+"PO-Revision-Date: 2004-06-23 00:58+0200\n"
+"Last-Translator: Tino Meinen <a.t.meinen@chello.nl>\n"
+"Language-Team: nl <vertaling@nl.linux.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: data/glade/AddWindow.glade.h:1
+msgid "*"
+msgstr "*"
+
+#: data/glade/AddWindow.glade.h:2
+msgid "_Play"
+msgstr "_Afspelen"
+
+#: data/glade/AddWindow.glade.h:3
+msgid "_Queue"
+msgstr "_Wachtrij"
+
+#: data/glade/AddWindow.glade.h:4
+msgid "_Search:"
+msgstr "_Zoeken:"
+
+#: data/glade/ErrorDialog.glade.h:1
+msgid "Error"
+msgstr "Fout"
+
+#: data/glade/NoMusicFoundWindow.glade.h:1
+msgid "<span weight=\"bold\" size=\"larger\">No music was found</span>"
+msgstr "<span weight=\"bold\" size=\"larger\">Geen muziek gevonden</span>"
+
+#: data/glade/NoMusicFoundWindow.glade.h:2
+msgid ""
+"Muine was unable to find your music collection. What would you like me to do?"
+msgstr "Muine kon uw muziekverzameling niet vinden. Wat wilt u dat ik doe?"
+
+#: data/glade/NoMusicFoundWindow.glade.h:3
+msgid ""
+"Muine will create the folders Music and Music/Playlists in your home folder "
+"to store your music files. This option is highly recommended. You can always "
+"import other folders manually."
+msgstr ""
+"Muine zal de mappen Music en Music/Playlists in uw persoonlijke map aanmaken "
+"om uw muziek in te bewaren. Deze optie wordt sterk aanbevolen. U kunt altijd "
+"handmatig andere mappen importeren."
+
+#: data/glade/NoMusicFoundWindow.glade.h:4
+msgid "No Music Found"
+msgstr "Geen muziek gevonden"
+
+# gewoonlijk ipv normaliter?
+#: data/glade/NoMusicFoundWindow.glade.h:5
+msgid ""
+"You will have to import your music manually. This is for experienced users "
+"only and therefore not generally recommended."
+msgstr ""
+"U zult zelf uw muziek moeten importeren. Dit is alleen voor ervaren "
+"gebruikers en wordt daarom normaliter afgeraden."
+
+#: data/glade/NoMusicFoundWindow.glade.h:6
+msgid "_Create an empty music collection"
+msgstr "Een _lege muziekverzameling aanmaken"
+
+# ik ga zelf mijn muziek beheren
+#: data/glade/NoMusicFoundWindow.glade.h:7
+msgid "_Nothing, I will manage my music myself"
+msgstr "_Niets, ik zal zelf mijn muziek beheren"
+
+#: data/glade/PlaylistWindow.glade.h:1
+msgid "P_roperties"
+msgstr "_Eigenschappen"
+
+#: data/glade/PlaylistWindow.glade.h:2 src/AddAlbumWindow.cs:65
+msgid "Play Album"
+msgstr "_Album afspelen"
+
+#: data/glade/PlaylistWindow.glade.h:3 src/AddSongWindow.cs:54
+msgid "Play Song"
+msgstr "_Nummer afspelen"
+
+#: data/glade/PlaylistWindow.glade.h:4 src/NotificationAreaIcon.cs:99
+msgid "Play _Album..."
+msgstr "_Album afspelen..."
+
+#: data/glade/PlaylistWindow.glade.h:5 src/NotificationAreaIcon.cs:96
+msgid "Play _Song..."
+msgstr "_Nummer afspelen..."
+
+#: data/glade/PlaylistWindow.glade.h:6
+msgid "R_epeat"
+msgstr "_Herhalen"
+
+#: data/glade/PlaylistWindow.glade.h:7
+msgid "Remove _Played Songs"
+msgstr "_Afgespeelde nummers verwijderen"
+
+#: data/glade/PlaylistWindow.glade.h:8
+msgid "Skip _Backwards"
+msgstr "_Terug"
+
+#: data/glade/PlaylistWindow.glade.h:9
+msgid "Skip _Forward"
+msgstr "_Vooruit"
+
+#: data/glade/PlaylistWindow.glade.h:10
+msgid "TMP"
+msgstr "TMP"
+
+#: data/glade/PlaylistWindow.glade.h:11
+msgid "_Clear"
+msgstr "_Wissen"
+
+#: data/glade/PlaylistWindow.glade.h:12
+msgid "_Hide Window"
+msgstr "Venster _verbergen"
+
+#: data/glade/PlaylistWindow.glade.h:13
+msgid "_Import Folder..."
+msgstr "Map _importeren..."
+
+#: data/glade/PlaylistWindow.glade.h:14
+msgid "_Next"
+msgstr "_Volgende"
+
+#: data/glade/PlaylistWindow.glade.h:15
+msgid "_Open Playlist..."
+msgstr "Speellijst _openen..."
+
+#: data/glade/PlaylistWindow.glade.h:16
+msgid "_Playlist"
+msgstr "_Speellijst"
+
+#: data/glade/PlaylistWindow.glade.h:17
+msgid "_Previous"
+msgstr "V_orige"
+
+#: data/glade/PlaylistWindow.glade.h:18
+msgid "_Remove Song"
+msgstr "Nummer ver_wijderen"
+
+#: data/glade/PlaylistWindow.glade.h:19
+msgid "_Save Playlist As..."
+msgstr "Speellijst opslaan _als..."
+
+#: data/glade/PlaylistWindow.glade.h:20
+msgid "_Skip to..."
+msgstr "_Vooruit naar..."
+
+#: data/glade/PlaylistWindow.glade.h:21
+msgid "_Song"
+msgstr "_Nummer"
+
+# Bezig met laden:
+# Nu aan het laden:
+#: data/glade/ProgressWindow.glade.h:1
+msgid "Loading:"
+msgstr "Laden:"
+
+#: data/glade/SkipToWindow.glade.h:1
+msgid "Skip to"
+msgstr "Vooruit naar"
+
+#: data/glade/YesNoDialog.glade.h:1
+msgid "Question"
+msgstr "Vraag"
+
+#: data/muine.desktop.in.h:1
+msgid "Listen to your music"
+msgstr "Naar uw muziek luisteren"
+
+#: data/muine.desktop.in.h:2 src/PlaylistWindow.cs:687
+msgid "Muine Music Player"
+msgstr "Muine muziekspeler"
+
+#: data/muine.schemas.in.h:1
+msgid "\"Add album\" window height"
+msgstr "\"Album toevoegen\" vensterhoogte"
+
+#: data/muine.schemas.in.h:2
+msgid "\"Add album\" window width"
+msgstr "\"Album toevoegen\" vensterbreedte"
+
+#: data/muine.schemas.in.h:3
+msgid "\"Add song\" window height"
+msgstr "\"Nummer toevoegen\" vensterhoogte"
+
+#: data/muine.schemas.in.h:4
+msgid "\"Add song\" window width"
+msgstr "\"Nummer toevoegen\" vensterbreedte"
+
+#: data/muine.schemas.in.h:5
+msgid "Amazon site to use for album images"
+msgstr "Te gebruiken site van Amazon voor albumhoezen"
+
+#: data/muine.schemas.in.h:6
+msgid "Default import folder"
+msgstr "Standaard importmap"
+
+#: data/muine.schemas.in.h:7
+msgid "Default playlist folder"
+msgstr "Standaard speellijstmap"
+
+#: data/muine.schemas.in.h:8
+msgid "First start"
+msgstr "Eerste begin"
+
+#: data/muine.schemas.in.h:9
+msgid "Folders that are monitored for changes."
+msgstr "Mappen die bijgehouden worden voor veranderingen."
+
+#: data/muine.schemas.in.h:10
+msgid "Height of the \"Add album\" window."
+msgstr "Hoogte van het venster \"Album toevoegen\"."
+
+#: data/muine.schemas.in.h:11
+msgid "Height of the \"Add song\" window."
+msgstr "Hoogte van het venster \"Nummer toevoegen\""
+
+#: data/muine.schemas.in.h:12
+msgid "Height of the information window."
+msgstr "Hoogte van het informatievenster."
+
+#: data/muine.schemas.in.h:13
+msgid "Height of the playlist window."
+msgstr "Hoogte van het speellijstvenster."
+
+#: data/muine.schemas.in.h:14
+msgid "Information window height"
+msgstr "Informatievenster hoogte"
+
+#: data/muine.schemas.in.h:15
+msgid "Information window width"
+msgstr "Informatievenster breedte"
+
+#: data/muine.schemas.in.h:16
+msgid "Last used folder from \"Import folder\" dialog."
+msgstr "Laatst gebruikte map uit dialoogvenster \"Map importeren\"."
+
+#: data/muine.schemas.in.h:17
+msgid "Last used folder from the playlist file selectors."
+msgstr "Laatst gebruikte map bij selectie van speellijstbestanden."
+
+#: data/muine.schemas.in.h:18
+msgid "Playlist window height"
+msgstr "Speellijst vensterhoogte"
+
+#: data/muine.schemas.in.h:19
+msgid "Playlist window width"
+msgstr "Speellijst vensterbreedte"
+
+#: data/muine.schemas.in.h:20
+msgid "Repeat mode"
+msgstr "Herhaalstand"
+
+#: data/muine.schemas.in.h:21
+msgid "Volume level"
+msgstr "Geluidsvolume"
+
+# highest volume level = maximaal geluidsvolume
+#: data/muine.schemas.in.h:22
+msgid "Volume level. 0 = lowest, 100 = highest."
+msgstr "Geluidsvolume 0 = laagst, 100 = maximaal."
+
+#: data/muine.schemas.in.h:23
+msgid "Watched folders"
+msgstr "Bijgehouden mappen"
+
+#: data/muine.schemas.in.h:24
+msgid "Whether or not to enable repeat playlist mode."
+msgstr "Of 'speellijst herhalen' wordt gebruikt of niet. "
+
+#: data/muine.schemas.in.h:25
+msgid ""
+"Which Amazon site to use for fetching album images, \"us\", \"uk\", \"de\", "
+"or \"jp\"."
+msgstr ""
+"Welke site van Amazon wordt gebruikt voor het ophalen van albumhoezen: \"us"
+"\" \"uk\" \"de\" of \"jp\"."
+
+#: data/muine.schemas.in.h:26
+msgid "Width of the \"Add album\" window."
+msgstr "Breedte van het venster \"Album toevoegen\"."
+
+#: data/muine.schemas.in.h:27
+msgid "Width of the \"Add song\" window."
+msgstr "Breedte van het venster \"Nummer toevoegen\"."
+
+#: data/muine.schemas.in.h:28
+msgid "Width of the information window."
+msgstr "Breedte van het informatievenster."
+
+#: data/muine.schemas.in.h:29
+msgid "Width of the playlist window."
+msgstr "Breedte van het speellijstvenster."
+
+#: data/muine.schemas.in.h:30
+msgid "false if Muine has been started before."
+msgstr "onwaar indien Muine al eerder is gestart."
+
+#: libmuine/player-gst.c:157
+msgid "Failed to create GstPlay object"
+msgstr "Aanmaken GstPlay-object aanmaken is mislukt"
+
+#: libmuine/player-gst.c:164
+msgid "Failed to create the required gnomevfssrc GStreamer element"
+msgstr "Aanmaken van vereiste gnomevfssrc GStreamer element is mislukt."
+
+# render - gebruiken?
+#: libmuine/player-gst.c:173
+msgid "Could not render default GStreamer audio output sink"
+msgstr "Kon de standaard GStreamer audiouitvoer niet gebruiken"
+
+#: libmuine/player-gst.c:182
+msgid "Could not find the volume element in the GstPlay pipeline"
+msgstr "Kon het volume-element in de GstPlay pijplijn niet vinden"
+
+#: libmuine/player-xine.c:283
+#, c-format
+msgid ""
+"Couldn't load the '%s' audio driver\n"
+"Check that the device is not busy."
+msgstr ""
+"Kon het audio-stuurprogramma '%s' niet laden\n"
+"Controleer of het apparaat niet bezig is."
+
+#: libmuine/player-xine.c:378 libmuine/player-xine.c:383
+#, c-format
+msgid "No plugin available for \"%s\""
+msgstr "Geen plugin beschikbaar voor \"%s\""
+
+#: libmuine/player-xine.c:388
+#, c-format
+msgid "Failed playing \"%s\""
+msgstr "Afspelen \"%s\" is mislukt"
+
+#: libmuine/player-xine.c:392
+msgid "Internal error"
+msgstr "Interne fout"
+
+#: libmuine/player-xine.c:401
+#, c-format
+msgid "Could not play \"%s\""
+msgstr "Kon \"%s\" niet afspelen"
+
+#: src/About.cs:38
+msgid "Jorn Baayen <jbaayen@gnome.org>"
+msgstr "Jorn Baayen <jbaayen@gnome.org>"
+
+#: src/About.cs:39
+msgid "Lee Willis <lee@leewillis.co.uk>"
+msgstr "Lee Willis <lee@leewillis.co.uk>"
+
+#: src/About.cs:40
+msgid "Việt Yên Nguyễn <nguyen@cs.utwente.nl>"
+msgstr "Việt Yên Nguyễn <nguyen@cs.utwente.nl>"
+
+#: src/About.cs:42
+msgid "Album covers are provided by amazon.com."
+msgstr "Albumhoezen geleverd door amazon.com."
+
+#: src/About.cs:52
+msgid "translator-credits"
+msgstr ""
+"Tino Meinen <a.t.meinen@chello.nl>\n"
+"Daniel van Eeden"
+
+#: src/About.cs:57
+msgid "Muine"
+msgstr "Muine"
+
+#: src/About.cs:58
+msgid "Copyright © 2003, 2004 Jorn Baayen"
+msgstr "Copyright © 2003, 2004 Jorn Baayen"
+
+#: src/About.cs:59
+msgid "A music player"
+msgstr "Een muziekspeler"
+
+#: src/AddAlbumWindow.cs:175 src/PlaylistWindow.cs:655
+#, csharp-format
+msgid "Performed by {0}"
+msgstr "Uitgevoerd door {0}"
+
+#. Space-separated list of prefixes that will be taken off the front
+#. * when sorting. For example, "The Beatles" will be sorted as "Beatles",
+#. * if "the" is included in this list. Also include the English "the"
+#. * if English is generally spoken in your country.
+#: src/Album.cs:83
+msgid "the dj"
+msgstr "the dj de"
+
+#: src/Metadata.cs:167
+#, csharp-format
+msgid "Failed to load metadata: {0}"
+msgstr "Kon metadata: {0} niet laden"
+
+#: src/Muine.cs:83
+#, csharp-format
+msgid ""
+"Failed to load the cover database: {0}\n"
+"\n"
+"Exiting..."
+msgstr ""
+"Laden van de hoes-database: {0} is mislukt\n"
+"\n"
+"Bezig met afsluiten..."
+
+#: src/Muine.cs:92
+#, csharp-format
+msgid ""
+"Failed to load the song database: {0}\n"
+"\n"
+"Exiting..."
+msgstr ""
+"Laden van de nummer-database: {0} is mislukt\n"
+"\n"
+"Bezig met afsluiten..."
+
+#: src/NotificationAreaIcon.cs:53
+msgid "Muine music player"
+msgstr "Muine muziekspeler"
+
+#: src/NotificationAreaIcon.cs:86
+msgid "_Previous Song"
+msgstr "V_orige nummer"
+
+#: src/NotificationAreaIcon.cs:89
+msgid "_Next Song"
+msgstr "_Volgende nummer"
+
+#: src/NotificationAreaIcon.cs:106 src/PlaylistWindow.cs:318
+msgid "Show _Window"
+msgstr "_Venster tonen"
+
+#: src/Player.cs:53
+#, csharp-format
+msgid ""
+"Error opening {0}:\n"
+"{1}"
+msgstr ""
+"Fout bij openen van {0}:\n"
+"{1}"
+
+#: src/Player.cs:233
+#, csharp-format
+msgid ""
+"Audio backend error:\n"
+"{0}"
+msgstr ""
+"Audiobackend fout:\n"
+"{0}"
+
+#: src/PlaylistWindow.cs:316
+msgid "Hide _Window"
+msgstr "_Venster verbergen"
+
+#: src/PlaylistWindow.cs:337
+msgid "Play the previous song"
+msgstr "Het vorige nummer afspelen"
+
+#: src/PlaylistWindow.cs:339
+msgid "Play the next song"
+msgstr "Het volgende nummer afspelen"
+
+#: src/PlaylistWindow.cs:341
+msgid "Add an album to the playlist"
+msgstr "Album toevoegen aan de speellijst"
+
+#: src/PlaylistWindow.cs:343
+msgid "Add a song to the playlist"
+msgstr "Nummer toevoegen aan de speellijst"
+
+#: src/PlaylistWindow.cs:351
+msgid "Change the volume level"
+msgstr "Geluidsvolume aanpassen"
+
+#: src/PlaylistWindow.cs:434 src/PlaylistWindow.cs:552
+#: src/PlaylistWindow.cs:576 src/PlaylistWindow.cs:590
+msgid "Playlist"
+msgstr "Speellijst"
+
+#: src/PlaylistWindow.cs:470
+#, csharp-format
+msgid ""
+"Failed to initialize the audio backend:\n"
+"{0}\n"
+"\n"
+"Exiting..."
+msgstr ""
+"Initialiseren van de audio-backend is mislukt:\n"
+"{0}\n"
+"\n"
+"Bezig met afsluiten..."
+
+# meervoud van uur is hier uur en niet uren
+#: src/PlaylistWindow.cs:569
+#, csharp-format
+msgid "Playlist (Repeating {0} hour)"
+msgid_plural "Playlist (Repeating {0} hours)"
+msgstr[0] "Speellijst (gedurende {0} uur herhalen)"
+msgstr[1] "Speellijst (gedurende {0} uur herhalen)"
+
+#: src/PlaylistWindow.cs:572
+#, csharp-format
+msgid "Playlist (Repeating {0} minute)"
+msgid_plural "Playlist (Repeating {0} minutes)"
+msgstr[0] "Speellijst (gedurende {0} minuut herhalen)"
+msgstr[1] "Speellijst (gedurende {0} minuten herhalen)"
+
+#: src/PlaylistWindow.cs:574
+msgid "Playlist (Repeating)"
+msgstr "Speellijst (herhalen)"
+
+#: src/PlaylistWindow.cs:583
+#, csharp-format
+msgid "Playlist ({0} hour remaining)"
+msgid_plural "Playlist ({0} hours remaining)"
+msgstr[0] "Speellijst ({0} uur resterend)"
+msgstr[1] "Speellijst ({0} uur resterend)"
+
+#: src/PlaylistWindow.cs:586
+#, csharp-format
+msgid "Playlist ({0} minute remaining)"
+msgid_plural "Playlist ({0} minutes remaining)"
+msgstr[0] "Speellijst ({0} minuut resterend)"
+msgstr[1] "Speellijst ({0} minuten resterend)"
+
+#: src/PlaylistWindow.cs:588
+msgid "Playlist (Less than one minute remaining)"
+msgstr "Speellijst (minder dan 1 minuut resterend)"
+
+# uit ipv van?
+#: src/PlaylistWindow.cs:651
+#, csharp-format
+msgid "From \"{0}\""
+msgstr "Van \"{0}\""
+
+#: src/PlaylistWindow.cs:653
+msgid "Album unknown"
+msgstr "Onbekend album"
+
+#: src/PlaylistWindow.cs:658
+msgid "Drop an image here to use it as album cover"
+msgstr "Sleep een afbeelding hiernaartoe om het als hoes te gebruiken"
+
+#: src/PlaylistWindow.cs:669
+#, csharp-format
+msgid "{0} - Muine Music Player"
+msgstr "{0} - Muine muziekspeler"
+
+#: src/PlaylistWindow.cs:707
+msgid "Pause music playback"
+msgstr "Afspelen pauzeren"
+
+#: src/PlaylistWindow.cs:711 src/PlaylistWindow.cs:714
+msgid "P_ause"
+msgstr "P_auzeren"
+
+#: src/PlaylistWindow.cs:720
+msgid "Resume music playback"
+msgstr "Afspelen hervatten"
+
+# Afspelen?
+#: src/PlaylistWindow.cs:724 src/PlaylistWindow.cs:727
+#: src/PlaylistWindow.cs:735 src/PlaylistWindow.cs:738
+msgid "Pl_ay"
+msgstr "_Afspelen"
+
+#: src/PlaylistWindow.cs:731
+msgid "Start music playback"
+msgstr "Afspelen starten"
+
+#: src/PlaylistWindow.cs:793
+#, csharp-format
+msgid "Failed to open {0} for reading"
+msgstr "Openen van {0} voor lezen is mislukt"
+
+#: src/PlaylistWindow.cs:877
+#, csharp-format
+msgid "Failed to open {0} for writing"
+msgstr "Openen van {0} voor schrijven is mislukt"
+
+#: src/PlaylistWindow.cs:1334
+msgid "Import Folder"
+msgstr "Map importeren"
+
+#: src/PlaylistWindow.cs:1380
+msgid "Open Playlist"
+msgstr "Speellijst openen"
+
+#: src/PlaylistWindow.cs:1396
+msgid "Save Playlist"
+msgstr "Speellijst opslaan"
+
+#: src/PlaylistWindow.cs:1411
+#, csharp-format
+msgid ""
+"File {0} will be overwritten.\n"
+"If you choose yes, the contents will be lost.\n"
+"\n"
+"Do you want to continue?"
+msgstr ""
+"Bestand {0} zal worden overschreven.\n"
+"Indien u ja kiest, zal de inhoud verloren gaan.\n"
+"\n"
+"Wilt u doorgaan?"
+
+#: src/ProgressWindow.cs:43
+#, csharp-format
+msgid "Importing {0}..."
+msgstr "Importeren {0}..."
+
+#: src/StringUtils.cs:45
+msgid "Unknown"
+msgstr "Onbekend"
+
+#: src/StringUtils.cs:49
+#, csharp-format
+msgid "{0} and others"
+msgstr "{0} en anderen"
+
+#: src/StringUtils.cs:51
+#, csharp-format
+msgid "{0} and {1}"
+msgstr "{0} en {1}"
+
+#~ msgid "Failed to set up an audio driver"
+#~ msgstr "Instellen van geluidsstuurprogramma mislukt"
+
+#~ msgid "Thanks to Amazon.com for providing album cover images!"
+#~ msgstr "Dank aan Amazon.com voor de afbeeldingen van de hoezen!"
+
+# database openen mislukt:
+# openen database mislukt:
+#~ msgid "Failed to open database: {0}"
+#~ msgstr "Kon database: {0} niet openen"
+
+#~ msgid "<b>Groups</b>"
+#~ msgstr "<b>Groepen</b>"
+
+#~ msgid "<b>Songs</b> (30 minutes in total)"
+#~ msgstr "<b>Nummers</b> (30 minuten in totaal)"
+
+#~ msgid "Groups"
+#~ msgstr "Groepen"
+
+#~ msgid "_Add song"
+#~ msgstr "_Nummer toevoegen"
+
+#~ msgid "Play _Album"
+#~ msgstr "_Album afspelen"
+
+#~ msgid "Play _Song"
+#~ msgstr "_Nummer afspelen"
+
+#~ msgid "_Clear Playlist"
+#~ msgstr "Speellijst _wissen"
+
+#~ msgid "_Information"
+#~ msgstr "_Informatie"
+
+#~ msgid "Orientation"
+#~ msgstr "Oriëntatie"
+
+# betere vertaling voor tray?
+#~ msgid "The orientation of the tray."
+#~ msgstr "De oriëntatie van het blad."
+
+#~ msgid "Song _Information"
+#~ msgstr "Nummer _informatie"
+
+#~ msgid "TITLE"
+#~ msgstr "TITLE"
+
+#~ msgid "ERROR MESSAGE"
+#~ msgstr "ERROR MESSAGE"
+
+#~ msgid "Add _Song"
+#~ msgstr "_Nummer toevoegen"
+
+#~ msgid "_Fill queue with random songs from selected groups"
+#~ msgstr "Wachtrij _vullen met willekeurige nummers uit geselecteerde groepen"
+
+#~ msgid "_Groups"
+#~ msgstr "_Groepen"
+
+#~ msgid "Search for Music"
+#~ msgstr "Zoeken naar muziek"
+
+#~ msgid "Welcome to Muine"
+#~ msgstr "Welkom bij Muine"
+
+#~ msgid "Default \"Save Playlist As\" folder."
+#~ msgstr "Standaard map \"Speellijst opslaan als\"."
+
+#~ msgid "Last used folder from \"Save Playlist As\" dialog."
+#~ msgstr "Laatst gebruikte map uit dialoogvenster \"Speellijst opslaan als\"."
+
+#~ msgid "Playlist window visibility."
+#~ msgstr "Speellijst vensterzichtbaarheid."
+
+#~ msgid "Playlist window visible (true) or not (false)."
+#~ msgstr "Speellijst zichtbaar (true) of niet (false)."
+
+#~ msgid "Pixbuf"
+#~ msgstr "Pixbuf"
+
+#~ msgid "A GdkPixbuf to display"
+#~ msgstr "Een GdkPixbuf voor weergave"
+
+#~ msgid "Filename"
+#~ msgstr "Bestandsnaam"
+
+#~ msgid "Filename to load and display"
+#~ msgstr "Bestandsnaam te laden voor weergave"
+
+#~ msgid "Stock ID"
+#~ msgstr "Standaard ID"
+
+#~ msgid "Stock ID for a stock image to display"
+#~ msgstr "Standaard ID voor een weer te geven standaard afbeelding"
+
+#~ msgid "GdkPixbufAnimation to display"
+#~ msgstr "GdkPixbufAnimation voor weergave"
+
+#~ msgid "Image type"
+#~ msgstr "Afbeeldingstype"
+
+#~ msgid "The representation being used for image data"
+#~ msgstr "De gebruikte representatie voor afbeeldingen"
+
+#~ msgid "Size"
+#~ msgstr "Afmeting"
+
+#~ msgid "Blinking"
+#~ msgstr "Knipperend"
+
+#~ msgid "Whether or not the status icon is blinking"
+#~ msgstr "Of het statuspictogram knippert"
+
+# Of: geluidsvolume zachter
+#~ msgid "Volume _Down"
+#~ msgstr "_Zachter"
+
+#~ msgid "Volume _Up"
+#~ msgstr "_Harder"
+
+#~ msgid "_Actions"
+#~ msgstr "_Acties"
+
+#~ msgid "_Volume"
+#~ msgstr "_Geluidsvolume"
+
+#~ msgid "0 seconds"
+#~ msgstr "0 seconden"
+
+#~ msgid "_Skip to:"
+#~ msgstr "_Vooruit naar:"
+
+#~ msgid "seconds"
+#~ msgstr "seconden"

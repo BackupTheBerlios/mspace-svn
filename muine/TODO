@@ -1,0 +1,76 @@
+Easy:
+=====
+
+o A song information dialog (Jorn is on this)
+  See http://huizen.dds.nl/~jbaayen/infodialog-proposal.html
+o D-BUS service (Sergio Rubio is on this)
+o Rewrite metadata backend to use TagLib, and add metadata writing support
+  http://developer.kde.org/~wheeler/taglib.html
+
+Tough:
+======
+
+o Plug-in arch, so that we can add things like dashboard and gnotify support
+  without bloating the main build.
+o Portable player integration
+  Need to discuss the UI first
+o Implement music groups (Jorn is working on this)
+  See http://huizen.dds.nl/~jbaayen/proposal.html
+o CD burning (Brad Griffith is workong on this)
+  Support both audio and MP3 cds.
+  
+  Create folders for different albums (Artist - Album format)
+  
+  Create a playlist.m3u with the playlist order.
+o Gapless transition/crossfading
+  This should be possible with the current GStreamer components, but
+  it's a tough one. Well, we could emit EOS a bit earlier than usual
+  and have a fancy adder somewhere in the pipeline that does the mixing
+  when a new song comes in ..
+o Figure out how to get the peak value from the ID3 RVA2 tag.
+o Improve first time dialog once again ..
+  Perhaps a system-wide music folder gconf key, where sound-juicer dumps the
+  music, and muine monitors it .. 
+o Support mastroska and mp3cue
+
+Depends on other components:
+============================
+
+o Directly use Pango# instead of using pango-utils.c
+  Depends on Gtk#, Ximian Bugzilla #52575
+o Monitor imported folders using FileWatcher
+  Depends on Mono, Ximian Bugzilla #58234
+o Make title and artist label one for easier selection.
+  We need a proper Gtk ellipsizing widget for this.
+o Use storage
+o Support OGM files
+  These will work once GStreamer supports them
+o Use media stock icons and music-player icon (gtk_icon_theme_lookup_icon) once
+  we use GTK 2.3, also make app icon themable, and use different window icons
+  Depends on Gtk# supporting Gtk 2.3
+o Use the GTK+ 2.3 fileselector, if it is available.
+  Depends on Gtk# supporting Gtk 2.3
+o Make the main window use a toolbar (and put "song info" button in it)
+  Depends on Gtk# supporting Gtk 2.3
+o Fix the bug where keysyms that are assigned while muine is running aren't
+  working.
+  Depends on GConf#, Ximian Bugzilla #55877
+o Figure out how to add new command line options (showing up in --help etc),
+  and add gstreamer command line options and --start-hidden
+  Depends on popt support in Gtk#
+o Make SM work fully
+  Depends on popt support in Gtk#
+
+We won't have:
+==============
+
+o Internet radio support
+o CD ripping
+o CD playback
+o Volume normalization. We support the replaygain tag, the tagging
+  application is responsible for setting these.. Muine is purely a player.
+o Visualization. Other apps can monitor the ALSA device and make fancy effects,
+  for example someone could code up an xscreensaver hack.
+
+All of these because these tasks can be handled much better by specialized
+applications.

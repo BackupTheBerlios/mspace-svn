@@ -1,0 +1,33 @@
+Muine is a new music player using some new UI ideas. The idea is that it will
+be much easier and comfortable to use than the iTunes model, which is used by
+both Rhythmbox and Jamboree. 
+
+Our website is here:
+
+  http://muine.gooeylinux.org/
+
+We have a mailinglist, muine-list@gnome.org. More information can be found here:
+  
+  http://mail.gnome.org/mailman/listinfo/muine-list
+
+Bugs should be reported at bugzilla.gnome.org, product Muine.
+
+Our IRC channel is #muine on irc.gimp.org.
+
+Requirements
+============
+
+Mono >= 0.96
+Gtk# >= 0.98
+libid3tag >= 0.15.0b
+vorbis >= 1.0
+FLAC >= 1.1.0
+gdbm
+
+And for playback either:
+
+  xine-lib >= 1.0.0rc3b   (Used by default)
+
+or:
+
+  GStreamer 0.8

@@ -1,0 +1,2950 @@
+2004-07-20  Jorn Baayen  <jbaayen@gnome.org>
+
+	* data/muine.desktop.in: Add MimeType stuff.
+
+2004-07-12  Bryan Forbes  <bryan@reigndropsfall.net>
+
+	* libmuine/player-gst.c: Fix issue where big endian machines don't
+	report the correct time.
+
+2004-07-13 Hile Tuohela <hile@iki.fi>
+
+	* Added Finnish translation
+
+2004-07-03  Lee Willis <lee@leewillis.co.uk>
+
+	* src/CoverDatabase.cs:
+	Don't compare excess spaces when searching for covers, and work around
+	an Amazon bug where the wrong image URL is returned
+
+2004-06-30  Alastair Porter  <alastair@linuxexperience.com>
+
+	* muine.spec.in: Update.
+
+2004-06-29  Brian K Nickel  <kerrick@cox.net>
+
+	* libmuine/player-gst.c: (player_stop), (player_pause):
+
+	Unlock audio device when paused.
+
+2004-06-19  Fernando Herrera  <fherrera@onirica.com>
+2004-06-20  Jorn Baayen  <jbaayen@gnome.org>
+
+	* data/muine.applications:
+	* src/Muine.cs:
+	* src/PlaylistWindow.cs:
+
+	Support for multiple files in the command line (play the first, enqueue
+	the rest)
+
+2004-06-20  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/AddAlbumWindow.cs:
+	* src/AddSongWindow.cs:
+	* src/Album.cs:
+	* src/Song.cs:
+
+	Make FitsCriteria a method of Song and Album.
+
+2004-06-18  Jorn Baayen  <jbaayen@gnome.org>
+
+	* configure.in:
+	* src/About.cs:
+
+	Bump version number to 0.6.3.99.
+
+2004-06-18  Jorn Baayen  <jbaayen@gnome.org>
+
+	* NEWS:
+	* README:
+	* configure.in:
+	* src/About.cs:
+	* src/NotificationAreaIcon.cs:
+
+	Mono Beta 3 support (Patch provided by jeroen, edd and latexer),
+	and released 0.6.3.
+
+2004-06-13  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/Muine.cs:
+
+	Small logic fix.
+
+2004-06-13  Jorn Baayen  <jbaayen@gnome.org>
+
+	* TODO:
+	* data/muine.applications:
+	* src/Muine.cs:
+	* src/PlaylistWindow.cs:
+	* src/Song.cs:
+	* src/SongDatabase.cs:
+
+	Support playing files that are not in the library.  Set Muine as 
+	your default ogg/mp3 handler in nautilus and you're in heaven.
+
+2004-06-13  Jorn Baayen  <jbaayen@gnome.org>
+
+	* TODO:
+	* src/Muine.cs:
+	* src/PlaylistWindow.cs:
+
+	Some cleanups and beginnings of SM support.
+
+2004-06-13  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/Album.cs:
+
+	Sort by album name if the album has > 3 artists.
+
+2004-06-06  Alexander Shopov <ash@contact.bg>
+
+	* configure.in: Added "bg" (Bulgarian) to ALL_LINGUAS
+
+2004-06-06  Takeshi AIHANA <aihana@gnome.gr.jp>
+
+	* configure.in: Added 'ja' (Japanese) into ALL_LINGUAS.
+
+2004-06-05  Jorn Baayen  <jbaayen@gnome.org>
+
+	* configure.in:
+	* src/About.cs:
+
+	Bumped version number to 0.6.2.99.
+
+2004-06-05  Jorn Baayen  <jbaayen@gnome.org>
+
+	* NEWS:
+	* configure.in:
+	* src/About.cs:
+
+	Released 0.6.2.
+
+2004-06-05  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/PlaylistWindow.cs:
+
+	Don't crash when dropping a file.
+
+2004-06-05  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/Song.cs:
+
+	Add a comment explaining the AlbumKey stuff.
+
+2004-06-05  Edd Dumbill  <edd@usefulinc.com>
+
+	* src/DashboardFrontend.cs:
+	* src/PlaylistWindow.cs:
+
+	Generalize dashboard interface.
+
+2004-06-05  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/Song.cs:
+
+	Add slightly fuzzy album matching.  Inspired by a patch from iain.
+
+2004-06-05  iain  <iain@prettypeople.org>
+            Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/PlaylistWindow.cs:
+
+	DNDing an album to the playlist window will import it.
+
+2004-06-05  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/CoverDatabase.cs:
+	* src/CoverImage.cs:
+	* src/StringUtils.cs:
+	* src/muine.exe.config.in:
+
+	Support non-ASCII filenames in cover image dnd.
+
+2004-06-05  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/CoverDatabase.cs:
+	* src/CoverImage.cs:
+	* src/Metadata.cs:
+	* src/SongDatabase.cs:
+
+	Fix native-to-managed string conversion.
+
+2004-06-05  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/EllipsizingLabel.cs:
+
+	Fix GtkLabel warning on startup.
+
+2004-06-05  Peter Johanson  <latexer@gentoo.org>
+            fer
+            Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/AddAlbumWindow.cs:
+	* src/AddSongWindow.cs:
+	* src/GettextCatalog.cs:
+	* src/Player.cs:
+	* src/Song.cs:
+	* src/StockIcons.cs:
+	* src/StringUtils.cs:
+
+	Make work with latest mono and gtk#.
+
+2004-05-13  Lee Willis   <lee@leewillis.co.uk>
+
+	* libmuine/player-xine.c:
+
+	Escape filename before passing to xine_open. Fixes #142434
+
+2004-05-11  Jorn Baayen  <jbaayen@gnome.org>
+
+	* configure.in:
+	* src/About.cs:
+
+	Bump version number to 0.6.1.99.
+	
+	* src/HandleView.cs:
+	* src/MmKeys.cs:
+	* src/Player.cs:
+	* src/VolumeButton.cs:
+
+	Kill GetObject usage.
+
+2004-05-10  Jorn Baayen  <jbaayen@gnome.org>
+
+	* NEWS:
+	* configure.in:
+	* src/About.cs:
+
+	Release 0.6.1.
+
+2004-05-10  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/Makefile.am:
+
+	Set MONO_XMLSERIALIZER_THS to "no" for AmazonSearchService.cs
+	generation. Works around Ximian Bugzilla #58194.
+
+2004-05-09  Jeroen Zwartepoorte  <jeroen@xs4all.nl>
+
+	* src/Muine.cs: Add explicit namespace for "File" references since in
+	gtk+ 2.4 there's now also a Gtk.File class.
+	* src/PlaylistWindow.cs: Idem. Use MainContext.Pending () instead of 
+	Global.EventsPending () since the latter has changed API from 2.2 to
+	2.4.
+	* src/ProgressWindow.cs: Idem.
+
+2004-05-09  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/About.cs:
+
+	Use UTF-8 copyright symbol, and spell Viet Yen's name in proper 
+	Vietnamese.
+	
+	* src/Makefile.am:
+
+	Pass "-codepage:utf8" to mcs.
+
+2004-05-09  Jorn Baayen  <jbaayen@gnome.org>
+
+	* data/images/muine-tray-paused.png:
+	* data/images/muine-tray-playing.png:
+
+	Revert to the old tray icon, has much more of a "music" association.
+
+2004-05-09  Jorn Baayen  <jbaayen@gnome.org>
+
+	* TODO:
+	* src/PlaylistWindow.cs:
+
+	Exit app when clicking close.
+
+2004-05-09  Jorn Baayen  <jbaayen@gnome.org>
+
+	* data/muine.schemas.in:
+
+	Better descriptions.
+
+2004-05-09  Jorn Baayen  <jbaayen@gnome.org>
+
+	* data/glade/NoMusicFoundWindow.glade:
+
+	Remove trailing space from message.
+
+2004-05-09  Jorn Baayen  <jbaayen@gnome.org>
+
+	* data/muine.schemas.in:
+
+	Consistent period usage.
+
+2004-05-08  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/PlaylistWindow.cs:
+	* src/SongDatabase.cs:
+
+	Catch IO errors when loading folders.
+
+2004-05-08  Jorn Baayen  <jbaayen@gnome.org>
+
+	* configure.in:
+	* src/About.cs:
+
+	Bump version number to 0.6.0.99.
+
+2004-05-08  Jorn Baayen  <jbaayen@gnome.org>
+
+	* TODO:
+	* data/images/Makefile.am:
+	* data/images/muine-default-cover.png:
+	* data/images/muine-playlist.png:
+	* data/images/muine-tray-paused.png:
+	* data/images/muine-tray-playing.png:
+	* data/images/muine.png:
+	* src/Makefile.am:
+	* src/Muine.cs:
+
+	New logo.
+
+2004-05-06  Jorn Baayen  <jbaayen@gnome.org>
+
+	* configure.in:
+	* src/About.cs:
+
+	Release 0.6.0.
+
+2004-05-06  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/AddAlbumWindow.cs:
+	* src/CoverImage.cs:
+
+	Only enable cover dnd when the covers are done loading.
+
+2004-05-06  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/PlaylistWindow.cs:
+
+	Only show the "Drop here" tooltip when the coverdb is finished loading.
+
+2004-05-05  Peter Johanson  <latexer@gentoo.org>
+            Jorn Baayen  <jbaayen@gnome.org>
+
+	* configure.in:
+	* src/Makefile.am:
+	A src/muine.exe.config.in:
+	* src/muine.in:
+
+	Support latest Mono and Gtk#.
+
+2004-05-01  Adam Weinberger  <adamw@gnome.org>
+
+	* configure.in: Added en_CA to ALL_LINGUAS.
+
+2004-04-28  Samúel Jón Gunnarsson  <sammi@techattack.nu>
+
+	* configure.in: Added "is" to ALL_LINGUAS.
+
+2004-04-27  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/AddAlbumWindow.cs:
+	* src/AddSongWindow.cs:
+
+	Optimize closing windows.
+
+2004-04-27  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/Album.cs:
+	* src/Song.cs:
+
+	Refactor sort & search key generation.
+
+2004-04-27  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/AddAlbumWindow.cs:
+	* src/AddSongWindow.cs:
+
+	Use an idle for performing the searches. Searching is much more
+	responsive now.
+
+2004-04-27  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/Song.cs:
+
+	Include album name in search key.
+
+2004-04-26  Jorn Baayen  <jbaayen@gnome.org>
+
+	* NEWS:
+	* libmuine/player-xine.c: (load_audio_out_driver),
+	(player_construct):
+
+	Load audio driver from xine-config.
+
+2004-04-25  Crispin Flowerday  <gnome@flowerday.cx>
+            Jorn Baayen  <jbaayen@gnome.org>
+
+	* libmuine/mm-keys.c: (mmkeys_class_init), (mmkeys_init),
+	(filter_mmkeys):
+	* src/MmKeys.cs:
+	* src/PlaylistWindow.cs:
+
+	Make the "Stop" multimedia key pause playback.
+
+	(Did some general mmkey code cleanup --Jorn)
+
+2004-04-25  Lee Willis  <lee@leewillis.co.uk>
+
+	* data/muine.schemas.in:
+	* src/CoverDatabase.cs:
+
+	Add a GConf key for using different amazon backends.
+
+2004-04-25  Crispin Flowerday  <gnome@flowerday.cx>
+
+	* src/CoverDatabase.cs:
+
+	Catch exceptions from the Pixbuf ctor.
+
+2004-04-25  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/Player.cs:
+
+	Make seek reload the stream when it has been stopped.
+
+2004-04-24  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/Muine.cs:
+
+	Start the changes thread *after* all covers have been loaded,
+	to reduce the amount of disc seeking on startup.
+
+2004-04-22  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/FileUtils.cs:
+	* src/Makefile.am:
+	* src/Muine.cs:
+	* src/PlaylistWindow.cs:
+	* src/SongDatabase.cs:
+
+	Split out filename peeking utilities to a separate class.
+
+2004-04-21  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/SongDatabase.cs:
+
+	Support for removable media in /media, like on SuSE.
+
+2004-04-21  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/PlaylistWindow.cs:
+
+	Call NSongsChanged in HandleRemovePlayedSongsCommand
+
+2004-04-20  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/CoverDatabase.cs:
+	* src/ErrorDialog.cs:
+	* src/Muine.cs:
+	* src/PlaylistWindow.cs:
+	* src/SongDatabase.cs:
+
+	Prettier error dialogs.
+
+2004-04-20  Jorn Baayen  <jbaayen@gnome.org>
+
+	* configure.in:
+	* libmuine/player-gst.c: (player_init), (player_construct),
+	(player_new), (player_set_file), (player_get_volume):
+	* libmuine/player-xine.c: (player_construct), (player_new),
+	(player_open), (player_set_file):
+	* libmuine/player.h:
+	* po/POTFILES.in:
+	* po/POTFILES.skip:
+	* src/Player.cs:
+	* src/PlaylistWindow.cs:
+
+	Much improved error handling.
+
+2004-04-19  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/ColoredCellRendererPixbuf.cs:
+
+	Simplify.
+
+2004-04-18  Jorn Baayen  <jbaayen@gnome.org>
+
+	* data/glade/PlaylistWindow.glade:
+
+	Change "Skip to" shortcut from Ctrl-T to T.
+
+2004-04-18  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/muine.in:
+
+	Add a "cd $HOME" to avoid the "loading libmuine/ as the libmuine dll"
+	bug. Lee's idea ..
+
+2004-04-17  Jorn Baayen  <jbaayen@gnome.org>
+
+	* data/images/Makefile.am:
+	A data/images/muine-about.png:
+	* src/About.cs:
+	* src/Makefile.am:
+
+	Use new logo by Andreas Kwiatkowski (kwiatkowski@typorism.com) in
+	the about box.
+
+2004-04-17  Jorn Baayen  <jbaayen@gnome.org>
+
+	* configure.in:
+
+	Require mono 0.31.
+
+2004-04-17  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/FileSelector.cs:
+	* src/Muine.cs:
+	* src/PlaylistWindow.cs:
+
+	Always save playlists with an m3u extension, only open playlist
+	files with a m3u extension.
+
+2004-04-15  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/EllipsizingLabel.cs:
+
+	Replace an unnecessary DllImport.
+
+2004-04-15  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/PlaylistWindow.cs:
+	* src/Song.cs:
+
+	Use Path.* where appropiate. (Thanks Lee!)
+
+2004-04-15  Jorn Baayen  <jbaayen@gnome.org>
+
+	A data/glade/GroupEditor.glade:
+	* data/glade/Makefile.am:
+	A data/glade/PlaylistFilling.glade:
+
+	Commit glade files for the groups stuff.
+
+2004-04-15  Jorn Baayen  <jbaayen@gnome.org>
+
+	R src/GroupWindow.cs:
+	* src/Makefile.am:
+
+	Remove unused code.
+
+2004-04-15  Jorn Baayen  <jbaayen@gnome.org>
+
+	* NEWS:
+	* src/PlaylistWindow.cs:
+
+	Release preparation.
+
+2004-04-15  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/Song.cs:
+
+	Do some AlbumKey caching.
+
+2004-04-15  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/GnomeProxy.cs:
+
+	Better error handling.
+
+2004-04-15  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/Song.cs:
+	* src/SongDatabase.cs:
+
+	Dirty, but absolutely massive optimization using g_path_get_dirname
+	instead of FileInfo. This cuts down startup time to a sane 5 seconds
+	when not cached, or one second when cached (~20k songs).
+
+2004-04-15  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/CoverImage.cs:
+
+	Only show "loading" image when an image is actually loading.
+
+2004-04-15  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/Player.cs:
+	* src/PlaylistWindow.cs:
+
+	More startup optimization.
+
+2004-04-14  Jorn Baayen  <jbaayen@gnome.org>
+
+	* libmuine/db.c: (db_foreach):
+	* src/CoverDatabase.cs:
+	* src/SongDatabase.cs:
+
+	More optimization and thread fixage.
+
+2004-04-14  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/CoverDatabase.cs:
+
+	Add some Thread.Sleep stuff to make the thread eat the CPU a little
+	less vigorously.
+
+2004-04-14  Jorn Baayen  <jbaayen@gnome.org>
+
+	* libmuine/player-xine.c: (player_open), (player_stop):
+	* src/Player.cs:
+	* src/PlaylistWindow.cs:
+
+	Fix some stop madness.
+
+2004-04-14  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/PlaylistWindow.cs:
+
+	Show window as soon as possible.
+
+2004-04-14  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/SongDatabase.cs:
+
+	Don't remove album covers when albums from removable media are
+	removed.
+
+2004-04-14  Jorn Baayen  <jbaayen@gnome.org>
+
+	* TODO:
+	* src/AddAlbumWindow.cs:
+	* src/Album.cs:
+	* src/CoverDatabase.cs:
+	* src/CoverImage.cs:
+	* src/Muine.cs:
+	* src/SongDatabase.cs:
+
+	Read album covers in a thread on startup. This greatly improves
+	startup speed.
+
+2004-04-14  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/PlaylistWindow.cs:
+	* src/SkipToWindow.cs:
+
+	Defer initialization of dialogs till when they are requested.
+
+2004-04-14  Artur Flinta  <aflinta@cvs.gnome.org>
+
+        * configure.in:
+	    Added "pl" to ALL_LINGUAS.
+
+2004-04-13  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/PlaylistWindow.cs:
+
+	More constructor fixage.
+
+2004-04-13  Kenneth Christiansen  <kenneth@gnu.org>
+	    Jorn Baayen  <jbaayen@gnome.org>
+
+	* configure.in:
+	* src/AddAlbumWindow.cs:
+	* src/AddSongWindow.cs:
+	* src/ColoredCellRendererPixbuf.cs:
+	* src/HandleView.cs:
+	* src/InfoWindow.cs:
+	* src/Makefile.am:
+	* src/MmKeys.cs:
+	* src/NotificationAreaIcon.cs:
+	* src/Player.cs:
+	* src/VolumeButton.cs:
+
+	Pass IntPtr.Zero to the base constructors when we want dummy objects
+	filled in with unmanaged gobjects.
+
+	Use pkg-config files from Gtk# CVS.
+	
+2004-04-12  Jorn Baayen  <jbaayen@gnome.org>
+
+	* configure.in:
+
+	Add "da" to ALL_LINGUAS.
+
+2004-04-11  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/Song.cs:
+
+	Sort songs by title, then artists.
+
+2004-04-11  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/NotificationAreaIcon.cs:
+	* src/PlaylistWindow.cs:
+
+	Remove properties menu item from the tray menu.
+
+2004-04-11  Jorn Baayen  <jbaayen@gnome.org>
+
+	* data/glade/PlaylistWindow.glade:
+	* data/images/Makefile.am:
+	R data/images/muine-groups.png:
+	* src/Makefile.am:
+	* src/NotificationAreaIcon.cs:
+	* src/StockIcons.cs:
+
+	UI cleanups.
+
+2004-04-11  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/SkipToWindow.cs:
+
+	Play after seek.
+
+2004-04-10  Jorn Baayen  <jbaayen@gnome.org>
+
+	* TODO:
+	R data/glade/GroupsWindow.glade:
+	* data/glade/Makefile.am:
+	* src/NotificationAreaIcon.cs:
+	* src/PlaylistWindow.cs:
+
+	Some cleanups, put info menuitem back again ..
+
+2004-04-10  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/PlaylistWindow.cs:
+
+	Correct error message.
+
+2004-04-09  Gareth Owen  <gowen72@yahoo.com>
+
+	* configure.in: Added en_GB to ALL_LINGUAS
+
+2004-04-09  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/Album.cs:
+
+	Sort by album year after artist. Inspired by a patch from teemu.
+
+2004-04-09  Lee Willis  <lee@leewillis.co.uk>
+            Jorn Baayen  <jbaayen@gnome.org>
+
+	* libmuine/pointer-list-view.c: (cell_data_func),
+	(pointer_list_view_get_contents),
+	(pointer_list_get_handle_from_path):
+	* libmuine/pointer-list-view.h:
+	* src/AddAlbumWindow.cs:
+	* src/CoverImage.cs:
+	* src/HandleView.cs:
+
+	Add album cover DnD in the "Play album" window.
+
+2004-04-09  Jorn Baayen  <jbaayen@gnome.org>
+
+	* configure.in:
+	* src/About.cs:
+
+	Bump version number to 0.5.3.99.
+
+2004-04-09  Jorn Baayen  <jbaayen@gnome.org>
+
+	* NEWS:
+	* configure.in:
+	* src/About.cs:
+
+	Released 0.5.3.
+
+2004-04-06  Andras Timar  <timar@gnome.hu>
+
+	* configure.in: Added hu to ALL_LINGUAS.
+
+2004-04-06  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/SongDatabase.cs:
+
+	Stop ProcessActionsFromThread at the right time.
+
+2004-04-05  Jorn Baayen  <jbaayen@gnome.org>
+
+	* README:
+
+	Up xine version requirement to 1.0.0rc3b.
+
+2004-04-04  Jorn Baayen  <jbaayen@gnome.org>
+
+	* configure.in:
+	* src/About.cs:
+
+	Bump version number to 0.5.2.99.
+
+2004-04-04  Lee Willis  <lee@leewillis.co.uk>
+            Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/CoverDatabase.cs:
+	* src/Song.cs:
+
+	Even better album cover matching. 
+
+2004-04-03  Jorn Baayen  <jbaayen@gnome.org>
+
+	* configure.in:
+	* src/About.cs:
+
+	Released 0.5.2.
+
+2004-04-03  Jorn Baayen  <jbaayen@gnome.org>
+
+	* libmuine/player-xine.c:
+
+	Fix compilation with Gnome 2.4.
+
+2004-04-03  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/SongDatabase.cs:
+
+	Threading cleanups.
+
+2004-04-03  Jorn Baayen  <jbaayen@gnome.org>
+
+	* configure.in:
+	* src/About.cs:
+
+	Release 0.5.1.
+
+2004-04-03  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/Makefile.am:
+
+	Please distcheck.
+
+2004-04-03  Jorn Baayen  <jbaayen@gnome.org>
+
+	* NEWS:
+
+	Updated for upcoming 0.5.1 release.
+
+2004-04-03  Jorn Baayen  <jbaayen@gnome.org>
+
+	* TODO:
+	* libmuine/player-gst.c: (update_volume), (player_set_volume),
+	(player_set_replaygain):
+
+	Fix replaygain in the gst backend.
+
+2004-04-03  Jorn Baayen  <jbaayen@gnome.org>
+
+	* libmuine/player-xine.c: (update_volume), (player_set_volume),
+	(player_set_replaygain):
+
+	Fix replaygain in the xine backend.
+
+2004-04-03  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/PlaylistWindow.cs:
+
+	Fix window visibility bug.
+
+2004-04-03  Jorn Baayen  <jbaayen@gnome.org>
+
+	* data/glade/PlaylistWindow.glade:
+	* src/NotificationAreaIcon.cs:
+	* src/PlaylistWindow.cs:
+
+	Hide information menu items again for upcoming release.
+
+2004-04-03  Jorn Baayen  <jbaayen@gnome.org>
+
+	* README:
+	* configure.in:
+
+	Make the xine backend the default.
+
+2004-04-03  Jorn Baayen  <jbaayen@gnome.org>
+
+	* TODO:
+	* src/PlaylistWindow.cs:
+	* src/SongDatabase.cs:
+
+	Remove db changing mutex, removes some semi-lockups seen when
+	upgrading muine. Also make the changes thread and idle run
+	concurrently.
+
+2004-04-02  Jorn Baayen  <jbaayen@gnome.org>
+
+	* README:
+	* TODO:
+	* src/Muine.cs:
+	* src/Song.cs:
+
+	Mime types not stored any longer. Broke the db format again,
+	will rebuild on the startup.. 
+
+	Also updated the docs to include info on the xine backend.
+
+2004-04-02  Jorn Baayen  <jbaayen@gnome.org>
+
+	* TODO:
+	* src/Player.cs:
+	* src/PlaylistWindow.cs:
+
+	Fix last eos lockup with xine backend.
+
+2004-04-02  Jorn Baayen  <jbaayen@gnome.org>
+
+	* TODO:
+	* configure.in:
+	* libmuine/Makefile.am:
+	R libmuine/metadata-gst.c:
+	R libmuine/player-gst-0.7.c:
+	A libmuine/player-gst.c: (player_get_type), (player_class_init),
+	(player_init), (player_finalize), (player_new), (eos_idle_cb),
+	(eos_cb), (error_idle_cb), (error_cb), (time_tick_cb),
+	(player_set_file), (player_play), (player_stop), (player_pause),
+	(player_set_volume), (player_get_volume), (player_set_replaygain),
+	(player_seek), (player_tell):
+	A libmuine/player-xine.c: (player_get_type), (player_class_init),
+	(tick_timeout), (player_init), (player_finalize), (signal_idle),
+	(xine_event), (player_construct), (player_new),
+	(player_error_quark), (player_open), (player_close),
+	(player_playing), (player_set_file), (player_play), (player_stop),
+	(player_pause), (player_set_volume), (player_get_volume),
+	(player_set_replaygain), (player_seek), (player_tell):
+	R libmuine/player.c:
+	* libmuine/player.h:
+	* src/Player.cs:
+	* src/SkipToWindow.cs:
+
+	New xine backend. Very much recommended.
+
+2004-04-02  Jorn Baayen  <jbaayen@gnome.org>
+
+	* configure.in:
+	* libmuine/player.c: (player_get_type), (player_class_init),
+	(player_init), (player_finalize), (player_new), (eos_idle_cb),
+	(eos_cb), (error_idle_cb), (error_cb), (time_tick_cb),
+	(player_set_file), (player_play), (player_stop), (player_pause),
+	(player_set_volume), (player_get_volume), (player_set_replaygain),
+	(player_seek), (player_tell):
+	* libmuine/player.h:
+	* src/Player.cs:
+
+	Use GStreamer 0.8 using GstPlay. 
+
+	Xine backend coming up soon.
+
+2004-04-02  Jorn Baayen  <jbaayen@gnome.org>
+
+	* libmuine/id3-vfs/mp3bitrate.c: (mpg123_parse_xing_header):
+
+	Port xing header parsing fixes from Rhythmbox.
+
+2004-04-02  Jorn Baayen  <jbaayen@gnome.org>
+
+	* TODO:
+	* configure.in:
+	* libmuine/Makefile.am:
+	R libmuine/gtk-glue.c:
+	R libmuine/gtk-glue.h:
+	* src/NotificationAreaIcon.cs:
+	* src/PlaylistWindow.cs:
+
+	Remove workarounds for Gtk# bugs that were fixed in Gtk# 0.18.
+	We depend on 0.18 now.
+
+2004-03-31  Edd Dumbill  <edd@usefulinc.com>
+
+	* libmuine/db.c: (db_unpack_string), (db_unpack_int),
+	(db_unpack_pixbuf):
+
+	Compile fix.
+
+2004-03-30  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/PlaylistWindow.cs:
+
+	"part of the best damn Docklet code this side of Tahiti"
+
+2004-03-23  Gustavo Maciel Dias Vieira  <gdvieira@zaz.com.br>
+
+	* configure.in: Added pt_BR to ALL_LINGUAS.
+
+2004-03-16  Iñaki Larrañaga  <dooteo@euskalgnu.org>
+
+	* configure.in: Added "eu" to ALL_LINGUAS.
+
+2004-03-15  Changwoo Ryu  <cwryu@debian.org>
+
+	* configure.in : Added "ko" to ALL_LINGUAS.
+
+2004-03-14  Jorn Baayen  <jbaayen@gnome.org>
+
+	* Makefile.am:
+	* data/Makefile.am:
+	* src/Makefile.am:
+
+	Clean out more files on distclean and clean.
+
+2004-03-14  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/NotificationAreaIcon.cs:
+
+	Middle-click on tray icon toggles window visibility.
+
+2004-03-14  Jorn Baayen  <jbaayen@gnome.org>
+
+	* data/glade/PlaylistWindow.glade:
+
+	Remove accels from Play buttons, fixing #137106.
+	
+	* src/Muine.cs:
+	* src/PlaylistWindow.cs:
+
+	Clicking the WM close button hides the window.
+
+2004-03-12  Lee Willis  <lee@leewillis.co.uk>
+            Jorn Baayen  <jbaayen@gnome.org>
+
+	* libmuine/Makefile.am:
+	* libmuine/mm-keys.c: (mmkeys_get_type), (mmkeys_class_init),
+	(mmkeys_finalize), (mmkeys_init), (mmkeys_new), (grab_mmkey),
+	(filter_mmkeys):
+	* libmuine/mm-keys.h:
+	* src/Makefile.am:
+	* src/MmKeys.cs:
+	* src/PlaylistWindow.cs:
+
+	Grab multimedia keys globally.
+
+2004-03-10  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* configure.in: Added Norwegian to ALL_LINGUAS.
+
+2004-03-07  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/PlaylistWindow.cs:
+
+	Fix prev button behaviour.
+
+2004-03-06  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/KeyUtils.cs:
+
+	Add more modifier keys.
+
+2004-02-29  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/PlaylistWindow.cs:
+
+	Add an album cover dnd tooltip.
+
+2004-02-29  Jorn Baayen  <jbaayen@gnome.org>
+
+	* libmuine/Makefile.am:
+	A libmuine/gtk-glue.c: (gtk_glue_get_monitor_dimensions):
+	A libmuine/gtk-glue.h:
+	* libmuine/markup-utils.c:
+	* src/NotificationAreaIcon.cs:
+
+	Fix tray icon popup positioning.
+
+2004-02-27  Jorn Baayen  <jbaayen@gnome.org>
+
+	* configure.in:
+	* src/About.cs:
+
+	Bump version number to 0.5.0.99.
+
+2004-02-27  Jorn Baayen  <jbaayen@gnome.org>
+
+	* TODO:
+	* data/glade/PlaylistWindow.glade:
+	* src/NotificationAreaIcon.cs:
+	* src/PlaylistWindow.cs:
+
+	Re-enable info window now that we have the release.
+	
+	Update TODO with information about the window parenting bug.
+
+2004-02-27  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/AddAlbumWindow.cs:
+	* src/CoverDatabase.cs:
+	* src/CoverImage.cs:
+	* src/StockIcons.cs:
+
+	Cleanup cover image dimension stuff some more.
+
+2004-02-27  Jorn Baayen  <jbaayen@gnome.org>
+
+	* NEWS:
+	* README:
+	* configure.in:
+	* src/About.cs:
+
+	Gtk# 0.17 has been released, release 0.5.0.
+	
+	* data/glade/SkipToWindow.glade:
+
+	Pressing Escape will close the window.
+	
+	* libmuine/metadata.c: (metadata_load):
+
+	Escape filename before handing it over to vfs, based on a patch
+	by Jeremy Jay <Jeremy_Jay@baylor.edu>
+
+	* po/POTFILES.in:
+	* src/AddAlbumWindow.cs:
+	* src/AddSongWindow.cs:
+	* src/InfoWindow.cs:
+	* src/PlaylistWindow.cs:
+
+	Add missing strings for translation, work around a Gtk# bug
+	with window parenting.
+
+	* src/CoverDatabase.cs:
+	* src/CoverImage.cs:
+	* src/StockIcons.cs:
+
+	Store cover image dimensions in one place.
+	
+	* data/glade/PlaylistWindow.glade:
+	* src/NotificationAreaIcon.cs:
+	
+	Disable information window for the release.
+
+2004-02-27  Lee Willis  <lee@leewillis.co.uk>
+            Jorn Baayen  <jbaayen@gnome.org>
+
+	R src/AmazonSearchService.cs:
+	* src/Makefile.am:
+
+	Autogenerate AmazonSearchService.cs.
+
+2004-02-26  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/PlaylistWindow.cs:
+
+	Mark missing string for translation.
+
+2004-02-26  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/muine.in:
+
+	Set both MONO_PATH and LD_LIBRARY_PATH. Grr.
+
+2004-02-26  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/About.cs:
+
+	Mark missing strings for translation.
+
+2004-02-26  Jorn Baayen  <jbaayen@gnome.org>
+
+	* TODO:
+	* autogen.sh:
+	* configure.in:
+	* libmuine/gettext-utils.c: (intl_init), (intl_get_string),
+	(intl_get_plural_string):
+	* libmuine/gettext-utils.h:
+	R po/LINGUAS:
+	R po/Makefile.in.in.override:
+	A src/GettextCatalog.cs:
+	* src/Makefile.am:
+	* src/Muine.cs:
+
+	OK, so we now have our own gettext bindings. This way we only
+	need to install the catalogs once, and we don't need all
+	the tricky Makefile.in.in hacks.
+
+2004-02-26  Jorn Baayen  <jbaayen@gnome.org>
+
+	* TODO:
+	* libmuine/db.c:
+	* libmuine/db.h:
+	* libmuine/gettext-utils.c:
+	* libmuine/gettext-utils.h:
+	* libmuine/markup-utils.c:
+	* libmuine/markup-utils.h:
+	* libmuine/metadata-gst.c:
+	* libmuine/metadata.c:
+	* libmuine/metadata.h:
+	* libmuine/pointer-list-view.c:
+	* libmuine/pointer-list-view.h:
+
+	More copyright symbol fixage, and updated TODO.
+
+2004-02-26  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/About.cs:
+	* src/ActionThread.cs:
+	* src/AddAlbumWindow.cs:
+	* src/AddSongWindow.cs:
+	* src/Album.cs:
+	* src/ColoredCellRendererPixbuf.cs:
+	* src/CoverDatabase.cs:
+	* src/CoverImage.cs:
+	* src/DashboardFrontend.cs:
+	* src/EllipsizingLabel.cs:
+	* src/ErrorDialog.cs:
+	* src/FileSelector.cs:
+	* src/GnomeProxy.cs:
+	* src/GroupWindow.cs:
+	* src/HandleView.cs:
+	* src/InfoWindow.cs:
+	* src/KeyUtils.cs:
+	* src/MarkupUtils.cs:
+	* src/MessageConnection.cs:
+	* src/Metadata.cs:
+	* src/Muine.cs:
+	* src/NoMusicFoundWindow.cs:
+	* src/NotificationAreaIcon.cs:
+	* src/Player.cs:
+	* src/PlaylistWindow.cs:
+	* src/ProgressWindow.cs:
+	* src/SkipToWindow.cs:
+	* src/Song.cs:
+	* src/SongDatabase.cs:
+	* src/StockIcons.cs:
+	* src/StringUtils.cs:
+	* src/VolumeButton.cs:
+	* src/YesNoDialog.cs:
+
+	Remove all UTF-8 copyright symbols to please xgettext.
+
+2004-02-26  Jorn Baayen  <jbaayen@gnome.org>
+
+	* autogen.sh:
+	* configure.in:
+	R po/Makefile.in:
+	A po/Makefile.in.in.override:
+	* po/POTFILES.in:
+
+	Get POTFILES right.
+	
+	* src/muine.in:
+
+	Use MONO_PATH instead of LD_LIBRARY_PATH.
+
+2004-02-26  Jorn Baayen  <jbaayen@gnome.org>
+
+	* TODO:
+	* configure.in:
+	* po/LINGUAS:
+	* po/Makefile.in:
+
+	Install C# translation catalogs ..
+
+2004-02-26  Jorn Baayen  <jbaayen@gnome.org>
+
+	* data/glade/NoMusicFoundWindow.glade:
+
+	Therefor -> Therefore
+
+	* src/PlaylistWindow.cs:
+
+	Use GetPluralString where needed.
+
+2004-02-26  Jorn Baayen  <jbaayen@gnome.org>
+
+	* configure.in:
+
+	Bump version number to 0.4.0.99, bump Gtk# requirement to 0.17.
+
+2004-02-26  Jorn Baayen  <jbaayen@gnome.org>
+
+	* libmuine/pointer-list-view.c: (pointers_reordered_cb),
+	(pointer_list_view_select):
+	* src/PlaylistWindow.cs:
+
+	Remove m3u file dnd, probably nobody used it anyway and it
+	broke playlist reordering.
+
+2004-02-26  Jorn Baayen  <jbaayen@gnome.org>
+
+	* libmuine/pointer-list-view.c: (pointer_list_view_init):
+	* src/InfoWindow.cs:
+	* src/PlaylistWindow.cs:
+
+	Various cleanups, and make the playlist multiselection.
+
+2004-02-26  Jorn Baayen  <jbaayen@gnome.org>
+
+	* data/glade/InfoWindow.glade:
+	* data/glade/PlaylistWindow.glade:
+	* src/AddAlbumWindow.cs:
+	* src/AddSongWindow.cs:
+	A src/CoverImage.cs:
+	* src/InfoWindow.cs:
+	* src/Makefile.am:
+	* src/Muine.cs:
+	* src/PlaylistWindow.cs:
+
+	Created a CoverImage widget which is now both used by 
+	the playlist and the song information window.
+
+	The add and info dialogs will now only be made transient
+	for the playlist window when the playlist window is actually
+	visible. This depends on a yet uncommited fix for Gtk# to
+	work reliably.
+
+2004-02-25  Jordi Mallach  <jordi@sindominio.net>
+
+	* configure.in (ALL_LINGUAS): Added "ca" (Catalan).
+
+2004-02-24  Jorn Baayen  <jbaayen@gnome.org>
+
+	* data/glade/InfoWindow.glade:
+	* src/InfoWindow.cs:
+
+	Fix keynav.
+
+2004-02-24  Jorn Baayen  <jbaayen@gnome.org>
+
+	* data/glade/InfoWindow.glade:
+	* src/AddAlbumWindow.cs:
+	* src/AddSongWindow.cs:
+	* src/ErrorDialog.cs:
+	* src/FileSelector.cs:
+	* src/HandleView.cs:
+	* src/InfoWindow.cs:
+	* src/KeyUtils.cs:
+	* src/Makefile.am:
+	* src/Muine.cs:
+	* src/NoMusicFoundWindow.cs:
+	* src/NotificationAreaIcon.cs:
+	* src/PlaylistWindow.cs:
+	* src/ProgressWindow.cs:
+	* src/SkipToWindow.cs:
+	* src/YesNoDialog.cs:
+
+	Updates for Gtk# CVS. 
+
+	And stop using GtkHTML for the information window, without any CSS
+	we had to use very hackish table layouts which were, well, hackish.
+	So we now just use normal widgets. 
+
+2004-02-23  Jorn Baayen  <jbaayen@gnome.org>
+
+	* data/glade/InfoWindow.glade:
+	* src/InfoWindow.cs:
+	* src/Makefile.am:
+
+	Use GtkHTML for the information window. Obviously still far from
+	finished.
+
+2004-02-22  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/HandleView.cs:
+	* src/KeyUtils.cs:
+
+	Do not handle single modifier keypresses.
+
+2004-02-21  Duarte Loreto <happyguy_pt@hotmail.com>
+
+	* configure.in: Added Portuguese (pt) to ALL_LINGUAS.
+
+2004-02-19  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/Album.cs:
+
+	Add year information.
+	
+	* src/StringUtils.cs:
+
+	Cleanup SelectionDataToString.
+
+2004-02-18  Jorn Baayen  <jbaayen@gnome.org>
+
+	* data/glade/InfoWindow.glade:
+	* data/glade/Makefile.am:
+	* data/glade/PlaylistWindow.glade:
+	* data/muine.schemas.in:
+	* src/InfoWindow.cs:
+	* src/Makefile.am:
+	* src/NotificationAreaIcon.cs:
+	* src/PlaylistWindow.cs:
+
+	Add a proof-of-concept information window.
+
+2004-02-18  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/PlaylistWindow.cs:
+
+	Remove some unneccessary code.
+
+2004-02-17  Jorn Baayen  <jbaayen@gnome.org>
+
+	* TODO:
+	* src/PlaylistWindow.cs:
+	* src/Song.cs:
+	* src/StringUtils.cs:
+
+	Album cover DnD, and DnD'ing m3u files to the playlist will load
+	them.
+
+	This needs an uncommited fix to Gtk# before it will work without
+	crashing, though ..
+
+2004-02-17  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/Album.cs:
+	* src/Song.cs:
+	* src/SongDatabase.cs:
+
+	Stop leaking removed songs and albums.
+	
+	* src/PlaylistWindow.cs:
+
+	Clean up window visibility code some more.
+
+2004-02-16  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/PlaylistWindow.cs:
+
+	Make window visibility menu item in the tray icon work well when
+	the window is iconified.
+
+2004-02-15  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/SongDatabase.cs:
+
+	Add a missing null check.
+
+2004-02-15  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/SongDatabase.cs:
+
+	Mark song as dead earlier.
+
+2004-02-15  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/AddAlbumWindow.cs:
+	* src/AddSongWindow.cs:
+
+	Tiny cleanup.
+
+2004-02-15  Jorn Baayen  <jbaayen@gnome.org>
+
+	* TODO:
+
+	Added info about visualization.
+	
+	* src/About.cs:
+
+	Added translation stuff.
+
+2004-02-15  Jorn Baayen  <jbaayen@gnome.org>
+
+	* libmuine/Makefile.am:
+	* libmuine/gettext-utils.c: (init_intl):
+	* libmuine/gettext-utils.h:
+	* src/Muine.cs:
+	
+	Setup intl on startup.
+
+2004-02-15  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/AddAlbumWindow.cs:
+	* src/Album.cs:
+	* src/CoverDatabase.cs:
+	* src/Metadata.cs:
+	* src/NotificationAreaIcon.cs:
+	* src/Player.cs:
+	* src/PlaylistWindow.cs:
+	* src/ProgressWindow.cs:
+	* src/SongDatabase.cs:
+	* src/StringUtils.cs:
+
+	Hopefully marked all strings for translation.
+
+2004-02-15  Jorn Baayen  <jbaayen@gnome.org>
+
+	* Makefile.am:
+	* README:
+	* TODO:
+	* configure.in:
+	* data/glade/AddWindow.glade:
+	* data/glade/ErrorDialog.glade:
+	* data/glade/ProgressWindow.glade:
+	* data/glade/YesNoDialog.glade:
+	* po/POTFILES.in:
+	* po/cs.po:
+	* po/de.po:
+	* po/es.po:
+	* po/fr.po:
+	* po/hr.po:
+	* po/nl.po:
+	* po/sr.po:
+	* po/sr@Latn.po:
+	* po/sv.po:
+	* src/About.cs:
+	* src/Makefile.am:
+	* src/Muine.cs:
+
+	First stab at proper translation support. This needs gettext 0.14
+	or higher. Will finish tomorrow.
+
+2004-02-15  Jorn Baayen  <jbaayen@gnome.org>
+
+	* libmuine/pointer-list-view.c: (pointer_list_view_select_first),
+	(pointer_list_view_select_next), (pointer_list_view_select_prev),
+	(pointer_list_view_select):
+
+	Move treeview cursor.
+
+2004-02-14  Jorn Baayen  <jbaayen@gnome.org>
+
+	* TODO:
+	* libmuine/pointer-list-view.c: (pointer_list_view_select_next),
+	(pointer_list_view_select_prev):
+	* src/AddAlbumWindow.cs:
+	* src/AddSongWindow.cs:
+	* src/HandleView.cs:
+	* src/KeyUtils.cs:
+	* src/PlaylistWindow.cs:
+
+	Forward navigation keypresses in add windows to the treeview.
+
+2004-02-14  Jorn Baayen  <jbaayen@gnome.org>
+
+	* TODO:
+	* libmuine/pointer-list-model.c:
+	(pointer_list_model_drag_data_received), (remove_ptr):
+
+	Make drag to end of playlist work. This might need Gtk 2.3,
+	I'm not sure ..
+
+2004-02-14  Jorn Baayen  <jbaayen@gnome.org>
+
+	* README:
+	* TODO:
+	* configure.in:
+	* libmuine/db.c:
+	* libmuine/db.h:
+	* libmuine/id3-vfs/id3-vfs.c: (id3_vfs_bitrate):
+	* libmuine/id3-vfs/id3-vfs.h:
+	* libmuine/id3-vfs/mp3bitrate.c: (mpg123_parse_xing_header),
+	(mp3_bitrate_parse_header):
+	* libmuine/id3-vfs/mp3bitrate.h:
+	* libmuine/metadata.c: (get_mp3_duration), (assign_metadata_mp3),
+	(assign_metadata_ogg), (FLAC_metadata_callback):
+	* libmuine/metadata.h:
+	* libmuine/player.c: (player_class_init), (player_get_state),
+	(tick_timeout_cb), (player_seek), (player_tell):
+	* libmuine/player.h:
+	* src/Metadata.cs:
+	* src/Muine.cs:
+	* src/Player.cs:
+	* src/PlaylistWindow.cs:
+	* src/SkipToWindow.cs:
+	* src/Song.cs:
+	* src/SongDatabase.cs:
+
+	Cleanups to mtime handling, store duration in seconds instead of
+	milliseconds.
+
+2004-02-14  Jorn Baayen  <jbaayen@gnome.org>
+
+	* TODO:
+	* src/NotificationAreaIcon.cs:
+	* src/PlaylistWindow.cs:
+
+	Make tray icon a fair bit more useful.
+
+2004-02-12  Julio M. Merino Vidal  <jmmv@menta.net>
+
+	* data/Makefile.am:
+
+	Honour the --disable-schemas-install option
+
+2004-02-11  Jorn Baayen  <jbaayen@gnome.org>
+
+	* configure.in:
+	* src/About.cs:
+
+	Release 0.4.0.
+
+2004-02-11  Jorn Baayen  <jbaayen@gnome.org>
+
+	* NEWS:
+	* configure.in:
+	* src/About.cs:
+
+	Bump version number to 0.3.99, update NEWS file for upcoming 0.4
+	release.
+
+2004-02-11  Jorn Baayen  <jbaayen@gnome.org>
+
+	* libmuine/pointer-list-model.c:
+	(pointer_list_model_get_moved_iter):
+	* libmuine/pointer-list-model.h:
+	* libmuine/pointer-list-view.c: (pointer_list_view_next):
+	* libmuine/pointer-list-view.h:
+	* src/HandleView.cs:
+	* src/PlaylistWindow.cs:
+
+	Remove obsolete methods.
+
+2004-02-11  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/About.cs:
+
+	Don't keep the logo pixbuf in memory.
+
+2004-02-10  Jorn Baayen  <jbaayen@gnome.org>
+
+	* libmuine/pointer-list-view.c: (pointer_list_view_select_first),
+	(pointer_list_view_select_next), (pointer_list_view_select_prev):
+	* libmuine/pointer-list-view.h:
+	* src/AddAlbumWindow.cs:
+	* src/AddSongWindow.cs:
+	* src/HandleView.cs:
+	* src/PlaylistWindow.cs:
+
+	Work around a couple of treeview scrolling bugs.
+
+2004-02-10  Jorn Baayen  <jbaayen@gnome.org>
+
+	* libmuine/pointer-list-view.c: (scroll_to_path),
+	(pointer_list_view_select_first), (pointer_list_view_select):
+	* src/AddAlbumWindow.cs:
+	* src/AddSongWindow.cs:
+	* src/HandleView.cs:
+	* src/Muine.cs:
+	* src/NotificationAreaIcon.cs:
+	* src/PlaylistWindow.cs:
+
+	Cleanups. Improve startup sequence. Reduce memory usage. Disable
+	first startup window until we've sorted the issue out.
+
+2004-02-10  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/ActionThread.cs:
+	* src/Song.cs:
+	* src/StringUtils.cs:
+
+	Cleanups, fix cover image fetching.
+
+2004-02-10  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/CoverDatabase.cs:
+	* src/Metadata.cs:
+
+	More cleanups.
+
+2004-02-10  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/ActionThread.cs:
+	* src/Album.cs:
+	* src/CoverDatabase.cs:
+	* src/PlaylistWindow.cs:
+	* src/Song.cs:
+	* src/SongDatabase.cs:
+	* src/StringUtils.cs:
+
+	Backend cleanups.
+
+2004-02-09  Jorn Baayen  <jbaayen@gnome.org>
+
+	* configure.in:
+
+	Added "de" (German) to ALL_LINGUAS.
+
+2004-02-09  Robert Sedak  <robert.sedak@sk.htnet.hr>
+
+        * configure.in: Added "hr" (Croatian) to ALL_LINGUAS.
+
+2004-02-08  Vaclav Slavik  <vaclav.slavik@matfyz.cz>
+
+	* libmuine/egg/eggmarshalers.c:
+
+	Define g_value_take_object as g_value_set_object_take_ownership
+	when using glib < 2.3.0.
+
+2004-02-08  Jorn Baayen  <jbaayen@gnome.org>
+
+	* data/glade/PlaylistWindow.glade:
+	* src/Action.cs:
+	* src/ActionThread.cs:
+	* src/Makefile.am:
+	* src/PlaylistWindow.cs:
+	* src/SongDatabase.cs:
+
+	Cleanups. Change labels of add buttons to "Play Song" and "Play Album".
+
+2004-02-08  Jorn Baayen  <jbaayen@gnome.org>
+
+	* libmuine/gsequence.c: (g_sequence_ptr_is_begin):
+
+	Sync gsequence implementation.
+
+2004-02-08  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/Muine.cs:
+	* src/PlaylistWindow.cs:
+	* src/SongDatabase.cs:
+
+	Improve startup mechanism.. and startup speed.
+
+2004-02-08  Jorn Baayen  <jbaayen@gnome.org>
+
+	* libmuine/metadata.c: (get_mp3_picture_data):
+
+	Only use the cover image if its width & height are >= 64.
+	
+	* AUTHORS:
+	* src/About.cs:
+
+	Added Lee & Viet Yen.
+
+2004-02-08  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/SongDatabase.cs:
+
+	Do actually start the thread :P
+
+2004-02-08  Jorn Baayen  <jbaayen@gnome.org>
+
+	* libmuine/metadata.c: (metadata_free):
+
+	Add a comment about not unreffing the album art pixbuf.
+	
+	* src/Song.cs:
+
+	Give cover.jpg priority over the ID3 image.
+
+2004-02-08  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/ActionThread.cs:
+	* src/PlaylistWindow.cs:
+	* src/ProgressWindow.cs:
+	* src/SongDatabase.cs:
+
+	More threading fixes.
+
+2004-02-08  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/PlaylistWindow.cs:
+	* src/SongDatabase.cs:
+
+	Only allow one thread to change the DB at the time.
+
+2004-02-08  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/PlaylistWindow.cs:
+
+	Avoid checking for changes & loading at the same time.
+
+2004-02-08  Lee Willis  <lee@leewillis.co.uk>
+            Jorn Baayen  <jbaayen@gnome.org>
+
+	* libmuine/metadata.c: (get_mp3_duration), (get_mp3_picture_data),
+	(get_mp3_gain), (assign_metadata_mp3), (metadata_get_album_art):
+	* libmuine/metadata.h:
+	* src/CoverDatabase.cs:
+	* src/Metadata.cs:
+	* src/Song.cs:
+
+	Get the album cover from the ID3 tag if available.
+
+2004-02-07  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/PlaylistWindow.cs:
+
+	Fix NSognsChanged usage in SeekTo.
+
+2004-02-07  Jorn Baayen  <jbaayen@gnome.org>
+
+	* data/images/muine-default-cover.png:
+
+	Fix image dimensions.
+
+2004-02-07  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/SongDatabase.cs:
+
+	Correctly remove songs from Songs hashtable.
+
+2004-02-06  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/CoverDatabase.cs:
+
+	Change > 0.6 to >= 0.6 in the amazon matching stuff.
+
+2004-02-06  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/AddAlbumWindow.cs:
+	* src/AddSongWindow.cs:
+	* src/StringUtils.cs:
+
+	Use legacy strcmp for comparing sort keys.
+
+2004-02-06  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/PlaylistWindow.cs:
+
+	Scroll to playing song when having removed the playing songs.
+
+2004-02-06  Việt Yên Nguyễn  <nguyen@cs.utwente.nl>
+            Jorn Baayen  <jbaayen@gnome.org>
+
+	* TODO:
+	* data/glade/Makefile.am:
+	* data/glade/NoMusicFoundWindow.glade:
+	* data/glade/SearchMusicWindow.glade:
+	* data/muine.schemas.in:
+	* src/Makefile.am:
+	* src/NoMusicFoundWindow.cs:
+	* src/PlaylistWindow.cs:
+	* src/SearchMusicWindow.cs:
+
+	Better first time window.
+
+2004-02-06  Jorn Baayen  <jbaayen@gnome.org>
+
+	* data/muine.schemas.in:
+	* src/PlaylistWindow.cs:
+
+	Do not remember window visibility state, it was confusing.
+
+2004-02-06  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/Album.cs:
+
+	"the artist" -> "artist the" in sort/search key.
+
+2004-02-05  Jorn Baayen  <jbaayen@gnome.org>
+
+	* libmuine/player.c: (player_init), (eos_idle_cb), (eos_cb),
+	(player_set_file):
+
+	Kill an EOS race.
+
+2004-02-05  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/PlaylistWindow.cs:
+
+	Fix previous commit ..
+
+2004-02-05  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/PlaylistWindow.cs:
+
+	Include playlist duration in playlist duration label when in repeat
+	mode.
+
+2004-02-04  Jorn Baayen  <jbaayen@gnome.org>
+
+	* README:
+
+	Added FLAC dependency.
+	
+	* src/Album.cs:
+
+	Remove unused Year field.
+	
+	* src/Song.cs:
+
+	g_free strings we get from the DB.
+
+2004-02-03  Jorn Baayen  <jbaayen@gnome.org>
+
+	* src/AddAlbumWindow.cs:
+
+	Initialize nothing_pixbuf before connecting to the database signals.
+
+2004-02-03  Jorn Baayen  <jbaayen@gnome.org>
+
+	* NEWS:
+	* configure.in:
+	* src/About.cs:
+
+	Released 0.3.2.
+	
+	* TODO:
+	* src/PlaylistWindow.cs:
+	* src/SongDatabase.cs:
+
+	First stab at implementing proper file watching, but it is commented
+	out for now because I ran into a mono bug. Details in TODO.
+
+2004-02-03  Jorn Baayen  <jbaayen@gnome.org>
+
+	* AUTHORS:
+	* MAINTAINERS:
+	* src/About.cs:
+	* src/PlaylistWindow.cs:
+
+	Fix assertions on empty playlist, change my email address.
+
+2004-02-02  Jorn Baayen  <jorn@nl.linux.org>
+
+	* TODO:
+	* data/images/muine-default-cover.png:
+	* src/CoverDatabase.cs:
+	* src/NotificationAreaIcon.cs:
+	* src/PlaylistWindow.cs:
+	* src/StockIcons.cs:
+
+	Use stock icon system whenever possible.
+
+2004-02-02  Jorn Baayen  <jorn@nl.linux.org>
+
+	* src/CoverDatabase.cs:
+	* src/GnomeProxy.cs:
+	* src/Makefile.am:
+
+	Use Gnome proxy settings.
+
+2004-02-02  Jorn Baayen  <jorn@nl.linux.org>
+
+	* data/glade/PlaylistWindow.glade:
+
+	Fix dup accel.
+
+2004-02-02  Jorn Baayen  <jorn@nl.linux.org>
+
+	* TODO:
+	* data/glade/PlaylistWindow.glade:
+	* data/muine.schemas.in:
+	* libmuine/pointer-list-model.c: (pointer_list_model_last):
+	* libmuine/pointer-list-model.h:
+	* libmuine/pointer-list-view.c: (pointer_list_view_last):
+	* libmuine/pointer-list-view.h:
+	* src/HandleView.cs:
+	* src/PlaylistWindow.cs:
+
+	Add a repeat mode.
+
+2004-02-02  Jorn Baayen  <jorn@nl.linux.org>
+
+	* src/Song.cs:
+
+	Nullify tmp_cover_image when not needed anymore.
+
+2004-02-02  Goetz Waschk  <waschk@informatik.uni-rostock.de>
+
+	* data/muine.schemas.in:
+
+	An empty string list should be stored as []
+
+2004-02-01  Jorn Baayen  <jorn@nl.linux.org>
+
+	* src/PlaylistWindow.cs:
+
+	Fix assertions when having an empty playlist. Pointed out by Lee Willis.
+
+2004-02-01  Jorn Baayen  <jorn@nl.linux.org>
+
+	* src/SongDatabase.cs:
+
+	Remove album cover pixbuf when not needed anymore.
+
+2004-02-01  Jorn Baayen  <jorn@nl.linux.org>
+
+	* NEWS:
+	* configure.in:
+	* src/About.cs:
+
+	Release 0.3.1.1.
+
+2004-02-01  Jorn Baayen  <jorn@nl.linux.org>
+
+	* TODO:
+	* src/Album.cs:
+	* src/CoverDatabase.cs:
+	* src/PlaylistWindow.cs:
+	* src/Song.cs:
+	* src/SongDatabase.cs:
+	* src/StringUtils.cs:
+
+	A vain attempt to make b0rken filenames work, and fix the bug
+	where sometimes the "downloading image" would disappear after 
+	a restart.
+
+2004-02-01  Jorn Baayen  <jorn@nl.linux.org>
+
+	* TODO:
+	* data/images/Makefile.am:
+	* data/images/muine-cover-downloading.png:
+	* src/CoverDatabase.cs:
+	* src/Makefile.am:
+	* src/Song.cs:
+
+	Add a "downloading" indicator when still searching for an albums
+	cover image. Also handle a maximum of 2 pages of results.
+
+2004-02-01  Jorn Baayen  <jorn@nl.linux.org>
+
+	* src/CoverDatabase.cs:
+
+	Hopefully improve cover image fetching reliability some more.
+	
+	* configure.in:
+
+	Remove explicit dependency on mono 0.29, as the relevant mono bug
+	seems to be fixed.
+
+2004-01-31  Jorn Baayen  <jorn@nl.linux.org>
+
+	* NEWS:
+	* configure.in:
+	* muine.spec.in:
+	* src/About.cs:
+
+	Release 0.3.1.
+
+2004-01-31  Jorn Baayen  <jorn@nl.linux.org>
+
+	* src/Song.cs:
+
+	Fix SearchKey calculation. Bug pointed out by Lee Willis.
+
+2004-01-31  Lee Willis  <lee@leewillis.co.uk>
+            Jorn Baayen  <jorn@nl.linux.org>
+
+	* NEWS:
+	* TODO:
+	* src/DashboardFrontend.cs:
+	* src/Makefile.am:
+	* src/PlaylistWindow.cs:
+
+	Add a dashboard frontend.
+
+2004-01-31  Jorn Baayen  <jorn@nl.linux.org>
+
+	* src/PlaylistWindow.cs:
+
+	Small optimization.
+
+2004-01-31  Jorn Baayen  <jorn@nl.linux.org>
+
+	* src/Song.cs:
+
+	Add {F,f}older.jpg to cover image detection code.
+
+2004-01-30  Jorn Baayen  <jorn@nl.linux.org>
+
+	* configure.in:
+	* po/ChangeLog:
+	* po/fr.po:
+
+	Added a French translation by Vincent Carriere.
+	
+	* libmuine/pointer-list-model.c: (pointer_list_model_get_index_of):
+	* libmuine/pointer-list-model.h:
+	* libmuine/pointer-list-view.c: (pointer_list_view_get_index_of):
+	* libmuine/pointer-list-view.h:
+	* src/HandleView.cs:
+
+	Add GetIndexOf.
+
+2004-01-30  Jorn Baayen  <jorn@nl.linux.org>
+
+	* TODO:
+	* src/PlaylistWindow.cs:
+
+	Select playing song when deiconifying window.
+
+2004-01-30  Jorn Baayen  <jorn@nl.linux.org>
+
+	* TODO:
+	* libmuine/pointer-list-view.c: (pointer_list_view_add_column),
+	(pointer_list_view_select):
+	* libmuine/pointer-list-view.h:
+	* src/AddAlbumWindow.cs:
+	* src/AddSongWindow.cs:
+	* src/HandleView.cs:
+	* src/PlaylistWindow.cs:
+
+	Expand text column in treeviews, select playing row when changing
+	playing song except when changing due to an EOS event.
+
+2004-01-29  Jorn Baayen  <jorn@nl.linux.org>
+
+	* NEWS:
+
+	Updated for upcoming 0.3.1 release.
+	
+	* src/PlaylistWindow.cs:
+
+	De-iconify window when tray icon is clicked.
+
+2004-01-29  Jorn Baayen  <jorn@nl.linux.org>
+
+	* src/AddAlbumWindow.cs:
+	* src/AddSongWindow.cs:
+
+	Remove awkward DefaultButton hack.
+
+2004-01-29  Jorn Baayen  <jorn@nl.linux.org>
+
+	* data/muine.schemas.in:
+
+	Set playlist dir to ~/Music/Playlists instead of ~/Playlists
+	
+	* libmuine/metadata.c: (assign_metadata_mp3),
+	(FLAC_metadata_callback):
+
+	Replaygain for mp3s, (hopefully) fix FLAC song duration.
+
+2004-01-29  Jorn Baayen  <jorn@nl.linux.org>
+
+	* libmuine/db.c: (db_pack_double):
+
+	Fix precision for db_pack_double.
+
+2004-01-29  Jorn Baayen  <jorn@nl.linux.org>
+
+	* libmuine/pointer-list-view.c: (pointer_list_view_select_next),
+	(pointer_list_view_select_prev):
+	* libmuine/pointer-list-view.h:
+	* src/HandleView.cs:
+	* src/PlaylistWindow.cs:
+
+	Don't unnecessarily change the selected row when a row is deleted.
+
+2004-01-28  Jorn Baayen  <jorn@nl.linux.org>
+
+	* src/PlaylistWindow.cs:
+
+	Fix the bug where sometimes different songs than added would
+	be played.
+
+2004-01-28  Lee Willis  <lee@leewillis.co.uk>
+            Jorn Baayen  <jorn@nl.linux.org>
+
+	* TODO:
+	* src/CoverDatabase.cs:
+	* src/PlaylistWindow.cs:
+	* src/Song.cs:
+
+	Improve cover image fetching reliability.
+
+2004-01-28  Jorn Baayen  <jorn@nl.linux.org>
+
+	* TODO:
+	* configure.in:
+	* libmuine/Makefile.am:
+	* libmuine/metadata.c: (assign_metadata_vorbiscomment),
+	(assign_metadata_ogg), (FLAC_read_callback), (FLAC_write_callback),
+	(FLAC_metadata_callback), (FLAC_error_callback),
+	(assign_metadata_flac), (metadata_load):
+	* libmuine/player.c: (create_decoder):
+	* src/About.cs:
+
+	Flac support, and bump version number to 0.3.0.99. Enjoy, edd ;)
+
+2004-01-28  Jorn Baayen  <jorn@nl.linux.org>
+
+	* libmuine/db.c: (db_get_version), (db_set_version), (db_foreach):
+
+	Plug leaks.
+
+2004-01-28  Jorn Baayen  <jorn@nl.linux.org>
+
+	* src/Song.cs:
+
+	Fix checked_cover_image being set to true when it should be false.
+
+2004-01-28  Jorn Baayen  <jorn@nl.linux.org>
+
+	* data/glade/PlaylistWindow.glade:
+	* src/PlaylistWindow.cs:
+
+	Revert making artist and title labels one. It broke ellipsizification..
+	or whatever the right word for that is.
+
+2004-01-27  Jorn Baayen  <jorn@nl.linux.org>
+
+	* configure.in:
+	* src/About.cs:
+
+	Release 0.3.0, and depend on mono = 0.29 due to the bug in Mono CVS.
+
+2004-01-27  Jorn Baayen  <jorn@nl.linux.org>
+
+	* TODO:
+	* configure.in:
+	* src/About.cs:
+
+	Release -pre2.
+
+2004-01-27  Jorn Baayen  <jorn@nl.linux.org>
+
+	* data/glade/PlaylistWindow.glade:
+	* src/PlaylistWindow.cs:
+
+	Make title_label and artist_label one, so that the text 
+	can be easier selected. As suggested by synap.
+
+2004-01-27  Jorn Baayen  <jorn@nl.linux.org>
+
+	* TODO:
+	* src/CoverDatabase.cs:
+	* src/Muine.cs:
+	* src/PlaylistWindow.cs:
+	* src/Song.cs:
+	* src/SongDatabase.cs:
+
+	Use dirname:albumname as album key. As discussed with ziegler.
+
+2004-01-27  Jorn Baayen  <jorn@nl.linux.org>
+
+	* TODO:
+	* data/glade/SkipToWindow.glade:
+	* src/SkipToWindow.cs:
+
+	Give up on ButtonPressEvent on the seeking HScale. 
+	
+	* NEWS:
+
+	Forgot some stuff.
+
+2004-01-27  Jorn Baayen  <jorn@nl.linux.org>
+
+	* NEWS:
+	* configure.in:
+	* src/About.cs:
+
+	0.3.0-pre1
+
+2004-01-27  Jorn Baayen  <jorn@nl.linux.org>
+
+	* TODO:
+	* data/Makefile.am:
+	* data/muine.applications:
+	* libmuine/Makefile.am:
+	* libmuine/bacon-message-connection.c: (test_is_socket),
+	(server_cb), (try_server), (try_client),
+	(bacon_message_connection_new), (bacon_message_connection_free),
+	(bacon_message_connection_set_callback),
+	(bacon_message_connection_send),
+	(bacon_message_connection_get_is_server):
+	* libmuine/bacon-message-connection.h:
+	* src/Makefile.am:
+	* src/MessageConnection.cs:
+	* src/Muine.cs:
+	* src/PlaylistWindow.cs:
+
+	Add command line handling and an applications file so that
+	Nautilus knows about us.
+
+2004-01-27  Jorn Baayen  <jorn@nl.linux.org>
+
+	* TODO:
+	* data/glade/PlaylistWindow.glade:
+	* src/CoverDatabase.cs:
+	* src/PlaylistWindow.cs:
+
+	Tried to implement DnD to the cover image, but ran into a Gtk#
+	bug. Updated TODO with bug information.
+
+2004-01-27  Jorn Baayen  <jorn@nl.linux.org>
+
+	* TODO:
+	* libmuine/egg/Makefile.am:
+	* libmuine/egg/eggstatusicon.c:
+	* libmuine/egg/eggstatusicon.h:
+	* src/NotificationAreaIcon.cs:
+
+	Tray icon restores itself after having been destroyed.
+
+2004-01-27  Jorn Baayen  <jorn@nl.linux.org>
+
+	* TODO:
+	* src/PlaylistWindow.cs:
+
+	Add XF86XK_Audio* keybindings.
+
+2004-01-26  Jorn Baayen  <jorn@nl.linux.org>
+
+	* data/images/Makefile.am:
+	* data/images/muine-tray-paused.png:
+	* data/images/muine-tray-playing.png:
+	* data/images/muine-tray.png:
+	* src/Makefile.am:
+	* src/NotificationAreaIcon.cs:
+	* src/PlaylistWindow.cs:
+
+	Show playing status in tray icon, inspired by a patch from
+	Sergio Rubio <S0302298@newi.ac.uk>
+
+2004-01-26  Jorn Baayen  <jorn@nl.linux.org>
+
+	* src/PlaylistWindow.cs:
+
+	Nicer album tooltip.
+
+2004-01-26  Jorn Baayen  <jorn@nl.linux.org>
+
+	* TODO:
+	* libmuine/db.c: (db_open), (db_get_version), (db_set_version),
+	(db_foreach), (db_unpack_double), (db_pack_double):
+	* libmuine/db.h:
+	* libmuine/metadata.c: (assign_metadata_mp3),
+	(assign_metadata_ogg), (metadata_free), (metadata_get_title),
+	(metadata_get_performer), (metadata_get_performer_count),
+	(metadata_get_album), (metadata_get_gain), (metadata_get_peak):
+	* libmuine/metadata.h:
+	* libmuine/player.c: (player_set_volume), (player_get_volume),
+	(player_set_replaygain):
+	* libmuine/player.h:
+	* src/AddAlbumWindow.cs:
+	* src/AddSongWindow.cs:
+	* src/Album.cs:
+	* src/CoverDatabase.cs:
+	* src/Metadata.cs:
+	* src/Muine.cs:
+	* src/Player.cs:
+	* src/PlaylistWindow.cs:
+	* src/Song.cs:
+	* src/SongDatabase.cs:
+	* src/StringUtils.cs:
+
+	Add database versioning, replaygain support, performer tag support,
+	and some misc bugfixes and cleanups.
+
+2004-01-26  Jorn Baayen  <jorn@nl.linux.org>
+
+	* data/glade/PlaylistWindow.glade:
+	* src/About.cs:
+	* src/PlaylistWindow.cs:
+
+	Put a link to amazon.com in the about box, instead of
+	linking to amazon.com from the cover image widget.
+
+2004-01-26  Jorn Baayen  <jorn@nl.linux.org>
+
+	* src/PlaylistWindow.cs:
+
+	Don't watch foo/bar/ if foo/ is already being watched.
+
+2004-01-26  Jorn Baayen  <jorn@nl.linux.org>
+
+	* src/CoverDatabase.cs:
+
+	Set KeepAlive to false when fetching cover images.
+
+2004-01-25  Jorn Baayen  <jorn@nl.linux.org>
+
+	* src/SongDatabase.cs:
+
+	Async fixes.
+
+2004-01-25  Jorn Baayen  <jorn@nl.linux.org>
+
+	* src/CoverDatabase.cs:
+
+	Close stream after creating a pixbuf from it.
+
+2004-01-25  Lee Willis  <lee@leewillis.co.uk>
+
+	* src/CoverDatabase.cs:
+
+	Fix SanitizeString.
+
+2004-01-25  Jorn Baayen  <jorn@nl.linux.org>
+
+	* src/Album.cs:
+
+	Fix sorting.
+
+2004-01-25  Jorn Baayen  <jorn@nl.linux.org>
+
+	* libmuine/pointer-list-view.c: (pointer_list_view_changed):
+	* src/AddAlbumWindow.cs:
+	* src/AddSongWindow.cs:
+
+	Better change handling.
+
+2004-01-25  Jorn Baayen  <jorn@nl.linux.org>
+
+	* src/AddAlbumWindow.cs:
+	* src/AddSongWindow.cs:
+
+	Ensure we keep a selection when possible.
+
+2004-01-25  Jorn Baayen  <jorn@nl.linux.org>
+
+	* src/Album.cs:
+	* src/Song.cs:
+
+	Fix album covers only showing up for the first song.
+	
+	* AUTHORS:
+	
+	Added Lee.
+
+2004-01-25  Jorn Baayen  <jorn@nl.linux.org>
+
+	* libmuine/db.c: (db_unpack_bool), (db_pack_bool):
+	* libmuine/db.h:
+	* src/AddAlbumWindow.cs:
+	* src/AddSongWindow.cs:
+	* src/Album.cs:
+	* src/Song.cs:
+	* src/SongDatabase.cs:
+
+	Fully asynchronous cover image fetching.
+
+	Again, the DB format has changed..
+
+2004-01-25  Jorn Baayen  <jorn@nl.linux.org>
+
+	* libmuine/db.c: (db_store):
+	* libmuine/pointer-list-view.c: (pointer_list_view_changed):
+	* libmuine/pointer-list-view.h:
+	* src/CoverDatabase.cs:
+	* src/HandleView.cs:
+	* src/PlaylistWindow.cs:
+	* src/Song.cs:
+	* src/SongDatabase.cs:
+
+	File existance/change/removal checking on startup works. And async ;)
+
+2004-01-25  Jorn Baayen  <jorn@nl.linux.org>
+
+	* src/PlaylistWindow.cs:
+
+	Check that we have no watched folders instead of an empty lib.
+
+2004-01-25  Jorn Baayen  <jorn@nl.linux.org>
+
+	* TODO:
+	* data/muine.schemas.in:
+	* libmuine/metadata.c: (metadata_load), (metadata_get_mtime):
+	* libmuine/metadata.h:
+	* src/Action.cs:
+	* src/ActionThread.cs:
+	* src/CoverDatabase.cs:
+	* src/Makefile.am:
+	* src/Metadata.cs:
+	* src/Muine.cs:
+	* src/PlaylistWindow.cs:
+	* src/Song.cs:
+	* src/SongDatabase.cs:
+
+	First stab at async stuff. This is not yet done.. will finish
+	tomorrow.
+
+	Again, the DB format changed.
+
+2004-01-24  Jorn Baayen  <jorn@nl.linux.org>
+
+	* configure.in:
+
+	Added "es" and "nl" to ALL_LINGUAS.
+
+2004-01-24  Lee Willis  <lee@leewillis.co.uk>
+            Jorn Baayen  <jorn@nl.linux.org>
+
+	* TODO:
+	* data/glade/PlaylistWindow.glade:
+	* src/AddSongWindow.cs:
+	* src/AmazonSearchService.cs:
+	* src/AmazonSearchService.wsdl:
+	* src/CoverDatabase.cs:
+	* src/Makefile.am:
+	* src/PlaylistWindow.cs:
+	* src/Song.cs:
+
+	Try to fetch album covers that cannot be found on disc from
+	amazon.com. 
+
+	FIXME this still needs to be made asynchronous..
+
+	The format of the databases has changed, so before
+	complaining it doesn't work:
+	!!!! rm ~/.gnome2/muine/*.db !!!!
+
+2004-01-24  Jorn Baayen  <jorn@nl.linux.org>
+
+	* NEWS:
+	* configure.in:
+	* src/About.cs:
+
+	Release 0.2.1.
+
+2004-01-24  Jorn Baayen  <jorn@nl.linux.org>
+
+	* data/muine.schemas.in:
+	* src/PlaylistWindow.cs:
+
+	Merge save_playlist_as an open_playlist gconf keys.
+
+2004-01-24  Jorn Baayen  <jorn@nl.linux.org>
+
+	* TODO:
+	* libmuine/pointer-list-view.c: (scroll_to_path),
+	(pointer_list_view_select_next), (pointer_list_view_select_prev):
+	* libmuine/pointer-list-view.h:
+	* src/AddAlbumWindow.cs:
+	* src/AddSongWindow.cs:
+	* src/HandleView.cs:
+
+	Scrolling improvements.
+
+2004-01-23  Jorn Baayen  <jorn@nl.linux.org>
+
+	* src/AddAlbumWindow.cs:
+	* src/AddSongWindow.cs:
+
+	Better feedback when queueing songs.
+
+2004-01-23  Jorn Baayen  <jorn@nl.linux.org>
+
+	* data/glade/AddWindow.glade:
+	* src/AddAlbumWindow.cs:
+	* src/AddSongWindow.cs:
+
+	Don't close the add window when queueing stuff.
+
+2004-01-23  Jorn Baayen  <jorn@nl.linux.org>
+
+	* src/Muine.cs:
+	* src/PlaylistWindow.cs:
+
+	Restore playlist on startup. (But only the songs that are
+	left to be played)
+
+2004-01-23  Danilo Šegan  <dsegan@gmx.net>
+
+	* configure.in: Added "sr" and "sr@Latn" to ALL_LINGUAS.
+
+2004-01-22  Jorn Baayen  <jorn@nl.linux.org>
+
+	* src/PlaylistWindow.cs:
+
+	Fix eos bug spotted by synap.
+
+2004-01-22  Jorn Baayen  <jorn@nl.linux.org>
+
+	* Makefile.am:
+	* configure.in:
+	* muine.spec.in:
+
+	Added a spec file by Link Dupont <link@subpop.net>
+
+2004-01-22  Jorn Baayen  <jorn@nl.linux.org>
+
+	* src/PlaylistWindow.cs:
+
+	Make artist and title labels selectable.
+
+2004-01-22  Jorn Baayen  <jorn@nl.linux.org>
+
+	* AUTHORS:
+	* NEWS:
+	* README:
+	* TODO:
+	* configure.in:
+	* data/glade/GroupsWindow.glade:
+	* data/glade/Makefile.am:
+	* src/About.cs:
+	* src/Muine.cs:
+	* src/PlaylistWindow.cs:
+
+	Add preliminary GroupsWindow interface, and release 0.2.
+
+2004-01-22  Jorn Baayen  <jorn@nl.linux.org>
+
+	* src/PlaylistWindow.cs:
+
+	Add missing ProgressWindow.Done ()
+
+2004-01-22  Jorn Baayen  <jorn@nl.linux.org>
+
+	* data/glade/ProgressWindow.glade:
+	* src/ProgressWindow.cs:
+
+	Progress window polish.
+
+2004-01-22  Jorn Baayen  <jorn@nl.linux.org>
+
+	* data/glade/SearchMusicWindow.glade:
+	* data/muine.schemas.in:
+	* src/FileSelector.cs:
+	* src/PlaylistWindow.cs:
+	* src/SearchMusicWindow.cs:
+
+	The first time window will now check if ~/Music exists,
+	and use that if it does. Otherwise it will search the homedir.
+
+	Also set the deafult playlist filesel folders to ~/Playlists/
+
+2004-01-22  Viet Yen Nguyen  <nguyen@cs.utwente.nl>
+            Jorn Baayen  <jorn@nl.linux.org>
+
+	* data/glade/Makefile.am:
+	* data/glade/SearchMusicWindow.glade:
+	* src/Makefile.am:
+	* src/PlaylistWindow.cs:
+	* src/SearchMusicWindow.cs:
+	* src/SongDatabase.cs:
+
+	First time "Search music" window.
+
+2004-01-21  Jorn Baayen  <jorn@nl.linux.org>
+
+	* libmuine/rb-cell-renderer-pixbuf.c:
+	(rb_cell_renderer_pixbuf_render):
+
+	Replace deprecated gdk_pixbuf_render_to_drawable_alpha
+
+2004-01-21  Jorn Baayen  <jorn@nl.linux.org>
+
+	* data/glade/PlaylistWindow.glade:
+	* src/PlaylistWindow.cs:
+
+	Get rid of messy volume menu.
+
+2004-01-21  Jorn Baayen  <jorn@nl.linux.org>
+
+	* configure.in:
+	* libmuine/Makefile.am:
+
+	Better check for libid3tag.
+
+2004-01-21  Jorn Baayen  <jorn@nl.linux.org>
+
+	* data/glade/SkipToWindow.glade:
+	* src/Player.cs:
+	* src/PlaylistWindow.cs:
+	* src/SkipToWindow.cs:
+	* src/StringUtils.cs:
+
+	Nicer seeking window. 
+
+	Based on a patch by Viet Yen Nguyen <nguyen@cs.utwente.nl>
+	
+	* libmuine/db.c: (db_foreach):
+
+	Fix gcc 2.96 bug.
+
+2004-01-21  Miloslav Trmac  <mitr@volny.cz>
+
+	* configure.in: Added cs (Czech) to ALL_LINGUAS.
+
+2004-01-21  Jorn Baayen  <jorn@nl.linux.org>
+
+	* data/glade/ErrorDialog.glade:
+	* data/glade/Makefile.am:
+	* data/glade/PlaylistWindow.glade:
+	* data/glade/YesNoDialog.glade:
+	* data/muine.schemas.in:
+	* src/ErrorDialog.cs:
+	* src/FileSelector.cs:
+	* src/Makefile.am:
+	* src/PlaylistWindow.cs:
+	* src/YesNoDialog.cs:
+
+	Playlist open/save.
+
+2004-01-21  Jorn Baayen  <jorn@nl.linux.org>
+
+	* data/glade/PlaylistWindow.glade:
+
+	Menu rearrangement.
+
+	Patch by Viet Yen Nguyen <nguyen@cs.utwente.nl>
+
+2004-01-21  Jorn Baayen  <jorn@nl.linux.org>
+
+	* data/glade/AddWindow.glade:
+
+	Change the button order of the add window to be HIG compliant.
+	
+	* src/PlaylistWindow.cs:
+
+	Change the tooltip on the previous button.
+
+	Patch by Viet Yen Nguyen <nguyen@cs.utwente.nl>
+
+2004-01-20  Jorn Baayen  <jorn@nl.linux.org>
+
+	* NEWS:
+	* TODO:
+	* configure.in:
+	* src/About.cs:
+
+	Release 0.1.1.
+
+2004-01-19  Jorn Baayen  <jorn@nl.linux.org>
+
+	* src/AddAlbumWindow.cs:
+
+	Slight look tweak.
+
+2004-01-19  Jorn Baayen  <jorn@nl.linux.org>
+
+	* libmuine/player.c: (player_tell):
+	* src/PlaylistWindow.cs:
+
+	More eos bugs.
+
+2004-01-19  Jorn Baayen  <jorn@nl.linux.org>
+
+	* data/glade/ProgressWindow.glade:
+
+	Remove "FILENAME" tmp string. It was shown at times.
+	
+	* src/PlaylistWindow.cs:
+
+	Fix a last_eos bug.
+
+2004-01-18  Jorn Baayen  <jorn@nl.linux.org>
+
+	* NEWS:
+	* README:
+	* configure.in:
+	* data/glade/PlaylistWindow.glade:
+	* data/images/Makefile.am:
+	* data/images/muine-add-album-16.png:
+	* data/images/muine-add-album.png:
+	* data/images/muine-albums.png:
+	* data/images/muine-forward.png:
+	* data/images/muine-next-16.png:
+	* data/images/muine-pause-16.png:
+	* data/images/muine-play-16.png:
+	* data/images/muine-previous-16.png:
+	* data/images/muine-queue.png:
+	* data/images/muine-rewind.png:
+	* src/About.cs:
+	* src/AddAlbumWindow.cs:
+	* src/Makefile.am:
+	* src/PlaylistWindow.cs:
+	* src/StockIcons.cs:
+
+	Aestethic fixes, release 0.1.
+
+2004-01-18  Jorn Baayen  <jorn@nl.linux.org>
+
+	* src/Song.cs:
+
+	Remove obsolete code.
+	
+	* src/SongDatabase.cs:
+
+	Small memory optimization.
+
+2004-01-18  Jorn Baayen  <jorn@nl.linux.org>
+
+	* libmuine/metadata.c: (assign_metadata_mp3), (metadata_free):
+
+	Plug leaks.
+
+2004-01-18  Jorn Baayen  <jorn@nl.linux.org>
+
+	* TODO:
+	* libmuine/metadata.c: (assign_metadata_mp3),
+	(assign_metadata_ogg), (metadata_get_track_number):
+	* libmuine/metadata.h:
+	* src/Album.cs:
+	* src/Metadata.cs:
+	* src/Song.cs:
+
+	Have songs sorted by tracknumber in their albums.
+
+2004-01-18  Jorn Baayen  <jorn@nl.linux.org>
+
+	* src/Album.cs:
+
+	Sort by artists, and then album name.
+	
+	* src/PlaylistWindow.cs:
+
+	Scroll to playing song when restoring window visibility.
+
+2004-01-18  Jorn Baayen  <jorn@nl.linux.org>
+
+	* TODO:
+	* data/glade/PlaylistWindow.glade:
+	* libmuine/Makefile.am:
+	* libmuine/pointer-list-view.c: (scroll_to_path):
+	* libmuine/rb-ellipsizing-label.c: (rb_strcmp), (rb_str_is_equal),
+	(measure_string_width), (compute_character_widths),
+	(start_element_handler), (end_element_handler),
+	(append_ellipsized_text), (text_handler), (ellipsize_string),
+	(rb_string_ellipsize_start), (rb_string_ellipsize_end),
+	(rb_string_ellipsize_middle), (set_text_ellipsized),
+	(rb_ellipsizing_label_get_type), (rb_ellipsizing_label_init),
+	(rb_ellipsizing_label_finalize), (rb_ellipsizing_label_new),
+	(rb_ellipsizing_label_set_text), (rb_ellipsizing_label_set_markup),
+	(rb_ellipsizing_label_set_mode), (rb_ellipsizing_label_get_width),
+	(real_size_request), (real_size_allocate), (real_expose_event),
+	(rb_ellipsizing_label_class_init),
+	(rb_ellipsizing_label_get_ellipsized),
+	(rb_ellipsizing_label_get_full_text_size), (entry_changed_cb),
+	(main):
+	* libmuine/rb-ellipsizing-label.h:
+	* src/EllipsizingLabel.cs:
+	* src/Makefile.am:
+	* src/PlaylistWindow.cs:
+
+	Make artist and title labels ellipsizing labels. Fix removing
+	songs from the playlist.
+
+2004-01-18  Jorn Baayen  <jorn@nl.linux.org>
+
+	* TODO:
+	* libmuine/pointer-list-view.c: (pointer_list_view_scroll_to):
+	* libmuine/pointer-list-view.h:
+	* src/HandleView.cs:
+	* src/PlaylistWindow.cs:
+
+	Scroll to playing cell when playing a newly added song or album.
+
+2004-01-18  Jorn Baayen  <jorn@nl.linux.org>
+
+	* src/PlaylistWindow.cs:
+	* src/ProgressWindow.cs:
+
+	Import cleanups.
+
+2004-01-18  Jorn Baayen  <jorn@nl.linux.org>
+
+	* TODO:
+	* configure.in:
+	* libmuine/db.c: (db_unpack_pixbuf), (db_pack_pixbuf):
+	* libmuine/db.h:
+	* src/CoverDatabase.cs:
+	* src/Makefile.am:
+	* src/Muine.cs:
+	* src/PixbufUtils.cs:
+	* src/Song.cs:
+
+	Implemenet cover database.
+
+2004-01-18  Jorn Baayen  <jorn@nl.linux.org>
+
+	* data/glade/AddWindow.glade:
+	* data/glade/ErrorDialog.glade:
+	* data/glade/ProgressWindow.glade:
+	* data/glade/SkipToWindow.glade:
+	* src/AddAlbumWindow.cs:
+	* src/AddSongWindow.cs:
+
+	Dialog fixes.
+
+2004-01-18  Jorn Baayen  <jorn@nl.linux.org>
+
+	* src/PlaylistWindow.cs:
+
+	Tray icon show/hide fixes.
+
+2004-01-18  Jorn Baayen  <jorn@nl.linux.org>
+
+	* src/AddAlbumWindow.cs:
+
+	Handle albums with a lot of artists in a nicer way.
+
+2004-01-18  Jorn Baayen  <jorn@nl.linux.org>
+
+	* src/AddAlbumWindow.cs:
+	* src/AddSongWindow.cs:
+
+	Speed tweaks, select first row when opening row.
+
+2004-01-18  Jorn Baayen  <jorn@nl.linux.org>
+
+	* libmuine/pointer-list-view.c: (pointer_list_view_get_length):
+	* libmuine/pointer-list-view.h:
+	* src/AddAlbumWindow.cs:
+	* src/AddSongWindow.cs:
+	* src/HandleView.cs:
+
+	Show max. 200 songs in the Add Song window if we are searching for
+	a string with less than 3 chars.
+
+2004-01-18  Jorn Baayen  <jorn@nl.linux.org>
+
+	* src/Album.cs:
+
+	Sort by artist, instead of album name.
+
+2004-01-18  Christian Rose  <menthos@menthos.com>
+
+	* configure.in: Added "sv" to ALL_LINGUAS.
+
+2004-01-18  Jorn Baayen  <jorn@nl.linux.org>
+
+	* TODO:
+	* data/glade/AddWindow.glade:
+	* data/glade/PlaylistWindow.glade:
+	* libmuine/pointer-list-view.c: (pointer_list_view_add_column):
+	* src/AddAlbumWindow.cs:
+	* src/AddSongWindow.cs:
+	* src/Album.cs:
+	* src/LibraryWindow.cs:
+	* src/Makefile.am:
+	* src/PlaylistWindow.cs:
+	* src/Song.cs:
+
+	Implement "Add album" window, fix window size saving.
+
+2004-01-18  Jorn Baayen  <jorn@nl.linux.org>
+
+	* data/glade/AddWindow.glade:
+	* libmuine/pointer-list-view.c: (scroll_to_path),
+	(pointer_list_view_select_next), (pointer_list_view_select_prev):
+	* src/AddSongWindow.cs:
+	* src/PlaylistWindow.cs:
+
+	Remove obsolete queue button, scroll when needed.
+
+2004-01-18  Jorn Baayen  <jorn@nl.linux.org>
+
+	* data/glade/AddWindow.glade:
+	* libmuine/pointer-list-view.c: (pointer_list_view_init),
+	(pointer_foreach_func), (path_foreach_func),
+	(pointer_list_view_get_selection),
+	(pointer_list_view_set_keep_selection),
+	(pointer_list_view_select_first), (pointer_list_view_select_next),
+	(pointer_list_view_select_prev):
+	* libmuine/pointer-list-view.h:
+	* src/AddSongWindow.cs:
+	* src/HandleView.cs:
+	* src/PlaylistWindow.cs:
+
+	Finish "Add song" window.
+
+2004-01-17  Jorn Baayen  <jorn@nl.linux.org>
+
+	* src/AddSongWindow.cs:
+	* src/Album.cs:
+	* src/PlaylistWindow.cs:
+	* src/Song.cs:
+
+	Optimizations.
+
+2004-01-17  Jorn Baayen  <jorn@nl.linux.org>
+
+	* data/glade/AddWindow.glade:
+	* data/glade/ErrorDialog.glade:
+	* data/glade/Makefile.am:
+	* data/glade/PlaylistWindow.glade:
+	* data/glade/ProgressWindow.glade:
+	* data/glade/SkipToWindow.glade:
+	* data/muine.schemas.in:
+	* src/AddSongWindow.cs:
+	* src/Album.cs:
+	* src/ErrorDialog.cs:
+	* src/KeyUtils.cs:
+	* src/Makefile.am:
+	* src/MarkupUtils.cs:
+	* src/Muine.cs:
+	* src/PlaylistWindow.cs:
+	* src/ProgressWindow.cs:
+	* src/SkipToWindow.cs:
+	* src/Song.cs:
+	* src/SongDatabase.cs:
+	* src/StringUtils.cs:
+
+	Add an "Import folder" command with a progress dialog, more library 
+	work (almost fully functional), error dialogs, various fixes and
+	polish.
+
+2004-01-17  Jorn Baayen  <jorn@nl.linux.org>
+
+	* Imported into CVS, this is very much WIP so don't expect anything
+	to work. If you want to use it, use the latest release instead.

@@ -1,0 +1,3 @@
+#!/bin/sh
+
+@MONO@ @MONO_FLAGS@ @prefix@/lib/muine/muine.exe "$@"
