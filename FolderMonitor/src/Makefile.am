@@ -1,1 +1,1 @@
-SUBDIRS = TrayIcon FolderMonitor
+SUBDIRS = FolderMonitor
