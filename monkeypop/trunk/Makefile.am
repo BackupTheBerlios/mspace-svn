@@ -4,7 +4,6 @@ if ENABLE_DBUS
 SUBDIRS += monkeypopd
 endif
 
-TMPDIR=/tmp/MonkeyPop-$(VERSION)
 BIN=monkeypop-$(VERSION)-bin.tar.gz
 SRC=monkeypop-$(VERSION)-src.tar.gz
 

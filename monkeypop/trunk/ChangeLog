@@ -1,5 +1,10 @@
 2004-10-21  Sergio Rubio  <sergio.rubio@hispalinux.es>
 
+	* Makefile.am: Cleaned
+	* monkeypopd/Client.cs: Added Application.Init,Run calls
+
+2004-10-21  Sergio Rubio  <sergio.rubio@hispalinux.es>
+
 	* Makefile.am: Added optional monkeypopd subdir
 	* configure.in: Added optional dbus support
 	* monkeypopd/Client.cs: DBus service client example
