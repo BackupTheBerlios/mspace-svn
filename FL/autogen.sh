@@ -35,6 +35,12 @@ test -n "$NO_AUTOMAKE" || (aclocal --version) < /dev/null > /dev/null 2>&1 || {
   DIE=1
 }
 
+# Running  libtoolize
+if grep "^AM_PROG_LIBTOOL" configure.in >/dev/null; then
+echo "Running libtoolize..."
+libtoolize --force --copy
+fi
+
 if test "$DIE" -eq 1; then
   exit 1
 fi

@@ -1,0 +1,3 @@
+<configuration>
+  <dllmap dll="flframework" target="@prefix@/lib/libflframework.so"/>
+</configuration>

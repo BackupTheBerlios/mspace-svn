@@ -1,17 +1,25 @@
 AC_PREREQ(2.59)
 AC_INIT(FLFramework, 0.1, [sergio.rubio@hispalinux.es])
+AM_CONFIG_HEADER(config.h)
 AM_MAINTAINER_MODE
 dnl AM_CONFIG_HEADER(config.h)
 
 AM_INIT_AUTOMAKE()
 
+# Checks for programs.
 AC_PROG_INSTALL
+AC_PROG_CC
+AM_PROG_CC_STDC
+AC_PROG_INSTALL
+AM_PROG_LIBTOOL
+
+# Checks for libraries.
 
 dnl Version dependencies
 MONO_REQUIRED=1.0
 GTKSHARP_REQUIRED=1.0
-dnl GDK20_MINIMUM_VERSION=2.2.3
-dnl ATK_MINIMUM_VERSION=1.2.4
+GDK20_MINIMUM_VERSION=2.2.3
+ATK_MINIMUM_VERSION=1.2.4
 
 #
 # Configure PKG_CONFIG
@@ -42,6 +50,14 @@ PKG_CHECK_MODULES(GTKSHARP,
 
 AC_SUBST(GTKSHARP_LIBS)
 
+PKG_CHECK_MODULES(GDK20, gdk-2.0 >= $GDK20_MINIMUM_VERSION)
+AC_SUBST(GDK20_CFLAGS)
+AC_SUBST(GDK20_LIBS)
+
+PKG_CHECK_MODULES(ATK, atk >= $ATK_MINIMUM_VERSION)
+AC_SUBST(ATK_CFLAGS)
+AC_SUBST(ATK_LIBS)
+
 dnl Check for Mono
 AC_PATH_PROG(MCS, mcs)
 AC_PATH_PROG(MONO, mono)
@@ -50,4 +66,9 @@ AC_PATH_PROG(MONO, mono)
 AC_OUTPUT([
 Makefile
 src/Makefile
+src/FLFramework.dll.config
+src/fl-framework.pc
+src/Gnome/Makefile
+src/Gnome/TrayIcon/Makefile
+src/Gnome/TrayIcon/libtrayicon/Makefile
 ])

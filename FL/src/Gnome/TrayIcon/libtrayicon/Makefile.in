@@ -20,7 +20,7 @@ VPATH = @srcdir@
 pkgdatadir = $(datadir)/@PACKAGE@
 pkglibdir = $(libdir)/@PACKAGE@
 pkgincludedir = $(includedir)/@PACKAGE@
-top_builddir = ../../..
+top_builddir = ../../../..
 
 am__cd = CDPATH="$${ZSH_VERSION+.}$(PATH_SEPARATOR)" && cd
 INSTALL = @INSTALL@
@@ -37,7 +37,6 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 host_triplet = @host@
 ACLOCAL = @ACLOCAL@
-ALLOCA = @ALLOCA@
 AMDEP_FALSE = @AMDEP_FALSE@
 AMDEP_TRUE = @AMDEP_TRUE@
 AMTAR = @AMTAR@
@@ -149,34 +148,33 @@ target_alias = @target_alias@
 TRAY_ICON_CFLAGS = $(GDK20_CFLAGS) $(ATK_CFLAGS)
 TRAY_ICON_LIBS = $(GDK20_LIBS) $(ATK_LIBS)
 
-EXTRA_DIST = $(srcdir)/eggtrayicon.h
+EXTRA_DIST = eggtrayicon.h
 
 INCLUDES = \
   $(TRAY_ICON_CFLAGS) \
-  -I$(top_srcdir)/libegg/util \
   -DEGG_COMPILATION \
   -DGTK_DISABLE_DEPRECATED \
   -DGDK_DISABLE_DEPRECATED \
   -DG_DISABLE_DEPRECATED
 
 
-trayiconlibdir = $(libdir)/FolderMonitor
-trayiconlib_LTLIBRARIES = libtrayicon.la
+trayiconlibdir = $(libdir)
+trayiconlib_LTLIBRARIES = libflframework.la
 
-libtrayicon_la_SOURCES = \
+libflframework_la_SOURCES = \
   eggtrayicon.c		
 
-subdir = src/TrayIcon/libtrayicon
+subdir = src/Gnome/TrayIcon/libtrayicon
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 LTLIBRARIES = $(trayiconlib_LTLIBRARIES)
 
-libtrayicon_la_LDFLAGS =
-libtrayicon_la_LIBADD =
-am_libtrayicon_la_OBJECTS = eggtrayicon.lo
-libtrayicon_la_OBJECTS = $(am_libtrayicon_la_OBJECTS)
+libflframework_la_LDFLAGS =
+libflframework_la_LIBADD =
+am_libflframework_la_OBJECTS = eggtrayicon.lo
+libflframework_la_OBJECTS = $(am_libflframework_la_OBJECTS)
 
 DEFAULT_INCLUDES =  -I. -I$(srcdir) -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
@@ -189,9 +187,9 @@ LTCOMPILE = $(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) \
 CCLD = $(CC)
 LINK = $(LIBTOOL) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
 	$(AM_LDFLAGS) $(LDFLAGS) -o $@
-DIST_SOURCES = $(libtrayicon_la_SOURCES)
+DIST_SOURCES = $(libflframework_la_SOURCES)
 DIST_COMMON = $(srcdir)/Makefile.in Makefile.am
-SOURCES = $(libtrayicon_la_SOURCES)
+SOURCES = $(libflframework_la_SOURCES)
 
 all: all-am
 
@@ -199,7 +197,7 @@ all: all-am
 .SUFFIXES: .c .lo .o .obj
 $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ Makefile.am  $(top_srcdir)/configure.in $(ACLOCAL_M4)
 	cd $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu  src/TrayIcon/libtrayicon/Makefile
+	  $(AUTOMAKE) --gnu  src/Gnome/TrayIcon/libtrayicon/Makefile
 Makefile: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.in  $(top_builddir)/config.status
 	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@ $(am__depfiles_maybe)
 trayiconlibLTLIBRARIES_INSTALL = $(INSTALL)
@@ -230,8 +228,8 @@ clean-trayiconlibLTLIBRARIES:
 	  echo "rm -f \"$${dir}/so_locations\""; \
 	  rm -f "$${dir}/so_locations"; \
 	done
-libtrayicon.la: $(libtrayicon_la_OBJECTS) $(libtrayicon_la_DEPENDENCIES) 
-	$(LINK) -rpath $(trayiconlibdir) $(libtrayicon_la_LDFLAGS) $(libtrayicon_la_OBJECTS) $(libtrayicon_la_LIBADD) $(LIBS)
+libflframework.la: $(libflframework_la_OBJECTS) $(libflframework_la_DEPENDENCIES) 
+	$(LINK) -rpath $(trayiconlibdir) $(libflframework_la_LDFLAGS) $(libflframework_la_OBJECTS) $(libflframework_la_LIBADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT) core *.core
@@ -339,11 +337,10 @@ distclean-tags:
 	-rm -f TAGS ID GTAGS GRTAGS GSYMS GPATH tags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 
-top_distdir = ../../..
+top_distdir = ../../../..
 distdir = $(top_distdir)/$(PACKAGE)-$(VERSION)
 
 distdir: $(DISTFILES)
-	$(mkinstalldirs) $(distdir)/$(srcdir)
 	@srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`; \
 	topsrcdirstrip=`echo "$(top_srcdir)" | sed 's|.|.|g'`; \
 	list='$(DISTFILES)'; for file in $$list; do \
