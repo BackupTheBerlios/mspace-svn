@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+    (c) Néstor Salceda & Sergio Rubio  (Monkey Space)
+    File: 
+        nant.xml
+    Description:
+        base nant file for automate basic task deployment.
+
+      INSERTAR LA WEB DE MONKEY SPACE Y TAL  
+-->
+
+<project basedir="." default="all" name="Monkey Space --">
+    <!--
+        PENSAR LAS PROPIEDADES Y PONERLAS
+    -->
+
+    <target name="clean">
+    </target>
+
+    <target name="all">
+    </target>
+</project>
