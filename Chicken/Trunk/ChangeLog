@@ -1,3 +1,21 @@
+2004-10-12  Sergio Rubio  <sergio.rubio@hispalinux.es>
+
+	* configure.in: refactored
+	* debian/README.Debian:
+	* debian/changelog:
+	* debian/compat:
+	* debian/control:
+	* debian/dirs:
+	* debian/docs:
+	* debian/fulldeps.control:
+	* debian/libchicken.dirs:
+	* debian/libchicken.docs:
+	* debian/libchicken.files:
+	* debian/libchicken.shlibs.in:
+	* debian/rules: debian package changes
+	* doc/Makefile.am: fixed doc instalation
+	* src/Gnome/TrayIcon/libtrayicon/Makefile.am: fixed compilation fralgs
+
 2004-10-11  Sergio Rubio  <sergio.rubio@hispalinux.es>
 
 	* debian/control: added some deps

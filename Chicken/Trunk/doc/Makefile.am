@@ -15,7 +15,7 @@ dist-hook:
 	mkdir -p $(distdir)/en	
 	cp -a $(srcdir)/en/* $(distdir)/en
 
-docsdir = `monodoc --get-sourcesdir`
+docsdir = $(libdir)/monodoc/sources
 docs_DATA = chicken-framework.source chicken-framework.tree chicken-framework.zip
 
 CLEANFILES = chicken-framework.tree chicken-framework.zip 
