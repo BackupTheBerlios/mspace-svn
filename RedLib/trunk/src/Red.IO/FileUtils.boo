@@ -19,16 +19,17 @@ public class FileUtils:
 		
 		return dirs
 	
-	private	static def GetAllDirectoryFiles (dir as string, rx as regex, files as ArrayList) as ArrayList:
+	private	static def GetAllDirectoryFiles (dir as string, rx as regex, files as ArrayList, discardHidden as bool) as ArrayList:
 		//Recurse through the directories
 		for d in Directory.GetDirectories (dir):
-			for f in Directory.GetFiles (d):
-				if rx:
-					if f =~ rx:
+			if not (d.StartsWith (".") and discardHidden):
+				for f in Directory.GetFiles (d):
+					if rx:
+						if f =~ rx:
+							files.Add (f)
+					else:
 						files.Add (f)
-				else:
-					files.Add (f)
-			GetAllDirectoryFiles (d, rx, files)
+				GetAllDirectoryFiles (d, rx, files, discardHidden)
 		
 		//Add the files from the top directory
 		for f in Directory.GetFiles (dir):
@@ -42,7 +43,10 @@ public class FileUtils:
 	
 
 	static def GetAllDirectoryFiles (dir as string) as IList:
-		return GetAllDirectoryFiles (dir, null, ArrayList ())
+		return GetAllDirectoryFiles (dir, null, ArrayList (), false)
+	
+	static def GetAllDirectoryFiles (dir as string, discardHidden as bool) as IList:
+		return GetAllDirectoryFiles (dir, null, ArrayList (), discardHidden)
 	
 	static def GetAllDirectoryFiles (dir as string, rx as regex) as IList:
-		return GetAllDirectoryFiles (dir, rx, ArrayList ())
+		return GetAllDirectoryFiles (dir, rx, ArrayList (), false)
