@@ -23,6 +23,12 @@ namespace Chicken.Gnome.Notification
     using Gecko;
     using Gtk;
     using Chicken.Gnome.TrayIcon;
+    using System.Threading;
+
+    public enum NotificationType {
+	Message,
+	Html
+    }
 
     public class NotificationMessage
     {
@@ -30,64 +36,91 @@ namespace Chicken.Gnome.Notification
 	private BlinkingTrayIcon icon;
 	private Window window;
 	
-	public NotificationMessage (string htmlcontent, BlinkingTrayIcon icon)
+	public NotificationMessage (string source, BlinkingTrayIcon icon, NotificationType type)
 	{
 	    this.icon = icon;
-	    webcontrol = new WebControl ();
-	    webcontrol.LoadUrl (htmlcontent);
+	    this.timeout = timeout;
 	    window = new Window (WindowType.Popup);
-	    window.Add (webcontrol);
-	    window.DefaultWidth = messageWidth;
-	    window.DefaultHeight = messageHeight;
+	    icon.ButtonPressEvent += ButtonPressed;
+	    switch (type)
+	    {
+		case NotificationType.Message:
+		    RenderMessage (source);
+		    break;
+		case NotificationType.Html:
+		    RenderHtml (source);
+		    break;
+	    }
+		    
+	    window.DefaultWidth = bubbleWidth;
+	    window.DefaultHeight = bubbleHeight;
 	    PositionWindow ();
-	    
 	}
 
-	private int messageWidth = 150;
-	public int MessageWidth {
+	private int timeout = 5000;
+	public int TimeOut {
 	    get {
-		return messageWidth;
+		return timeout;
 	    }
 	    set {
-		messageWidth = value;	
-		window.Resize (messageWidth, messageHeight);
+		timeout = value;
 	    }
 	}
 
-	private int messageHeight = 50;
-	public int MessageHeight {
+	private int bubbleWidth = 150;
+	public int BubbleWidth {
 	    get {
-		return messageHeight;
+		return bubbleWidth;
 	    }
 	    set {
-		messageHeight = value;
-		window.Resize (messageWidth, messageHeight);
+		bubbleWidth = value;	
+		window.Resize (bubbleWidth, bubbleHeight);
+	    }
+	}
+
+	private int bubbleHeight = 50;
+	public int BubbleHeight {
+	    get {
+		return bubbleHeight;
+	    }
+	    set {
+		bubbleHeight = value;
+		window.Resize (bubbleWidth, bubbleHeight);
 	    }
 	}
 
 	public void Notify ()
 	{
-	    icon.Run();
 	    window.ShowAll ();
+	    icon.Run ();
+	    Timer timer;
+	    timer = new Timer (new TimerCallback (StartTimer), null, timeout, 0);
 	}
-    
+
+	private void StartTimer (object obj)
+	{
+	    icon.Stop ();
+	    Application.Quit ();
+	}
+
 	private void PositionWindow ()
 	{
 	    window.Realize ();
 	    int ourWidth;
 	    int ourHeight;
-	    window.GetSize (out ourWidth, out ourHeight);
+	    int tmp1, tmp2, tmp3;
+	    window.GdkWindow.GetGeometry (out tmp1, out tmp2, out ourWidth, out ourHeight, out tmp3);
 
 	    window.Stick ();
-	    // not wrapped self.set_skip_taskbar_hint(gtk.TRUE)
-	    // not wrapped self.set_skip_pager_hint(gtk.TRUE)
+	    window.SkipTaskbarHint = true;
+	    window.SkipPagerHint = true;
 	    window.TypeHint = Gdk.WindowTypeHint.Dock;
 
 	    // Get the dimensions/position of the widgetToAlignWith
 	    icon.Realize();
 	    int entryX, entryY;
 	    icon.GdkWindow.GetOrigin (out entryX, out entryY);
-	    int entryWidth, entryHeight, tmp1, tmp2, tmp3;
+	    int entryWidth, entryHeight;
 	    icon.GdkWindow.GetGeometry (out tmp1, out tmp2, out entryWidth, out entryHeight, out tmp3);
 
 	    // Get the screen dimensions
@@ -113,6 +146,29 @@ namespace Chicken.Gnome.Notification
 	    // -"Coordinates locked in captain."
 	    // -"Engage."
 	    window.Move(newX, newY);
+	}
+	
+	private void ButtonPressed (object obj, ButtonPressEventArgs args)
+        {
+	    icon.Stop ();
+	    Application.Quit ();
+        }
+
+	private void RenderHtml (string source)
+	{
+	    webcontrol = new WebControl ();
+	    webcontrol.LoadUrl (source);
+	    window.Add (webcontrol);
+	}
+
+	private void RenderMessage (string source)
+	{
+	    HTML html = new HTML ();
+	    HTMLStream stream = html.Begin ("text/html");
+	    stream.Write (source);
+	    html.End (stream, HTMLStreamStatus.Ok);
+	    window.Add (html);
+	    
 	}
 
     }

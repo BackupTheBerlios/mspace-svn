@@ -9,7 +9,11 @@ chicken-framework.zip chicken-framework.tree: en/*/*.xml
 	$(ASSEMBLER) --ecma $(srcdir)/en -o chicken-framework 
 
 update:
-	monodoc --update ../src/Chicken.dll -o ./en
+	$(UPDATER) ../src/Chicken.dll -o ./en
+
+dist-hook:
+	mkdir -p $(distdir)/en	
+	cp -a $(srcdir)/en/* $(distdir)/en
 
 docsdir = `monodoc --get-sourcesdir`
 docs_DATA = chicken-framework.source chicken-framework.tree chicken-framework.zip

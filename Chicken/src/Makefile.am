@@ -1,6 +1,6 @@
 SUBDIRS = Gnome
 include sources.list
-REFERENCES = -pkg:gtk-sharp -pkg:gecko-sharp
+REFERENCES = -pkg:gtk-sharp -pkg:gecko-sharp -pkg:gtkhtml-sharp
 	
 Chicken.dll: $(CSSOURCES)
 	mcs $(CSSOURCES) -o $@ -target:library $(REFERENCES)

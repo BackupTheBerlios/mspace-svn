@@ -26,20 +26,22 @@ namespace Chicken.Gnome.TrayIcon
     public class BlinkingTrayIcon : TrayIcon
     {
 	private EventBox eBox;
-	private VBox vbox;
+	private HBox hbox;
 	private Gdk.Pixbuf pix1, pix2;
 	private Image image;
+	private Thread t;
 
 	public BlinkingTrayIcon (string name, Gdk.Pixbuf pix1, Gdk.Pixbuf pix2) : base (name)
 	{
 	    
 	    eBox = new EventBox ();
-	    vbox = new VBox ();
-	    eBox.Add (vbox);
+	    hbox = new HBox ();
+	    eBox.Add (hbox);
+	    eBox.ButtonPressEvent += ButtonPress;
 	    this.pix1 = pix1;
 	    this.pix2 = pix2;
 	    image = new Image (this.pix1);
-	    vbox.PackStart (image);
+	    hbox.PackStart (image);
 	    Add (eBox);
 	    
 	}
@@ -53,6 +55,17 @@ namespace Chicken.Gnome.TrayIcon
 		frecuency = value;
 	    }
 	}
+
+	private int timeout = 5000;
+	public int TimeOut {
+	    get {
+		return timeout;
+	    }
+	    set {
+		timeout = value;
+	    }
+	}
+
 	private void StartBlinking ()
 	{
 	    while (true)
@@ -68,11 +81,49 @@ namespace Chicken.Gnome.TrayIcon
 		    Thread.Sleep (frecuency);
 	    }
 	}
+
+	private void StartShrinking ()
+	{
+	    while (true)
+	    {
+		int lower = 12;
+		int upper = 24;
+		for (int i = upper; i >= lower; i--)
+		{
+		    Thread.Sleep (75);
+		    Gdk.Threads.Enter ();
+		    image.FromPixbuf = pix1.ScaleSimple (i, i, Gdk.InterpType.Bilinear);
+		    image.WidthRequest = upper;
+		    Gdk.Threads.Leave ();
+		}
+		for (int j = lower; j <= upper ; j++)
+		{
+		    Thread.Sleep (75);
+		    Gdk.Threads.Enter ();
+		    image.FromPixbuf = pix1.ScaleSimple (j, j, Gdk.InterpType.Bilinear); 
+		    image.WidthRequest = upper;
+		    Gdk.Threads.Leave ();
+		}
+	    }
+	}
+
+	public void Stop ()
+	{
+		t.Abort ();
+	}
+
+	private void ButtonPress (object obj, ButtonPressEventArgs args)
+	{
+	    if (ButtonPressEvent != null)
+		ButtonPressEvent (obj, args);
+	}
+
+	public new event ButtonPressEventHandler ButtonPressEvent;
 	
 	public virtual void Run ()
 	{
 	    ShowAll ();
-	    Thread t = new Thread (new ThreadStart (StartBlinking));
+	    t = new Thread (new ThreadStart (StartShrinking));
 	    t.Start ();
 	}
     }
