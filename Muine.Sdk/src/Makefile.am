@@ -14,5 +14,4 @@ pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = muine-sdk.pc
 
 EXTRA_DIST = sources.list muine-sdk.pc.in
-
 CLEANFILES = Muine.Sdk.dll muine-sdk.pc
