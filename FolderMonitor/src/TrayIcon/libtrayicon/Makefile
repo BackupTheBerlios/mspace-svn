@@ -17,9 +17,9 @@
 srcdir = .
 top_srcdir = ../../..
 
-pkgdatadir = $(datadir)/webnotes
-pkglibdir = $(libdir)/webnotes
-pkgincludedir = $(includedir)/webnotes
+pkgdatadir = $(datadir)/foldermonitor
+pkglibdir = $(libdir)/foldermonitor
+pkgincludedir = $(includedir)/foldermonitor
 top_builddir = ../../..
 
 am__cd = CDPATH="$${ZSH_VERSION+.}$(PATH_SEPARATOR)" && cd
@@ -36,17 +36,17 @@ NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
 host_triplet = powerpc-unknown-linux-gnu
-ACLOCAL = ${SHELL} /home/rubiojr/svn/mspace/WebNotes/Trunk/missing --run aclocal-1.7
+ACLOCAL = ${SHELL} /home/rubiojr/svn/mspace/FolderMonitor/missing --run aclocal-1.7
 ALLOCA = 
 AMDEP_FALSE = #
 AMDEP_TRUE = 
-AMTAR = ${SHELL} /home/rubiojr/svn/mspace/WebNotes/Trunk/missing --run tar
+AMTAR = ${SHELL} /home/rubiojr/svn/mspace/FolderMonitor/missing --run tar
 AR = ar
 ATK_CFLAGS = -I/usr/include/atk-1.0 -I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include  
 ATK_LIBS = -Wl,--export-dynamic -latk-1.0 -lgobject-2.0 -lgmodule-2.0 -ldl -lglib-2.0  
-AUTOCONF = ${SHELL} /home/rubiojr/svn/mspace/WebNotes/Trunk/missing --run autoconf
-AUTOHEADER = ${SHELL} /home/rubiojr/svn/mspace/WebNotes/Trunk/missing --run autoheader
-AUTOMAKE = ${SHELL} /home/rubiojr/svn/mspace/WebNotes/Trunk/missing --run automake-1.7
+AUTOCONF = ${SHELL} /home/rubiojr/svn/mspace/FolderMonitor/missing --run autoconf
+AUTOHEADER = ${SHELL} /home/rubiojr/svn/mspace/FolderMonitor/missing --run autoheader
+AUTOMAKE = ${SHELL} /home/rubiojr/svn/mspace/FolderMonitor/missing --run automake-1.7
 AWK = mawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
@@ -70,8 +70,6 @@ F77 =
 FFLAGS = 
 GDK20_CFLAGS = -DXTHREADS -I/usr/include/gtk-2.0 -I/usr/lib/gtk-2.0/include -I/usr/X11R6/include -I/usr/include/pango-1.0 -I/usr/include/freetype2 -I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include  
 GDK20_LIBS = -Wl,--export-dynamic -lgdk-x11-2.0 -lgdk_pixbuf-2.0 -lm -lpangoxft-1.0 -lpangox-1.0 -lpango-1.0 -lgobject-2.0 -lgmodule-2.0 -ldl -lglib-2.0  
-GECKOSHARP_CFLAGS =  
-GECKOSHARP_LIBS = -r:/opt/mono-1.0//lib/mono/gecko-sharp/gecko-sharp.dll  
 GTKSHARP_CFLAGS =  
 GTKSHARP_LIBS = -r:/opt/mono-1.0//lib/mono/gtk-sharp/glib-sharp.dll -r:/opt/mono-1.0//lib/mono/gtk-sharp/pango-sharp.dll -r:/opt/mono-1.0//lib/mono/gtk-sharp/atk-sharp.dll -r:/opt/mono-1.0//lib/mono/gtk-sharp/gdk-sharp.dll -r:/opt/mono-1.0//lib/mono/gtk-sharp/gtk-sharp.dll -r:/opt/mono-1.0//lib/mono/gtk-sharp/gnome-sharp.dll -r:/opt/mono-1.0//lib/mono/gtk-sharp/art-sharp.dll -r:/opt/mono-1.0//lib/mono/gtk-sharp/glade-sharp.dll -r:/opt/mono-1.0//lib/mono/gtk-sharp/gconf-sharp.dll -r:/opt/mono-1.0//lib/mono/gtk-sharp/gconf-sharp-peditors.dll  
 INSTALL_DATA = ${INSTALL} -m 644
@@ -84,30 +82,30 @@ LIBS =
 LIBTOOL = $(SHELL) $(top_builddir)/libtool
 LN_S = ln -s
 LTLIBOBJS = 
-MAINT = 
-MAINTAINER_MODE_FALSE = #
-MAINTAINER_MODE_TRUE = 
-MAKEINFO = ${SHELL} /home/rubiojr/svn/mspace/WebNotes/Trunk/missing --run makeinfo
+MAINT = #
+MAINTAINER_MODE_FALSE = 
+MAINTAINER_MODE_TRUE = #
+MAKEINFO = ${SHELL} /home/rubiojr/svn/mspace/FolderMonitor/missing --run makeinfo
 MCS = /opt/mono/bin/mcs
-MCS_FLAGS = -g
+MCS_FLAGS = 
 MONO = /opt/mono/bin/mono
 MONO_CFLAGS = -D_REENTRANT -pthread -I/opt/mono-1.0//include -I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include  
-MONO_FLAGS = --debug
+MONO_FLAGS = 
 MONO_LIBS = -Wl,--export-dynamic -pthread -L/opt/mono-1.0//lib -lmono -lpthread -lm -lgmodule-2.0 -ldl -lgthread-2.0 -lglib-2.0  
 OBJEXT = o
-PACKAGE = webnotes
+PACKAGE = foldermonitor
 PACKAGE_BUGREPORT = sergio.rubio@hispalinux.es
-PACKAGE_NAME = WebNotes
-PACKAGE_STRING = WebNotes 1.0
-PACKAGE_TARNAME = webnotes
-PACKAGE_VERSION = 1.0
+PACKAGE_NAME = FolderMonitor
+PACKAGE_STRING = FolderMonitor 0.1
+PACKAGE_TARNAME = foldermonitor
+PACKAGE_VERSION = 0.1
 PATH_SEPARATOR = :
 PKG_CONFIG = /usr/bin/pkg-config
 RANLIB = ranlib
 SET_MAKE = 
 SHELL = /bin/sh
 STRIP = strip
-VERSION = 1.0
+VERSION = 0.1
 ac_ct_AR = ar
 ac_ct_CC = gcc
 ac_ct_CXX = g++
@@ -136,7 +134,7 @@ host_os = linux-gnu
 host_vendor = unknown
 includedir = ${prefix}/include
 infodir = ${prefix}/info
-install_sh = /home/rubiojr/svn/mspace/WebNotes/Trunk/install-sh
+install_sh = /home/rubiojr/svn/mspace/FolderMonitor/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localstatedir = ${prefix}/var
@@ -199,10 +197,10 @@ all: all-am
 
 .SUFFIXES:
 .SUFFIXES: .c .lo .o .obj
-$(srcdir)/Makefile.in:  Makefile.am  $(top_srcdir)/configure.in $(ACLOCAL_M4)
+$(srcdir)/Makefile.in: # Makefile.am  $(top_srcdir)/configure.in $(ACLOCAL_M4)
 	cd $(top_srcdir) && \
 	  $(AUTOMAKE) --gnu  src/TrayIcon/libtrayicon/Makefile
-Makefile:  $(srcdir)/Makefile.in  $(top_builddir)/config.status
+Makefile: # $(srcdir)/Makefile.in  $(top_builddir)/config.status
 	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@ $(am__depfiles_maybe)
 trayiconlibLTLIBRARIES_INSTALL = $(INSTALL)
 install-trayiconlibLTLIBRARIES: $(trayiconlib_LTLIBRARIES)

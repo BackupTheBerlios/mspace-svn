@@ -23,21 +23,32 @@ namespace FolderMonitor
     using System.IO;
     using Gtk;
     using Egg;
+    using System.Diagnostics;
 
     public class FolderMonitor
     {
 	private TrayIcon icon;
 	private EventBox eBox;
 	private Image image;
+	private string path;
 
-	public FolderMonitor ()
+	public FolderMonitor (string folder)
 	{
-	    icon = new TrayIcon ();
+	    this.path = folder;
+	    icon = new TrayIcon ("FolderMonitor");
 	    eBox = new EventBox ();
 	    image = new Image (new Gdk.Pixbuf (null, "dropbox-changed.png"));
 	    eBox.Add (image);
+	    eBox.ButtonPressEvent += ButtonPressed;
 	    icon.Add (eBox);
 	    
+	    FileSystemWatcher mon = new FileSystemWatcher (folder); 
+	    mon.IncludeSubdirectories = true;
+	    mon.EnableRaisingEvents = true;
+	    mon.Changed += OnChanged;
+	    mon.Created += OnChanged;
+	    mon.Deleted += OnChanged;
+	    mon.Renamed += OnRenamed;
 	}
 
 	public static void Main (string[] args)
@@ -48,20 +59,26 @@ namespace FolderMonitor
 		Environment.Exit (1);
 	    }
 	    Application.Init ();
-	    FileSystemWatcher mon = new FileSystemWatcher ("/home/rubiojr/Dropbox"); 
-	    mon.IncludeSubdirectories = true;
-	    mon.EnableRaisingEvents = true;
-	    mon.Changed += OnChange;
-	    mon.Created += OnChange;
-	    mon.Deleted += OnChange;
-	    mon.Renamed += OnChange;
+	    FolderMonitor mon = new FolderMonitor (args[0]);
 	    Application.Run ();
 	}
 
-	private static void OnChange (object obj, FileSystemEventArgs args)
+	private void OnChanged (object obj, FileSystemEventArgs args)
+	{
+	    icon.ShowAll ();
+	}
+
+	private void OnRenamed (object obj, RenamedEventArgs args)
 	{
 	    Console.WriteLine ("Changed");
 	}
+
+	private void ButtonPressed (object obj, ButtonPressEventArgs args)
+        {
+		Process.Start ("nautilus", "file://" + path);
+		icon.Hide ();
+        }
+
     }
 
 }
