@@ -1,31 +1,31 @@
-SOURCES = \
-./Playlist/Playlist.cs\
-./Playlist/IPlaylist.cs\
-./Services/SdkServices.cs\
-./Services/ServiceUnavailableException.cs\
-./Nini/Config/AliasText.cs\
-./Nini/Config/ConfigBase.cs\
-./Nini/Config/ConfigCollection.cs\
-./Nini/Config/ConfigSourceBase.cs\
-./Nini/Config/DotNetConfigSource.cs\
-./Nini/Config/IConfig.cs\
-./Nini/Config/IConfigSource.cs\
-./Nini/Config/IniConfigSource.cs\
-./Nini/Config/RegistryConfigSource.cs\
-./Nini/Config/XmlConfigSource.cs\
-./Nini/Ini/IniDocument.cs\
-./Nini/Ini/IniException.cs\
-./Nini/Ini/IniItem.cs\
-./Nini/Ini/IniReader.cs\
-./Nini/Ini/IniSection.cs\
-./Nini/Ini/IniSectionCollection.cs\
-./Nini/Ini/IniWriter.cs\
-./Nini/Util/IOrderedDictionary.cs\
-./Nini/Util/OrderedList.cs\
-./Nini/Util/OrderedListEnumerator.cs\
-./Configuration/ObjectStore.cs\
-./Configuration/Configuration.cs\
-./Data/ISearchable.cs\
-./Data/Song.cs\
-./Data/SongMetadata.cs\
-./Player/IPlayer.cs
+CSSOURCES=
+CSSOURCES += ./Playlist/Playlist.cs
+CSSOURCES += ./Playlist/IPlaylist.cs
+CSSOURCES += ./Services/SdkServices.cs
+CSSOURCES += ./Services/ServiceUnavailableException.cs
+CSSOURCES += ./Nini/Config/AliasText.cs
+CSSOURCES += ./Nini/Config/ConfigBase.cs
+CSSOURCES += ./Nini/Config/ConfigCollection.cs
+CSSOURCES += ./Nini/Config/ConfigSourceBase.cs
+CSSOURCES += ./Nini/Config/DotNetConfigSource.cs
+CSSOURCES += ./Nini/Config/IConfig.cs
+CSSOURCES += ./Nini/Config/IConfigSource.cs
+CSSOURCES += ./Nini/Config/IniConfigSource.cs
+CSSOURCES += ./Nini/Config/RegistryConfigSource.cs
+CSSOURCES += ./Nini/Config/XmlConfigSource.cs
+CSSOURCES += ./Nini/Ini/IniDocument.cs
+CSSOURCES += ./Nini/Ini/IniException.cs
+CSSOURCES += ./Nini/Ini/IniItem.cs
+CSSOURCES += ./Nini/Ini/IniReader.cs
+CSSOURCES += ./Nini/Ini/IniSection.cs
+CSSOURCES += ./Nini/Ini/IniSectionCollection.cs
+CSSOURCES += ./Nini/Ini/IniWriter.cs
+CSSOURCES += ./Nini/Util/IOrderedDictionary.cs
+CSSOURCES += ./Nini/Util/OrderedList.cs
+CSSOURCES += ./Nini/Util/OrderedListEnumerator.cs
+CSSOURCES += ./Configuration/ObjectStore.cs
+CSSOURCES += ./Configuration/Configuration.cs
+CSSOURCES += ./Data/ISearchable.cs
+CSSOURCES += ./Data/Song.cs
+CSSOURCES += ./Data/SongMetadata.cs
+CSSOURCES += ./Player/IPlayer.cs

@@ -3,8 +3,8 @@ include sources.list
 MISCRS = /resource:../MuineSdk.ini,MuineSdk.ini
 REFERENCES = -pkg:gtk-sharp
 
-Muine.Sdk.dll: $(SOURCES)
-	mcs /out:$@ $(SOURCES) /target:library $(REFERENCES) $(MISCRS)
+Muine.Sdk.dll: $(CSSOURCES)
+	mcs /out:$@ $(CSSOURCES) /target:library $(REFERENCES) $(MISCRS)
 
 all: Muine.Sdk.dll
 
