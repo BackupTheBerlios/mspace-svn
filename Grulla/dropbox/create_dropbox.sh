@@ -1,33 +1,40 @@
 #!/bin/bash
 #variables que vamos a utilizar
-IP=
 GROUP=dropbox
 USER=
+IP=
 GUEST=
-DROP_FOLDER=
-
+GUEST_MAIL=
 
 ############################
 ## Comprobaciones previas ##
 ############################
+#Comprobamos si zenity está instalado
+echo comprobando zenity
 if test -z `which zenity`; then
-    printf "\n\033[31;1mDebes tener \033[32;1mzenity instalado en tu sistema para poder utilizar este script\033[0m\n\n"
+    printf "\n\033[31;1mDebes tener \033[32;1mzenity \033[31;1minstalado en tu sistema para poder utilizar este script\033[0m\n\n"
     exit 1
 fi
 
-if test ! -f Dropbox.desktop; then
-    printf "\n\033[31;1mDebes ejecutar el script desde el directorio donde lo has descomprimido\033[0m\n\n"
-    exit 1
-fi
-
-if test -z `which scponly`; then
-    printf "\n\033[31;1mDebes tener \033[32;1mscponly instalado en tu sistema para poder utilizar este script\033[0m\n\n"
-    
+#Comprobamos si el script se esa ejecutando como root
 if test `whoami` != "root"; then
     zenity --info --text="Debes ejecutar el script como usuario root." --title="Usuario sin privilegios"
     exit 1
 fi
 
+
+#Comprobamos si el script se esta ejecutando desde el directorio
+if test ! -f Dropbox.desktop; then
+    zenity --info --text="Debes ejecutar el script desde el directorio\ndonde lo has descomprimido." --title="Directorio desconocido"
+    exit 1
+fi
+
+#Comprobamos si scponly está instalado
+if test -z `which scponly`; then
+    zenity --info --text="Debes tener scponly instalado para poder continuar." --title="scponly"
+    exit 1
+fi
+    
 #Captura el nombre del usuario que ejecuta el script
 USER=`zenity --title "Nombre de usuario" --entry --text="Escribe tu nombre de usuario.\n"`
 if test -z `cat /etc/passwd | grep $USER`; then
@@ -40,6 +47,11 @@ GUEST=`zenity --title "Nombre del invitado" --entry --text="Escribe el nombre de
 if test `cat /etc/passwd | grep $GUEST`; then
     zenity --info --title "No puedo continuar" --text="El usuario $GUEST ya existe en el sistema.\nElija otro nombre por favor.\n"
     exit 1
+fi
+
+#captura del correo del invitado
+GUEST_MAIL=`zenity --title "e-mail del invitado" --entry --text="Escribe el e-mail de tu invitado.\n"`
+
 
 #captura la ip del usuario
 IP=`zenity --title "IP del mi máquina" --entry --text="Escribe la ip de tu máquina o el nobre de dominio.\n"`
@@ -60,15 +72,17 @@ chgrp $GROUP $DROP_FOLDER
 chmod g+srw $DROP_FOLDER
 
 #Crea el usuario invitado en el grupo dropbox
-else
-    useradd -d /home/$USER/Dropbox -g $GROUP -s /usr/bin/scponly $GUEST
-fi
+useradd -d /home/$USER/Dropbox -g $GROUP -s /usr/bin/scponly $GUEST
+echo $GUEST:$GUEST | chpasswd
 
 #Renombra el fichero .desktop a $USER-Dropbox.desktop
-cp Dropbox.desktop $USER-Dropbox.desktop
+cp Dropbox.desktop $USER-$GUEST-Dropbox.desktop
 
 #reemplaza @USER@ e @IP@ en el fichero Dropbox.desktop
-sed -i "s/@USER@/$USER/" $USER-Dropbox.desktop
-sed -i "s/@IP@/$IP/" $USER-Dropbox.desktop
+sed -i "s/@USER@/$USER/" $USER-$GUEST-Dropbox.desktop
+sed -i "s/@GUEST@/$GUEST/" $USER-$GUEST-Dropbox.desktop
+sed -i "s/@IP@/$IP/" $USER-$GUEST-Dropbox.desktop
 
-zenity --info --title="Proceso finalizado" --text="$GUEST es ahora tu invitado.\n Mándale el archivo $USER-Dropbox.desktop por\n correo y podrá empezar a usar tu buzón."
+zenity --info --title="Proceso finalizado" --text="$GUEST es ahora tu invitado.\nMándale el archivo $USER-$GUEST-Dropbox.desktop creado por\ncorreo y podrá empezar a usar tu buzón."
+
+sudo -u $USER gnome-open mailto:$GUEST_MAIL $USER-$GUEST-Dropbox.desktop

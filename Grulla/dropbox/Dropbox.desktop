@@ -3,6 +3,6 @@ Version=1.0
 Encoding=UTF-8
 Name=@USER@ DropBox
 Type=Link
-URL=sftp://@IP@/home/@USER@/Dropbox
+URL=sftp://@GUEST@@@IP@/home/@USER@/Dropbox
 Terminal=false
 Icon=gnome-fs-share.png
