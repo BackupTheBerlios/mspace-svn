@@ -1,10 +1,10 @@
-all: bubble-example.exe message-example.exe html-bubble.exe notification-area-message.exe
+all: svg-bubble.exe factory-example.exe html-bubble.exe notification-area-message.exe
 
-bubble-example.exe: BubbleExample.cs
-	mcs BubbleExample.cs -o $@ -pkg:gtk-sharp -pkg:chicken
+svg-bubble.exe: SvgBubble.cs
+	mcs SvgBubble.cs -o $@ -pkg:gtk-sharp -pkg:chicken
 
-message-example.exe: MessageExample.cs
-	mcs MessageExample.cs -o $@ -pkg:gtk-sharp -pkg:chicken
+factory-example.exe: FactoryExample.cs
+	mcs FactoryExample.cs -o $@ -pkg:gtk-sharp -pkg:chicken
 
 html-bubble.exe: HtmlBubble.cs
 	mcs HtmlBubble.cs -o $@ -pkg:gtk-sharp -pkg:chicken

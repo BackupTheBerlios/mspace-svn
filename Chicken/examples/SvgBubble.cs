@@ -23,7 +23,7 @@ using System.IO;
 using System;
 using System.Reflection;
 
-public class BubbleExample
+public class SvgBubble
 {
     public static void Main (string[] args)
     {

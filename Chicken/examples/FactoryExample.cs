@@ -28,8 +28,14 @@ public class MessageExample
     public static void Main (string[] args)
     {
 	Application.Init ();
-	NotificationFactory.ShowMessageNotification ("Header", "Body", NotificationType.Info);
+	NotificationFactory.ShowMessageNotification 
+	    ("Header", "Body", NotificationType.Info, new TimerEndHandler (TimerEnded));
 	Application.Run ();
+    }
+
+    public static void TimerEnded ()
+    {
+	Application.Quit ();
     }
 }
 
