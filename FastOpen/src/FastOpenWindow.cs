@@ -11,12 +11,23 @@ namespace FastOpen
 
     public class FastOpenWindow
     {
+	private string[] vfsUrls = {
+				"preferences:",
+				"fonts:",
+				"applications:",
+				"favorites:",
+				"start-here:",
+				"system-settings:",
+				"server-settings:",
+				"burn:",
+				"computer:",
+				"trash:"
+				};
 
 	[Glade.Widget] Window window;
 	[Glade.Widget] Entry entry;
 
 	XML gxml;
-	CommandList cmdList = new CommandList ();
 	private StringBuilder buffer = new StringBuilder ();
 	private bool ignore = false;
 
@@ -40,12 +51,10 @@ namespace FastOpen
 
 	private void ParseEntry (string entry)
 	{
-	    int index = entry.IndexOf (':');
-	    try {
-		//Let's see if gnome-vfs handles the uri
+	    if ( Array.IndexOf (vfsUrls, entry) != -1 || entry.StartsWith ("http://"))
 		Gnome.Url.Show (entry);
-	    } catch (GLib.GException) {
-	    
+	    else {
+		int index = entry.IndexOf (':');
 		if (index != -1) {
 		    // command contains :
 		    string[] stringEntry = entry.Split (':');
@@ -99,16 +108,6 @@ namespace FastOpen
 	    entry.SelectRegion (0, entry.CursorPosition);
 	}
 	
-	public void TextInserted (object obj, TextInsertedArgs args)
-	{
-	    ArrayList cmds = cmdList.CompleteCommand (entry.Text);
-	    if (cmds.Count == 1)
-	    {
-		entry.Text = (string)cmds[0];
-	    }
-		
-	}
-
 	public void KeyPressed (object obj, KeyPressEventArgs args)
 	{
 	    if (args.Event.Key == Gdk.Key.Escape)
