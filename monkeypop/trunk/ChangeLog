@@ -1,5 +1,9 @@
 2004-10-12  Sergio Rubio  <sergio.rubio@hispalinux.es>
 
+	* Makefile.am: Removed bin target
+
+2004-10-12  Sergio Rubio  <sergio.rubio@hispalinux.es>
+
 	* debian/README.Debian:
 	* debian/changelog:
 	* debian/compat:
