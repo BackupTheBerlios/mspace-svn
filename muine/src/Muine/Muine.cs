@@ -26,13 +26,13 @@ using Gdk;
 
 public class Muine : Gnome.Program
 {
-	private static PlaylistWindow playlist;
-
 	private static MessageConnection conn;
 
 	private static Gnome.Client client;
 
 	private static bool opened_playlist = false;
+
+	private static PlaylistWindow playlist;
 
 	public static void Main (string [] args)
 	{
@@ -70,11 +70,12 @@ public class Muine : Gnome.Program
 		ProcessCommandLine (args, false);
 
 		/* Load playlist */
-		if (!opened_playlist)
-			playlist.RestorePlaylist ();
+		//FIXME
+		//if (!opened_playlist)
+		//	playlist.RestorePlaylist ();
 
 		/* Show playlist window */
-		playlist.Run ();
+		playlist.ShowAll ();
 
 		/* Now we load the album covers, and after that start the changes thread */
 		AppContext.CoverDB.DoneLoading += new CoverDatabase.DoneLoadingHandler (HandleCoversDoneLoading);
@@ -95,36 +96,6 @@ public class Muine : Gnome.Program
 
 	private void ProcessCommandLine (string [] args, bool use_conn)
 	{
-		if (args.Length > 0) {
-			for (int i = 0; i < args.Length; i++) {
-				System.IO.FileInfo finfo = new System.IO.FileInfo (args [i]);
-			
-				if (finfo.Exists) {
-					if (FileUtils.IsPlaylist (args [i])) {
-						/* load as playlist */
-						if (use_conn)
-							conn.Send ("LoadPlaylist " + finfo.FullName);
-						else
-							playlist.OpenPlaylist (finfo.FullName);
-					} else {
-						/* load as music file */
-						if (use_conn)
-							if (i == 0)
-								conn.Send ("PlayFile " + finfo.FullName);
-							else
-								conn.Send ("QueueFile " + finfo.FullName);
-						else
-							if (i == 0)
-								playlist.PlayFile (finfo.FullName);
-							else
-								playlist.QueueFile (finfo.FullName);
-					}
-
-					opened_playlist = true;
-				}
-			}
-		} else if (use_conn)
-			conn.Send ("ShowWindow");
 	}
 
 	private void SetDefaultWindowIcon ()
@@ -137,14 +108,6 @@ public class Muine : Gnome.Program
 	private void HandleMessageReceived (string message,
 					    IntPtr user_data)
 	{
-		if (message == "ShowWindow")
-			playlist.WindowVisible = true;
-		else if (message.StartsWith ("LoadPlaylist "))
-			playlist.OpenPlaylist (message.Substring (13));
-		else if (message.StartsWith ("PlayFile "))
-			playlist.PlayFile (message.Substring (9));
-		else if (message.StartsWith ("QueueFile "))
-			playlist.QueueFile (message.Substring (10));
 	}
 
 	private void HandleCoversDoneLoading ()
