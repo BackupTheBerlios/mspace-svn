@@ -11,7 +11,8 @@ FastOpen aims to replace the gnome-panel run dialog, or provide a similar tool t
 not have such functionality (openbox for example). It provides a functionality similar to Konqueror "Web Shortcuts".
 
 FastOpen tries to accomplish the following tasks:
-* Command auto completion (Not implemented).
+* Command auto completion.
+* Path autocompletion.
 * "Web shortcuts" feature to translate shortcuts to real URLs.
 * A little shortcuts editor (FSEditor).
 * Command history (Not implemented).
@@ -19,7 +20,7 @@ FastOpen tries to accomplish the following tasks:
 
 INSTALATION
 ------------
-You need mono and gtk-sharp installed
+You need mono and gtk-sharp installed (and the -dev/-devel packages)
 
 ./configure
 ./make
@@ -30,23 +31,21 @@ USING FastOpen
 For a good time, I recommend you to configure your window manager and assign a keyboard shortcut to FastOpen to open it using
 Alt-F2 for example.
 
-If you want to add more shortcuts, use fseditor.exe
-
-
 FastOpen comes with some handy shortcuts by default.
-Type gg:<any text you want here> in the FastOpen dialog and the web browser will be launched with a google search.
+Type :gg:<any text you want here> in the FastOpen dialog and the web browser will be launched with a google search.
 
-vimtip:<any text you want here>
+:vimtip:<any text you want here>
 Will search vim.org for any tips containing the text.
 
-wr:<any word you want here>
+:wr:<any word you want here>
 Will translate the word using wordreference.com
 
-dict:<any word you want here>
+:dict:<any word you want here>
 Will search dict.org for any description of the work
 
 And there are many more. Open fseditor.exe and try some of them!!
 
+If you want to add more shortcuts, use fseditor
 
 FastOpen tips n'tricks
 -----------------------
@@ -54,6 +53,8 @@ FastOpen tips n'tricks
 * Type a URL and your browser will be launched pointing to that URL
   Example:
     type http://mono-project.com
+    or
+    mono-project.com without http://
 
 
 * You can type any of the predefined gnome-vfs URLs

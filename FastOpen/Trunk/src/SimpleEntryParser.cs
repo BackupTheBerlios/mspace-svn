@@ -27,24 +27,31 @@ namespace FastOpen
 	
 	public void Parse (string entry)
 	{
-	    int index = entry.IndexOf (':');
+	    string command;
+	    if (entry.StartsWith (":"))
+	    {
+		Console.WriteLine ("stripping..");
+		command = entry.Substring (1,entry.Length - 1);
+	    }else
+		command = entry;
+	    int index = command.IndexOf (':');
 	    if (index != -1) {
-		if ( Array.IndexOf (vfsUrls, entry) != -1 
-			|| entry.StartsWith ("http://")
-			|| entry.StartsWith ("/"))
+		if ( Array.IndexOf (vfsUrls, command) != -1 
+			|| command.StartsWith ("http://")
+			|| command.StartsWith ("/"))
 		{
-		    string sToOpen = entry;
-		    if (entry.StartsWith ("/"))
-			    sToOpen = "file:" + entry;
+		    string sToOpen = command;
+		    if (command.StartsWith ("/"))
+			    sToOpen = "file:" + command;
 		    Gnome.Url.Show (sToOpen);
 		} else { 
 		    string tmpString;
-		    if ((tmpString = GetShortcutURL (entry)) != null) {
+		    if ((tmpString = GetShortcutURL (command)) != null) {
 			Gnome.Url.Show (tmpString);
 		    }
 		}
 	    } else
-		Gnome.Url.Show ("http://" + entry);
+		Gnome.Url.Show ("http://" + command);
 	}
 	
 	//Returns null if the shortcut is not found

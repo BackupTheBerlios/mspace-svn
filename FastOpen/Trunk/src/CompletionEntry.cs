@@ -32,11 +32,29 @@ namespace FastOpen
 	private ArrayList completions = new ArrayList ();
 	private int completionCounter = 0;
 	private char separator = System.IO.Path.DirectorySeparatorChar;
+	
+	/*
+	 * If binary has bin found in PATH matching the text in entry
+	 * return true.
+	 * Else return false.
+	 */
+	private bool binFound = false;
+	public bool BinFound {
+	    get {
+		return binFound;
+	    }
+	}
 
+	//FIXME
+	//This can be optimized removing from completions 
+	//the entries not needed.
 	private void AutoComplete (string text)
 	{
 	    completions.Clear ();
 	    completionCounter = 0;
+    
+	    //Do it only the first time we search the PATH for binaries.
+	    //bins are catched in binList after that
 	    if (!explored)
 	    {
 		string[] paths = Environment.GetEnvironmentVariable ("PATH").Split (System.IO.Path.PathSeparator);
@@ -47,17 +65,17 @@ namespace FastOpen
 		    {
 			string[] files = Directory.GetFiles (path);
 			foreach (string file in files)
-			    binList.Add (System.IO.Path.GetFileNameWithoutExtension (file));
+			    binList.Add (System.IO.Path.GetFileName (file));
 		    }
 		}
 		explored = true;
 	    }
+	    
+	    //Add to completions the matching binaries
 	    foreach (string s in binList)
 	    {
 		if (s.StartsWith (text))
-		{
 		    completions.Add (s);
-		}
 	    }
 	}
 
@@ -131,12 +149,6 @@ namespace FastOpen
 	    return false;
 	}
 
-	private bool binFound = false;
-	public bool BinFound {
-	    get {
-		return binFound;
-	    }
-	}
 
     }
 }

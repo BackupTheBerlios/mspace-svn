@@ -49,8 +49,8 @@ namespace FastOpen
 
 	public void EntryActivated (object obj, EventArgs args)
 	{
-	    if (!entry.BinFound || entry.Text.StartsWith (":"))
-	    	parser.Parse (entry.Text.Substring (1,entry.Text.Length - 1));
+	    if (!entry.BinFound)
+	    	parser.Parse (entry.Text);
 	    else {
 		string[] command = entry.Text.Split (new char[]{' '}, 2);
 		try {
