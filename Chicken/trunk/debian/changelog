@@ -1,3 +1,9 @@
+libchicken (0.1.4-2) unstable; urgency=low
+
+  * Added missing depends in build-dep
+
+ -- rubiojr <sergio.rubio@hispalinux.es>  Tue, 12 Oct 2004
+
 libchicken (0.1.4-1) unstable; urgency=low
 
   * New upstream release
