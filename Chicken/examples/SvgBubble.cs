@@ -27,18 +27,8 @@ public class BubbleExample
 {
     public static void Main (string[] args)
     {
-	if (args.Length == 0)
-	{
-	    Console.WriteLine ("Usage: {0} svgfile",Assembly.GetCallingAssembly ().GetName ().Name);
-	    Environment.Exit (1);
-	}
-	else
-	{
-	    if (!File.Exists(args[0]))
-		Console.WriteLine ("File {0} not found!", args[0]);
-	}
 	Application.Init ();
-	NotificationBubble b = new NotificationBubble (args[0], NotificationSource.File, NotificationContent.Svg);
+	NotificationBubble b = new NotificationBubble ("msg.svg", NotificationSource.File, NotificationContent.Svg);
 	b.RenderWithTimer ();
 	Application.Run ();
     }
