@@ -2,8 +2,9 @@ RESOURCES = \
 	    /resource:../../images/dropbox-changed.png,dropbox-changed.png \
 	    /resource:../../images/dropbox-changed-red.png,dropbox-changed-red.png
 
+REFERENCES = -pkg:fl-framework -pkg:gtk-sharp
 FolderMonitor.exe: FolderMonitor.cs
-	mcs FolderMonitor.cs -pkg:gtk-sharp /r:../TrayIcon/TrayIcon.dll $(RESOURCES) -o $@
+	mcs FolderMonitor.cs $(RESOURCES) $(REFERENCES) -o $@
 
 all: FolderMonitor.exe
 

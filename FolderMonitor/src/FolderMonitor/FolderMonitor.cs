@@ -22,7 +22,7 @@ namespace FolderMonitor
     using System;    
     using System.IO;
     using Gtk;
-    using Egg;
+    using FL.Gnome.TrayIcon;
     using System.Diagnostics;
     using System.Threading;
 

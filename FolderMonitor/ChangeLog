@@ -1,4 +1,11 @@
 2004-09-20  Sergio Rubio  <sergio.rubio@hispalinux.es>
 
+	* configure.in:
+	* src/FolderMonitor/FolderMonitor.cs:
+	* src/FolderMonitor/Makefile.am:
+	* src/FolderMonitor/foldermonitor.in: misc fixes
+
+2004-09-20  Sergio Rubio  <sergio.rubio@hispalinux.es>
+
 	* configure.in: Bumped version. Removed trayicon libs
 
