@@ -48,7 +48,8 @@ namespace FastOpen
 
 	public void EntryActivated (object obj, EventArgs args)
 	{
-	    if (entry.Text.StartsWith (":"))
+	    entry.DeleteSelection ();
+	    if (!entry.BinFound)
 	    	parser.Parse (entry.Text.Substring (1,entry.Text.Length - 1));
 	    else {
 		try {

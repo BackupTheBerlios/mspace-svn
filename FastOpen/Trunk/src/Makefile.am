@@ -7,7 +7,7 @@ fastopen.exe: *.cs
 	mcs -o $@ *.cs -pkg:gtk-sharp -pkg:gnome-sharp -pkg:glade-sharp $(RESOURCES)
 
 fastopenlibdir = ${prefix}/lib/fastopen
-fastopenlib_DATA = fastopen.exe
+fastopenlib_DATA = fastopen.exe fseditor.exe
 
 EXTRA_DIST =				\
 	*.cs				

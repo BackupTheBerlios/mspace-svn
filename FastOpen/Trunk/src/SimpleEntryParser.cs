@@ -40,11 +40,11 @@ namespace FastOpen
 		} else { 
 		    string tmpString;
 		    if ((tmpString = GetShortcutURL (entry)) != null) {
-			Console.WriteLine ("Sortcut found: " + tmpString);
 			Gnome.Url.Show (tmpString);
 		    }
 		}
-	    }
+	    } else
+		Gnome.Url.Show ("http://" + entry);
 	}
 	
 	//Returns null if the shortcut is not found

@@ -80,9 +80,17 @@ namespace FastOpen
 		    int oldLength = Text.Length;
 		    Text = bin;
 		    SelectRegion (oldLength, Text.Length);
+		    binFound = true;
 		}
 	    }
 	    return true;
+	}
+
+	private bool binFound = false;
+	public bool BinFound {
+	    get {
+		return binFound;
+	    }
 	}
 
     }
