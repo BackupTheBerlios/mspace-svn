@@ -1,2 +1,2 @@
 #!/bin/bash 
-mono @prefix@/lib/FolderMonitor/FolderMonitor.exe $@
+MONO_PATH=@prefix@/lib/FolderMonitor:$MONO_PATH LD_LIBRARY_PATH=@prefix@/lib/FolderMonitor mono @prefix@/lib/FolderMonitor/FolderMonitor.exe $@

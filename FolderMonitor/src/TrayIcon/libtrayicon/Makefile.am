@@ -11,7 +11,7 @@ INCLUDES = \
   -DGDK_DISABLE_DEPRECATED \
   -DG_DISABLE_DEPRECATED
 
-trayiconlibdir = $(libdir)/WebNotes
+trayiconlibdir = $(libdir)/FolderMonitor
 trayiconlib_LTLIBRARIES = libtrayicon.la
 
 libtrayicon_la_SOURCES = \
