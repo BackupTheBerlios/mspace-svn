@@ -23,6 +23,7 @@ namespace Muine.Sdk.Configuration
     using Nini.Config;
     using System.Reflection;
     using System.IO;
+    using FL.Configuration;
 
     public class Configuration
     {
