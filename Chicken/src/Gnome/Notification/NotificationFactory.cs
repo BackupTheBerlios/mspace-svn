@@ -26,34 +26,73 @@ namespace Chicken.Gnome.Notification
 
     public class NotificationFactory
     {
-	/*public static void ShowMessageNotification (string header, string text, int timeout)
-	{
-	    BlinkingTrayIcon b = new BlinkingTrayIcon ("Message", new Gdk.Pixbuf (null, "tray-icon.png"));
-	    NotificationMessage nm = new NotificationMessage ("simple.svg", b, NotificationType.Svg, header, text);
-	    nm.TimeOut = timeout;
-	    nm.Notify();
-	}*/
 
-	public static void ShowMessageNotification (string svgfile, string header, string text, int timeout)
+	public static void ShowSvgNotification (string source, NotificationSource nsource, NotificationContent ncontent, int timeout)
 	{
-	    NotificationFactory factory = new NotificationFactory ();
+	    NotificationMessage msg = new NotificationMessage (source, nsource, ncontent);	    
+	    msg.TimeOut = timeout;
+	    msg.Notify ();
+	}
+
+	public static void ShowSvgNotification (string source, string header, string body, int timeout)
+	{
+	    ShowSvgNotification (source, NotificationSource.File, header, body, timeout, 200, 50, NotificationType.Info);
+	}
+
+	public static void ShowSvgNotification (string source,
+						NotificationSource nsource,
+						string header,
+						string body,
+						int timeout,
+						int width,
+						int height,
+						NotificationType type)
+	{
 	    Stream stream;
-
-	    if (svgfile == null)
+	    string svg = "";
+	    if (source == null)
 	    {
+		NotificationFactory factory = new NotificationFactory ();
 		Assembly assembly = Assembly.GetAssembly (factory.GetType ());
-		Console.WriteLine (assembly);
-		stream = assembly.GetManifestResourceStream ("simple.svg");
-		Console.WriteLine ("stream: ", stream);
-	    } else if (!File.Exists (svgfile)) {
-		Console.WriteLine ("Svg file not found.");
-		return;
-	    } else
-		stream = new FileStream (svgfile, FileMode.Open);
-		
-	    NotificationMessage nm = new NotificationMessage (stream, NotificationType.Svg, header, text);
-	    nm.TimeOut = timeout;
-	    nm.Notify ();
+		stream = assembly.GetManifestResourceStream (type.ToString () + ".svg");
+		StreamReader reader = new StreamReader (stream);
+		svg = reader.ReadToEnd ();
+		reader.Close ();
+		stream.Close ();
+	    } else {
+		if (nsource == NotificationSource.File) {
+		    stream = new FileStream (source, FileMode.Open, FileAccess.Read);
+		    StreamReader reader = new StreamReader (stream);
+		    svg = reader.ReadToEnd ();
+		    reader.Close ();
+		    stream.Close ();
+		} else if (nsource == NotificationSource.Text)
+		    svg = source;
+	    }
+	     
+	    svg = svg.Replace ("@HEADER@", header);
+	    svg = svg.Replace ("@TEXT@", body);
+	    NotificationMessage msg = new NotificationMessage (svg, NotificationSource.Text, NotificationContent.Svg);
+	    msg.TimeOut = timeout;
+	    msg.BubbleWidth = width;
+	    msg.BubbleHeight = height;
+	    msg.Notify ();
+	    
+	}
+
+	public static void ShowMessageNotification (string header, 
+						    string body,
+						    int timeout,
+						    int width,
+						    int height,
+						    NotificationType type)
+	{
+	    ShowSvgNotification (null, NotificationSource.Text, header, body, timeout, width, height, type);
+	}
+
+	public static void ShowMessageNotification (string header, string body, int timeout, NotificationType type)
+	{
+	    NotificationFactory.ShowMessageNotification (header, body, timeout, 200, 50, type); 
 	}
     }
 

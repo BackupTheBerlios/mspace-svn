@@ -27,10 +27,22 @@ namespace Chicken.Gnome.Notification
     using System.IO;
     using System.Reflection;
 
-    public enum NotificationType {
-	Message,
+    public enum NotificationSource {
+	Text,
+	File,
+	Url
+    }
+
+    public enum NotificationContent {
+	Svg,
 	Html,
-	Svg
+	PlainText
+    }
+
+    public enum NotificationType {
+	Info,
+	Warning,
+	Error
     }
 
     public class NotificationMessage
@@ -38,41 +50,19 @@ namespace Chicken.Gnome.Notification
 	private WebControl webcontrol;
 	private BlinkingTrayIcon icon;
 	private Window window;
-	private string text;
-	private string header;
-	private Stream msgStream;
+	private String source;
+	private NotificationSource sourceType;
+	private NotificationContent contentType;
 	
-	/*public NotificationMessage (string source, NotificationType type)
+	public NotificationMessage (string source, NotificationSource sourceType, NotificationContent contentType)
 	{
-	    window = new Window (WindowType.Popup);
-	    icon.ButtonPressEvent += ButtonPressed;
-	    switch (type)
-	    {
-		case NotificationType.Message:
-		    RenderMessage (source);
-		    break;
-		case NotificationType.Html:
-		    RenderHtml (source);
-		    break;
-	    }
-		    
-	    window.DefaultWidth = bubbleWidth;
-	    window.DefaultHeight = bubbleHeight;
-	    PositionWindow ();
-	}*/
-
-	public NotificationMessage (Stream stream, NotificationType type, string header, string text)
-	{
-	    this.header = header;
-	    this.text = text;
-	    this.msgStream = stream;
+	    this.contentType = contentType;
+	    this.sourceType = sourceType;
+	    this.source = source;
+	    if (source == null)
+		throw new ArgumentNullException ("Notification source can't be null.");
 	    InitComponent ();
-	    switch (type)
-	    {
-		case NotificationType.Svg:
-		    RenderSvg (stream);
-		    break;
-	    }
+
 	}
 
 	private void InitComponent ()
@@ -82,7 +72,6 @@ namespace Chicken.Gnome.Notification
 	    icon.ButtonPressEvent += ButtonPressed;
 	    window.DefaultWidth = bubbleWidth;
 	    window.DefaultHeight = bubbleHeight;
-	    PositionWindow ();
 	}
 
 	private int timeout = 5000;
@@ -95,7 +84,7 @@ namespace Chicken.Gnome.Notification
 	    }
 	}
 
-	private int bubbleWidth = 150;
+	private int bubbleWidth = 200;
 	public int BubbleWidth {
 	    get {
 		return bubbleWidth;
@@ -119,6 +108,19 @@ namespace Chicken.Gnome.Notification
 
 	public void Notify ()
 	{
+	    switch (contentType)
+	    {
+		case NotificationContent.Svg:
+		    RenderSvg ();
+		    break;
+		case NotificationContent.Html:
+		    RenderHtml ();
+		    break;
+		case NotificationContent.PlainText:
+		    RenderPlainText ();
+		    break;
+	    }
+	    PositionWindow ();
 	    window.ShowAll ();
 	    icon.Run ();
 	    Timer timer;
@@ -182,40 +184,57 @@ namespace Chicken.Gnome.Notification
 	    Application.Quit ();
         }
 
-	private void RenderHtml (string source)
+	private void RenderHtml ()
 	{
 	    webcontrol = new WebControl ();
 	    webcontrol.LoadUrl (source);
 	    window.Add (webcontrol);
 	}
 
-	private void RenderMessage (string source)
+	private void RenderPlainText ()
 	{
-	    HTML html = new HTML ();
-	    HTMLStream stream = html.Begin ("text/html");
-	    stream.Write (source);
-	    html.End (stream, HTMLStreamStatus.Ok);
-	    window.Add (html);
-	    
 	}
 	
-	private void RenderSvg (Stream stream)
+	private void RenderSvg ()
 	{
-	    StreamReader reader = new StreamReader (stream);
-	    string svg = reader.ReadToEnd ();
-	    reader.Close ();
-	    stream.Close ();
-	    svg = svg.Replace ("@HEADER@", header);
-	    svg = svg.Replace ("@TEXT@", text);
-	    string tmpdir = "/tmp/.chicken_notification_" + Environment.TickCount;
-	    string tmpfile = tmpdir + "/tmpsvg.svg";
-	    Directory.CreateDirectory (tmpdir);
-	    StreamWriter writer = new StreamWriter (new FileStream (tmpfile, FileMode.OpenOrCreate, FileAccess.Write));
-	    writer.Write (svg);
-	    writer.Close ();
-	    Image img = new Image (Rsvg.Pixbuf.FromFile(tmpfile));
-	    window.Add (img);
+	    switch (sourceType)
+	    {
+		case NotificationSource.File:
+		    RenderSvgFromFile ();
+		    break;
+		case NotificationSource.Text:
+		    RenderSvgFromText ();
+		    break;
+		default:
+		    Console.WriteLine ("Svg rendering from source " + sourceType + " not posible. Ignored.");
+		    break;
+	    }
 		
+	}
+
+	private void RenderSvgFromText ()
+	{
+	    string tmpdir = "/tmp/chicken_notification";
+	    if (!Directory.Exists (tmpdir))
+		Directory.CreateDirectory (tmpdir);
+	    string tmpfile = tmpdir + String.Format ("/tmpsvg-{0}.svg", Environment.TickCount);
+	    StreamWriter writer = new StreamWriter (new FileStream (tmpfile, FileMode.Create, FileAccess.Write));
+	    writer.Write (source);
+	    writer.Close ();
+	    Image img = new Image (Rsvg.Pixbuf.FromFileAtSize (tmpfile, BubbleWidth, BubbleHeight));
+	    File.Delete (tmpfile);
+	    window.Add (img);
+	}
+
+	private void RenderSvgFromFile ()
+	{
+	    if (!File.Exists (source))
+	    {
+		Console.WriteLine ("Svg file does not exists. Ignoring notification.");
+		return;
+	    }
+	    Image img = new Image (Rsvg.Pixbuf.FromFileAtSize (source, BubbleWidth, BubbleHeight));
+	    window.Add (img);
 	}
 
 

@@ -11,7 +11,7 @@
    id="svg1"
    sodipodi:version="0.32"
    inkscape:version="0.39"
-   sodipodi:docname="simple.svg"
+   sodipodi:docname="Chat.svg"
    sodipodi:docbase="/home/rubiojr/svn/mspace/Chicken/images"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:cc="http://web.resource.org/cc/"
@@ -65,40 +65,40 @@
     </rdf:RDF>
   </metadata>
   <rect
-     style="fill:#1aaf2c;fill-opacity:1.0000000;fill-rule:evenodd;stroke:#000000;stroke-width:2.5560861;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4.0000000;stroke-opacity:1.0000000;"
+     style="fill:#1aaf2c;fill-opacity:1.0000000;fill-rule:evenodd;stroke:#000000;stroke-width:1.0539016;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4.0000000;stroke-opacity:1.0000000;"
      id="rect963"
-     width="247.78032"
-     height="59.837582"
-     x="1.5643785"
-     y="1.4448268" />
+     height="60.446728"
+     x="0.65528756"
+     y="1.4487357"
+     width="250.00000" />
   <rect
-     style="fill:#d9d7f3;fill-opacity:1.0000000;fill-rule:evenodd;stroke:#000000;stroke-width:1.2780430;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4.0000000;stroke-opacity:1.0000000;"
+     style="fill:#d9d7f3;fill-opacity:1.0000000;fill-rule:evenodd;stroke:#000000;stroke-width:0.77787971;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4.0000000;stroke-opacity:1.0000000;"
      id="rect1585"
      width="187.30205"
-     height="57.582722"
-     x="61.591301"
-     y="2.8014200" />
+     x="62.954933"
+     y="1.4416399"
+     height="60.446728" />
   <text
      xml:space="preserve"
      style="font-size:12.000000;font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Sans;text-anchor:start;writing-mode:lr;"
-     x="67.939156"
-     y="21.989721"
+     x="69.770302"
+     y="21.982595"
      id="text2207"
      sodipodi:linespacing="100%"
-     transform="scale(0.992927,0.953932)"><tspan
+     transform="scale(0.992927,0.961034)"><tspan
        id="tspan2208">@HEADER@</tspan></text>
   <text
      xml:space="preserve"
      style="font-size:9.0000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Sans;text-anchor:start;writing-mode:lr;"
-     x="68.848251"
-     y="37.288776"
+     x="70.679398"
+     y="37.281651"
      id="text2210"
      sodipodi:linespacing="100%"
-     transform="scale(0.992927,0.953932)"><tspan
+     transform="scale(0.992927,0.961034)"><tspan
        id="tspan2211">@TEXT@</tspan></text>
   <g
      id="g2213"
-     transform="matrix(0.314688,0.000000,0.000000,0.316468,4.884366,4.825798)">
+     transform="matrix(0.314688,0.000000,0.000000,0.318824,3.975276,4.854880)">
     <defs
        id="definitions">
       <radialGradient
