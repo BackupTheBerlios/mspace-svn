@@ -65,6 +65,7 @@ if test "x$enable_gnome" = "xyes"; then
 		      gnome-sharp >= $GTKSHARP_REQUIRED \
 		      glade-sharp >= $GTKSHARP_REQUIRED \
 		      gtkhtml-sharp >= $GTKSHARP_REQUIRED \
+		      rsvg-sharp >= $GTKSHARP_REQUIRED \
 		      gconf-sharp >= $GTKSHARP_REQUIRED)
 
     AC_SUBST(GTKSHARP_LIBS)
