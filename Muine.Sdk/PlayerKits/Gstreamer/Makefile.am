@@ -1,4 +1,4 @@
-REFERENCES = -pkg:gtk-sharp /r:$(top_srcdir)/src/Muine.Sdk.dll
+REFERENCES = -pkg:gtk-sharp /r:$(top_srcdir)/src/Player.Sdk.dll
 
 CSSOURCES = GstPlayer.cs
 CSOURCES = player-gst.c
@@ -13,7 +13,7 @@ libgstplayer.so: $(CSOURCES) $(CHEADERS)
 
 all: GstPlayer.dll libgstplayer.so
 
-libgstplayerdir = $(prefix)/lib/Muine.Sdk/PlayerKits
+libgstplayerdir = $(prefix)/lib/Player.Sdk/PlayerKits
 libgstplayer_DATA = GstPlayer.dll libgstplayer.so GstPlayer.dll.config
 
 EXTRA_DIST = GstPlayer.dll.config $(CSSOURCES) $(CSOURCES) $(CHEADERS)

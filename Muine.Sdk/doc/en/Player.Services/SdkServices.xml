@@ -1,0 +1,73 @@
+<Type Name="SdkServices" FullName="Player.Services.SdkServices">
+  <TypeSignature Language="C#" Value="public class SdkServices" Maintainer="auto" />
+  <AssemblyInfo>
+    <AssemblyName>Player.Sdk</AssemblyName>
+    <AssemblyPublicKey>
+    </AssemblyPublicKey>
+    <AssemblyVersion>0.0.0.0</AssemblyVersion>
+    <AssemblyCulture>neutral</AssemblyCulture>
+    <Attributes />
+  </AssemblyInfo>
+  <ThreadSafetyStatement>Gtk# is thread aware, but not thread safe; See the <link location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
+  <Docs>
+    <summary>To be added</summary>
+    <remarks>To be added</remarks>
+  </Docs>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Attributes />
+  <Members>
+    <Member MemberName="Player">
+      <MemberSignature Language="C#" Value="public static Player.Player.IPlayer Player;" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>Player.Player.IPlayer</ReturnType>
+      </ReturnValue>
+      <Parameters>
+      </Parameters>
+      <Docs>
+        <summary>To be added</summary>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="MusicDb">
+      <MemberSignature Language="C#" Value="public static Player.Data.IMusicDb MusicDb;" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>Player.Data.IMusicDb</ReturnType>
+      </ReturnValue>
+      <Parameters>
+      </Parameters>
+      <Docs>
+        <summary>To be added</summary>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Playlist">
+      <MemberSignature Language="C#" Value="public static Player.Playlist.IPlaylist Playlist;" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>Player.Playlist.IPlaylist</ReturnType>
+      </ReturnValue>
+      <Parameters>
+      </Parameters>
+      <Docs>
+        <summary>To be added</summary>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public SdkServices ();" />
+      <MemberType>Constructor</MemberType>
+      <ReturnValue />
+      <Parameters />
+      <Docs>
+        <summary>To be added</summary>
+        <returns>a <see cref="T:Player.Services.SdkServices" /></returns>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

@@ -1,5 +1,0 @@
-<?xml version="1.0"?>
-<monodoc>
-    <node label="Muine Sdk" name="muine-sdk"/>
-    <source basefile="muine-sdk" path="muine-sdk" provider="ecma"/>
-</monodoc>

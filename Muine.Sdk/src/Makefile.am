@@ -1,17 +1,17 @@
 include sources.list
 
-MISCRS = /resource:../MuineSdk.ini,MuineSdk.ini
+MISCRS = /resource:../PlayerSdk.ini,PlayerSdk.ini
 REFERENCES = -pkg:chicken
 
-Muine.Sdk.dll: $(CSSOURCES)
+Player.Sdk.dll: $(CSSOURCES)
 	mcs /out:$@ $(CSSOURCES) /target:library $(MISCRS) $(REFERENCES)
 
-all: Muine.Sdk.dll
+all: Player.Sdk.dll
 
 sdklibdir = $(prefix)/lib
-sdklib_DATA = Muine.Sdk.dll
+sdklib_DATA = Player.Sdk.dll
 pkgconfigdir = $(libdir)/pkgconfig
-pkgconfig_DATA = muine-sdk.pc
+pkgconfig_DATA = player-sdk.pc
 
-EXTRA_DIST = sources.list muine-sdk.pc.in $(CSSOURCES)
-CLEANFILES = Muine.Sdk.dll muine-sdk.pc
+EXTRA_DIST = sources.list player-sdk.pc.in $(CSSOURCES)
+CLEANFILES = Player.Sdk.dll player-sdk.pc

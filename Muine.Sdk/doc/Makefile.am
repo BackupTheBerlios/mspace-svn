@@ -3,18 +3,18 @@ UPDATER = monodoc --update
 
 all: assemble
 
-assemble: muine-sdk.zip muine-sdk.tree
+assemble: player-sdk.zip player-sdk.tree
 
-muine-sdk.zip muine-sdk.tree: en/*/*.xml
-	$(ASSEMBLER) --ecma $(srcdir)/en -o muine-sdk 
+player-sdk.zip player-sdk.tree: en/*/*.xml
+	$(ASSEMBLER) --ecma $(srcdir)/en -o player-sdk 
 
 update:
-	monodoc --update ../src/Muine.Sdk.dll -o ./en
+	monodoc --update ../src/Player.Sdk.dll -o ./en
 
 docsdir = `monodoc --get-sourcesdir`
-docs_DATA = muine-sdk.source muine-sdk.tree muine-sdk.zip
+docs_DATA = player-sdk.source player-sdk.tree player-sdk.zip
 
-CLEANFILES = muine-sdk.tree muine-sdk.zip 
+CLEANFILES = player-sdk.tree player-sdk.zip 
 
 EXTRA_DIST =			\
-	muine-sdk.source
+	player-sdk.source

@@ -22,9 +22,9 @@
 using System;
 using System.Runtime.InteropServices;
 using GLib;
-using Muine.Sdk.Player;
-using Muine.Sdk.Playlist;
-using Muine.Sdk.Data;
+using Player.Player;
+using Player.Playlist;
+using Player.Data;
 
 public class GstPlayer : GLib.Object, IPlayer
 {

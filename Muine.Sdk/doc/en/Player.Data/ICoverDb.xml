@@ -1,0 +1,66 @@
+<Type Name="ICoverDb" FullName="Player.Data.ICoverDb">
+  <TypeSignature Language="C#" Value="public abstract interface ICoverDb" Maintainer="auto" />
+  <AssemblyInfo>
+    <AssemblyName>Player.Sdk</AssemblyName>
+    <AssemblyPublicKey>
+    </AssemblyPublicKey>
+    <AssemblyVersion>0.0.0.0</AssemblyVersion>
+    <AssemblyCulture>neutral</AssemblyCulture>
+    <Attributes />
+  </AssemblyInfo>
+  <ThreadSafetyStatement>Gtk# is thread aware, but not thread safe; See the <link location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
+  <Docs>
+    <summary>To be added</summary>
+    <remarks>To be added</remarks>
+  </Docs>
+  <Base />
+  <Interfaces />
+  <Attributes />
+  <Members>
+    <Member MemberName="AddCover">
+      <MemberSignature Language="C#" Value="public virtual bool AddCover (Player.Data.Cover cover);" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="cover" Type="Player.Data.Cover" />
+      </Parameters>
+      <Docs>
+        <summary>To be added</summary>
+        <param name="cover">a <see cref="T:Player.Data.Cover" /></param>
+        <returns>a <see cref="T:System.Boolean" /></returns>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RemoveCover">
+      <MemberSignature Language="C#" Value="public virtual bool RemoveCover (Player.Data.Cover cover);" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="cover" Type="Player.Data.Cover" />
+      </Parameters>
+      <Docs>
+        <summary>To be added</summary>
+        <param name="cover">a <see cref="T:Player.Data.Cover" /></param>
+        <returns>a <see cref="T:System.Boolean" /></returns>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Covers">
+      <MemberSignature Language="C#" Value="public virtual System.Collections.ArrayList Covers { get; };" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Collections.ArrayList</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added</summary>
+        <returns>a <see cref="T:System.Collections.ArrayList" /></returns>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

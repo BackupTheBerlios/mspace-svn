@@ -1,9 +1,0 @@
-prefix=@prefix@
-exec_prefix=${prefix}
-libdir=${exec_prefix}/lib
-
-
-Name: Muine Sdk
-Description: Muine Player Development Kit
-Version: 0.1
-Libs: -r:${libdir}/Muine.Sdk.dll

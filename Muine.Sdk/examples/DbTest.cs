@@ -18,8 +18,8 @@
  */
 
 using System;    
-using Muine.Sdk.Data;
-using Muine.Sdk.Services;
+using Player.Data;
+using Player.Services;
 using Gtk;
 
 public class DbTest

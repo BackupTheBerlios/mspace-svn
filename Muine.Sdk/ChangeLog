@@ -1,4 +1,11 @@
 2004-10-24  Sergio Rubio  <sergio.rubio@hispalinux.es>
+	
+	* Docs regenerated
+	* Changed namespaces name from Muine.Sdk to Player
+	* Added BSD license
+	* Changed all muine references to player
+
+2004-10-24  Sergio Rubio  <sergio.rubio@hispalinux.es>
 
 	* README:
 	* TODO:

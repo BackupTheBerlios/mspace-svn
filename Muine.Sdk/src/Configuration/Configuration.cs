@@ -17,7 +17,7 @@
  * Boston, MA 02111-1307, USA.
  */
 
-namespace Muine.Sdk.Configuration 
+namespace Player.Configuration 
 {
     using System;
     using Nini.Config;
@@ -31,22 +31,22 @@ namespace Muine.Sdk.Configuration
 
 	private Configuration ()
 	{
-	    objStore = new FileStore ("Muine.Sdk");
-	    if (objStore["MuineSdk.ini"] == null)
+	    objStore = new FileStore ("Player.Sdk");
+	    if (objStore["PlayerSdk.ini"] == null)
 	    {
 			CopyDefaultConfigFile ();
 	    }
-	    configSource = new IniConfigSource (objStore["MuineSdk.ini"]); 
+	    configSource = new IniConfigSource (objStore["PlayerSdk.ini"]); 
 	}
 
 	private void CopyDefaultConfigFile ()
 	{
 	    Assembly assembly = System.Reflection.Assembly.GetCallingAssembly ();
-	    System.IO.Stream s = assembly.GetManifestResourceStream ("MuineSdk.ini");
+	    System.IO.Stream s = assembly.GetManifestResourceStream ("PlayerSdk.ini");
 	    StreamReader reader = new StreamReader (s);
 	    string config = reader.ReadToEnd ();
 	    reader.Close ();
-	    StreamWriter writer = new StreamWriter (objStore.CreateFile ("MuineSdk.ini", false));
+	    StreamWriter writer = new StreamWriter (objStore.CreateFile ("PlayerSdk.ini", false));
 	    writer.Write (config);
 	    writer.Close ();
 	}

@@ -1,8 +1,8 @@
 // created on 08/31/2004 at 13:24
-namespace Muine.Sdk.Player
+namespace Player.Player
 {
 
-    using Muine.Sdk.Playlist;
+    using Player.Playlist;
 
 	public enum RepetitionType {
 				    RepeatSong,

@@ -1,0 +1,9 @@
+prefix=@prefix@
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+
+
+Name: Player.Sdk
+Description: Music Player Development Kit
+Version: 0.1
+Libs: -r:${libdir}/Player.Sdk.dll

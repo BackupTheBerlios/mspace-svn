@@ -17,11 +17,11 @@
  * Boston, MA 02111-1307, USA.
  */
 
-namespace Muine.Sdk.Playlist 
+namespace Player.Playlist 
 {
     using System; 
     using System.Collections;
-    using Muine.Sdk.Data;
+    using Player.Data;
 
     public interface IPlaylist : IList
     {

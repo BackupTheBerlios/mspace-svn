@@ -1,0 +1,39 @@
+<Type Name="IAlbumComparer" FullName="Player.Data.IAlbumComparer">
+  <TypeSignature Language="C#" Value="public abstract interface IAlbumComparer" Maintainer="auto" />
+  <AssemblyInfo>
+    <AssemblyName>Player.Sdk</AssemblyName>
+    <AssemblyPublicKey>
+    </AssemblyPublicKey>
+    <AssemblyVersion>0.0.0.0</AssemblyVersion>
+    <AssemblyCulture>neutral</AssemblyCulture>
+    <Attributes />
+  </AssemblyInfo>
+  <ThreadSafetyStatement>Gtk# is thread aware, but not thread safe; See the <link location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
+  <Docs>
+    <summary>To be added</summary>
+    <remarks>To be added</remarks>
+  </Docs>
+  <Base />
+  <Interfaces />
+  <Attributes />
+  <Members>
+    <Member MemberName="Compare">
+      <MemberSignature Language="C#" Value="public virtual int Compare (Player.Data.Album one, Player.Data.Album two);" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="one" Type="Player.Data.Album" />
+        <Parameter Name="two" Type="Player.Data.Album" />
+      </Parameters>
+      <Docs>
+        <summary>To be added</summary>
+        <param name="one">a <see cref="T:Player.Data.Album" /></param>
+        <param name="two">a <see cref="T:Player.Data.Album" /></param>
+        <returns>a <see cref="T:System.Int32" /></returns>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

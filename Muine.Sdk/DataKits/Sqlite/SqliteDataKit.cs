@@ -17,11 +17,11 @@
  * Boston, MA 02111-1307, USA.
  */
 
-namespace Muine.Sdk.Data.Kits 
+namespace Player.Data.Kits 
 {
     using System;
-    using Muine.Sdk.Data;
-    using Muine.Sdk.Configuration;
+    using Player.Data;
+    using Player.Configuration;
     using System.Collections;
     using Mono.Data.SqliteClient;
     using System.IO;

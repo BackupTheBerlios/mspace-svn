@@ -1,6 +1,6 @@
 AC_INIT(Makefile.am)
 AC_CANONICAL_SYSTEM
-AM_INIT_AUTOMAKE(MuineSdk, 0.1)
+AM_INIT_AUTOMAKE(player-sdk, 0.1)
 AM_MAINTAINER_MODE
 
 dnl Version dependencies
@@ -38,7 +38,7 @@ Makefile
 examples/Makefile
 doc/Makefile
 src/Makefile
-src/muine-sdk.pc
+src/player-sdk.pc
 PlayerKits/Makefile
 PlayerKits/Gstreamer/Makefile
 DataKits/Makefile

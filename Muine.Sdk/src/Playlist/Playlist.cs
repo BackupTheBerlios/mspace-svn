@@ -17,12 +17,12 @@
  * Boston, MA 02111-1307, USA.
  */
 
-namespace Muine.Sdk.Playlist
+namespace Player.Playlist
 {
 
     using System.Collections;
     using System;
-    using Muine.Sdk.Data;
+    using Player.Data;
 
     /* 
      * Custom ArrayList that fires events when the content is modified

@@ -17,13 +17,13 @@
  * Boston, MA 02111-1307, USA.
  */
 
-namespace Muine.Sdk.Services 
+namespace Player.Services 
 {
     using System;    
-    using Muine.Sdk.Configuration;
-    using Muine.Sdk.Player;
-    using Muine.Sdk.Playlist;
-    using Muine.Sdk.Data;
+    using Player.Configuration;
+    using Player.Player;
+    using Player.Playlist;
+    using Player.Data;
     using System.Reflection;
     using System.IO;
 
@@ -67,7 +67,7 @@ namespace Muine.Sdk.Services
 			} else {
 				Console.WriteLine ("Loading {0} from SYSTEM services", serviceAssembly);
 				string sdkDir = Path.GetDirectoryName (Assembly.GetCallingAssembly ().Location);
-				string systemServiceLocation = sdkDir + separator + "Muine.Sdk" + 
+				string systemServiceLocation = sdkDir + separator + "Player.Sdk" + 
 							separator + serviceDir + separator + serviceAssembly + ".dll";
 				Console.WriteLine ("Service location: {0}", systemServiceLocation);
 				asm = Assembly.LoadFrom (systemServiceLocation);

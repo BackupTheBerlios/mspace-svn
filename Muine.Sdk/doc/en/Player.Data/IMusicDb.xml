@@ -1,0 +1,111 @@
+<Type Name="IMusicDb" FullName="Player.Data.IMusicDb">
+  <TypeSignature Language="C#" Value="public abstract interface IMusicDb" Maintainer="auto" />
+  <AssemblyInfo>
+    <AssemblyName>Player.Sdk</AssemblyName>
+    <AssemblyPublicKey>
+    </AssemblyPublicKey>
+    <AssemblyVersion>0.0.0.0</AssemblyVersion>
+    <AssemblyCulture>neutral</AssemblyCulture>
+    <Attributes />
+  </AssemblyInfo>
+  <ThreadSafetyStatement>Gtk# is thread aware, but not thread safe; See the <link location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
+  <Docs>
+    <summary>To be added</summary>
+    <remarks>To be added</remarks>
+  </Docs>
+  <Base />
+  <Interfaces />
+  <Attributes />
+  <Members>
+    <Member MemberName="AddSong">
+      <MemberSignature Language="C#" Value="public virtual bool AddSong (Player.Data.Song song);" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="song" Type="Player.Data.Song" />
+      </Parameters>
+      <Docs>
+        <summary>To be added</summary>
+        <param name="song">a <see cref="T:Player.Data.Song" /></param>
+        <returns>a <see cref="T:System.Boolean" /></returns>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AddAlbum">
+      <MemberSignature Language="C#" Value="public virtual bool AddAlbum (Player.Data.Album album);" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="album" Type="Player.Data.Album" />
+      </Parameters>
+      <Docs>
+        <summary>To be added</summary>
+        <param name="album">a <see cref="T:Player.Data.Album" /></param>
+        <returns>a <see cref="T:System.Boolean" /></returns>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RemoveSong">
+      <MemberSignature Language="C#" Value="public virtual bool RemoveSong (Player.Data.Song song);" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="song" Type="Player.Data.Song" />
+      </Parameters>
+      <Docs>
+        <summary>To be added</summary>
+        <param name="song">a <see cref="T:Player.Data.Song" /></param>
+        <returns>a <see cref="T:System.Boolean" /></returns>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RemoveAlbum">
+      <MemberSignature Language="C#" Value="public virtual bool RemoveAlbum (Player.Data.Album album);" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="album" Type="Player.Data.Album" />
+      </Parameters>
+      <Docs>
+        <summary>To be added</summary>
+        <param name="album">a <see cref="T:Player.Data.Album" /></param>
+        <returns>a <see cref="T:System.Boolean" /></returns>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Songs">
+      <MemberSignature Language="C#" Value="public virtual System.Collections.ArrayList Songs { get; };" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Collections.ArrayList</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added</summary>
+        <returns>a <see cref="T:System.Collections.ArrayList" /></returns>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Albums">
+      <MemberSignature Language="C#" Value="public virtual System.Collections.ArrayList Albums { get; };" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Collections.ArrayList</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added</summary>
+        <returns>a <see cref="T:System.Collections.ArrayList" /></returns>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

@@ -17,7 +17,7 @@
  * Boston, MA 02111-1307, USA.
  */
 
-namespace Muine.Sdk.Services 
+namespace Player.Services 
 {
     using System;    
 

@@ -1,6 +1,6 @@
 REFERENCES =				\
 	-pkg:gtk-sharp				\
-	-r:../src/Muine.Sdk.dll
+	-r:../src/Player.Sdk.dll
 
 all: db-test.exe
 
