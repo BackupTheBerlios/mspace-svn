@@ -1,5 +1,5 @@
 AC_PREREQ(2.59)
-AC_INIT(didiwiki, 0.4, [mallum@handhelds.org])
+AC_INIT(didiwiki, 0.5, [mallum@handhelds.org])
 AC_CONFIG_SRCDIR([src/util.c])
 AC_CONFIG_HEADER([config.h])
 
@@ -24,12 +24,16 @@ AC_STRUCT_TM
 # Checks for library functions.
 AC_FUNC_ALLOCA
 AC_FUNC_FORK
-AC_FUNC_MALLOC
-AC_FUNC_REALLOC
 AC_FUNC_SELECT_ARGTYPES
 AC_FUNC_STAT
 AC_FUNC_STRFTIME
 AC_CHECK_FUNCS([asprintf inet_ntoa memset mkdir putenv select socket strdup strncasecmp])
+
+if test "x$GCC" = "xyes"; then
+        GCC_FLAGS="-g -Wall -fno-strict-aliasing"
+fi
+
+AC_SUBST(GCC_FLAGS)
 
 AC_OUTPUT([
 Makefile

@@ -1,0 +1,20 @@
+2004-10-22  Sergio Rubio  <sergio.rubio@hispalinux.es>
+
+	* src/TrayIcon/libtrayicon/Makefile: Crap
+	* src/WebNotes/Makefile: Crap
+	* src/didiwiki/ChangeLog:
+	* src/didiwiki/README:
+	* src/didiwiki/TODO:
+	* src/didiwiki/config.h.in:
+	* src/didiwiki/configure.ac:
+	* src/didiwiki/src/Makefile.am:
+	* src/didiwiki/src/didi.h:
+	* src/didiwiki/src/http.c: (http_server):
+	* src/didiwiki/src/wiki.c: (check_for_link),
+	(wiki_print_data_as_html), (wiki_redirect),
+	(wiki_show_create_page), (wiki_get_pages),
+	(wiki_show_changes_page), (wiki_show_search_results_page),
+	(wiki_show_template), (wiki_show_footer), (wiki_handle_rest_call),
+	(wiki_handle_http_request), (wiki_init):
+	* src/didiwiki/src/wiki.h: DidiWiki updated to 0.5
+

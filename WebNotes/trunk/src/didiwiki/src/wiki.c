@@ -55,7 +55,6 @@ check_for_link(char *line, int *skip_chars)
   char *url   =  NULL;
   char *title =  NULL;
   char *result = NULL;
-  char  tmp;
   int   found = 0;
 
   if (*p == '[') 		/* [ link [title] ] */
@@ -131,7 +130,7 @@ check_for_link(char *line, int *skip_chars)
 	}
       else
 	{
-	  char *extra_attr = NULL;
+	  char *extra_attr = "";
 
 	  if (!strncasecmp(url, "http://", 7))
 	    extra_attr = " title='WWW link' ";
@@ -210,7 +209,7 @@ void
 wiki_print_data_as_html(HttpResponse *res, char *raw_page_data)
 {
   char *p = raw_page_data;	    /* accumalates non marked up text */
-  char *q = NULL, *url = NULL, *link = NULL; /* temporary scratch stuff */
+  char *q = NULL, *link = NULL; /* temporary scratch stuff */
   char *line = NULL;
   int   line_len;
   int   i, j, skip_chars;
@@ -222,7 +221,6 @@ wiki_print_data_as_html(HttpResponse *res, char *raw_page_data)
   int strikethrough_on = 0;
   int open_para    = 0;
   int pre_on       = 0;
-  int list_depth   = 0;
   int table_on     = 0;
 
 #define ULIST 0
@@ -466,14 +464,14 @@ wiki_print_data_as_html(HttpResponse *res, char *raw_page_data)
 	    {
 	      if (line_start != line 
 		  && !is_wiki_format_char_or_space(*(line-1)) 
-		  && !underline_on)
+		  && !italic_on)
 		{ line++; continue; }
 
-	      if (isspace(*(line+1)) && !underline_on)
+	      if (isspace(*(line+1)) && !italic_on)
 		{ line++; continue; }
 
 	      /* crude path detection */
-	      if (line_start != line && isspace(*(line-1)) && !underline_on)
+	      if (line_start != line && isspace(*(line-1)) && !italic_on)
 		{ 
 		  char *tmp   = line+1;
 		  int slashes = 0;
@@ -495,15 +493,15 @@ wiki_print_data_as_html(HttpResponse *res, char *raw_page_data)
 		{
 		  /* italic */
 		  *line = '\0';
-		  http_response_printf(res, "%s%s\n", p, underline_on ? "</i>" : "<i>"); 
-		  underline_on ^= 1; /* reset flag */
+		  http_response_printf(res, "%s%s\n", p, italic_on ? "</i>" : "<i>"); 
+		  italic_on ^= 1; /* reset flag */
 		  p = line+1; 
 		}
 	    }
 	  else if (*line == '|' && table_on) /* table column */
 	    {
 	      *line = '\0';
-	      http_response_printf(res, p);
+	      http_response_printf(res, "%s", p);
 	      http_response_printf(res, "</td><td>\n");
 	      p = line+1;
 	    }
@@ -560,9 +558,10 @@ wiki_print_data_as_html(HttpResponse *res, char *raw_page_data)
 int 
 wiki_redirect(HttpResponse *res, char *location)
 {
-  char *header = alloca(strlen(location) + 14);
+  int   header_len = strlen(location) + 14; 
+  char *header = alloca(sizeof(char)*header_len);
 
-  sprintf(header, "Location: %s\r\n", location);
+  snprintf(header, header_len, "Location: %s\r\n", location);
 
   http_response_append_header(res, header);
   http_response_printf(res, "<html>\n<p>Redirect to %s</p>\n</html>\n", 
@@ -613,7 +612,7 @@ void
 wiki_show_create_page(HttpResponse *res)
 {
   wiki_show_header(res, "Create New Page", FALSE);
-  http_response_printf(res, CREATEFORM);
+  http_response_printf(res, "%s", CREATEFORM);
   wiki_show_footer(res);
 
   http_response_send(res);
@@ -635,55 +634,94 @@ changes_compar(const struct dirent **d1, const struct dirent **d2)
       return -1;
 }
 
-void
-wiki_show_changes_page(HttpResponse *res)
-{
-  struct dirent **namelist;
-  int             n;
 
-  wiki_show_header(res, "Changes", FALSE);
+
+WikiPageList**
+wiki_get_pages(int  *n_pages, char *expr)
+{
+  WikiPageList  **pages;
+  struct dirent **namelist;
+  int             n, i = 0;
+  struct stat     st;
 
   n = scandir(".", &namelist, 0, (void *)changes_compar);
-
-  /*
-  if (n < 0) TODO error
-  */
+  
+  pages = malloc(sizeof(WikiPageList*)*n);
 
   while(n--) 
     {
-      struct stat  st;
-      struct tm   *pTm;
-      char   datebuf[64];
-
       if ((namelist[n]->d_name)[0] == '.' 
 	  || !strcmp(namelist[n]->d_name, "styles.css"))
 	goto cleanup;
 
+      if (expr != NULL) 
+	{ 			/* Super Simple Search */
+	  char *data = NULL;
+	  if ((data = file_read(namelist[n]->d_name)) != NULL)
+	    if (strstr(data, expr) == NULL)
+	      if (strcmp(namelist[n]->d_name, expr) != 0) 
+		goto cleanup; 
+	}
+
+
       stat(namelist[n]->d_name, &st);
 
-      pTm = localtime(&st.st_mtime);
-      strftime(datebuf, sizeof(datebuf), "%Y-%m-%d %H:%M", pTm);
-      http_response_printf(res, "<a href='%s'>%s</a> %s<br />\n", 
-			   namelist[n]->d_name, 
-			   namelist[n]->d_name, 
-			   datebuf);
+      /* ignore anything but regular readable files */
+      if (S_ISREG(st.st_mode) && access(namelist[n]->d_name, R_OK) == 0)
+	{
+	  pages[i]        = malloc(sizeof(WikiPageList));
+	  pages[i]->name  = strdup (namelist[n]->d_name);
+	  pages[i]->mtime = st.st_mtime;
+
+	  i++;
+	}
+
     cleanup:
       free(namelist[n]);
     }
-  
+
+  *n_pages = i;
+
   free(namelist);
+
+  if (i==0) return NULL;
+
+  return pages;
+}
+
+void
+wiki_show_changes_page(HttpResponse *res)
+{
+  WikiPageList **pages = NULL;
+  int            n_pages, i;
+
+  wiki_show_header(res, "Changes", FALSE);
+
+  pages = wiki_get_pages(&n_pages, NULL);
+
+  for (i=0; i<n_pages; i++)
+    {
+      struct tm   *pTm;
+      char   datebuf[64];
+
+      pTm = localtime(&pages[i]->mtime);
+      strftime(datebuf, sizeof(datebuf), "%Y-%m-%d %H:%M", pTm);
+      http_response_printf(res, "<a href='%s'>%s</a> %s<br />\n", 
+			   pages[i]->name, 
+			   pages[i]->name, 
+			   datebuf);
+    }
 
   wiki_show_footer(res);
   http_response_send(res);
   exit(0);
-
 }
 
 void
 wiki_show_search_results_page(HttpResponse *res, char *expr)
 {
-  struct dirent **namelist;
-  int             n, i, finds = 0;
+  WikiPageList **pages = NULL;
+  int            n_pages, i;
 
   if (expr == NULL || strlen(expr) == 0)
     {
@@ -694,59 +732,49 @@ wiki_show_search_results_page(HttpResponse *res, char *expr)
       exit(0);
     }
 
-  i = n = scandir(".", &namelist, 0, 0);
+  pages = wiki_get_pages(&n_pages, expr);
 
-  while(i--) 
+  if (pages)
     {
-      if ((namelist[i]->d_name)[0] == '.' 
-	  || !strcmp(namelist[i]->d_name, "styles.css"))
-	continue;
+      for (i=0; i<n_pages; i++)
+	if (!strcmp(pages[i]->name, expr)) /* redirect on page name match */
+	  wiki_redirect(res, pages[i]->name);
 
-      if (!strcmp(namelist[i]->d_name, expr))
-	wiki_redirect(res, namelist[i]->d_name); /* exits */
-    }
+      wiki_show_header(res, "Search", FALSE);
 
-  i = n;
-
-  wiki_show_header(res, "Search", FALSE);
-
-
-  while(i--) 
-    {
-      char *data = NULL;
-
-      if ((namelist[i]->d_name)[0] == '.' 
-	  || !strcmp(namelist[i]->d_name, "styles.css"))
-	goto cleanup;
-
-      /* Super simple search functionality TODO Improve */
-
-      if ((data = file_read(namelist[i]->d_name)) != NULL)
+      for (i=0; i<n_pages; i++)
 	{
-	  if (strstr(data, expr))
-	    {
-	      http_response_printf(res, "<a href='%s'>%s</a><br />\n", 
-				   namelist[i]->d_name, 
-				   namelist[i]->d_name);
-	      finds++;
-	    }
+	  http_response_printf(res, "<a href='%s'>%s</a><br />\n", 
+			       pages[i]->name, 
+			       pages[i]->name);
 	}
-      
-      if (data) free(data);
-
-    cleanup:
-      free(namelist[i]);
     }
-
-  if (!finds)
-    http_response_printf(res, "No matches");
-
-  free(namelist);
+  else 
+    {
+      wiki_show_header(res, "Search", FALSE);
+      http_response_printf(res, "No matches");
+    }
 
   wiki_show_footer(res);
   http_response_send(res);
 
   exit(0);
+}
+
+void 
+wiki_show_template(HttpResponse *res, char *template_data)
+{
+  /* 4 templates - header.html, footer.html, 
+                   header-noedit.html, footer-noedit.html
+
+     Vars;
+
+     $title      - page title. 
+     $include()  - ?
+     $pages 
+
+  */
+
 }
 
 void
@@ -772,13 +800,113 @@ wiki_show_header(HttpResponse *res, char *page_title, int want_edit)
 void
 wiki_show_footer(HttpResponse *res)
 {
-  http_response_printf(res, PAGEFOOTER);
+  http_response_printf(res, "%s", PAGEFOOTER);
 
   http_response_printf(res, 
 		       "</body>\n"
 		       "</html>\n"
 		       );
 }
+
+void
+wiki_handle_rest_call(HttpRequest  *req, 
+		      HttpResponse *res,
+		      char         *func)
+{
+
+  if (func != NULL && *func != '\0')
+    {
+      if (!strcmp(func, "page/get"))
+	{
+	  char *page = http_request_param_get(req, "page");
+
+	  if (page == NULL)
+	    page = http_request_get_query_string(req);
+
+	  if (page && (access(page, R_OK) == 0)) 
+	    {
+	      http_response_printf(res, "%s", file_read(page));
+	      http_response_send(res);
+	      return;
+	    }  
+	}
+      else if (!strcmp(func, "page/set"))
+	{
+	  char *wikitext = NULL, *page = NULL;
+	  if( ( (wikitext = http_request_param_get(req, "text")) != NULL)
+	      && ( (page = http_request_param_get(req, "page")) != NULL))
+	    {
+	      file_write(page, wikitext);	      
+	      http_response_printf(res, "success");
+	      http_response_send(res);
+	      return;
+	    }
+	}
+      else if (!strcmp(func, "page/delete"))
+	{
+	  char *page = http_request_param_get(req, "page");
+
+	  if (page == NULL)
+	    page = http_request_get_query_string(req);
+
+	  if (page && (unlink(page) > 0))
+	    {
+	      http_response_printf(res, "success");
+	      http_response_send(res);
+	      return;  
+	    }
+	}
+      else if (!strcmp(func, "page/exists"))
+	{
+	  char *page = http_request_param_get(req, "page");
+
+	  if (page == NULL)
+	    page = http_request_get_query_string(req);
+
+	  if (page && (access(page, R_OK) == 0)) 
+	    {
+	      http_response_printf(res, "success");
+	      http_response_send(res);
+	      return;  
+	    }
+	}
+      else if (!strcmp(func, "pages") || !strcmp(func, "search"))
+	{
+	  WikiPageList **pages = NULL;
+	  int            n_pages, i;
+	  char          *expr = http_request_param_get(req, "expr");
+
+	  if (expr == NULL)
+	    expr = http_request_get_query_string(req);
+	  
+	  pages = wiki_get_pages(&n_pages, expr);
+
+	  if (pages)
+	    {
+	      for (i=0; i<n_pages; i++)
+		{
+		  struct tm   *pTm;
+		  char   datebuf[64];
+		  
+		  pTm = localtime(&pages[i]->mtime);
+		  strftime(datebuf, sizeof(datebuf), "%Y-%m-%d %H:%M", pTm);
+		  http_response_printf(res, "%s\t%s\n", pages[i]->name, datebuf);
+		}
+
+	      http_response_send(res);
+	      return;  
+	    }
+	}
+    }
+
+  http_response_set_status(res, 500, "Error");
+  http_response_printf(res, "<html><body>Failed</body></html>\n");
+  http_response_send(res);
+
+  return;  
+}
+
+
 
 void
 wiki_handle_http_request(HttpRequest *req)
@@ -802,7 +930,7 @@ wiki_handle_http_request(HttpRequest *req)
     {
       /*  Return CSS page */
       http_response_set_content_type(res, "text/css");
-      http_response_printf(res, CssData);
+      http_response_printf(res, "%s", CssData);
       http_response_send(res);
       exit(0);
     }
@@ -819,6 +947,29 @@ wiki_handle_http_request(HttpRequest *req)
 
   page = page + 1; 		/* skip slash */
 
+  if (!strncmp(page, "api/", 4))
+    {
+      char *p;
+
+      page += 4; 
+      for (p=page; *p != '\0'; p++)
+	if (*p=='?') { *p ='\0'; break; }
+      
+      wiki_handle_rest_call(req, res, page); 
+      exit(0);
+    }
+
+  /* A little safety. issue a malformed request for any paths,
+   * There shouldn't need to be any..
+   */
+  if (strchr(page, '/'))
+    {
+      http_response_set_status(res, 404, "Not Found");
+      http_response_printf(res, "<html><body>404 Not Found</body></html>\n");
+      http_response_send(res);
+      exit(0);
+    }
+
   if (!strcmp(page, "Changes"))
     {
       /* TODO list recent changes */
@@ -830,7 +981,6 @@ wiki_handle_http_request(HttpRequest *req)
     }
   else if (!strcmp(page, "Create"))
     {
-      char *new_page;
       if ( (wikitext = http_request_param_get(req, "title")) != NULL)
 	{
 	  /* create page and redirect */
@@ -907,7 +1057,7 @@ wiki_init(void)
     {
       if (mkdir(datadir, 0755) == -1)
 	{
-	  fprintf(stderr, "Unable to create '%s', giving up.\n");
+	  fprintf(stderr, "Unable to create '%s', giving up.\n", datadir);
 	  exit(1);
 	}
     }
@@ -927,6 +1077,6 @@ wiki_init(void)
   if (access("styles.css", R_OK) == 0) 
     CssData = file_read("styles.css");
   
-
+  return 1;
 }
 
