@@ -1,2 +1,0 @@
-SUBDIRS = MonitorPlugin Dashboard MiniPlayer
-
