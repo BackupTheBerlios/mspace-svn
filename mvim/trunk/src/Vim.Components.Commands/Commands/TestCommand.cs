@@ -28,7 +28,7 @@ namespace Vim.Components.Commands
 			}
 		}
 		
-		public ArrayList Aliases {
+		public ICollection Aliases {
 			get {
 				return aliases;
 			}

@@ -18,7 +18,7 @@ namespace Vim.Components.Commands
 	{
 		void Execute (object[] parameters);
 		
-		ArrayList Aliases { get; }
+		ICollection Aliases { get; }
 		string Name { get; }
 	}
 }
