@@ -135,32 +135,6 @@ namespace Muine.Sdk.Data
 		    }
 	    }
 
-	    public SongMetadata Metadata
-	    {
-		set {
-		    SongMetadata metadata = value;
-		    if (metadata.Title.Length > 0)
-			    title = metadata.Title;
-		    else
-			    title = Path.GetFileNameWithoutExtension (filename);
-		    
-		    artists = metadata.Artists;
-		    performers = metadata.Performers;
-		    album = metadata.Album;
-		    track_number = metadata.TrackNumber;
-		    year = metadata.Year;
-		    duration = metadata.Duration;
-		    mtime = metadata.MTime;
-		    gain = metadata.Gain;
-		    peak = metadata.Peak;
-
-		    sort_key = null;
-		    search_key = null;
-
-		    //GetCoverImage (metadata);
-		}
-	    }
-
 	    public Song (string fn)
 	    {
 		this.filename = fn;
@@ -168,16 +142,6 @@ namespace Muine.Sdk.Data
 
 	    public bool FitsCriteria (string [] search_bits)
 	    {
-		    /*int n_matches = 0;
-			    
-		    foreach (string search_bit in search_bits) {
-			    if (SearchKey.IndexOf (search_bit) >= 0) {
-				    n_matches++;
-				    continue;
-			    }
-		    }
-
-		    return (n_matches == search_bits.Length);*/
 		return false;
 	    }
     }

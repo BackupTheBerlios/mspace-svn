@@ -7,4 +7,5 @@ CSSOURCES += ./Configuration/Configuration.cs
 CSSOURCES += ./Data/ISearchable.cs
 CSSOURCES += ./Data/Song.cs
 CSSOURCES += ./Data/SongMetadata.cs
+CSSOURCES += ./Data/Album.cs
 CSSOURCES += ./Player/IPlayer.cs
