@@ -10,7 +10,8 @@ fastopenlibdir = ${prefix}/lib/fastopen
 fastopenlib_DATA = fastopen.exe fseditor.exe
 
 EXTRA_DIST =				\
-	*.cs				
+	*.cs				\	
+	fseditor.exe
 
 CLEANFILES =				\
 	fastopen.exe
