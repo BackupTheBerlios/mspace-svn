@@ -100,8 +100,10 @@ namespace Chicken.Gnome.Notification
 
 	private void TimerRunner (object obj)
 	{
+	    Gdk.Threads.Enter ();
 	    icon.Stop ();
 	    Destroy ();
+	    Gdk.Threads.Leave ();
 	    if (TimerEndedEvent != null)
 		TimerEndedEvent ();
 	}
