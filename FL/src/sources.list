@@ -1,3 +1,2 @@
 CSSOURCES=
-CSSOURCES += ./Plugins/PluginManager.cs
 CSSOURCES += ./Configuration/ObjectStore.cs

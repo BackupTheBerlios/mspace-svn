@@ -36,7 +36,7 @@ namespace FL.Configuration
 	    
 	    try {
 		if ( !Directory.Exists (configDir))
-		    Directory.Create (configDir);
+		    Directory.CreateDirectory (configDir);
 		
 		if (!Directory.Exists (location))
 		    Directory.CreateDirectory (location);
@@ -91,7 +91,7 @@ namespace FL.Configuration
 
 	    set {
 		if (!Directory.Exists (location))
-		    Directory.Create (location);
+		    Directory.CreateDirectory (location);
 		location = value;
 	    }
 	}

@@ -1,0 +1,8 @@
+2004-09-20  Sergio Rubio  <sergio.rubio@hispalinux.es>
+
+	* Makefile.am: Added release target
+	* src/Configuration/ObjectStore.cs: misc fixes
+	* src/Makefile.am: finished
+	* src/makesources.sh: improved to support multiple unwanted dirs.
+	* src/sources.list: updated
+
