@@ -31,19 +31,28 @@ namespace Chicken.Gnome.TrayIcon
 	private Image image;
 	private Thread t;
 
-	public BlinkingTrayIcon (string name, Gdk.Pixbuf pix1, Gdk.Pixbuf pix2) : base (name)
+	/*public BlinkingTrayIcon (string name, Gdk.Pixbuf pix1, Gdk.Pixbuf pix2) : base (name)
 	{
-	    
+	    this.pix1 = pix1;
+	    this.pix2 = pix2;
+	    InitComponent ();
+	}*/
+
+	private void InitComponent ()
+	{
+	    image = new Image (this.pix1);
 	    eBox = new EventBox ();
 	    hbox = new HBox ();
 	    eBox.Add (hbox);
 	    eBox.ButtonPressEvent += ButtonPress;
-	    this.pix1 = pix1;
-	    this.pix2 = pix2;
-	    image = new Image (this.pix1);
 	    hbox.PackStart (image);
 	    Add (eBox);
-	    
+	}
+
+	public BlinkingTrayIcon (string name, Gdk.Pixbuf trayicon) : base (name)
+	{
+	    this.pix1 = trayicon;
+	    InitComponent ();
 	}
 
 	private int frecuency = 500;

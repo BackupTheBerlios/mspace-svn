@@ -24,10 +24,13 @@ namespace Chicken.Gnome.Notification
     using Gtk;
     using Chicken.Gnome.TrayIcon;
     using System.Threading;
+    using System.IO;
+    using System.Reflection;
 
     public enum NotificationType {
 	Message,
-	Html
+	Html,
+	Svg
     }
 
     public class NotificationMessage
@@ -35,11 +38,12 @@ namespace Chicken.Gnome.Notification
 	private WebControl webcontrol;
 	private BlinkingTrayIcon icon;
 	private Window window;
+	private string text;
+	private string header;
+	private Stream msgStream;
 	
-	public NotificationMessage (string source, BlinkingTrayIcon icon, NotificationType type)
+	/*public NotificationMessage (string source, NotificationType type)
 	{
-	    this.icon = icon;
-	    this.timeout = timeout;
 	    window = new Window (WindowType.Popup);
 	    icon.ButtonPressEvent += ButtonPressed;
 	    switch (type)
@@ -52,6 +56,30 @@ namespace Chicken.Gnome.Notification
 		    break;
 	    }
 		    
+	    window.DefaultWidth = bubbleWidth;
+	    window.DefaultHeight = bubbleHeight;
+	    PositionWindow ();
+	}*/
+
+	public NotificationMessage (Stream stream, NotificationType type, string header, string text)
+	{
+	    this.header = header;
+	    this.text = text;
+	    this.msgStream = stream;
+	    InitComponent ();
+	    switch (type)
+	    {
+		case NotificationType.Svg:
+		    RenderSvg (stream);
+		    break;
+	    }
+	}
+
+	private void InitComponent ()
+	{
+	    window = new Window (WindowType.Popup);
+	    icon = new BlinkingTrayIcon ("Message", Gdk.Pixbuf.LoadFromResource ("tray-icon.png"));
+	    icon.ButtonPressEvent += ButtonPressed;
 	    window.DefaultWidth = bubbleWidth;
 	    window.DefaultHeight = bubbleHeight;
 	    PositionWindow ();
@@ -170,6 +198,27 @@ namespace Chicken.Gnome.Notification
 	    window.Add (html);
 	    
 	}
+	
+	private void RenderSvg (Stream stream)
+	{
+	    StreamReader reader = new StreamReader (stream);
+	    string svg = reader.ReadToEnd ();
+	    reader.Close ();
+	    stream.Close ();
+	    svg = svg.Replace ("@HEADER@", header);
+	    svg = svg.Replace ("@TEXT@", text);
+	    string tmpdir = "/tmp/.chicken_notification_" + Environment.TickCount;
+	    string tmpfile = tmpdir + "/tmpsvg.svg";
+	    Directory.CreateDirectory (tmpdir);
+	    StreamWriter writer = new StreamWriter (new FileStream (tmpfile, FileMode.OpenOrCreate, FileAccess.Write));
+	    writer.Write (svg);
+	    writer.Close ();
+	    Image img = new Image (Rsvg.Pixbuf.LoadFromStream (new FileStream (tmpfile, FileMode.Open)));
+	    window.Add (img);
+		
+	}
+
+
 
     }
 }
