@@ -70,7 +70,7 @@ namespace FastOpen
 
 	private void ParseEntry (string entry)
 	{
-	    if ( Array.IndexOf (vfsUrls, entry) != -1 || entry.StartsWith ("http://"))
+	    if ( Array.IndexOf (vfsUrls, entry) != -1 || entry.StartsWith ("http://") || entry.IndexOf ('.') != -1)
 		Gnome.Url.Show (entry);
 	    else {
 		int index = entry.IndexOf (':');
