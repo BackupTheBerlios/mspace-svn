@@ -74,7 +74,12 @@ public class MonkeyPop
 	Gdk.Pixbuf pix1 = new Gdk.Pixbuf (null, "notification.png").ScaleSimple (24, 24, Gdk.InterpType.Nearest);
 	Gdk.Pixbuf pix2 = new Gdk.Pixbuf (null, "notification-white.png").ScaleSimple (24,24, Gdk.InterpType.Nearest);
 	BlinkingTrayIcon icon = new BlinkingTrayIcon ("test", pix1, pix2);
-	NotificationMessage msg = new NotificationMessage (html, icon);
+	NotificationMessage msg;
+	if (html != null)
+	    msg = new NotificationMessage (html, icon, NotificationType.Html);
+	else
+	    msg = new NotificationMessage (message, icon, NotificationType.Message);
+	    
 	msg.BubbleWidth = Int32.Parse (width);
 	msg.BubbleHeight = Int32.Parse (height);
 	msg.TimeOut = Int32.Parse (timeout);
