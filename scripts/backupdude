@@ -5,7 +5,7 @@ import sys
 
 files = []
 targets = ""
-command = "tar czvfP"
+command = "tar cjvfP"
 destdir = ""
 destfile = "backup-" + time.strftime ("%Y_%m_%d_%H_%M") + ".tar.gz"
 
