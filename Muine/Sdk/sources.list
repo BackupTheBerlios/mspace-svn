@@ -1,15 +1,15 @@
 SOURCES = \
 ./Event/PlayerEvent.cs    \
-./Event/EventBus.cs	    \
+./Bus/EventBus.cs	    \
 ./Event/EventMessage.cs	    \
 ./Event/DatabaseEvent.cs    \
-./Event.BusMembers/DatabaseMonitor.cs \
-./Event.BusMembers/EventDebugMonitor.cs \
-./Event.BusMembers/PlayerMonitor.cs \
+./Bus.Members/DatabaseMonitor.cs \
+./Bus.Members/EventDebugMonitor.cs \
+./Bus.Members/PlayerMonitor.cs \
 ./Event.Filters/DatabaseEventFilter.cs \
 ./Event.Filters/PlayerEventFilter.cs\
 ./Event.Filters/IBusFilter.cs\
-./Bus/IBusMember.cs\
+./Bus.Members/IBusMember.cs\
 ./Bus/Message.cs\
 ./Bus/Bus.cs\
 ./Muine/GettextCatalog.cs\
@@ -28,7 +28,7 @@ SOURCES = \
 ./Muine/GnomeProxy.cs\
 ./Muine/ErrorDialog.cs\
 ./Action/ActionMessage.cs\
-./Action/ActionBus.cs\
+./Bus/ActionBus.cs\
 ./Plugin/PluginInfoAttribute.cs\
 ./Plugin/IPlugin.cs\
 ./Plugin/PluginManager.cs
