@@ -11,7 +11,7 @@ DROP_FOLDER=
 ## Comprobaciones previas ##
 ############################
 if test -z `which zenity`; then
-    printf "\n\033[31;1mDebes tener zenity instalado en tu sistema para poder utilizar este script\033[0m\n\n"
+    printf "\n\033[31;1mDebes tener \033[32;1mzenity instalado en tu sistema para poder utilizar este script\033[0m\n\n"
     exit 1
 fi
 
@@ -19,6 +19,9 @@ if test ! -f Dropbox.desktop; then
     printf "\n\033[31;1mDebes ejecutar el script desde el directorio donde lo has descomprimido\033[0m\n\n"
     exit 1
 fi
+
+if test -z `which scponly`; then
+    printf "\n\033[31;1mDebes tener \033[32;1mscponly instalado en tu sistema para poder utilizar este script\033[0m\n\n"
     
 if test `whoami` != "root"; then
     zenity --info --text="Debes ejecutar el script como usuario root." --title="Usuario sin privilegios"
@@ -34,7 +37,7 @@ fi
 
 #captura el nombre del invitado
 GUEST=`zenity --title "Nombre del invitado" --entry --text="Escribe el nombre de usuario que quieres para el invitado.\nEn minúsculas y sin espacios.\n"`
-if test -n `cat /etc/passwd | grep $GUEST`; then
+if test `cat /etc/passwd | grep $GUEST`; then
     zenity --info --title "No puedo continuar" --text="El usuario $GUEST ya existe en el sistema.\nElija otro nombre por favor.\n"
     exit 1
 
