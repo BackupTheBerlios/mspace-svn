@@ -1,0 +1,3 @@
+<configuration>
+  <dllmap dll="chicken" target="@prefix@/lib/libchicken.so"/>
+</configuration>

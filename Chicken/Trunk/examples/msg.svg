@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
+"http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   id="svg1"
+   sodipodi:version="0.32"
+   inkscape:version="0.39"
+   width="250.00000pt"
+   height="50.000000pt"
+   sodipodi:docname="msg.svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:xml="http://www.w3.org/XML/1998/namespace"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   sodipodi:docbase="/home/rubiojr/svn/mspace/Chicken/examples">
+  <defs
+     id="defs3" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2.0000000"
+     inkscape:cx="128.74646"
+     inkscape:cy="14.250000"
+     inkscape:window-width="640"
+     inkscape:window-height="525"
+     inkscape:window-x="0"
+     inkscape:window-y="44" />
+  <metadata
+     id="metadata4">
+    <rdf:RDF
+       id="RDF5">
+      <cc:Work
+         rdf:about=""
+         id="Work6">
+        <dc:format
+           id="format7">image/svg+xml</dc:format>
+        <dc:type
+           id="type9"
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <rect
+     style="fill:#6170ff;fill-opacity:1.0000000;fill-rule:evenodd;stroke:#000000;stroke-width:1.2389666pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;"
+     id="rect912"
+     x="0.77891791"
+     y="0.76981705"
+     width="311.56717"
+     height="61.585365" />
+  <path
+     sodipodi:type="star"
+     style="fill:#ffff00;fill-opacity:1.0000000;fill-rule:evenodd;stroke:#000000;stroke-width:3.6486901;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;stroke-miterlimit:4.0000000;stroke-dasharray:none;"
+     id="path908"
+     sodipodi:cx="21.875000"
+     sodipodi:cy="11.250000"
+     sodipodi:r1="40.697052"
+     sodipodi:r2="21.905285"
+     sodipodi:arg1="0.82884906"
+     sodipodi:arg2="1.3391951"
+     inkscape:flatsided="false"
+     inkscape:rounded="0.0000000"
+     d="M 49.375000,41.250000 L 26.903058,32.570416 L 9.6442377,50.065699 L 5.9250070,26.264634 L -17.855763,20.065699 L 0.89694917,4.9442178 L -5.6250003,-18.750000 L 16.846942,-10.070416 L 34.105762,-27.565699 L 37.824993,-3.7646339 L 61.605763,2.4343013 L 42.853051,17.555782 L 49.375000,41.250000 z "
+     sodipodi:sides="6"
+     transform="matrix(0.635606,0.000000,0.000000,0.611647,25.78363,24.68147)" />
+  <rect
+     style="fill:#ff0000;fill-opacity:1.0000000;fill-rule:evenodd;stroke:#000000;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;"
+     id="rect1536"
+     width="220.62500"
+     height="46.250000"
+     x="81.875000"
+     y="8.1250000" />
+  <text
+     xml:space="preserve"
+     style="font-size:12.000000;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Sans;text-anchor:start;writing-mode:lr;"
+     x="27.377802"
+     y="16.450089"
+     id="text1537"
+     transform="scale(3.499417,2.506895)"
+     sodipodi:linespacing="100%"><tspan
+       id="tspan1538">Example</tspan></text>
+</svg>

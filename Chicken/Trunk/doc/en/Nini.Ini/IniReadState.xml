@@ -1,0 +1,111 @@
+<Type Name="IniReadState" FullName="Nini.Ini.IniReadState">
+  <TypeSignature Language="C#" Value="public enum IniReadState" Maintainer="auto" />
+  <AssemblyInfo>
+    <AssemblyName>Chicken</AssemblyName>
+    <AssemblyPublicKey>
+    </AssemblyPublicKey>
+    <AssemblyVersion>0.0.0.0</AssemblyVersion>
+    <AssemblyCulture>neutral</AssemblyCulture>
+    <Attributes />
+  </AssemblyInfo>
+  <ThreadSafetyStatement>Gtk# is thread aware, but not thread safe; See the <link location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
+  <Docs>
+    <summary>To be added</summary>
+    <remarks>To be added</remarks>
+  </Docs>
+  <Base>
+    <BaseTypeName>System.Enum</BaseTypeName>
+  </Base>
+  <Interfaces>
+    <Interface>
+      <InterfaceName>System.IComparable</InterfaceName>
+    </Interface>
+    <Interface>
+      <InterfaceName>System.IConvertible</InterfaceName>
+    </Interface>
+    <Interface>
+      <InterfaceName>System.IFormattable</InterfaceName>
+    </Interface>
+  </Interfaces>
+  <Attributes />
+  <Members>
+    <Member MemberName="Closed">
+      <MemberSignature Language="C#" Value="Closed" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>Nini.Ini.IniReadState</ReturnType>
+      </ReturnValue>
+      <Parameters>
+      </Parameters>
+      <Docs>
+        <summary>To be added</summary>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="EndOfFile">
+      <MemberSignature Language="C#" Value="EndOfFile" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>Nini.Ini.IniReadState</ReturnType>
+      </ReturnValue>
+      <Parameters>
+      </Parameters>
+      <Docs>
+        <summary>To be added</summary>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Error">
+      <MemberSignature Language="C#" Value="Error" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>Nini.Ini.IniReadState</ReturnType>
+      </ReturnValue>
+      <Parameters>
+      </Parameters>
+      <Docs>
+        <summary>To be added</summary>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Initial">
+      <MemberSignature Language="C#" Value="Initial" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>Nini.Ini.IniReadState</ReturnType>
+      </ReturnValue>
+      <Parameters>
+      </Parameters>
+      <Docs>
+        <summary>To be added</summary>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Interactive">
+      <MemberSignature Language="C#" Value="Interactive" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>Nini.Ini.IniReadState</ReturnType>
+      </ReturnValue>
+      <Parameters>
+      </Parameters>
+      <Docs>
+        <summary>To be added</summary>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="value__">
+      <MemberSignature Language="C#" Value="value__" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters>
+      </Parameters>
+      <Docs>
+        <summary>To be added</summary>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>
