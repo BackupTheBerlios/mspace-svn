@@ -1,5 +1,5 @@
 compile:
-	mcs SdkServicesTest.cs /r:../../Muine.Player.Sdk.dll -pkg:gtk-sharp
+	mcs SdkServicesTest.cs -pkg:gtk-sharp -pkg:muine-sdk
 
 run:
 	mono SdkServicesTest.exe

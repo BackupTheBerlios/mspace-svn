@@ -36,4 +36,7 @@ AC_SUBST(MONO_FLAGS)
 AC_OUTPUT([
 Makefile
 src/Makefile
+src/muine-sdk.pc
+PlayerKits/Makefile
+PlayerKits/Gstreamer/Makefile
 ])

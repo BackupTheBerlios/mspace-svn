@@ -46,18 +46,22 @@ namespace Muine.Sdk.Services
 	    Assembly asm = null;
 	    //First, the service is loaded from the user config dir.
 	    try {
-		asm = Assembly.LoadFrom 
-		    (Configuration.GetInstance ().UserConfigDir + separator + serviceDir + separator + service + ".dll");
-		serviceObject = asm.CreateInstance (service);
-
-		//The user doesn't have a custom service, load the default
-		if (serviceObject == null)
+		string userConfigDir = Configuration.GetInstance ().UserConfigDir;
+		string userServiceLocation = userConfigDir + separator + serviceDir + separator + service + ".dll";
+		if (File.Exists (userServiceLocation))
 		{
-		    string systemLocation = Assembly.GetCallingAssembly ().Location;
-		    asm = Assembly.LoadFrom
-			(systemLocation + separator + "Muine.Sdk" + separator + serviceDir + separator + service + ".dll");
+		    asm = Assembly.LoadFrom (userServiceLocation);
+		    serviceObject = asm.CreateInstance (service);
+		} else {
+		    string sdkDir = Path.GetDirectoryName (Assembly.GetCallingAssembly ().Location);
+		    
+		    string systemServiceLocation = sdkDir + separator + "Muine.Sdk" + 
+						    separator + serviceDir + separator + service + ".dll";
+		    asm = Assembly.LoadFrom (systemServiceLocation);
 		    serviceObject = asm.CreateInstance (service);
 		}
+		if (serviceObject == null)
+		    throw new Exception ("ERROR: Service Object Unavailable.");
 		return serviceObject;
 	    } catch (Exception e) {
 		Console.WriteLine (e.StackTrace);
