@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using ComponentModel.Interfaces;
 
-namespace ComponentModel.Interfaces {
+namespace ComponentModel.Container {
     public class DefaultContainer : IContainer {
         private static DefaultContainer instance; 
        
