@@ -1,0 +1,4 @@
+usr/lib/libchicken*.so.*
+usr/lib/pkgconfig/chicken.pc
+usr/lib/Chicken.dll
+usr/lib/monodoc

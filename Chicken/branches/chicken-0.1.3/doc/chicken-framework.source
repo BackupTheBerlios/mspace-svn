@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<monodoc>
+    <node label="Chicken Framework" name="chicken-framework"/>
+    <source basefile="chicken-framework" path="chicken-framework" provider="ecma"/>
+</monodoc>
