@@ -27,18 +27,18 @@ namespace Muine.Sdk.Data.Kits
     using System.IO;
     using System.Text;
 
-    public class SqliteMusicDb : IMusicDb
+    public class SqliteDataKit : IMusicDb
     {
 	private SqliteConnection conn;
 	private string dbfile = "musicdb.sqlite";
 	private bool isNew = false;
 
-	public SqliteMusicDb ()
+	public SqliteDataKit ()
 	{
 	    conn = new SqliteConnection ();
 	    if (!File.Exists (Path.Combine (Configuration.GetInstance ().UserConfigDir, dbfile)))
 		isNew = true;
-	    conn.ConnectionString = "URI:file:" + Path.Combine (Configuration.GetInstance ().UserConfigDir, dbfile);
+	    conn.ConnectionString = "URI=file:" + Path.Combine (Configuration.GetInstance ().UserConfigDir, dbfile);
 	    conn.Open ();
 	    if (isNew)
 		SetupDb ();
@@ -102,7 +102,7 @@ namespace Muine.Sdk.Data.Kits
 
 	    SqliteCommand cmd = new SqliteCommand ();
 	    cmd.Connection = conn;
-	    cmd.CommandText = String.Format ("INSERT INTO songs (id, filename, title, artists, performers, album, tracknumber, year, duration, mtime, gain) VALUES ('{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}')",
+	    cmd.CommandText = String.Format ("INSERT INTO songs (id, filename, title, artists, performers, album, tracknumber, year, duration, mtime, gain) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}')",
 						song.GetHashCode (),
 						song.Filename,
 						song.Title,
@@ -129,7 +129,7 @@ namespace Muine.Sdk.Data.Kits
 	    
 	    SqliteCommand cmd = new SqliteCommand ();
 	    cmd.Connection = conn;
-	    cmd.CommandText = String.Format ("INSERT INTO albums (id, name, songs, artists, performers, year) VALUES ('{1}', '{2}', '{3}', '{4}', '{5}', '{6}')",
+	    cmd.CommandText = String.Format ("INSERT INTO albums (id, name, songs, artists, performers, year) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}')",
 						album.GetHashCode (),
 						album.Name,
 						songs,
@@ -170,16 +170,16 @@ namespace Muine.Sdk.Data.Kits
 	    command.Connection = conn;
 	    command.CommandText = 
 		 "CREATE TABLE songs (						    " +
-                        "       id		    INTEGER PRIMARY KEY NOT NULL,   " +
-                        "       filename	    STRING  NOT NULL,		    " +
+                        "       id		    INTEGER PRIMARY KEY NOT NULL,   	" +
+                        "       filename	    STRING  NOT NULL,		    	" +
                         "       title		    STRING  NOT NULL,               " +
                         "       artists		    STRING  NOT NULL,               " +
                         "       performers	    STRING  NOT NULL,               " +
-                        "       album		    STRING  NOT NULL                " +
-                        "       tacknumber	    INTEGER NOT NULL                " +
-                        "       year		    INTEGER NOT NULL                " +
-                        "       duration	    INTEGER NOT NULL                " +
-                        "       mtime		    INTEGER NOT NULL                " +
+                        "       album		    STRING  NOT NULL,               " +
+                        "       tracknumber	    INTEGER NOT NULL,               " +
+                        "       year		    INTEGER NOT NULL,               " +
+                        "       duration	    INTEGER NOT NULL,               " +
+                        "       mtime		    INTEGER NOT NULL,               " +
                         "       gain		    FLOAT   NOT NULL                " +
                         ")";
 	    command.ExecuteNonQuery ();
@@ -189,12 +189,12 @@ namespace Muine.Sdk.Data.Kits
 	    command.Connection = conn;
 	    command.CommandText = 
 		 "CREATE TABLE albums (						    " +
-                        "       id		    INTEGER PRIMARY KEY NOT NULL,   " +
-                        "       name		    STRING  NOT NULL,               " +
-                        "       artists		    STRING  NOT NULL,               " +
-                        "       songs		    STRING  NOT NULL,               " +
-                        "       performers	    STRING  NOT NULL                " +
-                        "       year		    INTEGER NOT NULL                " +
+                        "       id		    INTEGER PRIMARY KEY NOT NULL,	" +
+                        "       name		    STRING  NOT NULL,           " +
+                        "       artists		    STRING  NOT NULL,           " +
+                        "       songs		    STRING  NOT NULL,           " +
+                        "       performers	    STRING  NOT NULL,           " +
+                        "       year		    INTEGER NOT NULL           " +
                         ")";
 	    command.ExecuteNonQuery ();
 	    command.Dispose ();

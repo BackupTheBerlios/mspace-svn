@@ -1,0 +1,19 @@
+2004-10-24  Sergio Rubio  <sergio.rubio@hispalinux.es>
+
+	* DataKits/Sqlite/SqliteDataKit.cs: Fixes in tables creation and
+	connection string
+	* DataKits/Sqlite/SqliteMusicDb.cs: Renamed to SqliteDataKit
+	* Makefile.am: Added examples subdir
+	* MuineSdk.ini: Added Type and Assembly configuration for sections
+	* configure.in: Added examples dir
+	* examples/DbTest.cs: (DbTest), (DbTest.DbTest), (DbTest.Main): new
+	Example to test the database.
+	* examples/Makefile.am: Added
+	* src/Configuration/Configuration.cs: Some fixes in configuration handling
+	* src/Configuration/FileStore.cs: Copy from Chicken framework.
+	* src/Data/Album.cs: Default values for propperties
+	* src/Data/Song.cs: ditto
+	* src/Services/SdkServices.cs: Services loading fixes and some debugging
+	code
+	* src/sources.list: updated
+

@@ -23,7 +23,6 @@ namespace Muine.Sdk.Configuration
     using Nini.Config;
     using System.Reflection;
     using System.IO;
-    using Chicken.Configuration;
 
     public class Configuration
     {
@@ -35,8 +34,7 @@ namespace Muine.Sdk.Configuration
 	    objStore = new FileStore ("Muine.Sdk");
 	    if (objStore["MuineSdk.ini"] == null)
 	    {
-		objStore.CreateFile ("MuineSdk.ini", false);
-		CopyDefaultConfigFile ();
+			CopyDefaultConfigFile ();
 	    }
 	    configSource = new IniConfigSource (objStore["MuineSdk.ini"]); 
 	}
@@ -48,7 +46,7 @@ namespace Muine.Sdk.Configuration
 	    StreamReader reader = new StreamReader (s);
 	    string config = reader.ReadToEnd ();
 	    reader.Close ();
-	    StreamWriter writer = new StreamWriter (objStore["MuineSdk.ini"]);
+	    StreamWriter writer = new StreamWriter (objStore.CreateFile ("MuineSdk.ini", false));
 	    writer.Write (config);
 	    writer.Close ();
 	}
@@ -69,24 +67,42 @@ namespace Muine.Sdk.Configuration
 	    }
 	}
 
-	public string PlayerKit {
+	public string PlayerKitType {
 	    set {
 	    }
 
 	    get {
-		IConfig config = configSource.Configs["Player"];
-		return config.GetString ("PlayerKit", "GstPlayer");
+			IConfig config = configSource.Configs["Player"];
+			return config.GetString ("PlayerKit.Type", "GstPlayer");
+	    }
+	}
+	
+	public string PlayerKitAssembly {
+		set {
+		}
+		get {
+			IConfig config = configSource.Configs["Player"];
+			return config.GetString ("PlayerKit.Assembly", "Gstplayer");
+		}
+	}
+
+	public string DataKitType {
+	    set {
+	    }
+
+	    get {
+			IConfig config = configSource.Configs["Data"];
+			return config.GetString ("DataKit.Type", "SqliteDataKit");
 	    }
 	}
 
-	public string DataKit {
-	    set {
-	    }
-
-	    get {
-		IConfig config = configSource.Configs["Data"];
-		return config.GetString ("DataKit", "SqliteDataKit");
-	    }
+	public string DataKitAssembly {
+		set {
+		}
+		get {
+			IConfig config = configSource.Configs["Data"];
+			return config.GetString ("DataKit.Assembly", "SqliteDataKit");
+		}
 	}
 
 	internal FileStream CreateUserFile (string filename)

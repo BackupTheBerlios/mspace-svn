@@ -36,8 +36,8 @@ namespace Muine.Sdk.Services
 	static SdkServices ()
 	{
 	    Playlist = new Playlist ();
-	    Player = (IPlayer)LoadService ("PlayerKits", configuration.PlayerKit);
-	    MusicDb = (IMusicDb) LoadService ("DataKits", configuration.DataKit);
+	    Player = (IPlayer)LoadService ("PlayerKits", configuration.PlayerKitType, configuration.PlayerKitAssembly);
+	    MusicDb = (IMusicDb) LoadService ("DataKits", configuration.DataKitType, configuration.DataKitAssembly);
 	    Player.Playlist = Playlist;
 	}
 
@@ -46,7 +46,7 @@ namespace Muine.Sdk.Services
 	public static IPlaylist Playlist;
 
 
-	private static object LoadService (string serviceDir, string service)
+	private static object LoadService (string serviceDir, string serviceType, string serviceAssembly)
 	{
 	    char separator = Path.DirectorySeparatorChar;
 	    object serviceObject = null;
@@ -54,28 +54,39 @@ namespace Muine.Sdk.Services
 	    //First, the service is loaded from the user config dir.
 	    //If not, try to the system wide service.
 	    try {
-		string userConfigDir = Configuration.GetInstance ().UserConfigDir;
-		string userServiceLocation = userConfigDir + separator + serviceDir + separator + service + ".dll";
-		if (File.Exists (userServiceLocation))
-		{
-		    asm = Assembly.LoadFrom (userServiceLocation);
-		    serviceObject = asm.CreateInstance (service);
+			string userConfigDir = Configuration.GetInstance ().UserConfigDir;
+			string userServiceLocation = userConfigDir + separator + serviceDir + separator + serviceAssembly + ".dll";
+			if (File.Exists (userServiceLocation))
+			{
+				Console.WriteLine ("Loading {0} from USER services", serviceAssembly);
+				asm = Assembly.LoadFrom (userServiceLocation);
+				if (asm != null)
+					Console.WriteLine ("{0} loaded succesfully", serviceAssembly);
+				serviceObject = asm.CreateInstance (serviceType);
 
-		} else {
-		    string sdkDir = Path.GetDirectoryName (Assembly.GetCallingAssembly ().Location);
-		    string systemServiceLocation = sdkDir + separator + "Muine.Sdk" + 
-						    separator + serviceDir + separator + service + ".dll";
-		    asm = Assembly.LoadFrom (systemServiceLocation);
-		    serviceObject = asm.CreateInstance (service);
-		}
+			} else {
+				Console.WriteLine ("Loading {0} from SYSTEM services", serviceAssembly);
+				string sdkDir = Path.GetDirectoryName (Assembly.GetCallingAssembly ().Location);
+				string systemServiceLocation = sdkDir + separator + "Muine.Sdk" + 
+							separator + serviceDir + separator + serviceAssembly + ".dll";
+				Console.WriteLine ("Service location: {0}", systemServiceLocation);
+				asm = Assembly.LoadFrom (systemServiceLocation);
+				if (asm != null)
+					Console.WriteLine ("Assembly {0}.dll loaded succesfully", serviceAssembly);
+				serviceObject = asm.CreateInstance (serviceType);
+			}
 
-		if (serviceObject == null)
-		    throw new ServiceUnavailableException (String.Format ("ERROR: Service {0} unavailable.", service));
-		return serviceObject;
-		    
+			if (serviceObject == null)
+			{
+				Console.WriteLine ("Error initiating {0}", serviceType);
+				throw new ServiceUnavailableException (String.Format ("ERROR: Service {0} unavailable.", serviceType));
+			}
+			return serviceObject;
+					
 	    } catch (Exception e) {
-		Console.WriteLine (e.StackTrace);
-		throw new ServiceUnavailableException (String.Format ("ERROR: Service {0} unavailable.", service), e);
+			Console.WriteLine (e.StackTrace);
+			Console.WriteLine (e.Message);
+			throw new ServiceUnavailableException (String.Format ("ERROR: Service {0} unavailable.", serviceType), e);
 	    }
 	}
 	

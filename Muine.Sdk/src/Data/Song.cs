@@ -46,9 +46,13 @@ namespace Muine.Sdk.Data
 	    
 	    if (filename == null)
 		throw new ArgumentException ("Song:Constructor: metadata filename is null");
-	    if (title == null)
-		title = Path.GetFileNameWithoutExtension (filename);
-		
+	}
+
+	public Song (String filename)
+	{
+	    if (filename == null)
+		throw new ArgumentException ("Song:Constructor: metadata filename is null");
+	    this.filename = filename;
 	}
     
 	private string filename;
@@ -61,67 +65,69 @@ namespace Muine.Sdk.Data
 	private string title;
 	public string Title {
 		get {
+			if (title == null)
+				return Path.GetFileNameWithoutExtension (filename);
 			return title;
 		}
 	}
 
-	private ArrayList artists;
+	private ArrayList artists = new ArrayList ();
 	public ArrayList Artists {
 		get {
 			return artists;
 		}
 	}
 
-	private ArrayList performers;
+	private ArrayList performers = new ArrayList ();
 	public ArrayList Performers {
 		get {
 			return performers;
 		}
 	}
 
-	private string album;
+	private string album = "";
 	public string Album {
 		get {
 			return album;
 		}
 	}
 
-	private int tracknumber;
+	private int tracknumber = 0;
 	public int TrackNumber {
 		get {
 			return tracknumber;
 		}
 	}
 
-	private int year;
+	private int year = 1900;
 	public int Year {
 		get {
 			return year;
 		}
 	}
 
-	private int duration;
+	private int duration = 0;
 	public int Duration {
 		get {
 			return duration;
 		}
 	}
 
-	private int mtime;
+	private int mtime = 0;
 	public int MTime {
 		get {
 			return mtime;
 		}
 	}
 
-	private double gain;
+	private double gain = 0;
 	public double Gain {
 		get {
 			return gain;
 		}
 	}
 
-	private double peak;
+	private double peak = 0;
 	public double Peak {
 		get {
 			return peak;
@@ -141,7 +147,6 @@ namespace Muine.Sdk.Data
 	public bool FitsCriteria (string [] search_bits)
 	{
 	    throw new NotImplementedException ("Not implemented");
-	    return false;
 	}
 
 	public override bool Equals (object obj)

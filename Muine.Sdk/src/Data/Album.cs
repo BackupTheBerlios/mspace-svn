@@ -39,35 +39,35 @@ namespace Muine.Sdk.Data
 	    
 	}
 	
-	private string name;
+	private string name = "UNKNOWN";
 	public string Name {
 		get {
 			return name;
 		}
 	}
 
-	private ArrayList songs;
+	private ArrayList songs = new ArrayList ();
 	public ArrayList Songs {
 	    get {
 		return songs;
 	    }
 	}
 
-	private ArrayList artists;
+	private ArrayList artists = new ArrayList ();
 	public ArrayList Artists {
 		get {
 			return artists;
 		}
 	}
 
-	private ArrayList performers;
+	private ArrayList performers = new ArrayList ();
 	public ArrayList Performers {
 		get {
 		    return performers;
 		}
 	}
 
-	private int year;
+	private int year = 1900;
 	public int Year {
 		get {
 			return year;

@@ -1,3 +1,3 @@
-SUBDIRS = src PlayerKits DataKits doc
+SUBDIRS = src PlayerKits DataKits examples doc
 
 EXTRA_DIST = MuineSdk.ini
