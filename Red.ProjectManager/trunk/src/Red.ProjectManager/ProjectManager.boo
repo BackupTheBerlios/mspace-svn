@@ -156,6 +156,7 @@ class ProjectManager:
 				name = projectNode["Name"].InnerText
 				if File.Exists (location):
 					projects.Add (name, location)
+			WriteProjectsCache ()
 					
 		
 	private def InitConfigDir ():

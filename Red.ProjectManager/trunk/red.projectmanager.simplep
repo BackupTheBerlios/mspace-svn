@@ -3,97 +3,334 @@
     <Name>Red.ProjectManager</Name>
     <FileSet>
         <File>
-            <Path>/home/rubiojr/Projects/Red.ProjectManager/build/Red.dll</Path>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/doc/.svn/entries</Path>
         </File>
         <File>
-            <Path>/home/rubiojr/Projects/Red.ProjectManager/doc-html/Red.ProjectManager/Project.html</Path>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/doc-html/.svn/format</Path>
         </File>
         <File>
-            <Path>/home/rubiojr/Projects/Red.ProjectManager/ext/Red.dll</Path>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/.svn/empty-file</Path>
         </File>
         <File>
-            <Path>/home/rubiojr/Projects/Red.ProjectManager/src/Red.ProjectManager/ProjectFile.boo</Path>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/doc/.svn/text-base/index.xml.svn-base</Path>
         </File>
         <File>
-            <Path>/home/rubiojr/Projects/Red.ProjectManager/src/Red.ProjectManager/ProjectNode.boo</Path>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/build/.svn/empty-file</Path>
         </File>
         <File>
-            <Path>/home/rubiojr/Projects/Red.ProjectManager/doc-html/Red.ProjectManager/FileRemovedArgs.html</Path>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/src/Red.ProjectManager/.svn/text-base/MissingFilesException.boo.svn-base</Path>
         </File>
         <File>
-            <Path>/home/rubiojr/Projects/Red.ProjectManager/doc-html/Red.ProjectManager/ProjectFile.html</Path>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/build/.svn/props/ICSharpCode.SharpZipLib.dll.svn-work</Path>
         </File>
         <File>
-            <Path>/home/rubiojr/Projects/Red.ProjectManager/src/Red.ProjectManager/ProjectManager.boo</Path>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/doc/Red.ProjectManager/.svn/text-base/ProjectManager.xml.svn-base</Path>
         </File>
         <File>
-            <Path>/home/rubiojr/Projects/Red.ProjectManager/doc/Red.ProjectManager/FileAddedArgs.xml</Path>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/build/Red.dll</Path>
         </File>
         <File>
-            <Path>/home/rubiojr/Projects/Red.ProjectManager/ext/ICSharpCode.SharpZipLib.dll</Path>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/.svn/text-base/red.projectmanager.simplep.svn-base</Path>
         </File>
         <File>
-            <Path>/home/rubiojr/Projects/Red.ProjectManager/build/Red.ProjectManager.dll</Path>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/src/Red.ProjectManager/.svn/text-base/ProjectNavigator.boo.svn-base</Path>
         </File>
         <File>
-            <Path>/home/rubiojr/Projects/Red.ProjectManager/src/Red.ProjectManager/Project.boo</Path>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/doc/Red.ProjectManager/.svn/text-base/Project.xml.svn-base</Path>
         </File>
         <File>
-            <Path>/home/rubiojr/Projects/Red.ProjectManager/doc/Red.ProjectManager/FileRemovedArgs.xml</Path>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/build/.svn/prop-base/Red.ProjectManager.dll.svn-base</Path>
         </File>
         <File>
-            <Path>/home/rubiojr/Projects/Red.ProjectManager/doc-html/index.html</Path>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/build/.svn/text-base/Red.ProjectManager.dll.svn-base</Path>
         </File>
         <File>
-            <Path>/home/rubiojr/Projects/Red.ProjectManager/src/Red.ProjectManager/MissingFilesException.boo</Path>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/doc/Red.ProjectManager/XmlObject.xml</Path>
         </File>
         <File>
-            <Path>/home/rubiojr/Projects/Red.ProjectManager/doc-html/Red.ProjectManager/XmlObject.html</Path>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/doc/Red.ProjectManager/.svn/format</Path>
         </File>
         <File>
-            <Path>/home/rubiojr/Projects/Red.ProjectManager/test/Run.boo</Path>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/build/Red.ProjectManager.dll</Path>
         </File>
         <File>
-            <Path>/home/rubiojr/Projects/Red.ProjectManager/doc/index.xml</Path>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/ext/.svn/empty-file</Path>
         </File>
         <File>
-            <Path>/home/rubiojr/Projects/Red.ProjectManager/build/ICSharpCode.SharpZipLib.dll</Path>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/doc-html/Red.ProjectManager/.svn/text-base/ProjectFile.html.svn-base</Path>
         </File>
         <File>
-            <Path>/home/rubiojr/Projects/Red.ProjectManager/src/Red.ProjectManager/InvalidProjectFileException.boo</Path>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/test/.svn/text-base/Run.boo.svn-base</Path>
         </File>
         <File>
-            <Path>/home/rubiojr/Projects/Red.ProjectManager/doc-html/Red.ProjectManager/FileAddedArgs.html</Path>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/doc-html/Red.ProjectManager/ProjectFile.html</Path>
         </File>
         <File>
-            <Path>/home/rubiojr/Projects/Red.ProjectManager/doc/Red.ProjectManager/XmlObject.xml</Path>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/src/Red.ProjectManager/.svn/text-base/ProjectManager.boo.svn-base</Path>
         </File>
         <File>
-            <Path>/home/rubiojr/Projects/Red.ProjectManager/doc/Red.ProjectManager/ProjectFile.xml</Path>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/doc/Red.ProjectManager/.svn/entries</Path>
         </File>
         <File>
-            <Path>/home/rubiojr/Projects/Red.ProjectManager/doc-html/Red.ProjectManager/index.html</Path>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/doc/Red.ProjectManager/.svn/text-base/XmlObject.xml.svn-base</Path>
         </File>
         <File>
-            <Path>/home/rubiojr/Projects/Red.ProjectManager/doc/Red.ProjectManager.xml</Path>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/src/Red.ProjectManager/.svn/text-base/Project.boo.svn-base</Path>
         </File>
         <File>
-            <Path>/home/rubiojr/Projects/Red.ProjectManager/src/Red.ProjectManager/ProjectNavigator.boo</Path>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/doc-html/Red.ProjectManager/index.html</Path>
         </File>
         <File>
-            <Path>/home/rubiojr/Projects/Red.ProjectManager/doc/Red.ProjectManager/ProjectManager.xml</Path>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/test/.svn/empty-file</Path>
         </File>
         <File>
-            <Path>/home/rubiojr/Projects/Red.ProjectManager/doc-html/Red.ProjectManager/ProjectManager.html</Path>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/doc/Red.ProjectManager/.svn/empty-file</Path>
         </File>
         <File>
-            <Path>/home/rubiojr/Projects/Red.ProjectManager/red.projectmanager.simplep</Path>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/doc/Red.ProjectManager/FileAddedArgs.xml</Path>
         </File>
         <File>
-            <Path>/home/rubiojr/Projects/Red.ProjectManager/doc/Red.ProjectManager/Project.xml</Path>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/doc/Red.ProjectManager/.svn/text-base/FileRemovedArgs.xml.svn-base</Path>
         </File>
         <File>
-            <Path>/home/rubiojr/Projects/Red.ProjectManager/Makefile</Path>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/doc-html/Red.ProjectManager/ProjectManager.html</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/src/Red.ProjectManager/.svn/entries</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/doc-html/Red.ProjectManager/.svn/README.txt</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/src/.svn/format</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/ext/.svn/props/Red.dll.svn-work</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/test/Run.boo</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/doc/Red.ProjectManager/FileRemovedArgs.xml</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/build/.svn/format</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/build/.svn/props/Red.ProjectManager.dll.svn-work</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/src/.svn/empty-file</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/build/ICSharpCode.SharpZipLib.dll</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/ext/.svn/text-base/ICSharpCode.SharpZipLib.dll.svn-base</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/doc-html/.svn/empty-file</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/doc/.svn/empty-file</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/doc-html/Red.ProjectManager/.svn/text-base/FileRemovedArgs.html.svn-base</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/doc/Red.ProjectManager.xml</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/src/Red.ProjectManager/.svn/format</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/doc/.svn/text-base/Red.ProjectManager.xml.svn-base</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/build/.svn/text-base/Red.dll.svn-base</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/doc-html/Red.ProjectManager/XmlObject.html</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/src/Red.ProjectManager/MissingFilesException.boo</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/.svn/entries</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/doc-html/.svn/text-base/index.html.svn-base</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/doc-html/Red.ProjectManager/.svn/text-base/index.html.svn-base</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/doc-html/Red.ProjectManager/.svn/text-base/Project.html.svn-base</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/test/.svn/format</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/doc-html/Red.ProjectManager/.svn/text-base/ProjectManager.html.svn-base</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/ext/.svn/text-base/Red.dll.svn-base</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/doc/.svn/format</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/doc/Red.ProjectManager/.svn/text-base/FileAddedArgs.xml.svn-base</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/doc-html/Red.ProjectManager/.svn/text-base/FileAddedArgs.html.svn-base</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/.svn/format</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/src/Red.ProjectManager/.svn/empty-file</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/build/.svn/text-base/ICSharpCode.SharpZipLib.dll.svn-base</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/src/Red.ProjectManager/.svn/text-base/InvalidProjectFileException.boo.svn-base</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/src/Red.ProjectManager/.svn/text-base/ProjectFile.boo.svn-base</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/src/Red.ProjectManager/.svn/text-base/ProjectNode.boo.svn-base</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/src/Red.ProjectManager/.svn/README.txt</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/doc/.svn/README.txt</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/.svn/README.txt</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/src/Red.ProjectManager/ProjectFile.boo</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/doc-html/Red.ProjectManager/.svn/entries</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/doc-html/Red.ProjectManager/.svn/empty-file</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/doc-html/Red.ProjectManager/.svn/text-base/XmlObject.html.svn-base</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/build/.svn/README.txt</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/doc-html/.svn/README.txt</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/build/.svn/props/Red.dll.svn-work</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/doc-html/.svn/entries</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/doc-html/Red.ProjectManager/.svn/format</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/.svn/text-base/Makefile.svn-base</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/src/.svn/README.txt</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/test/.svn/README.txt</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/src/Red.ProjectManager/ProjectNavigator.boo</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/doc-html/index.html</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/src/.svn/entries</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/ext/.svn/prop-base/ICSharpCode.SharpZipLib.dll.svn-base</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/src/Red.ProjectManager/ProjectNode.boo</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/Makefile</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/ext/.svn/README.txt</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/build/.svn/entries</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/doc-html/Red.ProjectManager/Project.html</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/doc/index.xml</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/doc/Red.ProjectManager/ProjectManager.xml</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/doc/Red.ProjectManager/.svn/text-base/ProjectFile.xml.svn-base</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/ext/.svn/format</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/src/Red.ProjectManager/ProjectManager.boo</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/src/Red.ProjectManager/Project.boo</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/doc-html/Red.ProjectManager/FileAddedArgs.html</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/ext/.svn/prop-base/Red.dll.svn-base</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/doc/Red.ProjectManager/Project.xml</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/doc/Red.ProjectManager/.svn/README.txt</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/test/.svn/entries</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/ext/.svn/entries</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/doc-html/Red.ProjectManager/FileRemovedArgs.html</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/doc/Red.ProjectManager/ProjectFile.xml</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/build/.svn/prop-base/ICSharpCode.SharpZipLib.dll.svn-base</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/build/.svn/prop-base/Red.dll.svn-base</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/red.projectmanager.simplep</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/src/Red.ProjectManager/InvalidProjectFileException.boo</Path>
+        </File>
+        <File>
+            <Path>/home/rubiojr/Projects/mspace/Red.ProjectManager/trunk/ext/.svn/props/ICSharpCode.SharpZipLib.dll.svn-work</Path>
         </File>
     </FileSet>
     <FolderSet>
