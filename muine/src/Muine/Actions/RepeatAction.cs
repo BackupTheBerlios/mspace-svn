@@ -17,35 +17,20 @@
  * Boston, MA 02111-1307, USA.
  */
 
-namespace Gtk.Ext
+using Gtk.Ext;
+using Gtk;
+using System;
+
+public class RepeatAction : AbstractUIAction
 {
-    using Gtk;
-    using System;
-
-    public class ActionButton : Button
+    public RepeatAction ()
     {
-	protected UIAction action;
+	StockIcon = Stock.Refresh;
+	Label = AppContext.Catalog.GetString ("R_epeat");
+    }
 
-	public ActionButton (UIAction action) : base ()
-	{
-	    this.action = action;
-	    Sensitive = action.Enabled;
-	}
-
-	protected override void OnActivated ()
-	{
-	    if (!action.Enabled)
-		return;
-	    base.OnActivated ();
-	    action.ActionPerformed ();
-	}
-
-	protected override void OnClicked ()
-	{
-	    if (!action.Enabled)
-		return;
-	    base.OnClicked ();
-	    action.ActionPerformed ();
-	}
+    public override void ActionPerformed ()
+    {
     }
 }
+

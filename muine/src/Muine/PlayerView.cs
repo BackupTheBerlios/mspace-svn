@@ -33,20 +33,13 @@ public class PlayerView : VBox
 	private EllipsizingLabel title_label;
 	private EllipsizingLabel artist_label;
 
-	[Glade.Widget] private Button nextBtn;
-	[Glade.Widget] private Button prevBtn;
-	[Glade.Widget] private Button playPauseBtn;
-	[Glade.Widget] private Button playSongBtn;
-	[Glade.Widget] private Button playAlbumBtn;
 	[Glade.Widget] private VBox volumeBtnBox;
-	[Glade.Widget] private Image playSongImg;
-	[Glade.Widget] private Image playAlbumImg;
-
-	
 	[Glade.Widget] private HBox  nextBox;
 	[Glade.Widget] private HBox  prevBox;
 	[Glade.Widget] private HBox playPauseBox;
 	[Glade.Widget] private HBox coverBox;
+	[Glade.Widget] private HBox playAlbumBox;
+	[Glade.Widget] private HBox playSongBox;
 	[Glade.Widget] private VBox titleBox;
 	[Glade.Widget] private VBox artistBox;
 
@@ -91,18 +84,30 @@ public class PlayerView : VBox
 
 	ImageButton imgBtn;
 
-	imgBtn = new ImageButton (GlobalActions.PlayPauseAction);
+	imgBtn = new ImageButton (GlobalActions.PlayPause);
 	playPauseBox.PackStart (imgBtn);
+	imgBtn.TextEnabled = false;
+	imgBtn.Label.Text = "";
 	
-	imgBtn = new ImageButton (GlobalActions.PreviousAction);
+	imgBtn = new ImageButton (GlobalActions.Previous);
 	prevBox.Add (imgBtn);
+	imgBtn.TextEnabled = false;
+	imgBtn.Label.Text = "";
 
-	imgBtn = new ImageButton (GlobalActions.NextAction);
+	imgBtn = new ImageButton (GlobalActions.Next);
 	nextBox.Add (imgBtn);
+	imgBtn.TextEnabled = false;
+	imgBtn.Label.Text = "";
 
-	playSongImg.SetFromStock (Stock.Add, IconSize.LargeToolbar);
-	playAlbumImg.SetFromStock ("muine-add-album", IconSize.LargeToolbar);
+	imgBtn = new ImageButton (GlobalActions.AddSong);
+	playSongBox.Add (imgBtn);
+	imgBtn.TextEnabled = true;
+	imgBtn.Label.Text = AppContext.Catalog.GetString ("Play Song");
 
+	imgBtn = new ImageButton (GlobalActions.AddAlbum);
+	playAlbumBox.Add (imgBtn);
+	imgBtn.TextEnabled = true;
+	imgBtn.Label.Text = AppContext.Catalog.GetString ("Play Album");
 
     }
 	private void HandleVolumeChanged (int vol)
@@ -110,6 +115,7 @@ public class PlayerView : VBox
                 player.Volume = vol;
                 AppContext.GConfClient.Set ("/apps/muine/volume", vol);
         }
+
 	private void HandleTickEvent (int pos)
 	{
 	}

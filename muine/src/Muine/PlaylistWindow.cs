@@ -30,6 +30,8 @@ public class PlaylistWindow : Window
 {
 	/* menu widgets */
 	[Glade.Widget] private MenuItem songMenu;
+	[Glade.Widget] private MenuItem playlistMenu;
+	[Glade.Widget] private MenuItem fileMenu;
 
 
 	/* playlist area */
@@ -62,7 +64,7 @@ public class PlaylistWindow : Window
 			
 		Add (glade_xml ["main_vbox"]);
 
-		AddAccelGroup (((Menu) glade_xml ["file_menu"]).AccelGroup);
+		//AddAccelGroup (((Menu) glade_xml ["file_menu"]).AccelGroup);
 
 		SetupWindowSize ();
 		SetupButtonsAndMenuItems ();
@@ -73,7 +75,7 @@ public class PlaylistWindow : Window
 
 		playerView = new PlayerView (AppContext.PlayerBackend);
 		playerBox.PackStart (playerView);
-		playerView.ShowAll ();
+		//playerView.ShowAll ();
 		playerBox.ShowAll ();
 
 		glade_xml["main_vbox"].ShowAll ();
@@ -96,6 +98,7 @@ public class PlaylistWindow : Window
 			Main.Iteration ();
 	}
 
+	//{{{
 	public void CheckFirstStartUp () 
  	{
 		bool first_start;
@@ -136,8 +139,9 @@ public class PlaylistWindow : Window
 
  			pw.Done ();
   		}
-  	}
+  	}//}}}
 	
+	//{{{
 	private void SetupWindowSize ()
 	{
 		int width;
@@ -157,7 +161,7 @@ public class PlaylistWindow : Window
 		SetDefaultSize (width, height);
 
 		SizeAllocated += new SizeAllocatedHandler (HandleSizeAllocated);
-	}
+	}//}}}
 
 	private int last_x = -1;
 	private int last_y = -1;
@@ -178,7 +182,6 @@ public class PlaylistWindow : Window
 				Visible = false;
 			}
 
-			UpdateWindowVisibilityUI ();
 		}
 
 		get {
@@ -186,19 +189,52 @@ public class PlaylistWindow : Window
 		}
 	}
 
-	public void UpdateWindowVisibilityUI ()
-	{
-	}
-
 	private void SetupButtonsAndMenuItems ()
 	{
 		
 		Menu menu = new Menu ();
-		menu.Append (new ActionMenuItem (GlobalActions.PlayPauseAction));
-		menu.Append (new ActionMenuItem (GlobalActions.PreviousAction));
-		menu.Append (new ActionMenuItem (GlobalActions.NextAction));
-
+		
+		/* Song Menu */
+		menu.Append (new ActionMenuItem (GlobalActions.PlayPause));
+		//Separator
+		menu.Append (new SeparatorMenuItem ());
+		menu.Append (new ActionMenuItem (GlobalActions.Previous));
+		menu.Append (new ActionMenuItem (GlobalActions.Next));
+		//Separator
+		menu.Append (new SeparatorMenuItem ());
+		menu.Append (new ActionMenuItem (GlobalActions.SkipTo));
+		menu.Append (new ActionMenuItem (GlobalActions.SkipBackwards));
+		menu.Append (new ActionMenuItem (GlobalActions.SkipForward));
 		songMenu.Submenu = menu;
+
+		/* Playlist Menu */
+		menu = new Menu ();
+		menu.Append (new ActionMenuItem (GlobalActions.AddSong));
+		menu.Append (new ActionMenuItem (GlobalActions.AddAlbum));
+		//Separator
+		menu.Append (new SeparatorMenuItem ());
+		menu.Append (new ActionMenuItem (GlobalActions.RemoveSong));
+		menu.Append (new ActionMenuItem (GlobalActions.RemovePlayedSongs));
+		menu.Append (new ActionMenuItem (GlobalActions.ClearPlaylist));
+		//Separator
+		menu.Append (new SeparatorMenuItem ());
+		menu.Append (new ActionMenuItem (GlobalActions.Repeat));
+		playlistMenu.Submenu = menu;
+
+		/* File Submenu */
+		menu = new Menu ();
+		menu.Append (new ActionMenuItem (GlobalActions.ImportFolder));
+		//Separator
+		menu.Append (new SeparatorMenuItem ());
+		menu.Append (new ActionMenuItem (GlobalActions.OpenPlaylist));
+		menu.Append (new ActionMenuItem (GlobalActions.SavePlaylistAs));
+		//Separator
+		menu.Append (new SeparatorMenuItem ());
+		menu.Append (new ActionMenuItem (GlobalActions.HideWindow));
+		//Separator
+		menu.Append (new SeparatorMenuItem ());
+		menu.Append (new ActionMenuItem (GlobalActions.Quit));
+		fileMenu.Submenu = menu;
 
 	}
 
@@ -393,8 +429,6 @@ public class PlaylistWindow : Window
 		window_visible = ((args.Event.NewWindowState != Gdk.WindowState.Iconified) &&
 				  (args.Event.NewWindowState != Gdk.WindowState.Withdrawn));
 
-		if (old_window_visible != window_visible)
-			UpdateWindowVisibilityUI ();
 	}
 
 	private void HandleWindowVisibilityNotifyEvent (object o, VisibilityNotifyEventArgs args)
@@ -406,9 +440,6 @@ public class PlaylistWindow : Window
 
 		bool old_window_visible = window_visible;
 		window_visible = (args.Event.State != Gdk.VisibilityState.FullyObscured);
-
-		if (old_window_visible != window_visible)
-			UpdateWindowVisibilityUI ();
 
 		args.RetVal = false;
 	}

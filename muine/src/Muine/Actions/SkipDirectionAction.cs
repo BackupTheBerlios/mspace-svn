@@ -17,35 +17,32 @@
  * Boston, MA 02111-1307, USA.
  */
 
-namespace Gtk.Ext
+using Gtk;
+using Gtk.Ext;
+
+public class SkipDirectionAction : AbstractUIAction
 {
-    using Gtk;
-    using System;
-
-    public class ActionButton : Button
+    public enum Direction {
+			    Forward,
+			    Backwards
+			    }
+    
+    public SkipDirectionAction (Direction direction)
     {
-	protected UIAction action;
-
-	public ActionButton (UIAction action) : base ()
+	if (direction == Direction.Forward)
 	{
-	    this.action = action;
-	    Sensitive = action.Enabled;
+	    StockIcon = "muine-forward";
+	    Label = AppContext.Catalog.GetString ("Skip _Forward");
 	}
-
-	protected override void OnActivated ()
+	else
 	{
-	    if (!action.Enabled)
-		return;
-	    base.OnActivated ();
-	    action.ActionPerformed ();
-	}
-
-	protected override void OnClicked ()
-	{
-	    if (!action.Enabled)
-		return;
-	    base.OnClicked ();
-	    action.ActionPerformed ();
+	    StockIcon = "muine-rewind";
+	    Label = AppContext.Catalog.GetString ("Skip _Backwards");
 	}
     }
+
+    public override void ActionPerformed ()
+    {
+    }
 }
+

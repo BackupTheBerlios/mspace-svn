@@ -23,16 +23,44 @@ using Gtk.Ext;
 
 public class GlobalActions
 {
-    public static readonly UIAction PlayPauseAction;
-    public static readonly UIAction NextAction;
-    public static readonly UIAction PreviousAction;
+    public static readonly UIAction PlayPause;
+    public static readonly UIAction Next;
+    public static readonly UIAction Previous;
+    public static readonly UIAction SkipTo;
+    public static readonly UIAction SkipForward;
+    public static readonly UIAction SkipBackwards;
+    public static readonly UIAction AddSong;
+    public static readonly UIAction AddAlbum;
+    public static readonly UIAction RemoveSong;
+    public static readonly UIAction RemovePlayedSongs;
+    public static readonly UIAction ClearPlaylist;
+    public static readonly UIAction Repeat;
+    public static readonly UIAction ImportFolder;
+    public static readonly UIAction OpenPlaylist;
+    public static readonly UIAction SavePlaylistAs;
+    public static readonly UIAction HideWindow;
+    public static readonly UIAction Quit;
 
     static GlobalActions ()
     {
-	AppContext.Init ();
-	PlayPauseAction = new PlayAction ();
-	PreviousAction = new PreviousAction ();
-	NextAction = new NextAction ();
+	PlayPause = new PlayAction ();
+	Previous = new PreviousAction ();
+	Next = new NextAction ();
+	SkipTo = new SkipToAction ();
+	SkipForward = new SkipDirectionAction (SkipDirectionAction.Direction.Forward);
+	SkipBackwards = new SkipDirectionAction (SkipDirectionAction.Direction.Backwards);
+	AddSong = new AddSongAction ();
+	AddAlbum = new AddAlbumAction ();
+	RemoveSong = new RemoveSongAction ();
+	RemovePlayedSongs = new RemovePlayedSongsAction ();
+	ClearPlaylist = new ClearPlaylistAction ();
+	Repeat = new RepeatAction ();
+
+	ImportFolder = new ImportFolderAction ();
+	OpenPlaylist = new OpenPlaylistAction ();
+	SavePlaylistAs = new SavePlaylistAsAction ();
+	HideWindow = new HideWindowAction ();
+	Quit = new QuitAction ();
     }
 }
 

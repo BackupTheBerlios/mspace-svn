@@ -17,35 +17,20 @@
  * Boston, MA 02111-1307, USA.
  */
 
-namespace Gtk.Ext
+using Gtk.Ext;
+using Gtk;
+using System;
+
+public class RemoveSongAction : AbstractUIAction
 {
-    using Gtk;
-    using System;
-
-    public class ActionButton : Button
+    public RemoveSongAction ()
     {
-	protected UIAction action;
+	StockIcon = Stock.Remove;
+	Label = AppContext.Catalog.GetString ("_Remove Song");
+    }
 
-	public ActionButton (UIAction action) : base ()
-	{
-	    this.action = action;
-	    Sensitive = action.Enabled;
-	}
-
-	protected override void OnActivated ()
-	{
-	    if (!action.Enabled)
-		return;
-	    base.OnActivated ();
-	    action.ActionPerformed ();
-	}
-
-	protected override void OnClicked ()
-	{
-	    if (!action.Enabled)
-		return;
-	    base.OnClicked ();
-	    action.ActionPerformed ();
-	}
+    public override void ActionPerformed ()
+    {
     }
 }
+

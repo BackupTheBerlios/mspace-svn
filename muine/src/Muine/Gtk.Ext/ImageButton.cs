@@ -47,6 +47,17 @@ namespace Gtk.Ext {
 	    }
 	}
 
+	private Label label;
+	public new Label Label {
+	    get {
+		return label;
+	    }
+	    set {
+		label = value;
+		Label.Visible = textEnabled;
+	    }
+	}
+
 	private bool textEnabled = false;
 	public bool TextEnabled {
 	    get {
@@ -54,14 +65,14 @@ namespace Gtk.Ext {
 	    }
 	    set {
 		textEnabled = value;
-		box.PackEnd (new Label (action.Label));
+		Label.Visible = textEnabled;
 	    }
 	}
 
 	private void InitComponent ()
 	{
-	    if (textEnabled)
-		box.PackEnd (new Label (action.Label));
+	    Label = new Label (action.Label);
+	    box.PackEnd (Label);
 	    box.PackStart (image);
 	    //Child.Destroy ();
 	    Child = box;

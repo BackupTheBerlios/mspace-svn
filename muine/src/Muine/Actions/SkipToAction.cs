@@ -17,35 +17,20 @@
  * Boston, MA 02111-1307, USA.
  */
 
-namespace Gtk.Ext
+
+using Gtk;
+using Gtk.Ext;
+
+public class SkipToAction : AbstractUIAction
 {
-    using Gtk;
-    using System;
-
-    public class ActionButton : Button
+    public SkipToAction ()
     {
-	protected UIAction action;
+	StockIcon = Stock.JumpTo;
+	Label = AppContext.Catalog.GetString ("_Skip to...");
+    }
 
-	public ActionButton (UIAction action) : base ()
-	{
-	    this.action = action;
-	    Sensitive = action.Enabled;
-	}
-
-	protected override void OnActivated ()
-	{
-	    if (!action.Enabled)
-		return;
-	    base.OnActivated ();
-	    action.ActionPerformed ();
-	}
-
-	protected override void OnClicked ()
-	{
-	    if (!action.Enabled)
-		return;
-	    base.OnClicked ();
-	    action.ActionPerformed ();
-	}
+    public override void ActionPerformed ()
+    {
     }
 }
+

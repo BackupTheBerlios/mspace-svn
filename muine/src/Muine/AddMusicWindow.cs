@@ -66,6 +66,7 @@ public class AddMusicWindow : Window
 
 		dataView.Realize ();
 		dataView.Show ();
+		dataView.Search (String.Empty);
 
 	}
 
@@ -143,16 +144,4 @@ public class AddMusicWindow : Window
 	{
 	}
 
-	//public static void Main (string[] args)
-	//{
-	//    Application.Init ();
-	//    AppContext.Init ();
-	//    AppContext.DB.Load ();
-	//    AppContext.CoverDB.Load ();
-	//    DataStore store = new AlbumsStore ();
-	//    DataView dataview = new AlbumsView (store);
-	//    AddMusicWindow win = new AddMusicWindow (dataview);
-	//    win.ShowAll ();
-	//    Application.Run ();
-	//}
 }
