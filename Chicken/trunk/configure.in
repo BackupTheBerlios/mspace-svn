@@ -1,5 +1,5 @@
 AC_PREREQ(2.59)
-AC_INIT(Chicken, 0.1.3, [sergio.rubio@hispalinux.es])
+AC_INIT(Chicken, 0.1.4, [sergio.rubio@hispalinux.es])
 AM_CONFIG_HEADER(config.h)
 AM_MAINTAINER_MODE
 dnl AM_CONFIG_HEADER(config.h)
