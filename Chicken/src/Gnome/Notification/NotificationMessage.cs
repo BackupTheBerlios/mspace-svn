@@ -48,7 +48,7 @@ namespace Chicken.Gnome.Notification
     public class NotificationMessage
     {
 	private WebControl webcontrol;
-	private BlinkingTrayIcon icon;
+	private ShrinkingTrayIcon icon;
 	private Window window;
 	private String source;
 	private NotificationSource sourceType;
@@ -68,7 +68,7 @@ namespace Chicken.Gnome.Notification
 	private void InitComponent ()
 	{
 	    window = new Window (WindowType.Popup);
-	    icon = new BlinkingTrayIcon ("Message", Gdk.Pixbuf.LoadFromResource ("tray-icon.png"));
+	    icon = new ShrinkingTrayIcon ("Message", Gdk.Pixbuf.LoadFromResource ("tray-icon.png"));
 	    icon.ButtonPressEvent += ButtonPressed;
 	    window.DefaultWidth = bubbleWidth;
 	    window.DefaultHeight = bubbleHeight;
@@ -186,9 +186,47 @@ namespace Chicken.Gnome.Notification
 
 	private void RenderHtml ()
 	{
+	    switch (sourceType)
+	    {
+		case NotificationSource.File:
+		    RenderHtmlFromFile ();
+		    break;
+		case NotificationSource.Text:
+		    RenderHtmlFromText ();
+		    break;
+		case NotificationSource.Url:
+		    RenderHtmlFromUrl ();
+		    break;
+	    }
+	}
+
+	private void RenderHtmlFromFile ()
+	{
+	    webcontrol = new WebControl ();
+	    webcontrol.LoadUrl ("file://" + source);
+	    window.Add (webcontrol);
+	}
+
+	private void RenderHtmlFromUrl ()
+	{
 	    webcontrol = new WebControl ();
 	    webcontrol.LoadUrl (source);
 	    window.Add (webcontrol);
+	}
+
+	private void RenderHtmlFromText ()
+	{
+	    string tmpdir = "/tmp/chicken_notification";
+	    if (!Directory.Exists (tmpdir))
+		Directory.CreateDirectory (tmpdir);
+	    string tmpfile = tmpdir + String.Format ("/tmphtml-{0}.html", Environment.TickCount);
+	    StreamWriter writer = new StreamWriter (new FileStream (tmpfile, FileMode.Create, FileAccess.Write));
+	    writer.Write (source);
+	    writer.Close ();
+	    webcontrol = new WebControl ();
+	    webcontrol.LoadUrl ("file://" + tmpfile);
+	    window.Add (webcontrol);
+	    //File.Delete (tmpfile);
 	}
 
 	private void RenderPlainText ()

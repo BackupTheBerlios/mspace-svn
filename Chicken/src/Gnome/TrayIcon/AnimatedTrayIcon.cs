@@ -22,41 +22,68 @@ namespace Chicken.Gnome.TrayIcon
     using System;    
     using Gtk;
     using System.Threading;
-    using System.Collections;
 
-    public class BlinkingTrayIcon : AnimatedTrayIcon
+    public abstract class AnimatedTrayIcon : TrayIcon
     {
-	private Gdk.Pixbuf[] pixbufArray;
-	private Image image;
+	private EventBox eBox;
+	protected HBox hbox;
+	private Thread t;
 
 	private void InitComponent ()
 	{
-	    image = new Image (pixbufArray[0]);
-	    hbox.PackStart (image);
+	    eBox = new EventBox ();
+	    hbox = new HBox ();
+	    eBox.Add (hbox);
+	    eBox.ButtonPressEvent += ButtonPress;
+	    Add (eBox);
 	}
 
-	public BlinkingTrayIcon (string name, Gdk.Pixbuf[] pixbufArray) : base (name)
+	public AnimatedTrayIcon (string name) : base (name)
 	{
-	    this.pixbufArray = pixbufArray;
-	    if (pixbufArray.Length < 2)
-		throw new ArgumentException ("BlinkingTrayIcon: pixbufArray shouldContain at least 2 pixbufs");
 	    InitComponent ();
 	}
 
-	protected override void Render ()
-	{
-	    while (true)
-	    {
-		foreach (Gdk.Pixbuf pix in pixbufArray)
-		{
-		    Gdk.Threads.Enter ();
-		    image.FromPixbuf = pix; 
-		    Gdk.Threads.Leave ();
-		    Thread.Sleep (Frecuency);
-		}
+	private int frecuency = 75;
+	public int Frecuency {
+	    get {
+		return frecuency;
+	    }
+	    set {
+		frecuency = value;
 	    }
 	}
 
+	private int timeout = 5000;
+	public int TimeOut {
+	    get {
+		return timeout;
+	    }
+	    set {
+		timeout = value;
+	    }
+	}
+
+	public void Stop ()
+	{
+		t.Abort ();
+	}
+
+	private void ButtonPress (object obj, ButtonPressEventArgs args)
+	{
+	    if (ButtonPressEvent != null)
+		ButtonPressEvent (obj, args);
+	}
+
+	public new event ButtonPressEventHandler ButtonPressEvent;
+	
+	public virtual void Run ()
+	{
+	    ShowAll ();
+	    t = new Thread (new ThreadStart (Render));
+	    t.Start ();
+	}
+
+	protected abstract void Render ();
     }
 
 }

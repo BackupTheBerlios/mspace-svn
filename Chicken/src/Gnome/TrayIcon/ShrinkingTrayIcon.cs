@@ -22,24 +22,21 @@ namespace Chicken.Gnome.TrayIcon
     using System;    
     using Gtk;
     using System.Threading;
-    using System.Collections;
 
-    public class BlinkingTrayIcon : AnimatedTrayIcon
+    public class ShrinkingTrayIcon : AnimatedTrayIcon
     {
-	private Gdk.Pixbuf[] pixbufArray;
 	private Image image;
+	private Gdk.Pixbuf icon;
 
 	private void InitComponent ()
 	{
-	    image = new Image (pixbufArray[0]);
+	    image = new Image (icon);
 	    hbox.PackStart (image);
 	}
 
-	public BlinkingTrayIcon (string name, Gdk.Pixbuf[] pixbufArray) : base (name)
+	public ShrinkingTrayIcon (string name, Gdk.Pixbuf icon) : base (name)
 	{
-	    this.pixbufArray = pixbufArray;
-	    if (pixbufArray.Length < 2)
-		throw new ArgumentException ("BlinkingTrayIcon: pixbufArray shouldContain at least 2 pixbufs");
+	    this.icon = icon;
 	    InitComponent ();
 	}
 
@@ -47,16 +44,26 @@ namespace Chicken.Gnome.TrayIcon
 	{
 	    while (true)
 	    {
-		foreach (Gdk.Pixbuf pix in pixbufArray)
+		int lower = 12;
+		int upper = 24;
+		for (int i = upper; i >= lower; i--)
 		{
-		    Gdk.Threads.Enter ();
-		    image.FromPixbuf = pix; 
-		    Gdk.Threads.Leave ();
 		    Thread.Sleep (Frecuency);
+		    Gdk.Threads.Enter ();
+		    image.FromPixbuf = icon.ScaleSimple (i, i, Gdk.InterpType.Bilinear);
+		    image.WidthRequest = upper;
+		    Gdk.Threads.Leave ();
+		}
+		for (int j = lower; j <= upper ; j++)
+		{
+		    Thread.Sleep (Frecuency);
+		    Gdk.Threads.Enter ();
+		    image.FromPixbuf = icon.ScaleSimple (j, j, Gdk.InterpType.Bilinear); 
+		    image.WidthRequest = upper;
+		    Gdk.Threads.Leave ();
 		}
 	    }
 	}
-
     }
 
 }

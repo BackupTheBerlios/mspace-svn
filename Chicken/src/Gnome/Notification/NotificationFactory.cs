@@ -23,23 +23,24 @@ namespace Chicken.Gnome.Notification
     using System.IO;
     using System.Reflection;
     using System.Text;
+    using System.Collections;
 
     public class NotificationFactory
     {
 
-	public static void ShowSvgNotification (string source,
-						NotificationSource nsource,
-						NotificationContent ncontent,
-						int timeout)
+	public static void ShowHtmlNotification (string source, NotificationSource nsource, int width, int height, int timeout)
 	{
-	    NotificationMessage msg = new NotificationMessage (source, nsource, ncontent);	    
+	    NotificationMessage msg = new NotificationMessage (source, nsource, NotificationContent.Html);
+	    msg.BubbleWidth = width;
+	    msg.BubbleHeight = height;
 	    msg.TimeOut = timeout;
 	    msg.Notify ();
+		    
 	}
 
-	public static void ShowSvgNotification (string source, string header, string body, int timeout)
+	public static void ShowSvgNotification (string source, string header, string body, int width, int height, int timeout)
 	{
-	    ShowSvgNotification (source, NotificationSource.File, header, body, timeout, 200, 75, NotificationType.Info);
+	    ShowSvgNotification (source, NotificationSource.File, header, body, timeout, width, height, NotificationType.Info);
 	}
 
 	public static void ShowSvgNotification (string source,
@@ -92,31 +93,22 @@ namespace Chicken.Gnome.Notification
 	    ShowSvgNotification (null, NotificationSource.Text, header, body, timeout, width, height, type);
 	}
 
-	public static void ShowMessageNotification (string header, string body, int timeout, NotificationType type)
+	public static void ShowMessageNotification (string header, string body, NotificationType type)
 	{
-	    NotificationFactory.ShowMessageNotification (header, body, timeout, 200, 75, type); 
+	    NotificationFactory.ShowMessageNotification (header, body, 5000, 200, 75, type); 
 	}
 
 	private static string ReplaceMacros (string svg, string header, string text)
 	{
 	    
-	    int linenum = 0;
 	    string newsvg = svg;
 	    newsvg = newsvg.Replace ("@HEADER@", header);
-	    string[] lines = new string[3];
 	    int pcount = 0;
-	    int tokens = 0;
-	    int lasti = 0;
+	    ArrayList tokens = new ArrayList ();
 	    
 	    StringBuilder builder = new StringBuilder ();
 	    for (int i = 0 ; i < text.Length; i++)
 	    {
-		if (tokens == 2)
-		{
-		    lasti = i;
-		    break;
-		}
-
 		if (text[i] != '%' || pcount > 2)
 		{
 		    builder.Append (text[i]);
@@ -124,25 +116,44 @@ namespace Chicken.Gnome.Notification
 		}
 		else {
 			pcount++;
-			if (pcount == 2 && linenum < 2)
+			if (pcount == 2 && tokens.Count < 3)
 			{
-			    tokens++;
-			    lines[linenum] = builder.ToString (); 
+			    Token t = new Token ();
+			    t.nextTokenAt = i + 1;
+			    t.number = tokens.Count + 1;
+			    t.content = builder.ToString ();
+			    tokens.Add (t);
 			    builder = new StringBuilder ();
-			    linenum++;
-			    pcount = 0;
 			}
 		}
 		
 	    }
-	    lines[linenum] = text.Substring (lasti); 
+	    Token last = new Token ();
+	    if (tokens.Count == 0)
+		last.content = text;
+	    else
+		last.content = text.Substring (((Token)tokens[tokens.Count -1]).nextTokenAt);
+	    tokens.Add (last);
+
+	    while (tokens.Count < 3)
+	    {
+		Token empty = new Token ();
+		empty.content = "";
+		tokens.Add (empty);
+	    }
 	    
-	    newsvg = newsvg.Replace ("@LINE1@", lines[0]);
-	    newsvg = newsvg.Replace ("@LINE2@", lines[1]);
-	    newsvg = newsvg.Replace ("@LINE3@", lines[2]);
+	    newsvg = newsvg.Replace ("@LINE1@", ((Token)(tokens[0])).content);
+	    newsvg = newsvg.Replace ("@LINE2@", ((Token)(tokens[1])).content);
+	    newsvg = newsvg.Replace ("@LINE3@", ((Token)(tokens[2])).content);
 	    
 	    return newsvg;
 	}
+    }
+
+    internal class Token {
+	public int nextTokenAt;
+	public int number;
+	public string content;
     }
 
 }
