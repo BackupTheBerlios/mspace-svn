@@ -1,9 +1,11 @@
 SUBDIRS = Gnome
 include sources.list
-REFERENCES = -pkg:gtk-sharp -pkg:gecko-sharp -pkg:gtkhtml-sharp
+REFERENCES = -pkg:gtk-sharp -pkg:gecko-sharp -pkg:gtkhtml-sharp -pkg:rsvg-sharp
+RESOURCES = /resource:../images/simple.svg,simple.svg \
+	/resource:../images/tray-icon.png,tray-icon.png
 	
 Chicken.dll: $(CSSOURCES)
-	mcs $(CSSOURCES) -o $@ -target:library $(REFERENCES)
+	mcs $(CSSOURCES) -o $@ -target:library $(REFERENCES) $(RESOURCES)
 
 all: Chicken.dll
 
