@@ -57,7 +57,7 @@
     <!-- Compila el componente y lo guarda en bin -->
     <target name="build" depends="create-skeleton">
         <csc target="library" output="${bin}/${component_name}.dll" debug="true"
-        verbose="false">
+        verbose="true">
             <sources basedir="${src}">
                 <include name="**/*.cs"/>
             </sources>
@@ -69,11 +69,11 @@
         <tstamp/>
     </target>
 
-    <!-- Ejecuta el componente -->
+    <!-- Ejecuta el componente (Lo compila como un exe y luego lo ejecuta) -->
     <target name="run" depends="build">
         <csc target="exe" output="${bin}/${component_name}.exe" debug="true"
-        verbose="false">
-            <sources basedir="${src}/${component_name}">
+        verbose="true">
+            <sources basedir="${src}">
                 <include name="**/*.cs"/>
             </sources>
             <references>
@@ -82,9 +82,17 @@
                 <include name="**/${bin}/*.dll"/>    
             </references>
         </csc>
-           
-        <exec program="${nant.settings.currentframework.runtimeengine}">
-            <arg  value="${bin}/${component_name}.exe"/>
+          
+        <exec program="${bin}/${component_name}.exe" useruntimeengine="true">
+            <environment>
+                <variable name="MONO_PATH">
+                    <path>
+                        <pathelement file="${lib}"/>
+                        <pathelement file="${components}"/>
+                        <pathelement file="${bin}"/>
+                    </path>
+                </variable>
+            </environment>
         </exec>
 
         <tstamp/>

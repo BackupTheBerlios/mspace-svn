@@ -5,13 +5,18 @@ using System;
 //Falta también la instancia única del componente.
 using AppExample.Components.MainComponent.Bo;
 
+using Test;
+
 namespace AppExample {
             //OR AppExample
     
     public class Launcher {
         public static void Main () {
-            new MainComponentComponentModel ().InitApp ();
+            MainComponentComponentModel.Co ();
+
+            //MainComponentComponentModel mc = new MainComponentComponentModel ();
             //Console.WriteLine ("Hello world"); 
+            Out.Write ("Hello!!");           
         }
     }
 }
