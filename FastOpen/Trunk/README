@@ -47,6 +47,12 @@ And there are many more. Open fseditor.exe and try some of them!!
 
 If you want to add more shortcuts, use fseditor
 
+Autocompletion
+---------------
+Do you wanna open gedit? ok type "ge" and press TAB and FastOpen will complete it.
+It also completes when you type. If you press TAB multiple times it will cycle between
+the commands available with this prefix. Try it, it's fun :).
+
 FastOpen tips n'tricks
 -----------------------
 
