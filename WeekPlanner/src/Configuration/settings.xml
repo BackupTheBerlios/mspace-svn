@@ -1,0 +1,11 @@
+<configuration>
+<configSections>
+      <section name="plugins"
+            type="WeekPlanner.PluginSectionHandler, weekplanner.exe"
+            />
+</configSections>
+   <plugins>
+      <plugin type="Royo.Plugins.Custom.EmailPlugin, CustomPlugin" />
+      <plugin type="Royo.Plugins.Custom.EmailPlugin, CustomPlugin" />
+   </plugins>
+</configuration>

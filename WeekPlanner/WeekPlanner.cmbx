@@ -1,0 +1,16 @@
+<Combine fileversion="1.0" name="WeekPlanner" description="">
+  <StartMode startupentry="WeekPlanner" single="True">
+    <Execute entry="WeekPlanner" type="None" />
+  </StartMode>
+  <Entries>
+    <Entry filename="./WeekPlanner.prjx" />
+  </Entries>
+  <Configurations active="Debug">
+    <Configuration name="Release">
+      <Entry name="WeekPlanner" configurationname="Debug" build="False" />
+    </Configuration>
+    <Configuration name="Debug">
+      <Entry name="WeekPlanner" configurationname="Debug" build="False" />
+    </Configuration>
+  </Configurations>
+</Combine>

@@ -1,0 +1,58 @@
+<Project name="WeekPlanner" description="" newfilesearch="None" enableviewstate="True" version="1.1" projecttype="C#">
+  <Contents>
+    <File name="./src/Cell.cs" subtype="Code" buildaction="Compile" dependson="" data="" />
+    <File name="./src/main.cs" subtype="Code" buildaction="Compile" dependson="" data="" />
+    <File name="./src/TaskArea.cs" subtype="Code" buildaction="Compile" dependson="" data="" />
+    <File name="./src/Task.cs" subtype="Code" buildaction="Compile" dependson="" data="" />
+    <File name="./src/TaskManager.cs" subtype="Code" buildaction="Compile" dependson="" data="" />
+    <File name="./src/UI/PlannerWindow.cs" subtype="Code" buildaction="Compile" dependson="" data="" />
+    <File name="./src/UI/ReadonlyTaskInfoDialog.cs" subtype="Code" buildaction="Compile" dependson="" data="" />
+    <File name="./src/UI/SelectableTask.cs" subtype="Code" buildaction="Compile" dependson="" data="" />
+    <File name="./src/UI/TaskInfoDialog.cs" subtype="Code" buildaction="Compile" dependson="" data="" />
+    <File name="./src/UI/TimeTable.cs" subtype="Code" buildaction="Compile" dependson="" data="" />
+    <File name="./glade/NewTask.glade" subtype="Code" buildaction="EmbedAsResource" dependson="" data="" />
+    <File name="./glade/PlannerWindow.glade" subtype="Code" buildaction="EmbedAsResource" dependson="" data="" />
+    <File name="./glade/ReadonlyTaskInfoDialog.glade" subtype="Code" buildaction="EmbedAsResource" dependson="" data="" />
+    <File name="./images/click.png" subtype="Code" buildaction="EmbedAsResource" dependson="" data="" />
+    <File name="./images/Coolgrey-squared.png" subtype="Code" buildaction="EmbedAsResource" dependson="" data="" />
+    <File name="./images/oh.png" subtype="Code" buildaction="EmbedAsResource" dependson="" data="" />
+    <File name="./images/poing.png" subtype="Code" buildaction="EmbedAsResource" dependson="" data="" />
+    <File name="./images/Table-blue.png" subtype="Code" buildaction="EmbedAsResource" dependson="" data="" />
+    <File name="./images/table.png" subtype="Code" buildaction="EmbedAsResource" dependson="" data="" />
+    <File name="./src/Plugin/IPluginContext.cs" subtype="Code" buildaction="Compile" dependson="" data="" />
+    <File name="./src/Plugin/IPlugin.cs" subtype="Code" buildaction="Compile" dependson="" data="" />
+    <File name="./src/Plugin/PluginManager.cs" subtype="Code" buildaction="Compile" dependson="" data="" />
+    <File name="./src/Plugin/TaskPluginAdapter.cs" subtype="Code" buildaction="Compile" dependson="" data="" />
+    <File name="./src/New Folder" subtype="Directory" buildaction="Compile" dependson="" data="" />
+    <File name="./src/Configuration/AppConfiguration.cs" subtype="Code" buildaction="Compile" dependson="" data="" />
+    <File name="./src/Configuration/Encrypt.cs" subtype="Code" buildaction="Compile" dependson="" data="" />
+    <File name="./src/Configuration/Utils.cs" subtype="Code" buildaction="Compile" dependson="" data="" />
+  </Contents>
+  <References>
+    <Reference type="Gac" refto="gdk-sharp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" localcopy="True" />
+    <Reference type="Gac" refto="glade-sharp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" localcopy="True" />
+    <Reference type="Gac" refto="glib-sharp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" localcopy="True" />
+    <Reference type="Gac" refto="gtk-sharp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" localcopy="True" />
+    <Reference type="Gac" refto="System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" localcopy="True" />
+    <Reference type="Gac" refto="gnome-sharp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" localcopy="True" />
+    <Reference type="Gac" refto="System.Xml, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" localcopy="True" />
+  </References>
+  <DeploymentInformation target="" script="" strategy="File" />
+  <Configuration runwithwarnings="False" name="Debug">
+    <CodeGeneration runtime="MsNet" compiler="Csc" warninglevel="4" nowarn="" includedebuginformation="True" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" mainclass="" target="Exe" definesymbols="" generatexmldocumentation="False" win32Icon="" />
+    <Execution commandlineparameters="" consolepause="True" />
+    <Output directory="./bin/Debug" assembly="WeekPlanner" executeScript="" executeBeforeBuild="" executeAfterBuild="" />
+  </Configuration>
+  <Configurations active="Debug">
+    <Configuration runwithwarnings="False" name="Debug">
+      <CodeGeneration runtime="MsNet" compiler="Csc" warninglevel="4" nowarn="" includedebuginformation="True" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" mainclass="" target="Exe" definesymbols="" generatexmldocumentation="False" win32Icon="" />
+      <Execution commandlineparameters="" consolepause="True" />
+      <Output directory="./bin/Debug" assembly="WeekPlanner" executeScript="" executeBeforeBuild="" executeAfterBuild="" />
+    </Configuration>
+    <Configuration runwithwarnings="False" name="Release">
+      <CodeGeneration runtime="MsNet" compiler="Csc" warninglevel="4" nowarn="" includedebuginformation="True" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" mainclass="" target="Exe" definesymbols="" generatexmldocumentation="False" win32Icon="" />
+      <Execution commandlineparameters="" consolepause="True" />
+      <Output directory="./bin/Release" assembly="WeekPlanner" executeScript="" executeBeforeBuild="" executeAfterBuild="" />
+    </Configuration>
+  </Configurations>
+</Project>

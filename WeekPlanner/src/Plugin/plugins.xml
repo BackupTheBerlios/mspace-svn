@@ -1,0 +1,4 @@
+<plugins>
+		<plugin type="Royo.Plugins.Custom.EmailPlugin" assembly="" />
+		<plugin type="Royo.Plugins.Custom.EmailPlugin" assembly="" />
+</plugins>
