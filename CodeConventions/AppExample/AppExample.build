@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+    (c) Néstor Salceda & Sergio Rubio  (Monkey Space)
+    File: 
+        nant.xml
+    Description:
+        base nant file for automate basic task deployment.
+
+      INSERTAR LA WEB DE MONKEY SPACE Y TAL  
+-->
+
+<project basedir="." default="all" name="Monkey Space --">
+<!-- Properties -->
+    <!--
+        PENSAR LAS PROPIEDADES Y PONERLAS
+        DEBERÁN SER ASÍ COMO VARIABLES QUE SOLO HAYA QUE CAMBIAR
+        PARA ADAPTAR EL COMPONENTE.  EL RESTO DE CONFIGURACIÓN Y COMPILACIÓN
+        SERÁ IGUAL.
+    -->
+    
+    <!--Configuracion (Igual sería recomendable que coincidieran con el
+    manifiesto del ensamblado)-->
+    <property name="version" value="0.1"/>
+    <property name="description" value="A little description"/>
+    <property name="component_name" value="MSpace -- "/> 
+    
+    <!--Localizacion de dependencias -->
+    <property name="src" value="src"/>
+    <property name="lib" value="lib"/>
+    <property name="doc" value="doc"/>
+    <property name="resources" value="resources"/>
+        <!--Aqui se guardarán los ejecutables generados-->
+    <property name="bin" value="bin"/>
+
+<!-- Targets -->
+
+    <!-- Elimina los ficheros existentes en bin y en doc -->
+    <target name="clean">
+        <delete dir="${bin}" if="${directory::exists(bin)}" failonerror="false"/> 
+        <delete dir="${doc}" if="${directory::exists(doc)}" failonerror="false"/> 
+        <tstamp/>
+    </target>
+
+    <!-- Crea una nueva jerarquia con bin y doc para la compilación -->
+    <target name="create-skeleton" depends="clean">
+        <mkdir dir="${bin}" />
+        <mkdir dir="${doc}" />
+    </target>
+    
+    <!-- Compila el componente y lo guarda en bin -->
+    <target name="build" depends="create-skeleton">
+        <tstamp/>
+    </target>
+
+    <!-- Ejecuta el componente -->
+    <target name="run" depends="build">
+        <tstamp/>
+    </target>
+
+    <!-- Por defecto compilará el componente y escribirá la documentación-->
+    <target name="all" depends="build,doc">
+        <tstamp/>
+    </target>
+
+    <!-- Documenta el componente -->
+    <target name="doc" depends="build">
+        <tstamp/>
+    </target>
+
+    <!-- Ayuda sobre este fichero -->
+    <target name="usage">
+        <echo>
+            Monkey Space NAnt buildfile for component 
+            ${component_name} version ${version}.
+
+            Component's Description:
+                ${description}
+
+            Available task:
+                
+                -all
+                    Compile, and creates binary files.
+
+                -doc
+                    Creates documentation.  ¿Monodoc or ndoc?
+
+                -clean
+                    Delete component binaries.
+                
+                -usage
+                    Show this help.
+        </echo>
+        <tstamp/>
+    </target>
+</project>
