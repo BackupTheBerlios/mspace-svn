@@ -1,0 +1,2 @@
+GLADERS =
+GLADERS += /resource:../../glade/MainWindow.glade,MainWindow.glade

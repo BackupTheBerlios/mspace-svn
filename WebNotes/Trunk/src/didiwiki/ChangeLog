@@ -1,0 +1,124 @@
+2004-08-17  0.3 release. 
+
+2004-08-17  mallum  <mallum@handhelds.org>
+
+	* README:
+	* configure.ac:
+	Bump up version to 0.3
+
+	* src/wikitext.h:
+	More CSS tweakery
+	* website/index.htm:
+	Update for 0.3 release 
+
+2004-08-10  mallum,,,  <mallum@handhelds.org>
+
+	* src/wiki.c: (wiki_show_header):
+	* src/wikitext.h:
+	Add titles and shortcut keys to hrefs
+
+2004-08-08  mallum,,,  <mallum@handhelds.org>
+
+	* src/http.c: (http_response_new), (http_response_send_headers):
+	* src/http.h:
+	All content type in response to be set. 
+	* src/wiki.c: (wiki_show_changes_page),
+	(wiki_show_search_results_page), (wiki_show_header),
+	(wiki_handle_http_request):
+	* src/wikitext.h:
+	Fix styles.css to have corect content type.
+	More web standard related fixes. Now xhtml transitional.
+
+2004-08-06  mallum,,,  <mallum@handhelds.org>
+
+	* src/wiki.c: (wiki_print_data_as_html), (wiki_show_header):
+	* src/wikitext.h:
+	CSS + HTML cleanups/improvements
+
+2004-08-02  mallum,,,  <mallum@handhelds.org>
+
+	* src/wiki.c: (wiki_print_data_as_html):
+	Attempt to detect path names and not make them italic 
+
+2004-08-02  mallum,,,  <mallum@handhelds.org>
+
+	* src/wiki.c: (file_write), (wiki_print_data_as_html):
+	More improvements to bold/italic/underline etc handling
+
+2004-07-30  mallum,,,  <mallum@handhelds.org>
+
+	* README:
+	update
+	* src/wiki.c: (wiki_print_data_as_html), (wiki_init):
+	honor DIDIWIKIHOME env var. Improve */-_ handling.
+	* src/wikitext.h:
+	Escape %%'s
+	* website/index.htm:
+	Update for 0.2 release
+
+2004-07-30  0.2 Release
+
+2004-07-29  mallum,,,  <mallum@handhelds.org>
+
+	* AUTHORS:
+	Populated
+	* src/wiki.c: (wiki_print_data_as_html):
+	* src/wikitext.h:
+	Basic Table support. Help updates. pre fixes
+
+2004-07-29  mallum,,,  <mallum@handhelds.org>
+
+	* configure.ac:
+	Bump up version
+	* src/didi.c: (main):
+	* src/didi.h:
+	* src/http.c: (malformed_request):
+	* src/util.c: (util_ascii_to_hex), (util_dehttpize),
+	(util_htmlize):
+	* src/util.h:
+	* src/wiki.c: (check_for_link), (file_read),
+	(wiki_print_data_as_html), (wiki_init):
+	Quick source cleanup. 
+	Make sure lingering </pre>'s get closed
+
+2004-07-28  mallum,,,  <mallum@handhelds.org>
+
+	* src/http.c: (http_server):
+	reuse socket address 
+	* src/wiki.c: (wiki_print_data_as_html):
+	Dont stick <p>'s in <pre>'s
+
+2004-07-20  0.1 Release. 
+
+2004-07-20  mallum,,,  <mallum@handhelds.org>
+
+	* README:
+	* src/wikitext.h:
+	* website/index.htm:
+	More updates to wikitext.h , stylesheets etc.  
+	Added website stuff to svn. 
+	A bit more info in the README.
+
+2004-07-20  mallum,,,  <mallum@handhelds.org>
+
+	* src/didi.h:
+	* src/http.c:
+	* src/util.c:
+	* src/wiki.c: (wiki_print_data_as_html), (changes_compar),
+	(wiki_show_changes_page), (wiki_show_search_results_page),
+	(wiki_show_header):
+	* src/wikitext.h:
+	Add license to source files. 
+	More predefined Wiki Text. 
+
+2004-07-19  mallum  <mallum@handhelds.org>
+
+	* src/http.c: (http_server):
+	* src/wiki.c: (wiki_print_data_as_html), (wiki_show_changes_page),
+	(wiki_show_search_results_page), (wiki_show_header),
+	(wiki_show_footer), (wiki_handle_http_request), (wiki_init):
+	* src/wikitext.h:
+	Added simple search functionality. 
+	Messed with some header defines
+	Imporved webserver startup
+
