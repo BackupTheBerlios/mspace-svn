@@ -46,6 +46,13 @@ public class StockIcons
 		"muine-paused"
 	};
 
+	public static Pixbuf GetPixbuf (string name)
+	{
+	    if (Array.IndexOf (stock_icons, name) != -1)
+		return new Pixbuf (null, name + ".png");
+	    return null;
+	}
+
 	public static IconSize AlbumCoverSize;
 
 	public static void Initialize ()
