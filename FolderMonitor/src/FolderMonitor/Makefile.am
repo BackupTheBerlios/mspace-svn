@@ -10,7 +10,7 @@ all: FolderMonitor.exe
 bin_SCRIPTS = foldermonitor
 
 monitorlibdir = $(prefix)/lib/FolderMonitor
-monitorlib_DATA = FolderMonitor.exe
+monitorlib_DATA = FolderMonitor.exe FolderMonitor.exe.config
 
 EXTRA_DIST = FolderMonitor.cs foldermonitor.in FolderMonitor.exe.config.in
 CLEANFILES = *.exe foldermonitor
