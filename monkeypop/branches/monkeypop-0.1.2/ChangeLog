@@ -1,0 +1,13 @@
+2004-10-12  Sergio Rubio  <sergio.rubio@hispalinux.es>
+
+	* debian/README.Debian:
+	* debian/changelog:
+	* debian/compat:
+	* debian/control:
+	* debian/copyright:
+	* debian/dirs:
+	* debian/docs:
+	* debian/fulldeps.control:
+	* debian/rules:
+	Added debian package files
+

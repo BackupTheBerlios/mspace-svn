@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN"
+"http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   version="1.0"
+   x="0.0000000"
+   y="0.0000000"
+   width="744.09448"
+   height="1052.3622"
+   id="svg1">
+  <defs
+     id="defs3" />
+  <metadata
+     id="metadata4">
+    <rdf:RDF
+       id="RDF5">
+      <cc:Work
+         rdf:about=""
+         id="Work6">
+        <dc:format
+           id="format7">image/svg+xml</dc:format>
+        <dc:type
+           id="type9"
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <path
+     d="M 94.909263,102.10529 L 94.909263,266.50139 L 521.22537,266.50139 L 521.22537,102.10529 L 94.909263,102.10529 z "
+     style="fill:#ffde00;fill-opacity:0.75000000;fill-rule:evenodd;stroke:#000000;stroke-width:2.7500000;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4.0000000;stroke-opacity:1.0000000;"
+     id="rect1027" />
+  <path
+     d="M 149.71496,214.53425 L 117.33915,192.13481 L 80.532695,206.10665 L 91.831145,168.39362 L 67.169318,137.70614 L 106.52795,136.79763 L 128.09256,103.85989 L 141.11909,141.01143 L 179.10857,151.34227 L 147.80077,175.21169 L 149.71496,214.53425 z "
+     transform="translate(48.94527,20.15394)"
+     style="fill:#ff0000;fill-opacity:0.75000000;fill-rule:evenodd;stroke:#000000;stroke-width:2.7500000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4.0000000;stroke-opacity:1.0000000;"
+     id="path1650" />
+  <text
+     x="56.27544"
+     y="33.208649"
+     transform="scale(2.183138,2.127686)"
+     style="font-size:12.000000;font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000000;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Sans;text-anchor:start;writing-mode:lr;"
+     id="text2274"
+     xml:space="preserve"><tspan
+       x="55"
+       y="33.208649"
+       id="tspan2281">@HEADER@</tspan></text>
+  <text
+     x="201.29645"
+     y="167.91650"
+     transform="scale(1.218728,1.265750)"
+     style="font-size:12.000000;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Sans;"
+     id="text2283"
+     xml:space="preserve"><tspan
+       id="tspan2284">@TEXT@</tspan></text>
+</svg>
