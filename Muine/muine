@@ -1,0 +1,3 @@
+#!/bin/sh
+
+/usr/local/bin/mono --debug /usr/local/lib/muine/muine.exe "$@"
