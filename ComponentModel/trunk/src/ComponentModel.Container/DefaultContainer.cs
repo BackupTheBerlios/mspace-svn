@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Collections;
 using ComponentModel.Interfaces;
 using ComponentModel.Container.Dao;
+using ComponentModel.Exceptions;
 using NLog;
 
 using System.Threading;
@@ -57,10 +58,8 @@ namespace ComponentModel.Container {
         
         public static DefaultContainer Instance {
             get {
-                Console.WriteLine ("Getting default Instance of Container.");
                 if (instance == null)
                     instance = new DefaultContainer ();
-                Console.WriteLine ("Exiting getting default instance of Container.");
                 return instance;
             }
         }
@@ -71,8 +70,8 @@ namespace ComponentModel.Container {
                     return (IComponentModel)componentList[i];
                 }
             }
-            return null;
-            //Exception
+            throw new ComponentNotFoundException ("Component " + componentName + " not found in container.");
+            //return null;
         }
 
         public void Add (IComponentModel component) {

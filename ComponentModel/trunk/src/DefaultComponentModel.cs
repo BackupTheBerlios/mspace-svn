@@ -5,6 +5,7 @@ using ComponentModel.VO;
 using NLog;
 using ComponentModel.Container;
 using ComponentModel.ExceptionManager;
+using ComponentModel.Exceptions;
 
 namespace ComponentModel {
     public class DefaultComponentModel : IComponentModel {
@@ -77,8 +78,13 @@ namespace ComponentModel {
                 return responseMethodVO;
             }
             catch (Exception exception) {
-                this.InstantiateExceptionManager ();
-                defaultExceptionManager.ProcessException (exception);
+                if (exception is ComponentModelException) {
+                    //Tirar la exception para arriba.
+                }
+                else {
+                    this.InstantiateExceptionManager ();
+                    defaultExceptionManager.ProcessException (exception);
+                }
             }
             return null;
         }
@@ -99,7 +105,8 @@ namespace ComponentModel {
         internal void SetVO (ComponentModelVO vo) {
             this.vO = vo;
         }
-         
+        
+        //Public Methods
         public ResponseMethodVO Execute (string methodName, object[] parameters) {
             Type type = this.GetType ();
             logger.Debug ("Type of component invoke. " + type.ToString ());
