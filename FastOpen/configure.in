@@ -37,4 +37,6 @@ AC_OUTPUT([
 Makefile
 fastopen
 src/Makefile
+data/Makefile
+glade/Makefile
 ])
