@@ -1,5 +1,5 @@
 AC_PREREQ(2.59)
-AC_INIT(WebNotes, 1.0, [sergio.rubio@hispalinux.es])
+AC_INIT(WebNotes, 1.0.1, [sergio.rubio@hispalinux.es])
 AM_MAINTAINER_MODE
 AM_CONFIG_HEADER(config.h)
 
