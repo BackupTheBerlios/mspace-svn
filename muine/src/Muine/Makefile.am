@@ -4,6 +4,8 @@ include sources.list
 
 RESOURCES = \
 /resource:images/muine-about.png,muine-about.png	\
+/resource:images/muine-volume-zero.png,muine-volume-zero.png	\
+/resource:images/muine-volume-medium.png,muine-volume-medium.png	\
 /resource:images/muine-nothing.png,muine-nothing.png	\
 /resource:images/muine.png,muine.png	\
 /resource:glade/AddWindow.glade,AddWindow.glade	\
@@ -15,6 +17,7 @@ RESOURCES = \
 /resource:glade/PlaylistWindow.glade,PlaylistWindow.glade	\
 /resource:glade/ProgressWindow.glade,ProgressWindow.glade	\
 /resource:glade/SkipToWindow.glade,SkipToWindow.glade	\
+/resource:glade/Player.glade,Player.glade	\
 /resource:glade/YesNoDialog.glade,YesNoDialog.glade
 
 ASSEMBLIES = /r:../Sdk/Muine.Sdk.dll
