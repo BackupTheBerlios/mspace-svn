@@ -1,0 +1,16 @@
+<Namespace Name="Chicken" FullName="Chicken" FullNameSP="Chicken" Maintainer="Sergio Rubio">
+  <Docs>
+    <summary>.Net TrayIcon bindings and Animated TrayIcon support</summary>
+    <remarks>
+      <para>
+	  This namespace contains the .Net TrayIcon bindings and some derived classes
+	  with animation support.
+      </para>
+      <para>
+	  There is a base AnimatedTrayIcon class and to subclasses,
+	  <see cref="T:Chicken.Gnome.TrayIcon.BlinkingTrayIcon"/> and <see cref="T:Chicken.Gnome.TrayIcon.ShrinkingTrayIcon"/>
+	  with different animations.
+	</para>
+    </remarks>
+  </Docs>
+</Namespace>

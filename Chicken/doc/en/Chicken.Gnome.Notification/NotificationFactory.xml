@@ -10,8 +10,47 @@
   </AssemblyInfo>
   <ThreadSafetyStatement>Gtk# is thread aware, but not thread safe; See the <link location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
   <Docs>
-    <summary>To be added</summary>
-    <remarks>To be added</remarks>
+    <summary>Static factory methods to show notification messages rendered from different sources.</summary>
+    <remarks>
+      <para>
+Three different methods are provided to render an notification message from different content. See <see cref="T:Chicken.Gnome.Notification.NotificationContent" />.</para>
+      <list type="bullet">
+        <item>
+          <term>
+            <see cref="M:Chicken.Gnome.Notification.NotificationFactory.ShowMessageNotification" /> will render a standard notification message included in the framework assembly.</term>
+        </item>
+        <item>
+          <term>
+            <see cref="M:Chicken.Gnome.Notification.NotificationFactory.ShowHtmlNotification" /> will render a standard notification message from a file, a URL or a text chunk.
+</term>
+        </item>
+        <item>
+          <term>
+            <para>
+              <see cref="M:Chicken.Gnome.Notification.NotificationFactory.ShowSvgNotification" /> will render an Svg message from a file or an Svg chunk.
+</para>
+          </term>
+        </item>
+      </list>
+      <para />
+      <example>
+        <code lang="C#">
+using Chicken.Gnome.Notification;
+using Gtk;
+
+public class SimpleMessageTest
+{
+    public static void Main (string[] args)
+    {
+        Application.Init ();
+        NotificationFactory.ShowMessageNotification ("Notification header", "Notificaiton body", NotificationType.Info);
+        Application.Run ();
+    }
+
+}
+  </code>
+      </example>
+    </remarks>
   </Docs>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -33,12 +72,16 @@
         <Parameter Name="timeout" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <summary>To be added</summary>
-        <param name="source">a <see cref="T:System.String" /></param>
-        <param name="nsource">a <see cref="T:System.Int32" /></param>
-        <param name="width">a <see cref="T:System.Int32" /></param>
-        <param name="height">a <see cref="T:System.Int32" /></param>
-        <param name="timeout">a <see cref="T:System.Int32" /></param>
+        <summary>
+          <para>
+Render a HTML notification message from a file, a URL or a text chunk.
+</para>
+        </summary>
+        <param name="source">Can be a file, a URL or a HTML chunk. See <see cref="T:Chicken.Gnome.Notification.NotificationSource" />.</param>
+        <param name="nsource">The source type of the notification.</param>
+        <param name="width">The notification bubble width.</param>
+        <param name="height">The notification bubble height.</param>
+        <param name="timeout">The notification timeout in milliseconds. After this time, the notification disappears.</param>
         <remarks>To be added</remarks>
       </Docs>
     </Member>
@@ -57,43 +100,41 @@
         <Parameter Name="timeout" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <summary>To be added</summary>
-        <param name="source">a <see cref="T:System.String" /></param>
-        <param name="header">a <see cref="T:System.String" /></param>
-        <param name="body">a <see cref="T:System.String" /></param>
-        <param name="width">a <see cref="T:System.Int32" /></param>
-        <param name="height">a <see cref="T:System.Int32" /></param>
-        <param name="timeout">a <see cref="T:System.Int32" /></param>
-        <remarks>To be added</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="ShowSvgNotification">
-      <MemberSignature Language="C#" Value="public static void ShowSvgNotification (string source, Chicken.Gnome.Notification.NotificationSource nsource, string header, string body, int timeout, int width, int height, Chicken.Gnome.Notification.NotificationType type);" />
-      <MemberType>Method</MemberType>
-      <ReturnValue>
-        <ReturnType>System.Void</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="source" Type="System.String" />
-        <Parameter Name="nsource" Type="Chicken.Gnome.Notification.NotificationSource" />
-        <Parameter Name="header" Type="System.String" />
-        <Parameter Name="body" Type="System.String" />
-        <Parameter Name="timeout" Type="System.Int32" />
-        <Parameter Name="width" Type="System.Int32" />
-        <Parameter Name="height" Type="System.Int32" />
-        <Parameter Name="type" Type="Chicken.Gnome.Notification.NotificationType" />
-      </Parameters>
-      <Docs>
-        <summary>To be added</summary>
-        <param name="source">a <see cref="T:System.String" /></param>
-        <param name="nsource">a <see cref="T:System.Int32" /></param>
-        <param name="header">a <see cref="T:System.String" /></param>
-        <param name="body">a <see cref="T:System.String" /></param>
-        <param name="timeout">a <see cref="T:System.Int32" /></param>
-        <param name="width">a <see cref="T:System.Int32" /></param>
-        <param name="height">a <see cref="T:System.Int32" /></param>
-        <param name="type">a <see cref="T:System.Int32" /></param>
-        <remarks>To be added</remarks>
+        <summary>Renders an Svg message from a file or an Svg chunk.</summary>
+        <param name="source">The source of the Svg notification. A file or a text chunk.</param>
+        <param name="header">The header that will replace @HEADER@ if found.
+</param>
+        <param name="body">The body that will replace the @LINE@ macros.</param>
+        <param name="width">The width of the message bubble.</param>
+        <param name="height">The height of the message bubble.</param>
+        <param name="timeout">The timeout of the notification.</param>
+        <remarks>
+          <para>
+If the Svg file contains macros, they will be replaced with the contents of header and body parameters.
+</para>
+          <list type="table">
+            <listheader>
+              <term>Macro</term>
+              <description>Replaced with</description>
+            </listheader>
+            <item>
+              <term>@HEADER@</term>
+              <description>replaced with the contents of the header parameter</description>
+            </item>
+            <item>
+              <term>@LINE1@</term>
+              <description>replaced with the contents of the body parameter</description>
+            </item>
+            <item>
+              <term>@LINE2@</term>
+              <description>replaced with the contents of the body parameter</description>
+            </item>
+            <item>
+              <term>@LINE3@</term>
+              <description>replaced with the contents of the body parameter</description>
+            </item>
+          </list>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="ShowMessageNotification">
@@ -111,13 +152,13 @@
         <Parameter Name="type" Type="Chicken.Gnome.Notification.NotificationType" />
       </Parameters>
       <Docs>
-        <summary>To be added</summary>
-        <param name="header">a <see cref="T:System.String" /></param>
-        <param name="body">a <see cref="T:System.String" /></param>
-        <param name="timeout">a <see cref="T:System.Int32" /></param>
-        <param name="width">a <see cref="T:System.Int32" /></param>
-        <param name="height">a <see cref="T:System.Int32" /></param>
-        <param name="type">a <see cref="T:System.Int32" /></param>
+        <summary>Renders a standard notification message included in the framework assembly specifying the width, the height and the timeout of the notification.</summary>
+        <param name="header">The header of the message.</param>
+        <param name="body">The body of the message.</param>
+        <param name="timeout">The timeout of the notification.</param>
+        <param name="width">The width of the notification bubble.</param>
+        <param name="height">The height of the notification bubble.</param>
+        <param name="type">The type of the notification. It can be Warning, Info or Error.</param>
         <remarks>To be added</remarks>
       </Docs>
     </Member>
@@ -133,21 +174,17 @@
         <Parameter Name="type" Type="Chicken.Gnome.Notification.NotificationType" />
       </Parameters>
       <Docs>
-        <summary>To be added</summary>
-        <param name="header">a <see cref="T:System.String" /></param>
-        <param name="body">a <see cref="T:System.String" /></param>
-        <param name="type">a <see cref="T:System.Int32" /></param>
-        <remarks>To be added</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public NotificationFactory ();" />
-      <MemberType>Constructor</MemberType>
-      <ReturnValue />
-      <Parameters />
-      <Docs>
-        <summary>To be added</summary>
-        <returns>a <see cref="T:Chicken.Gnome.Notification.NotificationFactory" /></returns>
+        <summary>Renders a standard notification message included in the framework assembly.</summary>
+        <param name="header">The header of the message</param>
+        <param name="body">
+          <para>
+The body of the message. A maximum of 3 lines will be rendered. Each line of the body must be separated with %%.
+</para>
+          <para>
+Example: "this is a three %% line %% message body"
+</para>
+        </param>
+        <param name="type">Can be Warning, Info and Error.</param>
         <remarks>To be added</remarks>
       </Docs>
     </Member>

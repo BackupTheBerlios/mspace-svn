@@ -27,6 +27,7 @@ namespace Chicken.Gnome.Notification
 
     public class NotificationFactory
     {
+	private NotificationFactory (){}
 
 	public static void ShowHtmlNotification (string source, NotificationSource nsource, int width, int height, int timeout)
 	{
@@ -43,7 +44,7 @@ namespace Chicken.Gnome.Notification
 	    ShowSvgNotification (source, NotificationSource.File, header, body, timeout, width, height, NotificationType.Info);
 	}
 
-	public static void ShowSvgNotification (string source,
+	private static void ShowSvgNotification (string source,
 						NotificationSource nsource,
 						string header,
 						string body,

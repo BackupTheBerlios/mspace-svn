@@ -5,7 +5,7 @@ all: assemble
 
 assemble: chicken-framework.zip chicken-framework.tree
 
-chicken-framework.zip chicken-framework.tree: en/*/*.xml
+chicken-framework.zip chicken-framework.tree: en/*/*.xml en/*.xml
 	$(ASSEMBLER) --ecma $(srcdir)/en -o chicken-framework 
 
 update:
