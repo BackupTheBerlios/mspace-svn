@@ -1,0 +1,14 @@
+AC_PREREQ(2.59)
+AC_INIT(monkeypop-scripts, 0.1)
+
+AM_MAINTAINER_MODE
+
+AM_INIT_AUTOMAKE()
+
+# Checks for programs.
+AC_PROG_INSTALL
+
+AC_OUTPUT([
+Makefile
+XChat/Makefile
+])
