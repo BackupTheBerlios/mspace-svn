@@ -5,7 +5,7 @@ import Gdk
 
 class GladeContext (IProjectContext):
 
-	_icon = Pixbuf ("images/UI-icon.png")
+	_icon = Pixbuf (Globals.Resources, "UI-icon.png")
 	public Icon as Gdk.Pixbuf:
 		get:
 			return _icon

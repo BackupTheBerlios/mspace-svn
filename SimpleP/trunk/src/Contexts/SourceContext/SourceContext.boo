@@ -6,7 +6,7 @@ class SourceContext (IProjectContext):
 
 	public Icon as Gdk.Pixbuf:
 		get:
-			return Gdk.Pixbuf ("images/Source-icon.png")
+			return Gdk.Pixbuf (Globals.Resources, "Source-icon.png")
 
 	_name = "Source"
 	public Name as string:

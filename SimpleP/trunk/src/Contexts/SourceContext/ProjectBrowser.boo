@@ -111,10 +111,10 @@ class ProjectBrowser (TreeView):
 	private def AddDirectoriesToView ():
 		for subdir as string in _currentProject.Navigator.CurrentSubdirs:
 			subdir = System.IO.Path.Combine (_currentProject.Navigator.CurrentPath, subdir)
-			store.AppendValues ( (subdir.Split ( (sep,) )[-1], Gdk.Pixbuf ("images/folder.png"), subdir, true) )
+			store.AppendValues ( (subdir.Split ( (sep,) )[-1], Gdk.Pixbuf (Globals.Resources, "folder.png"), subdir, true) )
 		
 		if _currentProject.Navigator.HasParent:
-			store.AppendValues ( ("../", Gdk.Pixbuf ("images/folder.png"), _currentProject.Navigator.Parent, true) )
+			store.AppendValues ( ("../", Gdk.Pixbuf (Globals.Resources,"folder.png"), _currentProject.Navigator.Parent, true) )
 		
 
 	_filters = Globals.SourceExtensions
@@ -126,7 +126,7 @@ class ProjectBrowser (TreeView):
 				extension = pfile.FullName
 			if not extension in _filters:
 				continue
-			store.AppendValues ( (pfile.Name, Gdk.Pixbuf ("images/file.png"), pfile.FullName, false) )
+			store.AppendValues ( (pfile.Name, Gdk.Pixbuf (Globals.Resources,"file.png"), pfile.FullName, false) )
 
 	private def RemoveFromDiskClicked ():
 		file as string = GetRowValue (store.FullNameCol)

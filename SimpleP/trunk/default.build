@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+    (c) Néstor Salceda & Sergio Rubio  (Monkey Space Developers)
+    File: 
+        nant.xml
+    Description:
+        base nant file template for automate basic task deployment.
+
+      INSERTAR LA WEB DE MONKEY SPACE Y TAL  
+-->
+
+<project basedir="." default="build" name="SimpleP Project Manager">
+<!-- Properties -->
+   
+    <property name="nant.settings.currentframework" value="mono-1.0"/>
+   
+    <property name="version" value="1.0"/>
+    <property name="description" value="SimpleP project manager"/>
+    <property name="bindir" value="build/"/>
+    <property name="docdir" value="doc/"/>
+
+<!-- Targets -->
+
+    <!-- Elimina los ficheros existentes en bin y en doc -->
+    <target name="clean">
+        <delete dir="${bindir}" if="${directory::exists(bindir)}" failonerror="false"/> 
+        <tstamp/>
+    </target>
+
+    <!-- Crea una nueva jerarquia con bin y doc para la compilación -->
+    <target name="create-skeleton" depends="clean">
+        <mkdir dir="${bindir}"/>
+        <mkdir dir="${docdir}"/>
+        <tstamp/>
+    </target>
+
+	<target name="resources">
+		<csc target="library" output="${bindir}/Resources.exe">
+			<sources basedir=".">
+				<include name="resources/res.cs"/>
+			</sources>
+			<resources>
+				<include name="images/*.png"/>
+				<include name="ui-data/*.glade"/>
+			</resources>
+		</csc>
+        <tstamp/>
+	</target>
+    
+    <!-- Compila el componente y lo guarda en bin -->
+    <target name="build"  depends="create-skeleton,resources">
+        <booc output="${bindir}/SimpleP">
+			<sources basedir=".">
+				<include name="src/**/*.boo"/>
+			</sources>
+			<references>
+				<include name="gtk-sharp.dll"/>
+				<include name="glade-sharp"/>
+				<include name="gdk-sharp"/>
+				<include name="../../RedLib/trunk/build/Red.dll"/>
+				<include name="../../Red.ProjectManager/trunk/build/Red.ProjectManager.dll"/>
+				<include name="../../Red.Gtk/trunk/build/Red.Gtk.dll"/>
+				<include name="ext/NLog.dll"/>
+			</references>
+        </booc>
+        <tstamp/>
+    </target>
+
+    <!-- Por defecto compilará el componente y escribirá la documentación-->
+    <target name="all" depends="build,doc">
+        <tstamp/>
+    </target>
+
+    <!-- Documenta el componente y lo guarda en doc-->
+    <target name="doc" depends="build">
+        <tstamp/>
+    </target>
+
+    <!-- Ayuda sobre este fichero -->
+    <target name="usage">
+        <echo>
+            ${description}
+
+            Available task:
+                
+                -all
+                    Compile, and creates binary files.
+
+                -doc
+                    Creates documentation.  ¿Monodoc or ndoc?
+
+                -clean
+                    Delete component binaries.
+                
+                -run
+                    Runs the application.
+               
+                -build
+                    Build component.
+               
+                -all
+                    Builds component and document it.
+                
+                -usage
+                    Show this help.
+        </echo>
+        <tstamp/>
+    </target>
+</project>

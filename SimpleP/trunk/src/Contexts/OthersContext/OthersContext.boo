@@ -5,7 +5,7 @@ import Gdk
 
 class OthersContext (IProjectContext):
 
-	_icon = Pixbuf ("images/Other-icon.png")
+	_icon = Pixbuf (Globals.Resources, "Other-icon.png")
 	public Icon as Gdk.Pixbuf:
 		get:
 			return _icon

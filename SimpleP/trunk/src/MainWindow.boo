@@ -35,14 +35,14 @@ class MainWindow (Window):
 
 	def constructor ():
 		super ("SimpleP")
-		gxml = XML ("simplep.glade", "projectManagerWindow", null)
+		gxml = XML (Globals.Resources, "simplep.glade", "projectManagerWindow", null)
 		gxml.Autoconnect (self)
 		self.Raw = gxml["projectManagerWindow"].Raw
 		Init ()
 	
 	private def Init ():
 		DeleteEvent += Application.Quit
-		Icon = Gdk.Pixbuf ("images/SimpleP-icon-gears.png")
+		Icon = Gdk.Pixbuf (Globals.Resources,"SimpleP-icon-gears.png")
 
 		SetupProjectView ()
 		Services.Statusbar.MessagePushed += MessagePushed

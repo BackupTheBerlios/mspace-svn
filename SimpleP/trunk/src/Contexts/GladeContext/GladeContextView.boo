@@ -74,7 +74,7 @@ class GladeContextView (TreeView):
 			files = currentProject.GetFilesWithExtension ([".glade"])
 			for file as ProjectFile in files:
 				fileText = "${file.Name}\n<span foreground='grey' size='small'>${file.FullName}</span>"
-				_store.AppendValues ( (Gdk.Pixbuf ("images/glade-20.png"),
+				_store.AppendValues ( (Gdk.Pixbuf (Globals.Resources, "glade-20.png"),
 										fileText, file.FullName) )
 
 	private def ProjectChanged (sender, args):

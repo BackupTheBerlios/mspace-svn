@@ -23,7 +23,7 @@ class AboutWindow (Window):
 		gxml = XML ("simplep.glade", "aboutWindow", null)
 		gxml.Autoconnect (self)
 		self.Raw = gxml["aboutWindow"].Raw
-		aboutImage.FromFile = "images/SimpleP-full-logo.png"
+		aboutImage.FromPixbuf = Gdk.Pixbuf (Globals.Resources, "SimpleP-full-logo.png")
 
 	def OnCloseClicked (sender, args):
 		Destroy ()

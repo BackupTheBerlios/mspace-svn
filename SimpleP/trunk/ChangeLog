@@ -1,0 +1,20 @@
+2005-04-05  Sergio Rubio  <sergio.rubio@hispalinux.es>
+
+	* Makefile: updated to build de resources in a satellite
+	* default.build: NEW nant build file, UNTESTED
+	* images/images.list:
+	* images/makeimages.sh:
+	* resources/res.cs:
+	* simplep.simplep:
+	* src/AboutWindow.boo:
+	* src/Contexts/GladeContext/GladeContext.boo:
+	* src/Contexts/GladeContext/GladeContextView.boo:
+	* src/Contexts/OthersContext/OthersContext.boo:
+	* src/Contexts/SourceContext/ProjectBrowser.boo:
+	* src/Contexts/SourceContext/SourceContext.boo:
+	* src/Contexts/TargetsContext/TargetsContext.boo:
+	* src/Globals.boo:
+	* src/MainWindow.boo:
+
+	Resources are now built inside the Resources.dll assembly
+

@@ -1,0 +1,6 @@
+namespace SimpleP
+{
+	class Res
+	{
+	}
+}
