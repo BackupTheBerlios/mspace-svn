@@ -1,7 +1,6 @@
 0.1
 ----
-* TrayIcon 
-* BlinkingTrayIcon
-* ShrinkingTrayIcon
+* TrayIcon bindings
+* AnimatedTrayIcon, BlinkingTrayIcon, ShrinkingTrayIcon
 * NotificationMessage and NotificationFactory
 * Nini included (See http://nini.sf.net)
