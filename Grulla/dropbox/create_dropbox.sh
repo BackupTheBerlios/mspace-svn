@@ -23,12 +23,6 @@ if test `whoami` != "root"; then
 fi
 
 
-#Comprobamos si el script se esta ejecutando desde el directorio
-if test ! -f Dropbox.desktop; then
-    zenity --info --text="Debes ejecutar el script desde el directorio\ndonde lo has descomprimido." --title="Directorio desconocido"
-    exit 1
-fi
-
 #Comprobamos si scponly está instalado
 if test -z `which scponly`; then
     zenity --info --text="Debes tener scponly instalado para poder continuar." --title="scponly"
@@ -75,9 +69,6 @@ chmod g+srw $DROP_FOLDER
 useradd -d /home/$USER/Dropbox -g $GROUP -s /usr/bin/scponly $GUEST
 echo $GUEST:$GUEST | chpasswd
 
-#Renombra el fichero .desktop a $USER-Dropbox.desktop
-cp Dropbox.desktop $USER-$GUEST-Dropbox.desktop
-
 #reemplaza @USER@ e @IP@ en el fichero Dropbox.desktop
 #sed -i "s/@USER@/$USER/" $USER-$GUEST-Dropbox.desktop
 #sed -i "s/@GUEST@/$GUEST/" $USER-$GUEST-Dropbox.desktop
@@ -91,8 +82,10 @@ Version=1.0
 Encoding=UTF-8
 Name=$USER DropBox
 Type=Link
-URL=sftp://$GUEST@$IP/home/$USER/Dropbox
+URL=sftp://$GUEST@$IP:/home/$USER/Dropbox
 Terminal=false
 Icon=gnome-fs-share.png" > $USER-$GUEST-Dropbox.desktop
 
-sudo -u $USER gnome-open mailto:$GUEST_MAIL $USER-$GUEST-Dropbox.desktop
+if test `which sudo`; then
+    sudo -u $USER gnome-open mailto:$GUEST_MAIL $USER-$GUEST-Dropbox.desktop
+fi
