@@ -39,4 +39,6 @@ src/Makefile
 src/muine-sdk.pc
 PlayerKits/Makefile
 PlayerKits/Gstreamer/Makefile
+DataKits/Makefile
+DataKits/Sqlite/Makefile
 ])

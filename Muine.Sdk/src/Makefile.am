@@ -1,7 +1,7 @@
 include sources.list
 
 MISCRS = /resource:../MuineSdk.ini,MuineSdk.ini
-REFERENCES = -pkg:fl-framework
+REFERENCES = -pkg:chicken
 
 Muine.Sdk.dll: $(CSSOURCES)
 	mcs /out:$@ $(CSSOURCES) /target:library $(MISCRS) $(REFERENCES)

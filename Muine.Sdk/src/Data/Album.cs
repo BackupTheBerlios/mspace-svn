@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004 Jorn Baayen <jorn@nl.linux.org>
+ * Copyright (C) 2004 Sergio Rubio <sergio.rubio@hispalinux.es>  
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -22,57 +22,104 @@ namespace Muine.Sdk.Data
     using System;
     using System.Collections;
 
-    public class Album : ISearchable
+    /// 
+    /// Readonly copy of an Album in the Music Database.
+    /// Modifications to this class are ignored. They are not
+    /// persisted into the database.
+    /// 
+    public class Album : ISearchable, IComparable
     {
-	    private string name;
-	    public string Name {
-		    get {
-			    return name;
-		    }
+	public Album (AlbumMetadata metadata)
+	{
+	    name = metadata.Name;
+	    songs = metadata.Songs;
+	    artists = metadata.Artists;
+	    performers = metadata.Performers;
+	    year = metadata.Year;
+	    
+	}
+	
+	private string name;
+	public string Name {
+		get {
+			return name;
+		}
+	}
+
+	private ArrayList songs;
+	public ArrayList Songs {
+	    get {
+		return songs;
 	    }
+	}
 
-	    public ArrayList Songs;
+	private ArrayList artists;
+	public ArrayList Artists {
+		get {
+			return artists;
+		}
+	}
 
-	    private ArrayList artists;
-	    public string [] Artists {
-		    get {
-			    return (string []) artists.ToArray (typeof (string));
-		    }
+	private ArrayList performers;
+	public ArrayList Performers {
+		get {
+		    return performers;
+		}
+	}
+
+	private int year;
+	public int Year {
+		get {
+			return year;
+		}
+	}
+
+	private IAlbumComparer comparer = new SimpleAlbumComparer ();
+	public IAlbumComparer Comparer {
+	    get {
+		return comparer;
 	    }
-
-	    private ArrayList performers;
-	    public string [] Performers {
-		    get {
-			    return (string []) performers.ToArray (typeof (string));
-		    }
+	    set {
+		comparer = value;	
 	    }
+	}
 
-	    private string year;
-	    public string Year {
-		    get {
-			    return year;
-		    }
-	    }
+	public bool FitsCriteria (string [] search_bits)
+	{
+	    throw new NotImplementedException ("Not implemented");
+	    return false;
+	}
 
-	    private static string [] prefixes = null;
+	public override bool Equals (object obj)
+	{
+	    if (obj.GetType () != this.GetType ())
+		throw new ArgumentException ("Album:Equals: object is not an Album");
 
-	    public Album (Song initial_song)
-	    {
-	    }
+	    if (comparer.Compare (this, (Album)obj) == 0) 
+		return true;
+	    else return false;
+	}
 
-	    public bool AddSong (Song song)
-	    {
-		return false;
-	    }
+	public int CompareTo (object obj)
+	{
+	    if (obj.GetType () != this.GetType ())
+		throw new ArgumentException ("Album:CompareTo: object is not an Album");
 
-	    public bool RemoveSong (Song song)
-	    {
-		return false;
-	    }
+	    return comparer.Compare (this, (Album)obj);
+	}
 
-	    public bool FitsCriteria (string [] search_bits)
-	    {
-		return false;
-	    }
+	public static int Compare (Album one, Album two)
+	{
+	    return new SimpleAlbumComparer ().Compare (one, two);
+	}
+    }
+
+    public class SimpleAlbumComparer : IAlbumComparer
+    {
+	public int Compare (Album one, Album two)
+	{
+	    return one.Name.ToLower ().CompareTo (two.Name.ToLower ());
+		
+	}
     }
 }

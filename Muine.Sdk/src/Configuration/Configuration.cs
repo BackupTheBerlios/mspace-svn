@@ -23,19 +23,19 @@ namespace Muine.Sdk.Configuration
     using Nini.Config;
     using System.Reflection;
     using System.IO;
-    using FL.Configuration;
+    using Chicken.Configuration;
 
     public class Configuration
     {
-	private ObjectStore objStore;
+	private FileStore objStore;
 	private IConfigSource configSource;
 
 	private Configuration ()
 	{
-	    objStore = new ObjectStore ("Muine.Sdk");
+	    objStore = new FileStore ("Muine.Sdk");
 	    if (objStore["MuineSdk.ini"] == null)
 	    {
-		objStore.CreateObject ("MuineSdk.ini");
+		objStore.CreateFile ("MuineSdk.ini", false);
 		CopyDefaultConfigFile ();
 	    }
 	    configSource = new IniConfigSource (objStore["MuineSdk.ini"]); 
@@ -82,6 +82,12 @@ namespace Muine.Sdk.Configuration
 	public string DataKit {
 	    set {
 	    }
+	}
+
+	public FileStream CreateUserFile (string filename)
+	{
+	    FileStream f = objStore.CreateFile (filename, false);
+	    return f;
 	}
 	
     }

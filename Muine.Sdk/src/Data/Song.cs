@@ -23,126 +23,164 @@ namespace Muine.Sdk.Data
     using System.Collections;
     using System.IO;
 
-    public class Song : ISearchable
+    /// 
+    ///	Readonly copy of a Song in the music database.
+    /// Modifications to this class are ignored. They are not
+    /// persisted into the database
+    /// 
+    public class Song : ISearchable, IComparable
     {
-	    private string filename;
-	    public string Filename {
-		    get {
-			    return filename;
-		    }
-	    }
-		    
-	    private string title;
-	    public string Title {
-		    get {
-			    return title;
-		    }
-	    }
+	public Song (SongMetadata metadata)
+	{
+	    filename = metadata.Filename;
+	    title = metadata.Title;
+	    artists = metadata.Artists;
+	    performers = metadata.Performers;
+	    album = metadata.Album;
+	    tracknumber = metadata.TrackNumber;
+	    year = metadata.Year;
+	    mtime = metadata.MTime;
+	    duration = metadata.Duration;
+	    gain = metadata.Gain;
+	    peak = metadata.Peak;
+	    
+	    if (filename == null)
+		throw new ArgumentException ("Song:Constructor: metadata filename is null");
+	    if (title == null)
+		title = Path.GetFileNameWithoutExtension (filename);
+		
+	}
+    
+	private string filename;
+	public string Filename {
+		get {
+			return filename;
+		}
+	}
+		
+	private string title;
+	public string Title {
+		get {
+			return title;
+		}
+	}
 
-	    private string [] artists;
-	    public string [] Artists {
-		    get {
-			    return artists;
-		    }
+	private ArrayList artists;
+	public ArrayList Artists {
+		get {
+			return artists;
+		}
+	}
+
+	private ArrayList performers;
+	public ArrayList Performers {
+		get {
+			return performers;
+		}
+	}
+
+	private string album;
+	public string Album {
+		get {
+			return album;
+		}
+	}
+
+	private int tracknumber;
+	public int TrackNumber {
+		get {
+			return tracknumber;
+		}
+	}
+
+	private int year;
+	public int Year {
+		get {
+			return year;
+		}
+	}
+
+	private int duration;
+	public int Duration {
+		get {
+			return duration;
+		}
+	}
+
+	private int mtime;
+	public int MTime {
+		get {
+			return mtime;
+		}
+	}
+
+	private double gain;
+	public double Gain {
+		get {
+			return gain;
+		}
+	}
+
+	private double peak;
+	public double Peak {
+		get {
+			return peak;
+		}
+	}
+
+	private ISongComparer comparer = new SimpleSongComparer ();
+	public ISongComparer Comparer {
+	    get {
+		return comparer;
 	    }
-
-	    private string [] performers;
-	    public string [] Performers {
-		    get {
-			    return performers;
-		    }
+	    set {
+		comparer = value;
 	    }
+	}
 
-	    private string album;
-	    public string Album {
-		    get {
-			    return album;
-		    }
-	    }
+	public bool FitsCriteria (string [] search_bits)
+	{
+	    throw new NotImplementedException ("Not implemented");
+	    return false;
+	}
 
-	    private int track_number;
-	    public int TrackNumber {
-		    get {
-			    return track_number;
-		    }
-	    }
+	public override bool Equals (object obj)
+	{
+	    if (obj.GetType () != this.GetType ())
+		throw new ArgumentException ("Song:Equals: object is not a Song");
 
-	    private string year;
-	    public string Year {
-		    get {
-			    return year;
-		    }
-	    }
+	    if (comparer.Compare (this, (Song)obj) == 0) 
+		return true;
+	    else return false;
+	}
 
-	    private int duration;
-	    public int Duration {
-		    /* we have a setter too, because sometimes we want
-		     * to correct the duration. */
-		    set {
-			    duration = value;
-		    }
-		    
-		    get {
-			    return duration;
-		    }
-	    }
+	public int CompareTo (object obj)
+	{
+	    if (obj.GetType () != this.GetType ())
+		throw new ArgumentException ("Song:CompareTo: object is not a Song");
 
-	    private int mtime;
-	    public int MTime {
-		    get {
-			    return mtime;
-		    }
-	    }
+	    return comparer.Compare (this, (Song)obj);
+	}
 
-	    private double gain;
-	    public double Gain {
-		    get {
-			    return gain;
-		    }
-	    }
+	public int Compare (Song one, Song two)
+	{
+	    return new SimpleSongComparer ().Compare(one, two);
+	}
+    }
 
-	    private double peak;
-	    public double Peak {
-		    get {
-			    return peak;
-		    }
-	    }
-
-	    private string sort_key = null;
-	    public string SortKey {
-		    get {
-			    if (sort_key == null) {
-				    string a = String.Join (" ", artists).ToLower ();
-				    string p = String.Join (" ", performers).ToLower ();
-				    
-			    }
-			    
-			    return sort_key;
-		    }
-	    }
-
-	    private string search_key = null;
-	    public string SearchKey {
-		    get {
-			    if (search_key == null) {
-				    string a = String.Join (" ", artists).ToLower ();
-				    string p = String.Join (" ", performers).ToLower ();
-				    
-				    search_key = title.ToLower () + " " + a + " " + p + " " + album.ToLower ();
-			    }
-
-			    return search_key;
-		    }
-	    }
-
-	    public Song (string fn)
+    public class SimpleSongComparer : ISongComparer 
+    {
+	public int Compare (Song one, Song two)
+	{
+	    if (one.Title.ToLower () == two.Title.ToLower ())
 	    {
-		this.filename = fn;
+		if (one.Filename == two.Filename)
+		    return 0;
+	    } else {
+		if (one.Filename == two.Filename)
+		    return 0;
 	    }
-
-	    public bool FitsCriteria (string [] search_bits)
-	    {
-		return false;
-	    }
+	    return one.Filename.CompareTo (two.Filename);
+	}
     }
 }

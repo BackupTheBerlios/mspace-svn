@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004 Sergio Rubio <sergio.rubio@hispalinux.es>
+ * Copyright (C) 2004 Sergio Rubio <sergio.rubio@hispalinux.es>  
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -17,16 +17,17 @@
  * Boston, MA 02111-1307, USA.
  */
 
-namespace Muine.Sdk.Data 
+namespace Muine.Sdk.Data
 {
-    using System;    
+    using System;
+    using System.Collections;
 
-	public class CoverDatabase
-	{
-	    public CoverDatabase ()
-	    {
-	    }
-	}
-
+    public class AlbumMetadata
+    {
+	    public string Name;
+	    public ArrayList Songs;
+	    public ArrayList Artists;
+	    public ArrayList Performers;
+	    public int Year;
+    }
 }
-

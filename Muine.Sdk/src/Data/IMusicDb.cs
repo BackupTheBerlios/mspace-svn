@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003, 2004 Jorn Baayen <jorn@nl.linux.org>
+ * Copyright (C) 2004 Sergio Rubio <sergio.rubio@hispalinux.es>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -17,23 +17,25 @@
  * Boston, MA 02111-1307, USA.
  */
 
-namespace Muine.Sdk.Data
+namespace Muine.Sdk.Data 
 {
     using System;
     using System.Collections;
 
-    public class SongMetadata
+    public interface IMusicDb
     {
-	    public string Filename;
-	    public string Title;
-	    public ArrayList Artists;
-	    public ArrayList Performers;
-	    public string Album;
-	    public int TrackNumber;
-	    public int Year;
-	    public int Duration;
-	    public int MTime;
-	    public double Gain;
-	    public double Peak;
+	ArrayList Songs { get; }
+
+	ArrayList Albums { get; }
+
+	bool AddSong (Song song);
+
+	bool AddAlbum (Album album);
+
+	bool RemoveSong (Song song);
+
+	bool RemoveAlbum (Album album);
     }
+
 }
+

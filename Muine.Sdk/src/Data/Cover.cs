@@ -21,12 +21,31 @@ namespace Muine.Sdk.Data
 {
     using System;    
 
-    public class MusicDatabase
+    public class Cover
     {
-	public MusicDatabase ()
+	private int id;
+	public int Id {
+	    get {
+		return id;
+	    }
+	}
+
+	private string filename;
+	public string Filename {
+	    get {
+		return filename;	
+	    }
+	}
+
+	public override bool Equals (object obj)
 	{
+	    if ((obj.GetType () != this.GetType ()) || (obj == null))
+		return false;
+	    Cover c = (Cover) obj;
+	    return c.filename == this.filename;
 	}
     }
+
 
 }
 
