@@ -9,7 +9,7 @@
 using System;
 using System.Text;
 
-namespace Vim.Components.VimBuffer.Model.VimBufferStrategy {
+namespace Vim.Components.VimBuffer {
     public class GapTextBufferStrategy : IVimBufferStrategy {
         private char[] buffer = new char [0];
 

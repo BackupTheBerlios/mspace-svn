@@ -5,7 +5,7 @@
 //      Néstor Salceda Alonso (wizito@gentelibre.org)
 // (C) 2005
 
-namespace Vim.Components.VimBuffer.Model.VimBufferStrategy {
+namespace Vim.Components.VimBuffer {
     /**
      *  Basic strategy interface to operate with buffer implementations.
      */

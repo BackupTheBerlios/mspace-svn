@@ -8,7 +8,7 @@
 // 
 using System;
 
-namespace Vim.Components.VimBuffer.Model.VimBufferStrategy {
+namespace Vim.Components.VimBuffer {
     public class StringVimBufferStrategy : IVimBufferStrategy {
         private string text;
    

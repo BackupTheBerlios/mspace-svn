@@ -15,22 +15,9 @@ resources/log4net.config
 RESOURCES_REFERENCES_BUILD=$(foreach res, $(RESOURCES_REFERENCES),$(addprefix -resource:,$(res)),$(notdir $(res)))
 
 SOURCES_REFERENCES=\
-Vim.Components.BufferedVimControl/Model/*.cs\
-Vim.Components.BufferedVimControl/Controller/*.cs\
-Vim.Components.BufferedVimControl/View/*.cs\
 Vim.Components.BufferedVimControl/*.cs\
-Vim.Components.VimControl/Model/*.cs\
-Vim.Components.VimControl/Controller/*.cs\
-Vim.Components.VimControl/View/*.cs\
 Vim.Components.VimControl/*.cs\
-Vim.Components.VimBuffer/Model/*.cs\
-Vim.Components.VimBuffer/Model/VimBufferStrategy/*.cs\
-Vim.Components.VimBuffer/Controller/*.cs\
-Vim.Components.VimBuffer/View/*.cs\
 Vim.Components.VimBuffer/*.cs\
-Vim.Components.VimEntry/Model/*.cs\
-Vim.Components.VimEntry/Controller/*.cs\
-Vim.Components.VimEntry/View/*.cs\
 Vim.Components.VimEntry/*.cs\
 Vim.Components/*.cs\
 Vim.Components.Gtk/*.cs\
