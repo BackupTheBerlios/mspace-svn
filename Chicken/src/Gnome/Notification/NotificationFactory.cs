@@ -52,7 +52,8 @@ namespace Chicken.Gnome.Notification
 		stream = new FileStream (svgfile, FileMode.Open);
 		
 	    NotificationMessage nm = new NotificationMessage (stream, NotificationType.Svg, header, text);
-		nm.Notify ();
+	    nm.TimeOut = timeout;
+	    nm.Notify ();
 	}
     }
 
