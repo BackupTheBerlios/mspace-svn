@@ -22,7 +22,6 @@ namespace Muine.Sdk.Playlist
 
     using System.Collections;
     using System;
-    using GLib;
     using Muine.Sdk.Data;
 
     /* 

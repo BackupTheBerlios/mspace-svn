@@ -23,8 +23,6 @@ namespace Muine.Sdk.Data
     using System.Collections;
     using System.IO;
 
-    using Gdk;
-
     public class Song : ISearchable
     {
 	    private string filename;

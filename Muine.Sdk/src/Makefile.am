@@ -4,7 +4,7 @@ MISCRS = /resource:../MuineSdk.ini,MuineSdk.ini
 REFERENCES = -pkg:gtk-sharp
 
 Muine.Sdk.dll: $(CSSOURCES)
-	mcs /out:$@ $(CSSOURCES) /target:library $(REFERENCES) $(MISCRS)
+	mcs /out:$@ $(CSSOURCES) /target:library $(MISCRS)
 
 all: Muine.Sdk.dll
 
@@ -13,5 +13,5 @@ sdklib_DATA = Muine.Sdk.dll
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = muine-sdk.pc
 
-EXTRA_DIST = sources.list muine-sdk.pc.in
+EXTRA_DIST = sources.list muine-sdk.pc.in $(CSSOURCES)
 CLEANFILES = Muine.Sdk.dll muine-sdk.pc
