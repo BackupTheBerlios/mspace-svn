@@ -20,4 +20,6 @@ SOURCES = \
 ./DataView.cs\
 ./KeyUtils.cs\
 ./About.cs\
-./PlayerView.cs
+./PlayerView.cs\
+./PlaylistView.cs\
+./PlaylistStore.cs
