@@ -1,0 +1,18 @@
+#!/usr/bin/python
+import os
+import time
+
+files = []
+targets = ""
+command = "tar czvfP backup-" + time.strftime ("%Y_%m_%d_%H_%M") + ".tar.gz "
+rcfilepath = os.getenv ("HOME") + "/.backupduderc"
+try:
+    rcfile = open (rcfilepath)
+    files = rcfile.readlines ()
+except:
+    print rcfilepath, "does not exist" 
+	
+for i in files:
+    targets += i.replace ("\n", "") + " "
+
+os.system (command + targets)
