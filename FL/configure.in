@@ -1,0 +1,53 @@
+AC_PREREQ(2.59)
+AC_INIT(FLFramework, 0.1, [sergio.rubio@hispalinux.es])
+AM_MAINTAINER_MODE
+dnl AM_CONFIG_HEADER(config.h)
+
+AM_INIT_AUTOMAKE()
+
+AC_PROG_INSTALL
+
+dnl Version dependencies
+MONO_REQUIRED=1.0
+GTKSHARP_REQUIRED=1.0
+dnl GDK20_MINIMUM_VERSION=2.2.3
+dnl ATK_MINIMUM_VERSION=1.2.4
+
+#
+# Configure PKG_CONFIG
+#
+AC_PATH_PROG(PKG_CONFIG, pkg-config, no)
+if test "x$PKG_CONFIG" = "xno"; then
+    AC_MSG_ERROR([You need to install pkg-config])
+fi
+
+
+dnl Pkgconfig
+PKG_CHECK_MODULES(MONO,
+		  mono >= $MONO_REQUIRED)
+MCS_FLAGS=
+MONO_FLAGS=
+if test $USE_MAINTAINER_MODE = yes; then
+	MCS_FLAGS="-g"
+	MONO_FLAGS="--debug"
+fi
+AC_SUBST(MCS_FLAGS)
+AC_SUBST(MONO_FLAGS)
+
+PKG_CHECK_MODULES(GTKSHARP,
+		  gtk-sharp >= $GTKSHARP_REQUIRED \
+		  gnome-sharp >= $GTKSHARP_REQUIRED \
+		  glade-sharp >= $GTKSHARP_REQUIRED \
+		  gconf-sharp >= $GTKSHARP_REQUIRED)
+
+AC_SUBST(GTKSHARP_LIBS)
+
+dnl Check for Mono
+AC_PATH_PROG(MCS, mcs)
+AC_PATH_PROG(MONO, mono)
+
+
+AC_OUTPUT([
+Makefile
+src/Makefile
+])
