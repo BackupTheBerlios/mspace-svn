@@ -1,0 +1,17 @@
+<Namespace Name="Chicken" FullName="Chicken" FullNameSP="Chicken" Maintainer="Sergio Rubio">
+  <Docs>
+    <summary>Chicken Framework notification components</summary>
+    <remarks>
+	<para>
+	    Components to display a bubble and a notification area icon when a system event is fired.
+	    Notifications can be rendered from different sources. At the moment, only Svg and HTML rendering 
+	    are supported, although more will be added in the future.
+	</para>
+	<para>
+	    There is a <see cref="T:Chicken.Gnome.Notification.NotificationMessage"/> which implements the notification
+	    logic and look, and a <see cref="T:Chicken.Gnome.Notification.NotificationFactory"/> utility class to manage
+	    the building and display of notifications messages.
+	</para>
+    </remarks>
+  </Docs>
+</Namespace>

@@ -1,0 +1,135 @@
+<Type Name="NotificationBubble" FullName="Chicken.Gnome.Notification.NotificationBubble">
+  <TypeSignature Language="C#" Value="public class NotificationBubble : Gtk.Window, Implementor, IWrapper, IDisposable" Maintainer="auto" />
+  <AssemblyInfo>
+    <AssemblyName>Chicken</AssemblyName>
+    <AssemblyPublicKey>
+    </AssemblyPublicKey>
+    <AssemblyVersion>0.0.0.0</AssemblyVersion>
+    <AssemblyCulture>neutral</AssemblyCulture>
+    <Attributes />
+  </AssemblyInfo>
+  <ThreadSafetyStatement>Gtk# is thread aware, but not thread safe; See the <link location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
+  <Docs>
+    <summary>
+      <para>
+A popup window to display a message. Notification bubbles can be rendered from SVG and HTML.
+SVG rendering is done using librsvg and HTML rendering is done using Gecko.
+</para>
+    </summary>
+    <remarks>See <see cref="T:Gecko.WebControl" /> and <see cref="T:Rsvg.Pixbuf" />.</remarks>
+  </Docs>
+  <Base>
+    <BaseTypeName>Gtk.Window</BaseTypeName>
+  </Base>
+  <Interfaces>
+    <Interface>
+      <InterfaceName>Atk.Implementor</InterfaceName>
+    </Interface>
+    <Interface>
+      <InterfaceName>GLib.IWrapper</InterfaceName>
+    </Interface>
+    <Interface>
+      <InterfaceName>System.IDisposable</InterfaceName>
+    </Interface>
+  </Interfaces>
+  <Attributes />
+  <Members>
+    <Member MemberName="RenderWithTimer">
+      <MemberSignature Language="C#" Value="public void RenderWithTimer ();" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Renders a bubble with a timer. When the timer ends, the bubble disappears.</summary>
+        <remarks>After the timeout ends, the bubble is automatically destroyed and disposed. There is no need to do anything else.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Render">
+      <MemberSignature Language="C#" Value="public void Render ();" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Render the bubble. The developer must destroy de bubble manually.</summary>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public NotificationBubble (string source, Chicken.Gnome.Notification.NotificationSource sourceType, Chicken.Gnome.Notification.NotificationContent contentType);" />
+      <MemberType>Constructor</MemberType>
+      <ReturnValue />
+      <Parameters>
+        <Parameter Name="source" Type="System.String" />
+        <Parameter Name="sourceType" Type="Chicken.Gnome.Notification.NotificationSource" />
+        <Parameter Name="contentType" Type="Chicken.Gnome.Notification.NotificationContent" />
+      </Parameters>
+      <Docs>
+        <summary>Builds a new bubble from the speciefied source.</summary>
+        <param name="source">
+          <para>
+The source of the bubble. If HTML rendering is used, the source must be a file, a text chunk or a URL. If SVG rendering is used, the source must be a file or a text chunk.
+</para>
+        </param>
+        <param name="sourceType">The source to be rendered by the bubble.</param>
+        <param name="contentType">Whether we want to render SVG, HTML or plain text.</param>
+        <returns />
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TimeOut">
+      <MemberSignature Language="C#" Value="public int TimeOut { set; get; };" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>The timeout of the bubble in milliseconds. After this timeout, the bubble disappears.</summary>
+        <returns>a <see cref="T:System.Int32" /></returns>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="BubbleWidth">
+      <MemberSignature Language="C#" Value="public int BubbleWidth { set; get; };" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>The width of the bubble window in pixels.</summary>
+        <returns>a <see cref="T:System.Int32" /></returns>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="BubbleHeight">
+      <MemberSignature Language="C#" Value="public int BubbleHeight { set; get; };" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>The height of the bubble window in pixels.</summary>
+        <returns>a <see cref="T:System.Int32" /></returns>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TimerEndedEvent">
+      <MemberSignature Language="C#" Value="public event Chicken.Gnome.Notification.TimerEndedHandler TimerEndedEvent;" />
+      <MemberType>Event</MemberType>
+      <ReturnValue>
+        <ReturnType>Chicken.Gnome.Notification.TimerEndedHandler</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>This event is fired when the bubble timer ends, if RenderWithTimer has been used.</summary>
+        <remarks>If Render() is used instead of RenderWithTimer(), this event is never fired. </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

@@ -1,0 +1,25 @@
+0.1.3
+------
+* Packaging fixes
+
+0.1.2
+-----
+* Emergency bugfix release
+* Threading issues fixed
+
+0.1.1
+----
+* New NotificationBubble widget
+* Added some examples
+* Docs updated
+* Misc fixes.
+* Some refactoring.
+* Embedding in an application, does not cause the app to die
+when the notification timer ends [Néstor Salceda]
+
+0.1
+----
+* TrayIcon bindings
+* AnimatedTrayIcon, BlinkingTrayIcon, ShrinkingTrayIcon
+* NotificationMessage and NotificationFactory
+* Nini included (See http://nini.sf.net)
