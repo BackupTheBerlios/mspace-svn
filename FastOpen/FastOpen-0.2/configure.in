@@ -1,0 +1,42 @@
+AC_INIT(src/main.cs)
+AC_CANONICAL_SYSTEM
+AM_INIT_AUTOMAKE(FastOpen, 0.2)
+AM_MAINTAINER_MODE
+
+dnl Version dependencies
+
+MONO_REQUIRED=1.0
+GTKSHARP_REQUIRED=1.0
+
+dnl Pkgconfig
+
+PKG_CHECK_MODULES(MONO,
+		  mono >= $MONO_REQUIRED)
+
+PKG_CHECK_MODULES(GTKSHARP,
+		  gtk-sharp >= $GTKSHARP_REQUIRED \
+		  gnome-sharp >= $GTKSHARP_REQUIRED \
+		  glade-sharp >= $GTKSHARP_REQUIRED \
+		  gconf-sharp >= $GTKSHARP_REQUIRED)
+
+
+dnl Check for Mono
+AC_PATH_PROG(MCS, mcs)
+AC_PATH_PROG(MONO, mono)
+
+MCS_FLAGS=
+MONO_FLAGS=
+if test $USE_MAINTAINER_MODE = yes; then
+	MCS_FLAGS="-g"
+	MONO_FLAGS="--debug"
+fi
+AC_SUBST(MCS_FLAGS)
+AC_SUBST(MONO_FLAGS)
+
+AC_OUTPUT([
+Makefile
+fastopen
+fseditor
+src/Makefile
+data/Makefile
+])
