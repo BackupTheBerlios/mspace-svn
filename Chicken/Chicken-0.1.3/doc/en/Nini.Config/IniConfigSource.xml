@@ -1,0 +1,94 @@
+<Type Name="IniConfigSource" FullName="Nini.Config.IniConfigSource">
+  <TypeSignature Language="C#" Value="public class IniConfigSource : Nini.Config.ConfigSourceBase, IConfigSource" Maintainer="auto" />
+  <AssemblyInfo>
+    <AssemblyName>Chicken</AssemblyName>
+    <AssemblyPublicKey>
+    </AssemblyPublicKey>
+    <AssemblyVersion>0.0.0.0</AssemblyVersion>
+    <AssemblyCulture>neutral</AssemblyCulture>
+    <Attributes />
+  </AssemblyInfo>
+  <ThreadSafetyStatement>Gtk# is thread aware, but not thread safe; See the <link location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
+  <Docs>
+    <summary>To be added</summary>
+    <remarks>To be added</remarks>
+  </Docs>
+  <Base>
+    <BaseTypeName>Nini.Config.ConfigSourceBase</BaseTypeName>
+  </Base>
+  <Interfaces>
+    <Interface>
+      <InterfaceName>Nini.Config.IConfigSource</InterfaceName>
+    </Interface>
+  </Interfaces>
+  <Attributes />
+  <Members>
+    <Member MemberName="Save">
+      <MemberSignature Language="C#" Value="public virtual void Save ();" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added</summary>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public IniConfigSource (string filePath);" />
+      <MemberType>Constructor</MemberType>
+      <ReturnValue />
+      <Parameters>
+        <Parameter Name="filePath" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <summary>To be added</summary>
+        <param name="filePath">a <see cref="T:System.String" /></param>
+        <returns>a <see cref="T:Nini.Config.IniConfigSource" /></returns>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public IniConfigSource (System.IO.TextReader reader);" />
+      <MemberType>Constructor</MemberType>
+      <ReturnValue />
+      <Parameters>
+        <Parameter Name="reader" Type="System.IO.TextReader" />
+      </Parameters>
+      <Docs>
+        <summary>To be added</summary>
+        <param name="reader">a <see cref="T:System.IO.TextReader" /></param>
+        <returns>a <see cref="T:Nini.Config.IniConfigSource" /></returns>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public IniConfigSource (System.IO.Stream stream);" />
+      <MemberType>Constructor</MemberType>
+      <ReturnValue />
+      <Parameters>
+        <Parameter Name="stream" Type="System.IO.Stream" />
+      </Parameters>
+      <Docs>
+        <summary>To be added</summary>
+        <param name="stream">a <see cref="T:System.IO.Stream" /></param>
+        <returns>a <see cref="T:Nini.Config.IniConfigSource" /></returns>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsReadOnly">
+      <MemberSignature Language="C#" Value="public virtual bool IsReadOnly { get; };" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added</summary>
+        <returns>a <see cref="T:System.Boolean" /></returns>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>
