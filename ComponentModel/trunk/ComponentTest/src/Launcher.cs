@@ -15,6 +15,7 @@ namespace ComponentModel.ComponentTest {
             else
                 Console.WriteLine ("Dcm es null");
             dcm.Execute ("Saluda", null);
+            dcm.Execute ("SaludaATodos", null);
         }
     }
 }

@@ -31,8 +31,6 @@ namespace ComponentModel {
             foreach (Assembly assembly in DefaultContainer.Instance.Assemblies) {
                 foreach (Type type in assembly.GetTypes ()) {
                     if (type.IsSubclassOf (typeof (DefaultExceptionManager)) || type.IsSubclassOf (typeof (IExceptionManager))) {
-                        logger.Debug ("Subclass is from exceptionmanager. " + type.ToString ());
-                        logger.Debug (type.ToString ());
                         if (type.ToString().Equals (exceptionManagerClassName)) {
                             logger.Debug ("Getting type of exception manager: " + type.ToString ());
                             return type;
@@ -43,52 +41,48 @@ namespace ComponentModel {
             return null;
         }
         
-        
-        
-        public ResponseMethodVO Execute (string methodName, params object[] parameters) {
-            logger.Debug ("Enter method Execute.");
-            Type type = this.GetType ();
-            logger.Debug ("Type of component invoke: " + type.ToString ());
-            ResponseMethodVO responseMethodVO = new ResponseMethodVO ();
-            // Solo se aceptan métodos no estáticos, declarados y públicos.
-            MethodInfo methodInfo = type.GetMethod (methodName, BindingFlags.Instance | BindingFlags.DeclaredOnly | BindingFlags.Public);
+        private MethodInfo GetMethodToExecute (string methodName, Type componentType) {
+            logger.Debug ("Entering GetMethodToExecute. Searching: " + methodName + " in: " + componentType.ToString ());
+            MethodInfo methodInfo = componentType.GetMethod (methodName, BindingFlags.Instance | BindingFlags.DeclaredOnly | BindingFlags.Public);
             logger.Debug ("Finded method to execute: " + methodInfo.ToString ());
-            //Cumple requisitos de ejecución?
-            Attribute[] attributes = (Attribute[])methodInfo.GetCustomAttributes (typeof (ComponentMethodAttribute),false);
-            if (attributes.Length == 1) {
-                if (defaultExceptionManager == null) {
-                    logger.Debug ("Try instantiate defaultExceptionManager");
-                    //FIXME esto es bastante cambiable
-                    //defaultExceptionManager = this.GetExceptionManager ();
-                    Type typeManager = this.GetTypeExceptionManager (this.VO.ExceptionClassName); 
-                    defaultExceptionManager = (DefaultExceptionManager)typeManager.GetConstructor (null).Invoke (null);
-                    logger.Debug ("ExceptionManagerInstanciated.");
-                }
-                ComponentMethodAttribute componentMethodAttribute = (ComponentMethodAttribute)attributes[0];
-                logger.Debug ("Finded Attribute: " + componentMethodAttribute.GetType ());
-                logger.Debug ("Reading attribute viewName: " + componentMethodAttribute.ViewName);
-                Type viewType = this.GetViewType (componentMethodAttribute);
-                logger.Debug ("Finded view Type: " + viewType.ToString ());
-                try {
-                    //Execute Method here !!
-                    object ret = methodInfo.Invoke (this, parameters);
-                    responseMethodVO.ResponseValue = ret;
-                    //Redirecting to view.
-                    object obj = viewType.GetConstructor (null).Invoke (null);
-                    methodInfo = viewType.GetMethod (componentMethodAttribute.ResponseName, BindingFlags.Instance | BindingFlags.DeclaredOnly | BindingFlags.Public);
-                //Executing response.
-                    methodInfo.Invoke (obj, new object[]{responseMethodVO});
-                } catch (Exception e) {
-                    defaultExceptionManager.ProcessException (e);
-                }
-                logger.Debug ("Finded response Method in view: " + viewType.ToString() + " " + methodInfo.ToString ());
+            return methodInfo;
+        }
+        
+        private MethodInfo GetMethodResponse (Type viewType, ComponentMethodAttribute componentMethodAttribute) {
+            MethodInfo responseMethod = viewType.GetMethod (componentMethodAttribute.ResponseName, BindingFlags.Instance | BindingFlags.DeclaredOnly | BindingFlags.Public) ;
+            logger.Debug ("Finded response to execute: " + responseMethod.ToString () + " in: " + viewType.ToString ());
+            return responseMethod;
+        } 
+        
+        private void InstantiateExceptionManager () {
+            if (defaultExceptionManager == null) {
+                logger.Debug ("Trying to instantiate ExceptionManager.");
+                Type typeManager = this.GetTypeExceptionManager (this.VO.ExceptionClassName);
+                this.defaultExceptionManager = (DefaultExceptionManager)typeManager.GetConstructor (null).Invoke (null);
+                logger.Debug ("Exception manager instatiated.");
             }
-            logger.Debug ("Exiting method Execute");
-            if (responseMethodVO.ResponseValue != null)
+            logger.Debug ("Exception manager already instatiated.");
+        }
+        
+        private ResponseMethodVO ExecuteCompleteSequence (MethodInfo methodToInvoke, object[] parameters, Type viewType, MethodInfo methodResponse) {
+            try {
+                ResponseMethodVO responseMethodVO = new ResponseMethodVO ();
+                logger.Debug ("Method " + methodToInvoke + " executing.");
+                object ret = methodToInvoke.Invoke (this, parameters);
+                responseMethodVO.ResponseValue = ret;
+                logger.Debug ("Redirecting to view: " + viewType.ToString () + " to response Method: " + methodResponse.ToString ());
+                object obj = viewType.GetConstructor (null).Invoke (null);
+                logger.Debug ("Executing response method: " + methodResponse.ToString ());
+                methodResponse.Invoke (obj, new object[] {responseMethodVO});
                 return responseMethodVO;
+            }
+            catch (Exception exception) {
+                this.InstantiateExceptionManager ();
+                defaultExceptionManager.ProcessException (exception);
+            }
             return null;
         }
-
+        
         private Type GetViewType (ComponentMethodAttribute componentMethodAttribute) {
             foreach (Assembly assembly in DefaultContainer.Instance.Assemblies) {
                 foreach (Type type in assembly.GetTypes ()) {
@@ -106,5 +100,19 @@ namespace ComponentModel {
             this.vO = vo;
         }
          
+        public ResponseMethodVO Execute (string methodName, object[] parameters) {
+            Type type = this.GetType ();
+            logger.Debug ("Type of component invoke. " + type.ToString ());
+
+            //Recollecting data for execution.
+            MethodInfo methodToExecute = this.GetMethodToExecute (methodName, type);
+            Attribute[] attributes = (Attribute[]) methodToExecute.GetCustomAttributes (typeof (ComponentMethodAttribute), false);
+            ComponentMethodAttribute componentMethodAttribute = (ComponentMethodAttribute) attributes[0];
+            Type viewType = this.GetViewType (componentMethodAttribute);
+            MethodInfo responseMethod = this.GetMethodResponse (viewType, componentMethodAttribute);
+            //Executing 
+            ResponseMethodVO responseMethodVO = this.ExecuteCompleteSequence (methodToExecute, parameters, viewType, responseMethod); 
+            return responseMethodVO;
+        }
     }
 }

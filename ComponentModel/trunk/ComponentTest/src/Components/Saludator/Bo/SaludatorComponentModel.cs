@@ -7,12 +7,16 @@ namespace ComponentModel.ComponentTest.Components.Saludator.Bo {
        public SaludatorComponentModel () : base () {
        }
 
-       //ComponentModel.ComponentTest.Components.Saludator.Form.SaludatorForm
        [ComponentMethod (ViewName = "ComponentModel.ComponentTest.Components.Saludator.Form.SaludatorForm", ResponseName = "ResponseSaluda")]
        public int Saluda () {
            Console.WriteLine ("Que pasa co !!");
            throw new System.Exception ("Yeahhh");
            return 1;
+       }
+
+       [ComponentMethod (ViewName = "ComponentModel.ComponentTest.Components.Saludator.Form.SaludatorForm", ResponseName = "ResponseSaludaATodos")]
+       public void SaludaATodos () {
+            Console.WriteLine ("Saludaré a todos si me los pides, bellaco !!"); 
        }
    }
 }
