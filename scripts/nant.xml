@@ -29,28 +29,28 @@
     
     <!-- Directory Tree--> 
     <!-- Localizacion de dependencias -->
-    <property name="src" value="src"/>
-    <property name="lib" value="lib"/>
+    <property name="srcdir" value="src"/>
+    <property name="libdir" value="lib"/>
     <!-- Other mspace components -->
-    <property name="components" value="lib/components"/>
-    <property name="doc" value="doc"/>
-    <property name="resources" value="resources"/>
+    <!--<property name="components" value="lib/components"/>-->
+    <property name="docdir" value="doc"/>
+    <property name="resourcesdir" value="resources"/>
         <!--Aqui se guardarán los ejecutables generados-->
-    <property name="bin" value="bin"/>
+    <property name="bindir" value="bin"/>
 
 <!-- Targets -->
 
     <!-- Elimina los ficheros existentes en bin y en doc -->
     <target name="clean">
-        <delete dir="${bin}" if="${directory::exists(bin)}" failonerror="false"/> 
-        <delete dir="${doc}" if="${directory::exists(doc)}" failonerror="false"/> 
+        <delete dir="${bindir}" if="${directory::exists(bindir)}" failonerror="false"/> 
+        <delete dir="${docdir}" if="${directory::exists(docdir)}" failonerror="false"/> 
         <tstamp/>
     </target>
 
     <!-- Crea una nueva jerarquia con bin y doc para la compilación -->
     <target name="create-skeleton" depends="clean">
-        <mkdir dir="${bin}"/>
-        <mkdir dir="${doc}"/>
+        <mkdir dir="${bindir}"/>
+        <mkdir dir="${docdir}"/>
         <tstamp/>
     </target>
     
@@ -62,8 +62,8 @@
                 <include name="**/*.cs"/>
             </sources>
             <references>
-                <include name="**/${lib}/*.dll"/>
-                <include name="**/${lib}/components/*.dll"/>
+                <include name="**/${libdir}/*.dll"/>
+                <include name="**/${libdir}/components/*.dll"/>
             </references>
         </csc>
         <tstamp/>
@@ -71,25 +71,25 @@
 
     <!-- Ejecuta el componente (Lo compila como un exe y luego lo ejecuta) -->
     <target name="run" depends="build">
-        <csc target="exe" output="${bin}/${component_name}.exe" debug="true"
+        <csc target="exe" output="${bindir}/${component_name}.exe" debug="true"
         verbose="true">
             <sources basedir="${src}">
                 <include name="**/*.cs"/>
             </sources>
             <references>
-                <include name="**/${lib}/*.dll"/>
-                <include name="**/${lib}/components/*.dll"/>
-                <include name="**/${bin}/*.dll"/>    
+                <include name="**/${libdir}/*.dll"/>
+                <include name="**/${libdir}/components/*.dll"/>
+                <include name="**/${bindir}/*.dll"/>    
             </references>
         </csc>
           
-        <exec program="${bin}/${component_name}.exe" useruntimeengine="true">
+        <exec program="${bindir}/${component_name}.exe" useruntimeengine="true">
             <environment>
                 <variable name="MONO_PATH">
                     <path>
-                        <pathelement file="${lib}"/>
+                        <pathelement file="${libdir}"/>
                         <pathelement file="${components}"/>
-                        <pathelement file="${bin}"/>
+                        <pathelement file="${bindir}"/>
                     </path>
                 </variable>
             </environment>
