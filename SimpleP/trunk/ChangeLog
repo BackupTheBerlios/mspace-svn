@@ -1,5 +1,10 @@
 2005-04-05  Sergio Rubio  <sergio.rubio@hispalinux.es>
 
+	* Makefile: Fixed dll importing
+	* src/MainWindow.boo: Fixed a null pointer ex
+
+2005-04-05  Sergio Rubio  <sergio.rubio@hispalinux.es>
+
 	* src/AboutWindow.boo:
 	* src/Contexts/SourceContext/ProjectBrowser.boo:
 	* src/Globals.boo:

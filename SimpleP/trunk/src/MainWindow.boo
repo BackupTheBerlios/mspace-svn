@@ -151,10 +151,11 @@ class MainWindow (Window):
 
 	private def ImportProjectFilesClicked (sender, args):
 		project = Services.ProjectManager.CurrentProject
-		lastFileCount = project.Files.Count
-		project.ImportFiles ()
-		fileCount = project.Files.Count - lastFileCount
-		DialogFactory.ShowInfoDialog (self, "<b>Importing files</b>\n\n<b>${fileCount}</b> files imported.")
+		if project:
+			lastFileCount = project.Files.Count
+			project.ImportFiles (false)
+			fileCount = project.Files.Count - lastFileCount
+			DialogFactory.ShowInfoDialog (self, "<b>Importing files</b>\n\n<b>${fileCount}</b> files imported.")
 
 	private def ClearProjectClicked (sernder, args):
 		Services.ProjectManager.CurrentProject.Clear ()

@@ -17,6 +17,10 @@ Resources.dll: resources/res.cs
 	mcs -t:library -out:build/Resources.exe -resource:ui-data/simplep.glade $(IMAGES) resources/res.cs
 
 update-refs:
+	cp ../../RedLib/trunk/build/Red.dll ext
+	cp ../../RedLib/trunk/build/ICSharpCode.SharpZipLib.dll ext
+	cp ../../Red.Gtk/trunk/build/Red.Gtk.dll ext
+	cp ../../Red.ProjectManager/trunk/build/Red.ProjectManager.dll ext
 	cp ext/*dll* build/	
 
 clean:
