@@ -1,0 +1,15 @@
+Source: libchicken
+Section: libs
+Priority: optional
+Maintainer: Sergio Rubio <sergio.rubio@hispalinux.es>
+Standards-Version: 3.6.1
+Build-Depends: debhelper (>= 4.0.0), libgtk2.0-dev (>= 2.2.0), automake1.7
+
+Package: libchicken
+Architecture: powerpc i386 sparc s390
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Misc .Net/Mono components.
+ .
+ Desktop notification messages, notification bubbles,
+ configuration helpers and many more. Nini framework
+ (see http://nini.sf.net) is also included.
