@@ -1,0 +1,72 @@
+MonoVim
+========
+
+Empezando por el principio, la breve historia de este pequeño proyecto.
+Encontramos problemas que no podiamos salvar a la hora de utilizar este editor;
+su dificil componentización fué la principal motivación a la hora de escribirlo.
+Así como también el poder utilizar comandos generados por nosotros.
+
+La primera versión, tenia algun error en el primer problema pero el añadir algún
+nuevo comando invitaba a tener que entrar dentro del código fuente de la
+aplicación.
+
+Se decide un nuevo diseño para hacer más facil estos dos problemas.
+
+======
+
+Notas:
+
+El nuevo diseño:  Se especificarán unos interfaces que deben cumplir los modelos
+de datos; separando así las diferentes capas y cumpliendo el patrón
+arquitectónico MVC.
+
+Entonces, el corte de las clases será el siguiente:
+
+    Tendremos cada una de las unidades básicas de implementación, los modelos de
+    datos, con sus casos de uso totalmente definidos.  Esto significa que por
+    ejemplo para crear el modelo Buffer, se deberá proveer unas cuantas
+    operaciones para manejar ese modelo de datos (Insertar nuevas lineas, borrar
+    caracteres ...)
+
+    Comunicaremos esto con la vista a través de un Controlador, que capturará
+    los eventos de la vista y los transformará en llamadas a casos de uso del
+    modelo de datos que sea pertinente.
+
+    Y finalmente la vista, deberá contener los métodos para poder actualizar el
+    estado del modelo.
+
+    **No existirán referencias en la vista al Modelo de datos; sólo una al
+    controlador, y en el controlador tendremos una hacia la vista y otra hacia
+    el controlador.
+
+Modelos de datos y casos de uso:
+================================
+
+    En muchos casos el modelo de datos será algo bastante parecido a un VO nada
+    más, con sus correspondientes métodos getter y setter. Y los eventos que se
+    produzcan.
+    El buffer dónde escribiremos llevará unos cuantos casos de uso más.
+    Generalmente el manejo del texto que estemos escribiendo.
+    Además constara de eventos variados (Observer) para notificar los cambios a
+    la vista y que esta actúe como el programador lo quiera.
+
+Vistas y Modelos:
+=================
+    A la hora de generar una vista, se le surrogará un modelo de datos que tenga
+    sus eventos, para poder capturarlos y tomar las decisiones que se tenga en
+    cuenta.
+    Generalmente el Interface de cualquier vista, proveera métodos para poder
+    capturar los eventos y manejarlos.
+
+¿Qué ganamos?
+=============
+    Independencia de modelos; es posible especificar un modelo utilizando la
+    implementación que deseemos.
+    Independencia en la vista, no se depende de GTK y se puede generar una vista
+    para cualquier toolkit gráfico.
+
+Construcción de los componentes.
+================================
+    Para construir el componente principal del Vim, lo vamos a dividir en varios
+    componentes que se combinarán para crear el componente principal. 
+    

@@ -1,0 +1,5 @@
+<?xml version='1.0'?>
+<monodoc>
+    <node label='MonoVim' name='org.vim'/>
+    <source basefile='org.vim' path='org.vim' provider='ecma'/>
+</monodoc>
