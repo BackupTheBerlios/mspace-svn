@@ -1,5 +1,3 @@
-* Implementar la edición de atajos en FSEditor.
-* Autocompletar.
-* Historial.
-* Mejorar la arquitectura de la aplicación.
-
+* Entry autocompletion
+* Command history
+* Refactor/improve FastOpenWindow entry parsing
