@@ -38,14 +38,8 @@ libmuine_la_SOURCES =			\
 	ogg-helper.h			\
 	gsequence.c			\
 	gsequence.h			\
-	pointer-list-model.c		\
-	pointer-list-model.h		\
-	pointer-list-view.c		\
-	pointer-list-view.h		\
 	markup-utils.c			\
 	markup-utils.h			\
-	rb-cell-renderer-pixbuf.c	\
-	rb-cell-renderer-pixbuf.h	\
 	rb-ellipsizing-label.c		\
 	rb-ellipsizing-label.h		\
 	volume-button.c			\
