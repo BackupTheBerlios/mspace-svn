@@ -4,20 +4,36 @@ using System.Reflection;
 using System.Collections;
 using ComponentModel.Interfaces;
 using ComponentModel.Container.Dao;
+using NLog;
 
 namespace ComponentModel.Container {
     public class DefaultContainer : IContainer {
         private static DefaultContainer instance = null; 
-       
+        private Assembly[] assemblies; 
         private IList componentList;
         
+        //Logging
+        Logger logger = LogManager.GetLogger ("ComponentModel.Container.DefaultContainer");
+        
+        internal Assembly[] Assemblies {
+            get {
+                return assemblies;
+            }
+        }
+        
         private DefaultContainer () {
+            logger.Debug ("Init DefaultContainer");
             componentList = new ArrayList ();
             //Toma el único dominio de la aplicacion
             AppDomain appDomain = AppDomain.CurrentDomain;
-            Assembly[] assemblies = appDomain.GetAssemblies ();
+            assemblies = appDomain.GetAssemblies ();
             foreach (Assembly ass  in assemblies) {
                 ICollection collection = DefaultContainerDao.Instance.ProcessAssembly (ass);
+                //DEbugg
+                //foreach (Type type in ass.GetTypes ()) {
+                //    logger.Debug ("Type finded: " + type.ToString ());
+                //}
+                //
                 RegisterComponent (collection);
             }
             //En cada ensamblado, cargará el / los componente y lo registrará con el
@@ -30,8 +46,6 @@ namespace ComponentModel.Container {
             while (enumerator.MoveNext ()) {
                 DefaultComponentModel defaultComponentModel = (DefaultComponentModel)enumerator.Current;
                 this.Add (defaultComponentModel); 
-                Console.WriteLine ("Added: " + defaultComponentModel.ToString ());
-                Console.WriteLine (defaultComponentModel.VO.Name);
             }
         }
         
@@ -57,6 +71,7 @@ namespace ComponentModel.Container {
             if (componentList.Contains (component))
                 return;
             componentList.Add (component);
+            logger.Debug ("Registering component: " + component + " as Name: " + component.VO.Name);
         }
 
         public void Remove (IComponentModel component) {
