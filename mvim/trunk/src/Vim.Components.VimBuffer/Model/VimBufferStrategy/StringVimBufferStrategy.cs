@@ -1,3 +1,11 @@
+//
+// Vim.Components.VimBuffer.Model.VimBufferStrategy.StringVimBufferStrategy.cs :
+//      A implementation of IVimBufferStrategy with a string.
+//
+// Author:
+//      Néstor Salceda Alonso (wizito@gentelibre.org)
+// (C) 2005
+// 
 using System;
 
 namespace Vim.Components.VimBuffer.Model.VimBufferStrategy {
@@ -12,11 +20,16 @@ namespace Vim.Components.VimBuffer.Model.VimBufferStrategy {
         }
 
         public char this [int offset] {
-            get {return text[offset];}
+            get {
+                if (offset == text.Length)
+                    return '\0'; 
+                return text[offset];
+            }
         }
 
         public void Insert (int offset, string text) {
-            this.text = this.text.Insert (offset, text);
+            if (text != null) 
+                this.text = this.text.Insert (offset, text);
         }
 
         public void Remove (int offset, int length) {
@@ -29,6 +42,8 @@ namespace Vim.Components.VimBuffer.Model.VimBufferStrategy {
         }
 
         public string GetText (int offset, int length) {
+            if (length == 0)
+                return String.Empty;
             return text.Substring (offset, Math.Min (length, text.Length - offset));
         }
 
