@@ -98,7 +98,7 @@ namespace FolderMonitor
 		    image.FromPixbuf = new Gdk.Pixbuf (null, "dropbox-changed.png");
 		    //image.QueueDraw ();
 		    Gdk.Threads.Leave ();
-		    Thread.Sleep (100);
+		    Thread.Sleep (500);
 		//}
 
 		//for (int i = 1 ; i < 15 ; i++)
@@ -108,7 +108,7 @@ namespace FolderMonitor
 		    image.FromPixbuf = new Gdk.Pixbuf (null, "dropbox-changed-red.png");
 		    //image.QueueDraw ();
 		    Gdk.Threads.Leave ();
-		    Thread.Sleep (100);
+		    Thread.Sleep (500);
 		//}
 	    }
 	}
