@@ -21,35 +21,24 @@ namespace FastOpen
 {
     using Gtk;
     using System;
-    using System.Diagnostics;
     using System.Collections;
     using System.Text;
     using System.IO;
+    using System.Diagnostics;
 
     public class FastOpenWindow : Window
     {
-	private string[] vfsUrls = {
-				"preferences:",
-				"fonts:",
-				"applications:",
-				"favorites:",
-				"start-here:",
-				"system-settings:",
-				"server-settings:",
-				"burn:",
-				"computer:",
-				"trash:"
-				};
 
 	private StringBuilder buffer = new StringBuilder ();
 	private bool ignore = false;
 
-	private Entry entry;
+	private CompletionEntry entry;
+	public IEntryParser parser = new SimpleEntryParser ();
 
 	public FastOpenWindow () : base (WindowType.Toplevel)
 	{	
 	    Icon = new Gdk.Pixbuf (null, "fastopen.png");
-	    entry = new Entry ();
+	    entry = new CompletionEntry ();
 	    entry.Activated += EntryActivated;
 	    BorderWidth = 12;
 	    Add (entry);
@@ -59,69 +48,20 @@ namespace FastOpen
 
 	public void EntryActivated (object obj, EventArgs args)
 	{
-	    ParseEntry (entry.Text);
+	    if (entry.Text.StartsWith (":"))
+	    	parser.Parse (entry.Text.Substring (1,entry.Text.Length - 1));
+	    else {
+		try {
+		    ProcessStartInfo info = new ProcessStartInfo (entry.Text);
+		    info.UseShellExecute = false;
+		    Process process = Process.Start (info);
+		} catch {
+		    Console.WriteLine ("ERROR: Launching process.");
+		}
+	    }
 	    Application.Quit ();
 	}
 
-	private void ParseEntry (string entry)
-	{
-	    if ( Array.IndexOf (vfsUrls, entry) != -1 
-		    || entry.StartsWith ("http://")
-		    || entry.StartsWith ("/"))
-	    {
-		string sToOpen = entry;
-		if (entry.StartsWith ("/"))
-			sToOpen = "file:" + entry;
-		Gnome.Url.Show (sToOpen);
-	    }
-	    else {
-		int index = entry.IndexOf (':');
-		if (index != -1) {
-		    // command contains :
-		    string[] stringEntry = entry.Split (':');
-		    string command = stringEntry[0];
-		    string parameters = stringEntry[1];
-		    string url;
-		    if ((url = GetShortcutURL (command)) != null)
-		    {
-			if (url.IndexOf ("{@}") != -1)
-			    Gnome.Url.Show (url.Replace ("{@}", parameters));
-			else {
-			    Gnome.Url.Show (url);
-			}
-		    }
-		} else {
-		    try {
-			ProcessStartInfo info = new ProcessStartInfo (entry);
-			info.UseShellExecute = false;
-			Process process = Process.Start (info);
-		    } catch {
-			Console.WriteLine ("ERROR: Launching process.");
-		    }
-		}
-	    }
-	    
-	}
-
-	//Returns null if the shortcut is not found
-	private string GetShortcutURL (string command)
-	{
-	    StreamReader reader = new StreamReader (AppContext.ShortcutsFile);
-	    string line;
-	    while ((line = reader.ReadLine ()) != null)
-	    {
-		string[] tokens = line.Split ('#');
-		if (tokens.Length > 0)
-		{
-		    //Command found. Replace
-		    if (tokens[0] == command)
-		    {
-			return tokens[1];
-		    }
-		}
-	    }
-	    return null;
-	}
 
 	protected override bool OnKeyPressEvent (Gdk.EventKey evt)
 	{
