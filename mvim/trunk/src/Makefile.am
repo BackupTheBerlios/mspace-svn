@@ -24,6 +24,7 @@ Vim.Components.VimControl/Controller/*.cs\
 Vim.Components.VimControl/View/*.cs\
 Vim.Components.VimControl/*.cs\
 Vim.Components.VimBuffer/Model/*.cs\
+Vim.Components.VimBuffer/Model/VimBufferStrategy/*.cs\
 Vim.Components.VimBuffer/Controller/*.cs\
 Vim.Components.VimBuffer/View/*.cs\
 Vim.Components.VimBuffer/*.cs\

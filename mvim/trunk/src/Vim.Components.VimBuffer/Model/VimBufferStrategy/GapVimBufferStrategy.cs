@@ -1,8 +1,8 @@
 using System;
 using System.Text;
 
-namespace Vim.Components.VimBuffer.Model {
-    public class GapTextBufferStrategy : ITextBufferStrategy {
+namespace Vim.Components.VimBuffer.Model.VimBufferStrategy {
+    public class GapTextBufferStrategy : IVimBufferStrategy {
         private char[] buffer = new char [0];
 
         int gapBeginOffset = 0;
@@ -26,11 +26,19 @@ namespace Vim.Components.VimBuffer.Model {
             gapBeginOffset = gapEndOffset = 0;
         }
 
-        public char GetCharAt (int offset) {
-            if (offset < gapBeginOffset)
-                return buffer [offset];
-            else
-                return buffer [offset + GapLength];
+        //public char GetCharAt (int offset) {
+        //    if (offset < gapBeginOffset)
+        //        return buffer [offset];
+        //    else
+        //        return buffer [offset + GapLength];
+        //}
+        public char this [int offset] {
+            get {
+                if (offset < gapBeginOffset)
+                    return buffer [offset];
+                else
+                    return buffer [offset + GapLength];
+            }
         }
         
         public string GetText (int offset, int length) {
