@@ -1,0 +1,77 @@
+<Type Name="NotificationMessage" FullName="Chicken.Gnome.Notification.NotificationMessage">
+  <TypeSignature Language="C#" Value="public class NotificationMessage" Maintainer="auto" />
+  <AssemblyInfo>
+    <AssemblyName>Chicken</AssemblyName>
+    <AssemblyPublicKey>
+    </AssemblyPublicKey>
+    <AssemblyVersion>0.0.0.0</AssemblyVersion>
+    <AssemblyCulture>neutral</AssemblyCulture>
+    <Attributes />
+  </AssemblyInfo>
+  <ThreadSafetyStatement>Gtk# is thread aware, but not thread safe; See the <link location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
+  <Docs>
+    <summary>To be added</summary>
+    <remarks>To be added</remarks>
+  </Docs>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Attributes />
+  <Members>
+    <Member MemberName="Notify">
+      <MemberSignature Language="C#" Value="public void Notify ();" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added</summary>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public NotificationMessage (string htmlcontent, Chicken.Gnome.TrayIcon.BlinkingTrayIcon icon);" />
+      <MemberType>Constructor</MemberType>
+      <ReturnValue />
+      <Parameters>
+        <Parameter Name="htmlcontent" Type="System.String" />
+        <Parameter Name="icon" Type="Chicken.Gnome.TrayIcon.BlinkingTrayIcon" />
+      </Parameters>
+      <Docs>
+        <summary>To be added</summary>
+        <param name="htmlcontent">a <see cref="T:System.String" /></param>
+        <param name="icon">a <see cref="T:Chicken.Gnome.TrayIcon.BlinkingTrayIcon" /></param>
+        <returns>a <see cref="T:Chicken.Gnome.Notification.NotificationMessage" /></returns>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="MessageWidth">
+      <MemberSignature Language="C#" Value="public int MessageWidth { set; get; };" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added</summary>
+        <returns>a <see cref="T:System.Int32" /></returns>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="MessageHeight">
+      <MemberSignature Language="C#" Value="public int MessageHeight { set; get; };" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added</summary>
+        <returns>a <see cref="T:System.Int32" /></returns>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>
