@@ -38,7 +38,7 @@
       <Parameters>
       </Parameters>
       <Docs>
-        <summary>To be added</summary>
+        <summary>The notification bubble will render SVG.</summary>
         <remarks>To be added</remarks>
       </Docs>
     </Member>
@@ -51,7 +51,7 @@
       <Parameters>
       </Parameters>
       <Docs>
-        <summary>To be added</summary>
+        <summary>The notification bubble will render HTML.</summary>
         <remarks>To be added</remarks>
       </Docs>
     </Member>
@@ -64,7 +64,7 @@
       <Parameters>
       </Parameters>
       <Docs>
-        <summary>To be added</summary>
+        <summary>The notification bubble will render plain text.</summary>
         <remarks>To be added</remarks>
       </Docs>
     </Member>

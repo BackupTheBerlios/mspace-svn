@@ -58,8 +58,8 @@ public class SimpleMessageTest
   <Interfaces />
   <Attributes />
   <Members>
-    <Member MemberName="ShowHtmlNotification">
-      <MemberSignature Language="C#" Value="public static void ShowHtmlNotification (string source, Chicken.Gnome.Notification.NotificationSource nsource, int width, int height, int timeout);" />
+    <Member MemberName="ShowHtmlNotification" Deprecated="true">
+      <MemberSignature Language="C#" Value="public static void ShowHtmlNotification (string source, Chicken.Gnome.Notification.NotificationSource nsource, int width, int height, int timeout, Chicken.Gnome.Notification.TimerEndHandler thandler);" />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -70,6 +70,7 @@ public class SimpleMessageTest
         <Parameter Name="width" Type="System.Int32" />
         <Parameter Name="height" Type="System.Int32" />
         <Parameter Name="timeout" Type="System.Int32" />
+        <Parameter Name="thandler" Type="Chicken.Gnome.Notification.TimerEndHandler" />
       </Parameters>
       <Docs>
         <summary>
@@ -83,10 +84,15 @@ Render a HTML notification message from a file, a URL or a text chunk.
         <param name="height">The notification bubble height.</param>
         <param name="timeout">The notification timeout in milliseconds. After this time, the notification disappears.</param>
         <remarks>To be added</remarks>
+        <param name="thandler">
+          <para>
+Handler called when the timeout of the notification area message expires. It can be null if there is no interest in handling this event.
+</para>
+        </param>
       </Docs>
     </Member>
-    <Member MemberName="ShowSvgNotification">
-      <MemberSignature Language="C#" Value="public static void ShowSvgNotification (string source, string header, string body, int width, int height, int timeout);" />
+    <Member MemberName="ShowSvgNotification" Deprecated="true">
+      <MemberSignature Language="C#" Value="public static void ShowSvgNotification (string source, string header, string body, int width, int height, int timeout, Chicken.Gnome.Notification.TimerEndHandler thandler);" />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -98,47 +104,22 @@ Render a HTML notification message from a file, a URL or a text chunk.
         <Parameter Name="width" Type="System.Int32" />
         <Parameter Name="height" Type="System.Int32" />
         <Parameter Name="timeout" Type="System.Int32" />
+        <Parameter Name="thandler" Type="Chicken.Gnome.Notification.TimerEndHandler" />
       </Parameters>
       <Docs>
-        <summary>Renders an Svg message from a file or an Svg chunk.</summary>
-        <param name="source">The source of the Svg notification. A file or a text chunk.</param>
-        <param name="header">The header that will replace @HEADER@ if found.
-</param>
-        <param name="body">The body that will replace the @LINE@ macros.</param>
-        <param name="width">The width of the message bubble.</param>
-        <param name="height">The height of the message bubble.</param>
-        <param name="timeout">The timeout of the notification.</param>
-        <remarks>
-          <para>
-If the Svg file contains macros, they will be replaced with the contents of header and body parameters.
-</para>
-          <list type="table">
-            <listheader>
-              <term>Macro</term>
-              <description>Replaced with</description>
-            </listheader>
-            <item>
-              <term>@HEADER@</term>
-              <description>replaced with the contents of the header parameter</description>
-            </item>
-            <item>
-              <term>@LINE1@</term>
-              <description>replaced with the contents of the body parameter</description>
-            </item>
-            <item>
-              <term>@LINE2@</term>
-              <description>replaced with the contents of the body parameter</description>
-            </item>
-            <item>
-              <term>@LINE3@</term>
-              <description>replaced with the contents of the body parameter</description>
-            </item>
-          </list>
-        </remarks>
+        <summary>Render a Svg as a notification bubble from a file, or a text chunk.</summary>
+        <param name="source">The source of the notification. See <see cref="T:Chicken.Gnome.Notification.NotificationSource" />. Note that an svg cannot be rendered from a Url at the moment.</param>
+        <param name="header">The header text of the notification. It should be a short description of the message.</param>
+        <param name="body">The type of the notification. See <see cref="T:Chicken.Gnome.Notification.NotificationType" />.</param>
+        <param name="width">The notification bubble width.</param>
+        <param name="height">The notification bubble height.</param>
+        <param name="timeout">The notification timeout in milliseconds. After this time, the notification disappears.</param>
+        <param name="thandler">Handler called when the timeout of the notification area message expires. It can be null if there is no interest in handling this event.</param>
+        <remarks>To be added</remarks>
       </Docs>
     </Member>
-    <Member MemberName="ShowMessageNotification">
-      <MemberSignature Language="C#" Value="public static void ShowMessageNotification (string header, string body, int timeout, int width, int height, Chicken.Gnome.Notification.NotificationType type);" />
+    <Member MemberName="ShowMessageNotification" Deprecated="true">
+      <MemberSignature Language="C#" Value="public static void ShowMessageNotification (string header, string body, int timeout, int width, int height, Chicken.Gnome.Notification.NotificationType type, Chicken.Gnome.Notification.TimerEndHandler thandler);" />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -150,20 +131,22 @@ If the Svg file contains macros, they will be replaced with the contents of head
         <Parameter Name="width" Type="System.Int32" />
         <Parameter Name="height" Type="System.Int32" />
         <Parameter Name="type" Type="Chicken.Gnome.Notification.NotificationType" />
+        <Parameter Name="thandler" Type="Chicken.Gnome.Notification.TimerEndHandler" />
       </Parameters>
       <Docs>
-        <summary>Renders a standard notification message included in the framework assembly specifying the width, the height and the timeout of the notification.</summary>
-        <param name="header">The header of the message.</param>
-        <param name="body">The body of the message.</param>
-        <param name="timeout">The timeout of the notification.</param>
-        <param name="width">The width of the notification bubble.</param>
-        <param name="height">The height of the notification bubble.</param>
-        <param name="type">The type of the notification. It can be Warning, Info or Error.</param>
+        <summary>Shows a standard warning, info or error notification.</summary>
+        <param name="header">The header text of the notification. It should be a short description of the message.</param>
+        <param name="body">The body of the notification message.</param>
+        <param name="timeout">The notification timeout in milliseconds. After this time, the notification disappears.</param>
+        <param name="width">The notification bubble width.</param>
+        <param name="height">The notification bubble height.</param>
+        <param name="type">The type of the notification. See <see cref="T:Chicken.Gnome.Notification.NotificationType" />.</param>
+        <param name="thandler">Handler called when the timeout of the notification area message expires. It can be null if there is no interest in handling this event.</param>
         <remarks>To be added</remarks>
       </Docs>
     </Member>
-    <Member MemberName="ShowMessageNotification">
-      <MemberSignature Language="C#" Value="public static void ShowMessageNotification (string header, string body, Chicken.Gnome.Notification.NotificationType type);" />
+    <Member MemberName="ShowMessageNotification" Deprecated="true">
+      <MemberSignature Language="C#" Value="public static void ShowMessageNotification (string header, string body, Chicken.Gnome.Notification.NotificationType type, Chicken.Gnome.Notification.TimerEndHandler thandler);" />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -172,19 +155,114 @@ If the Svg file contains macros, they will be replaced with the contents of head
         <Parameter Name="header" Type="System.String" />
         <Parameter Name="body" Type="System.String" />
         <Parameter Name="type" Type="Chicken.Gnome.Notification.NotificationType" />
+        <Parameter Name="thandler" Type="Chicken.Gnome.Notification.TimerEndHandler" />
       </Parameters>
       <Docs>
-        <summary>Renders a standard notification message included in the framework assembly.</summary>
-        <param name="header">The header of the message</param>
-        <param name="body">
-          <para>
-The body of the message. A maximum of 3 lines will be rendered. Each line of the body must be separated with %%.
-</para>
-          <para>
-Example: "this is a three %% line %% message body"
-</para>
-        </param>
-        <param name="type">Can be Warning, Info and Error.</param>
+        <summary>Shows a standard warning, info or error notification with the default width, height and timeout.</summary>
+        <param name="header">The header text of the notification. It should be a short description of the message.</param>
+        <param name="body">The body of the notification message.</param>
+        <param name="type">The type of the notification. See <see cref="T:Chicken.Gnome.Notification.NotificationType" />.</param>
+        <param name="thandler">Handler called when the timeout of the notification area message expires. It can be null if there is no interest in handling this event.</param>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ShowHtmlNotification">
+      <MemberSignature Language="C#" Value="public static void ShowHtmlNotification (string source, Chicken.Gnome.Notification.NotificationSource nsource, int width, int height, int timeout, Chicken.Gnome.Notification.TimerEndedHandler thandler);" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="source" Type="System.String" />
+        <Parameter Name="nsource" Type="Chicken.Gnome.Notification.NotificationSource" />
+        <Parameter Name="width" Type="System.Int32" />
+        <Parameter Name="height" Type="System.Int32" />
+        <Parameter Name="timeout" Type="System.Int32" />
+        <Parameter Name="thandler" Type="Chicken.Gnome.Notification.TimerEndedHandler" />
+      </Parameters>
+      <Docs>
+        <summary>To be added</summary>
+        <param name="source">a <see cref="T:System.String" /></param>
+        <param name="nsource">a <see cref="T:System.Int32" /></param>
+        <param name="width">a <see cref="T:System.Int32" /></param>
+        <param name="height">a <see cref="T:System.Int32" /></param>
+        <param name="timeout">a <see cref="T:System.Int32" /></param>
+        <param name="thandler">a <see cref="T:Chicken.Gnome.Notification.TimerEndedHandler" /></param>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ShowSvgNotification">
+      <MemberSignature Language="C#" Value="public static void ShowSvgNotification (string source, string header, string body, int width, int height, int timeout, Chicken.Gnome.Notification.TimerEndedHandler thandler);" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="source" Type="System.String" />
+        <Parameter Name="header" Type="System.String" />
+        <Parameter Name="body" Type="System.String" />
+        <Parameter Name="width" Type="System.Int32" />
+        <Parameter Name="height" Type="System.Int32" />
+        <Parameter Name="timeout" Type="System.Int32" />
+        <Parameter Name="thandler" Type="Chicken.Gnome.Notification.TimerEndedHandler" />
+      </Parameters>
+      <Docs>
+        <summary>To be added</summary>
+        <param name="source">a <see cref="T:System.String" /></param>
+        <param name="header">a <see cref="T:System.String" /></param>
+        <param name="body">a <see cref="T:System.String" /></param>
+        <param name="width">a <see cref="T:System.Int32" /></param>
+        <param name="height">a <see cref="T:System.Int32" /></param>
+        <param name="timeout">a <see cref="T:System.Int32" /></param>
+        <param name="thandler">a <see cref="T:Chicken.Gnome.Notification.TimerEndedHandler" /></param>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ShowMessageNotification">
+      <MemberSignature Language="C#" Value="public static void ShowMessageNotification (string header, string body, int timeout, int width, int height, Chicken.Gnome.Notification.NotificationType type, Chicken.Gnome.Notification.TimerEndedHandler thandler);" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="header" Type="System.String" />
+        <Parameter Name="body" Type="System.String" />
+        <Parameter Name="timeout" Type="System.Int32" />
+        <Parameter Name="width" Type="System.Int32" />
+        <Parameter Name="height" Type="System.Int32" />
+        <Parameter Name="type" Type="Chicken.Gnome.Notification.NotificationType" />
+        <Parameter Name="thandler" Type="Chicken.Gnome.Notification.TimerEndedHandler" />
+      </Parameters>
+      <Docs>
+        <summary>To be added</summary>
+        <param name="header">a <see cref="T:System.String" /></param>
+        <param name="body">a <see cref="T:System.String" /></param>
+        <param name="timeout">a <see cref="T:System.Int32" /></param>
+        <param name="width">a <see cref="T:System.Int32" /></param>
+        <param name="height">a <see cref="T:System.Int32" /></param>
+        <param name="type">a <see cref="T:System.Int32" /></param>
+        <param name="thandler">a <see cref="T:Chicken.Gnome.Notification.TimerEndedHandler" /></param>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ShowMessageNotification">
+      <MemberSignature Language="C#" Value="public static void ShowMessageNotification (string header, string body, Chicken.Gnome.Notification.NotificationType type, Chicken.Gnome.Notification.TimerEndedHandler thandler);" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="header" Type="System.String" />
+        <Parameter Name="body" Type="System.String" />
+        <Parameter Name="type" Type="Chicken.Gnome.Notification.NotificationType" />
+        <Parameter Name="thandler" Type="Chicken.Gnome.Notification.TimerEndedHandler" />
+      </Parameters>
+      <Docs>
+        <summary>To be added</summary>
+        <param name="header">a <see cref="T:System.String" /></param>
+        <param name="body">a <see cref="T:System.String" /></param>
+        <param name="type">a <see cref="T:System.Int32" /></param>
+        <param name="thandler">a <see cref="T:Chicken.Gnome.Notification.TimerEndedHandler" /></param>
         <remarks>To be added</remarks>
       </Docs>
     </Member>

@@ -1,5 +1,5 @@
-<Type Name="NotificationMessage" FullName="Chicken.Gnome.Notification.NotificationMessage">
-  <TypeSignature Language="C#" Value="public class NotificationMessage" Maintainer="auto" />
+<Type Name="NotificationAreaMessage" FullName="Chicken.Gnome.Notification.NotificationAreaMessage">
+  <TypeSignature Language="C#" Value="public class NotificationAreaMessage" Maintainer="auto" />
   <AssemblyInfo>
     <AssemblyName>Chicken</AssemblyName>
     <AssemblyPublicKey>
@@ -10,8 +10,49 @@
   </AssemblyInfo>
   <ThreadSafetyStatement>Gtk# is thread aware, but not thread safe; See the <link location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
   <Docs>
-    <summary>To be added</summary>
-    <remarks>To be added</remarks>
+    <summary>
+      <para>
+NotificationAreaMessage shows an animated notification area icon and a notification bubble at the same time.
+</para>
+    </summary>
+    <remarks>
+      <para>
+Example:
+</para>
+      <example>
+        <code lang="C#">
+    using System;
+    using Gtk;
+    using Chicken.Gnome.Notification;
+
+    public class NotificationAreaMessageExample
+    {
+		public static void Main (string[] args)
+		{
+			Application.Init ();
+			NotificationAreaMessage msg = new NotificationAreaMessage 
+					("msg.svg", NotificationSource.File, NotificationContent.Svg);
+			msg.BubbleWidth = 250;
+			msg.BubbleHeight = 50;
+			msg.TimeOut = 5000; //milliseconds
+			msg.TimerEndedEvent += TimeEnded;
+			msg.Notify ();
+			Application.Run ();
+		}
+		
+		private static void TimerEnded ()
+		{
+	    		Application.Quit ();
+		}
+
+    }
+
+  </code>
+      </example>
+      <para>
+See <see cref="T:Chicken.Gnome.Notification.NotificationBubble" /> and <see cref="T:Chicken.Gnome.TrayIcon.AnimatedTrayIcon" />.
+</para>
+    </remarks>
   </Docs>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -32,7 +73,7 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public NotificationMessage (string source, Chicken.Gnome.Notification.NotificationSource sourceType, Chicken.Gnome.Notification.NotificationContent contentType);" />
+      <MemberSignature Language="C#" Value="public NotificationAreaMessage (string source, Chicken.Gnome.Notification.NotificationSource sourceType, Chicken.Gnome.Notification.NotificationContent contentType);" />
       <MemberType>Constructor</MemberType>
       <ReturnValue />
       <Parameters>
@@ -45,7 +86,7 @@
         <param name="source">a <see cref="T:System.String" /></param>
         <param name="sourceType">a <see cref="T:System.Int32" /></param>
         <param name="contentType">a <see cref="T:System.Int32" /></param>
-        <returns>a <see cref="T:Chicken.Gnome.Notification.NotificationMessage" /></returns>
+        <returns>a <see cref="T:Chicken.Gnome.Notification.NotificationAreaMessage" /></returns>
         <remarks>To be added</remarks>
       </Docs>
     </Member>
@@ -57,7 +98,7 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added</summary>
+        <summary>The timeout of the bubble in milliseconds. After this timeout, the bubble disappears.</summary>
         <returns>a <see cref="T:System.Int32" /></returns>
         <remarks>To be added</remarks>
       </Docs>
@@ -70,7 +111,7 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added</summary>
+        <summary>The width of the bubble window in pixels.</summary>
         <returns>a <see cref="T:System.Int32" /></returns>
         <remarks>To be added</remarks>
       </Docs>
@@ -83,8 +124,32 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added</summary>
+        <summary>The height of the bubble window in pixels.</summary>
         <returns>a <see cref="T:System.Int32" /></returns>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TimerEnd" Deprecated="true">
+      <MemberSignature Language="C#" Value="public event Chicken.Gnome.Notification.TimerEndHandler TimerEnd;" />
+      <MemberType>Event</MemberType>
+      <ReturnValue>
+        <ReturnType>Chicken.Gnome.Notification.TimerEndHandler</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added</summary>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TimerEndedEvent">
+      <MemberSignature Language="C#" Value="public event Chicken.Gnome.Notification.TimerEndedHandler TimerEndedEvent;" />
+      <MemberType>Event</MemberType>
+      <ReturnValue>
+        <ReturnType>Chicken.Gnome.Notification.TimerEndedHandler</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added</summary>
         <remarks>To be added</remarks>
       </Docs>
     </Member>
