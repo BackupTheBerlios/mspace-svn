@@ -1,13 +1,16 @@
 include sources.list
 
 MISCRS = /resource:../MuineSdk.ini,MuineSdk.ini
-REFERENCES = -pkg:gtk-sharp /r:../ext/Nini.dll
+REFERENCES = -pkg:gtk-sharp
 
-Muine.Player.Sdk.dll: $(SOURCES)
+Muine.Sdk.dll: $(SOURCES)
 	mcs /out:$@ $(SOURCES) /target:library $(REFERENCES) $(MISCRS)
 
-all: Muine.Player.Sdk.dll
+all: Muine.Sdk.dll
 
-EXTRA_DIST =
+sdklibdir = $(prefix)/lib
+sdklib_DATA = Muine.Sdk.dll muine-sdk.pc
 
-CLEANFILES = Muine.Player.Sdk.dll
+EXTRA_DIST = sources.list muine-sdk.pc.in
+
+CLEANFILES = Muine.Sdk.dll muine-sdk.pc

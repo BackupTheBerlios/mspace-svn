@@ -39,7 +39,6 @@ namespace Muine.Sdk.Services
 	public static IPlaylist Playlist;
 
 	//FIXME: Test if the service is loaded from the Sdk assembly properly
-	//FIXME: Add support for system wide custom services.
 	private static object LoadService (string serviceDir, string service)
 	{
 	    char separator = Path.DirectorySeparatorChar;
@@ -54,7 +53,9 @@ namespace Muine.Sdk.Services
 		//The user doesn't have a custom service, load the default
 		if (serviceObject == null)
 		{
-		    asm = Assembly.GetCallingAssembly ();
+		    string systemLocation = Assembly.GetCallingAssembly ().Location;
+		    asm = Assembly.LoadFrom
+			(systemLocation + separator + "Muine.Sdk" + separator + serviceDir + separator + service + ".dll");
 		    serviceObject = asm.CreateInstance (service);
 		}
 		return serviceObject;
