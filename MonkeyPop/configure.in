@@ -54,6 +54,7 @@ AC_PATH_PROG(MONO, mono)
 
 AC_OUTPUT([
 Makefile
+scripts/Makefile
 src/Makefile
 images/Makefile
 src/monkeypop

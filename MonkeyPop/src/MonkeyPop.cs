@@ -95,9 +95,8 @@ public class MonkeyPop
 		continue;
 	    }
 	    else if (s.StartsWith ("--") && collecting)
-	    {
 		collecting = false;
-	    }
+
 	    if (collecting)
 		textbuilder.Append (s + " ");
 	}
@@ -111,9 +110,8 @@ public class MonkeyPop
 		continue;
 	    }
 	    else if (s.StartsWith ("--") && collecting)
-	    {
 		collecting = false;
-	    }
+
 	    if (collecting)
 		headerbuilder.Append (s + " ");
 	}
@@ -126,61 +124,70 @@ public class MonkeyPop
 	    Environment.Exit (1);
 	}
 	
+	//We are receiving html
 	if (options.html)
 	{
+	    NotificationSource sourceType = NotificationSource.Url;
+	    string source = null;
 	    if (options.content != null)
 	    {
-		NotificationFactory.ShowHtmlNotification 
-		    (options.content, NotificationSource.Text, options.width, options.height, options.timeout);
-		Application.Run ();
+		    sourceType = NotificationSource.Text;
+		    source = options.content;
 	    }
 	    else if (options.file != null)
 	    {
-		NotificationFactory.ShowHtmlNotification 
-		    (options.file, NotificationSource.File, options.width, options.height, options.timeout);
-		Application.Run ();
+		    sourceType = NotificationSource.File;
+		    source = options.file;
 	    }
 	    else if (options.url != null)
 	    {
-		NotificationFactory.ShowHtmlNotification 
-		    (options.url, NotificationSource.Url, options.width, options.height, options.timeout);
-		Application.Run ();
+		    sourceType = NotificationSource.Url;
+		    source = options.url;
 	    }
 	    else
 		options.DoHelp ();
+
+	    NotificationFactory.ShowHtmlNotification (source, sourceType,
+							options.width, options.height,
+							options.timeout, new TimerEndedHandler (TimerEnded));
 	}
+	
+	// We are receiving svg
 	else if (options.svg)
 	{
 	    if (options.file != null)
-	    {
-		NotificationFactory.ShowSvgNotification 
-		    (options.file, options.header, options.text, options.width, options.height, options.timeout);
-		Application.Run ();
-
-	    } 
-	    else if (options.content != null)
-	    {
-	    }
+		NotificationFactory.ShowSvgNotification (options.file, options.header,
+							options.text, options.width,
+							options.height, options.timeout,
+							new TimerEndedHandler (TimerEnded));
+	    
 	    else if (options.warning)
-	    {
-		NotificationFactory.ShowMessageNotification (options.header, options.text, options.timeout, options.width, options.height, NotificationType.Warning);
-		Application.Run ();
-	    }
+		ShowStandardMsg (NotificationType.Warning, options);
+		    
 	    else if (options.info)
-	    {
-		NotificationFactory.ShowMessageNotification (options.header, options.text, options.timeout, options.width, options.height, NotificationType.Info);
-		Application.Run ();
-	    } 
+		ShowStandardMsg (NotificationType.Info, options);
+		    
 	    else if (options.error)
-	    {
-		NotificationFactory.ShowMessageNotification (options.header, options.text, options.timeout, options.width, options.height, NotificationType.Error);
-		Application.Run ();
-	    }
+		ShowStandardMsg (NotificationType.Error, options);
+
 	    else
 		options.DoHelp ();
 	}
 	else
 	    options.DoHelp ();
+	Application.Run ();
+    }
+
+    private static void TimerEnded ()
+    {
+	Application.Quit ();
+    }
+
+    private static void ShowStandardMsg (NotificationType type, SimpleOptions options)
+    {
+		NotificationFactory.ShowMessageNotification (options.header, options.text,
+								options.timeout, options.width,
+								options.height, type, new TimerEndedHandler (TimerEnded));
     }
     
 }
