@@ -23,7 +23,6 @@ CSSOURCES += ./Nini/Ini/IniWriter.cs
 CSSOURCES += ./Nini/Util/IOrderedDictionary.cs
 CSSOURCES += ./Nini/Util/OrderedList.cs
 CSSOURCES += ./Nini/Util/OrderedListEnumerator.cs
-CSSOURCES += ./Configuration/ObjectStore.cs
 CSSOURCES += ./Configuration/Configuration.cs
 CSSOURCES += ./Data/ISearchable.cs
 CSSOURCES += ./Data/Song.cs

@@ -1,7 +1,7 @@
 include sources.list
 
 MISCRS = /resource:../MuineSdk.ini,MuineSdk.ini
-REFERENCES = -pkg:gtk-sharp
+REFERENCES = -pkg:gtk-sharp -pkg:fl-framework
 
 Muine.Sdk.dll: $(CSSOURCES)
 	mcs /out:$@ $(CSSOURCES) /target:library $(MISCRS)
