@@ -23,31 +23,14 @@ using System.IO;
 using System.Text.RegularExpressions;
 
 using Gtk;
+using Gtk.Ext;
 using GLib;
 
 public class PlaylistWindow : Window
 {
 	/* menu widgets */
-	[Glade.Widget]
-	private ImageMenuItem play_pause_menu_item;
-	private Image play_pause_menu_item_image;
-	[Glade.Widget]
-	private ImageMenuItem previous_menu_item;
-	[Glade.Widget]
-	private ImageMenuItem next_menu_item;
-	[Glade.Widget]
-	private ImageMenuItem skip_to_menu_item;
-	[Glade.Widget]
-	private ImageMenuItem skip_backwards_menu_item;
-	[Glade.Widget]
-	private ImageMenuItem skip_forward_menu_item;
-	[Glade.Widget]
-	private ImageMenuItem information_menu_item;
-	[Glade.Widget]
-	private ImageMenuItem remove_song_menu_item;
-	[Glade.Widget]
-	private CheckMenuItem repeat_menu_item;
-	private bool setting_repeat_menu_item;
+	[Glade.Widget] private MenuItem songMenu;
+
 
 	/* playlist area */
 	[Glade.Widget]
@@ -95,7 +78,6 @@ public class PlaylistWindow : Window
 
 		glade_xml["main_vbox"].ShowAll ();
 
-		((Label) play_pause_menu_item.Child).LabelProp = AppContext.Catalog.GetString ("Pl_ay");
 	}
 
 	public void RestorePlaylist ()
@@ -210,42 +192,13 @@ public class PlaylistWindow : Window
 
 	private void SetupButtonsAndMenuItems ()
 	{
-		Gtk.Image image;
-		image = new Image (Stock.Add, IconSize.Menu);
-		((ImageMenuItem) glade_xml ["add_song_menu_item"]).Image = image;
-		image.Visible = true;
-		image = new Image ("muine-add-album", IconSize.Menu);
-		((ImageMenuItem) glade_xml ["add_album_menu_item"]).Image = image;
-		image.Visible = true;
+		
+		Menu menu = new Menu ();
+		menu.Append (new ActionMenuItem (GlobalActions.PlayPauseAction));
+		menu.Append (new ActionMenuItem (GlobalActions.PreviousAction));
+		menu.Append (new ActionMenuItem (GlobalActions.NextAction));
 
-		play_pause_menu_item_image = new Image ("muine-play", IconSize.Menu);
-		play_pause_menu_item.Image = play_pause_menu_item_image;
-		play_pause_menu_item_image.Visible = true;
-		image = new Image ("muine-previous", IconSize.Menu);
-		previous_menu_item.Image = image;
-		image.Visible = true;
-		image = new Image ("muine-next", IconSize.Menu);
-		next_menu_item.Image = image;
-		image.Visible = true;
-
-		image = new Image ("muine-rewind", IconSize.Menu);
-		skip_backwards_menu_item.Image = image;
-		image.Visible = true;
-		image = new Image ("muine-forward", IconSize.Menu);
-		skip_forward_menu_item.Image = image;
-		image.Visible = true;
-
-		/* FIXME */
-		glade_xml ["information_menu_item_separator"].Visible = false;
-		information_menu_item.Visible = false;
-
-		setting_repeat_menu_item = true;
-		try {
-			repeat_menu_item.Active = (bool) AppContext.GConfClient.Get ("/apps/muine/repeat");
-		} catch {
-			repeat_menu_item.Active = false;
-		}
-		setting_repeat_menu_item = false;
+		songMenu.Submenu = menu;
 
 	}
 
@@ -621,10 +574,10 @@ public class PlaylistWindow : Window
 
 	private void HandleRepeatCommand (object o, EventArgs args)
 	{
-		if (setting_repeat_menu_item)
-			return;
+		//if (setting_repeat_menu_item)
+		//	return;
 
-		AppContext.GConfClient.Set ("/apps/muine/repeat", repeat_menu_item.Active);
+		//AppContext.GConfClient.Set ("/apps/muine/repeat", repeat_menu_item.Active);
 	}
 
 	private void HandleHideWindowCommand (object o, EventArgs args)

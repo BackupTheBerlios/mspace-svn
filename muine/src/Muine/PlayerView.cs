@@ -20,6 +20,7 @@
 using Gtk;
 using Glade;
 using System;
+using Gtk.Ext;
 
 public class PlayerView : VBox
 {
@@ -38,13 +39,13 @@ public class PlayerView : VBox
 	[Glade.Widget] private Button playSongBtn;
 	[Glade.Widget] private Button playAlbumBtn;
 	[Glade.Widget] private VBox volumeBtnBox;
-	[Glade.Widget] private Image playPauseImg;
-	[Glade.Widget] private Image nextImg;
-	[Glade.Widget] private Image prevImg;
 	[Glade.Widget] private Image playSongImg;
 	[Glade.Widget] private Image playAlbumImg;
 
 	
+	[Glade.Widget] private HBox  nextBox;
+	[Glade.Widget] private HBox  prevBox;
+	[Glade.Widget] private HBox playPauseBox;
 	[Glade.Widget] private HBox coverBox;
 	[Glade.Widget] private VBox titleBox;
 	[Glade.Widget] private VBox artistBox;
@@ -88,15 +89,20 @@ public class PlayerView : VBox
 	volumeButton.VolumeChanged += HandleVolumeChanged;
 	volumeBtnBox.Add (volumeButton);
 
-	playPauseImg.SetFromStock ("muine-play", IconSize.LargeToolbar);
-	nextImg.SetFromStock ("muine-next", IconSize.LargeToolbar);
-	prevImg.SetFromStock ("muine-previous", IconSize.LargeToolbar);
+	ImageButton imgBtn;
+
+	imgBtn = new ImageButton (GlobalActions.PlayPauseAction);
+	playPauseBox.PackStart (imgBtn);
+	
+	imgBtn = new ImageButton (GlobalActions.PreviousAction);
+	prevBox.Add (imgBtn);
+
+	imgBtn = new ImageButton (GlobalActions.NextAction);
+	nextBox.Add (imgBtn);
 
 	playSongImg.SetFromStock (Stock.Add, IconSize.LargeToolbar);
 	playAlbumImg.SetFromStock ("muine-add-album", IconSize.LargeToolbar);
 
-	AppContext.Playlist.SongChanged += HandleSongChanged;
-	UpdateButtons ();
 
     }
 	private void HandleVolumeChanged (int vol)
@@ -116,13 +122,4 @@ public class PlayerView : VBox
 	{
 	}
 
-	private void HandleSongChanged (object obj, Song s)
-	{
-	    UpdateButtons ();
-	}
-
-	private void UpdateButtons ()
-	{
-	    nextBtn.Sensitive = AppContext.Playlist.Next != null;
-	}
 }
