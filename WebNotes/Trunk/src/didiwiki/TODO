@@ -1,0 +1,65 @@
+
+Notes
+=====
+
+Want to keep things simple,quick and useful. Didiwiki intended for personal
+use - Notes, Todos, basic PIM etc - functionality should reflect that.
+
+Keep deps lows, binary should just run - no dependance on external files. 
+Should just work. 
+
+Pending
+=====
+
+Apply Halski's '-' patch.
+
+
+Stuff that would be nice to have
+=====
+
+- Auth
+  - basic http auth 
+    - set via user/pass in ~/.didiwiki/.htacess ?
+  - Limit by IP
+
+- Any secruity improvements in code. 
+
+- RSS feed of changes / searches ?
+
+- Simple REST uri like API for external getting/setting raw wiki pages
+  - didiwiki:8000/api/get/PageName
+  - didiwiki:8000/api/set/PageName?data
+  - didiwiki:8000/api/search
+  - didiwiki:8000/api/changes
+
+- Rewrite Parser.
+  - can be much faster but its not that slow atm. 
+  - make generic, output text, docbook ( bloat - uneeded )
+                   - REST api would make it easy to write other 
+		     programs that did this. 
+
+- Wikipedia style icons after external links etc ( done in css )
+  - 'xxd' can convert pngs etc to c arrays useful for including
+    small images in binary. 
+
+- Also favicon.ico *DONE*, though better icon would be nice. 
+
+- Improve serach.
+
+- Interwiki style links ?
+
+
+
+Stuff thats a little more out there
+======
+
+- metadata on pages / tagging / tagging by dates
+  - used to build custom searchs, group stuff togeather
+    - more PIM like. 
+  - need to think more on this
+
+- #include 'wikipage' style directive ?
+
+- GTD tool, how would this work ?
+
+   
