@@ -29,6 +29,9 @@ namespace ComponentModel {
         }
       
         private Type GetTypeExceptionManager (string exceptionManagerClassName) {
+            if ((exceptionManagerClassName == null) | (exceptionManagerClassName.Equals (String.Empty))) {
+                throw new ExceptionManagerNotFoundException ("Null exception managerClassName.");
+            }
             foreach (Assembly assembly in DefaultContainer.Instance.Assemblies) {
                 foreach (Type type in assembly.GetTypes ()) {
                     if (type.IsSubclassOf (typeof (DefaultExceptionManager)) || type.IsSubclassOf (typeof (IExceptionManager))) {
@@ -39,19 +42,32 @@ namespace ComponentModel {
                     }
                 }
             }
-            return null;
+            //Si llega aquí, no ha encontrado el exceptionManager.
+            throw new ExceptionManagerNotFoundException ("Exception Manager Can't be found in Component.");
+            //return null;
         }
         
         private MethodInfo GetMethodToExecute (string methodName, Type componentType) {
             logger.Debug ("Entering GetMethodToExecute. Searching: " + methodName + " in: " + componentType.ToString ());
             MethodInfo methodInfo = componentType.GetMethod (methodName, BindingFlags.Instance | BindingFlags.DeclaredOnly | BindingFlags.Public);
-            logger.Debug ("Finded method to execute: " + methodInfo.ToString ());
+            //Checkeamos que lo haya encontrado
+            if (methodInfo == null) {
+                throw new MethodNotFoundException ("Method to execute: " + methodName + " not found.");
+            }
+            else {
+                logger.Debug ("Finded method to execute: " + methodInfo.ToString ());
+            }
             return methodInfo;
         }
         
         private MethodInfo GetMethodResponse (Type viewType, ComponentMethodAttribute componentMethodAttribute) {
             MethodInfo responseMethod = viewType.GetMethod (componentMethodAttribute.ResponseName, BindingFlags.Instance | BindingFlags.DeclaredOnly | BindingFlags.Public) ;
+            if (responseMethod == null) {
+                throw new ResponseNotFoundException ("Response: " + componentMethodAttribute.ResponseName + " not found in: " + viewType.ToString ());
+            } 
+            else {
             logger.Debug ("Finded response to execute: " + responseMethod.ToString () + " in: " + viewType.ToString ());
+            }
             return responseMethod;
         } 
         
@@ -77,15 +93,31 @@ namespace ComponentModel {
                 methodResponse.Invoke (obj, new object[] {responseMethodVO});
                 return responseMethodVO;
             }
-            catch (Exception exception) {
-                if (exception is ComponentModelException) {
-                    //Tirar la exception para arriba.
+            catch (TargetInvocationException exception) {
+                if (exception.InnerException is ComponentModelException) {
+                    throw exception.InnerException;
                 }
                 else {
                     this.InstantiateExceptionManager ();
                     defaultExceptionManager.ProcessException (exception);
                 }
             }
+            /**
+            catch (Exception exception) {
+                //if (exception is ComponentModelException) {
+                if (exception is TargetInvocationException) {
+                    //Tirar la exception para arriba.
+                    logger.Debug ("A ComponentModelException has been caugth");
+                    logger.Debug (exception.InnerException.ToString ());
+                    throw new ComponentModelException("ComponentModel Exception.");
+                }
+                else {
+                    this.InstantiateExceptionManager ();
+                    defaultExceptionManager.ProcessException (exception);
+                }
+                logger.Debug ("A exception has been caught.");
+            }
+            */
             return null;
         }
         
@@ -98,7 +130,8 @@ namespace ComponentModel {
                     }
                 }
             }
-            return null;
+            throw new ViewNotFoundException ("View " +componentMethodAttribute.ViewName + " not found");
+            //return null;
         }
         
         //Other (Aux @DEPRECATED)

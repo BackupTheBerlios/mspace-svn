@@ -17,6 +17,7 @@ namespace ComponentModel.ComponentTest {
             dcm.Execute ("Saluda", null);
             //dcm.Execute ("SaludaATodos", null);
             //dcm = (DefaultComponentModel)defaultContainer.GetComponentByName ("Saludador!");
+            Console.WriteLine ("Fin exec terminated program.");
         }
     }
 }

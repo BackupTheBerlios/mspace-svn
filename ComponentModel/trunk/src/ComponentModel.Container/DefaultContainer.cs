@@ -50,7 +50,6 @@ namespace ComponentModel.Container {
             IEnumerator enumerator = collection.GetEnumerator ();
             while (enumerator.MoveNext ()) {
                 DefaultComponentModel defaultComponentModel = (DefaultComponentModel)enumerator.Current;
-                //Registrar aqui el exceptionClass
                 this.Add (defaultComponentModel); 
             }
             logger.Debug ("Exiting RegisterComponent.");
