@@ -1,0 +1,4 @@
+2004-09-20  Sergio Rubio  <sergio.rubio@hispalinux.es>
+
+	* configure.in: Bumped version. Removed trayicon libs
+

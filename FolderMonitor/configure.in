@@ -1,45 +1,15 @@
 AC_PREREQ(2.59)
-AC_INIT(FolderMonitor, 0.2.2, [sergio.rubio@hispalinux.es])
+AC_INIT(FolderMonitor, 0.2.3, [sergio.rubio@hispalinux.es])
 AM_MAINTAINER_MODE
-AM_CONFIG_HEADER(config.h)
 
 AM_INIT_AUTOMAKE()
 
 # Checks for programs.
-AC_PROG_CC
-AM_PROG_CC_STDC
 AC_PROG_INSTALL
-AM_PROG_LIBTOOL
-
-# Checks for libraries.
-
-# Checks for header files.
-AC_HEADER_DIRENT
-AC_HEADER_STDC
-AC_HEADER_SYS_WAIT
-AC_CHECK_HEADERS([arpa/inet.h netinet/in.h stdlib.h string.h sys/socket.h sys/time.h unistd.h])
-
-# Checks for typedefs, structures, and compiler characteristics.
-AC_C_CONST
-AC_HEADER_TIME
-AC_STRUCT_TM
-
-# Checks for library functions.
-AC_FUNC_ALLOCA
-AC_FUNC_FORK
-AC_FUNC_MALLOC
-AC_FUNC_REALLOC
-AC_FUNC_SELECT_ARGTYPES
-AC_FUNC_STAT
-AC_FUNC_STRFTIME
-AC_CHECK_FUNCS([asprintf inet_ntoa memset mkdir putenv select socket strdup strncasecmp])
-
 
 dnl Version dependencies
 MONO_REQUIRED=1.0
 GTKSHARP_REQUIRED=1.0
-GDK20_MINIMUM_VERSION=2.2.3
-ATK_MINIMUM_VERSION=1.2.4
 
 #
 # Configure PKG_CONFIG
@@ -70,13 +40,6 @@ PKG_CHECK_MODULES(GTKSHARP,
 
 AC_SUBST(GTKSHARP_LIBS)
 
-PKG_CHECK_MODULES(GDK20, gdk-2.0 >= $GDK20_MINIMUM_VERSION)
-AC_SUBST(GDK20_CFLAGS)
-AC_SUBST(GDK20_LIBS)
-
-PKG_CHECK_MODULES(ATK, atk >= $ATK_MINIMUM_VERSION)
-AC_SUBST(ATK_CFLAGS)
-AC_SUBST(ATK_LIBS)
 
 dnl Check for Mono
 AC_PATH_PROG(MCS, mcs)
@@ -88,8 +51,5 @@ Makefile
 src/Makefile
 src/FolderMonitor/Makefile
 src/FolderMonitor/foldermonitor
-src/FolderMonitor/FolderMonitor.exe.config
-src/TrayIcon/Makefile
-src/TrayIcon/libtrayicon/Makefile
 images/Makefile
 ])
