@@ -17,8 +17,6 @@
  * Boston, MA 02111-1307, USA.
  */
 
-namespace MonkeyPop.NotificationDaemon 
-{
     using System;    
     using Gtk; 
     
@@ -44,5 +42,4 @@ namespace MonkeyPop.NotificationDaemon
 	}
     }
 
-}
 

@@ -1,9 +1,8 @@
 
-namespace MonkeyPop.NotificationDaemon
-{
     using DBus;
     using System;
     using Chicken.Gnome.Notification;
+    using Gtk;
     
     [DBus.Interface ("org.rubiojr.MonkeyPop.NotificationDaemon")]
     public class NotificationDaemon
@@ -21,6 +20,6 @@ namespace MonkeyPop.NotificationDaemon
 	    NotificationType ntype = (NotificationType)Enum.Parse (typeof (NotificationType), type);
 	    NotificationFactory.ShowMessageNotification (header, body, ntype, null);
 	}
+	
 
     }
-}

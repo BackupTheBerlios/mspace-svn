@@ -42,9 +42,25 @@ PKG_CHECK_MODULES(GTKSHARP,
 AC_SUBST(GTKSHARP_LIBS)
 
 
+dnl-------------------------
+dnl	Chicken check
+dnl-------------------------
 PKG_CHECK_MODULES(CHICKEN,
 		    chicken >= $CHICKEN_REQUIRED)
 AC_SUBST(CHICKEN_LIBS)
+
+
+dnl --------------
+dnl	DBus
+dnl --------------
+DBUS_REQUIRED=0.22
+AC_ARG_ENABLE(dbus, [  --enable-dbus=[no/yes]    compile with DBus daemon support.],,enable_dbus=no)
+AM_CONDITIONAL(ENABLE_DBUS, test "$enable_dbus" = "yes")
+if test "x$enable_dbus" = "xyes"; then
+    PKG_CHECK_MODULES(DBUS_SHARP,
+                  dbus-sharp >= $DBUS_REQUIRED)
+fi
+AC_SUBST(DBUS_SHARP_LIBS)
 
 
 dnl Check for Mono
@@ -57,4 +73,5 @@ Makefile
 src/Makefile
 images/Makefile
 src/monkeypop
+monkeypopd/Makefile
 ])

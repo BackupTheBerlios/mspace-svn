@@ -1,10 +1,18 @@
-CSFILES=*.cs
-REFERENCES=-pkg:gtk-sharp -pkg:chicken -pkg:dbus-sharp
+REFERENCES= \
+	    $(GTKSHARP_LIBS)		\
+	    $(CHICKEN_LIBS)	 	\
+	    $(DBUS_SHARP_LIBS)
 
-all: notification-daemon.exe
+all: NotificationDaemon.dll notification-daemon.exe client.exe
 
-notification-daemon.exe: $(CSFILES)
-	mcs $(CSFILES) -o $@ $(REFERENCES)
+NotificationDaemon.dll: NotificationDaemon.cs
+	mcs NotificationDaemon.cs -t:library -o $@ $(REFERENCES)
+
+notification-daemon.exe: DaemonLauncher.cs
+	mcs DaemonLauncher.cs -o $@ $(REFERENCES) -r:NotificationDaemon.dll
+
+client.exe: Client.cs
+	mcs Client.cs -o $@ $(REFERENCES) -r:NotificationDaemon.dll
 
 EXTRA_DIST = *.cs
-CLEANFILES= *.exe
+CLEANFILES= *.exe *.dll
