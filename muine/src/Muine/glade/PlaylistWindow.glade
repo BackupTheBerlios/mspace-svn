@@ -44,7 +44,7 @@
 		      <signal name="activate" handler="HandleImportFolderCommand" last_modification_time="Sat, 17 Jan 2004 19:23:29 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image944">
+			<widget class="GtkImage" id="image997">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-execute</property>
 			  <property name="icon_size">1</property>
@@ -58,7 +58,7 @@
 		  </child>
 
 		  <child>
-		    <widget class="GtkMenuItem" id="separator8">
+		    <widget class="GtkSeparatorMenuItem" id="separator8">
 		      <property name="visible">True</property>
 		    </widget>
 		  </child>
@@ -72,7 +72,7 @@
 		      <accelerator key="O" modifiers="GDK_CONTROL_MASK" signal="activate"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image945">
+			<widget class="GtkImage" id="image998">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-open</property>
 			  <property name="icon_size">1</property>
@@ -94,7 +94,7 @@
 		      <accelerator key="S" modifiers="GDK_CONTROL_MASK" signal="activate"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image946">
+			<widget class="GtkImage" id="image999">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-save-as</property>
 			  <property name="icon_size">1</property>
@@ -108,7 +108,7 @@
 		  </child>
 
 		  <child>
-		    <widget class="GtkMenuItem" id="before_recent_sep">
+		    <widget class="GtkSeparatorMenuItem" id="before_recent_sep">
 		      <property name="visible">True</property>
 		    </widget>
 		  </child>
@@ -124,7 +124,7 @@
 		  </child>
 
 		  <child>
-		    <widget class="GtkMenuItem" id="separator3">
+		    <widget class="GtkSeparatorMenuItem" id="separator3">
 		      <property name="visible">True</property>
 		    </widget>
 		  </child>
@@ -142,187 +142,10 @@
 	  </child>
 
 	  <child>
-	    <widget class="GtkMenuItem" id="song">
+	    <widget class="GtkMenuItem" id="songMenu">
 	      <property name="visible">True</property>
 	      <property name="label" translatable="yes">_Song</property>
 	      <property name="use_underline">True</property>
-
-	      <child>
-		<widget class="GtkMenu" id="song_menu">
-
-		  <child>
-		    <widget class="GtkImageMenuItem" id="play_pause_menu_item">
-		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">TMP</property>
-		      <property name="use_underline">True</property>
-		      <signal name="activate" handler="HandlePlayPauseCommand" last_modification_time="Sun, 11 Jan 2004 17:45:18 GMT"/>
-		      <accelerator key="space" modifiers="0" signal="activate"/>
-
-		      <child internal-child="image">
-			<widget class="GtkImage" id="image947">
-			  <property name="visible">True</property>
-			  <property name="stock">gnome-stock-about</property>
-			  <property name="icon_size">1</property>
-			  <property name="xalign">0.5</property>
-			  <property name="yalign">0.5</property>
-			  <property name="xpad">0</property>
-			  <property name="ypad">0</property>
-			</widget>
-		      </child>
-		    </widget>
-		  </child>
-
-		  <child>
-		    <widget class="GtkMenuItem" id="separator1">
-		      <property name="visible">True</property>
-		    </widget>
-		  </child>
-
-		  <child>
-		    <widget class="GtkImageMenuItem" id="previous_menu_item">
-		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">_Previous</property>
-		      <property name="use_underline">True</property>
-		      <signal name="activate" handler="HandlePreviousCommand" last_modification_time="Sun, 11 Jan 2004 17:45:18 GMT"/>
-		      <accelerator key="P" modifiers="0" signal="activate"/>
-
-		      <child internal-child="image">
-			<widget class="GtkImage" id="image948">
-			  <property name="visible">True</property>
-			  <property name="stock">gnome-stock-about</property>
-			  <property name="icon_size">1</property>
-			  <property name="xalign">0.5</property>
-			  <property name="yalign">0.5</property>
-			  <property name="xpad">0</property>
-			  <property name="ypad">0</property>
-			</widget>
-		      </child>
-		    </widget>
-		  </child>
-
-		  <child>
-		    <widget class="GtkImageMenuItem" id="next_menu_item">
-		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">_Next</property>
-		      <property name="use_underline">True</property>
-		      <signal name="activate" handler="HandleNextCommand" last_modification_time="Sun, 11 Jan 2004 17:45:18 GMT"/>
-		      <accelerator key="N" modifiers="0" signal="activate"/>
-
-		      <child internal-child="image">
-			<widget class="GtkImage" id="image949">
-			  <property name="visible">True</property>
-			  <property name="stock">gnome-stock-about</property>
-			  <property name="icon_size">1</property>
-			  <property name="xalign">0.5</property>
-			  <property name="yalign">0.5</property>
-			  <property name="xpad">0</property>
-			  <property name="ypad">0</property>
-			</widget>
-		      </child>
-		    </widget>
-		  </child>
-
-		  <child>
-		    <widget class="GtkMenuItem" id="separator2">
-		      <property name="visible">True</property>
-		    </widget>
-		  </child>
-
-		  <child>
-		    <widget class="GtkImageMenuItem" id="skip_to_menu_item">
-		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">_Skip to...</property>
-		      <property name="use_underline">True</property>
-		      <signal name="activate" handler="HandleSkipToCommand" last_modification_time="Sun, 11 Jan 2004 17:45:18 GMT"/>
-		      <accelerator key="T" modifiers="0" signal="activate"/>
-
-		      <child internal-child="image">
-			<widget class="GtkImage" id="image950">
-			  <property name="visible">True</property>
-			  <property name="stock">gtk-jump-to</property>
-			  <property name="icon_size">1</property>
-			  <property name="xalign">0.5</property>
-			  <property name="yalign">0.5</property>
-			  <property name="xpad">0</property>
-			  <property name="ypad">0</property>
-			</widget>
-		      </child>
-		    </widget>
-		  </child>
-
-		  <child>
-		    <widget class="GtkImageMenuItem" id="skip_backwards_menu_item">
-		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">Skip _Backwards</property>
-		      <property name="use_underline">True</property>
-		      <signal name="activate" handler="HandleSkipBackwardsCommand" last_modification_time="Sun, 11 Jan 2004 17:45:18 GMT"/>
-		      <accelerator key="Left" modifiers="GDK_CONTROL_MASK" signal="activate"/>
-
-		      <child internal-child="image">
-			<widget class="GtkImage" id="image951">
-			  <property name="visible">True</property>
-			  <property name="stock">gnome-stock-about</property>
-			  <property name="icon_size">1</property>
-			  <property name="xalign">0.5</property>
-			  <property name="yalign">0.5</property>
-			  <property name="xpad">0</property>
-			  <property name="ypad">0</property>
-			</widget>
-		      </child>
-		    </widget>
-		  </child>
-
-		  <child>
-		    <widget class="GtkImageMenuItem" id="skip_forward_menu_item">
-		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">Skip _Forward</property>
-		      <property name="use_underline">True</property>
-		      <signal name="activate" handler="HandleSkipForwardCommand" last_modification_time="Sun, 11 Jan 2004 17:45:18 GMT"/>
-		      <accelerator key="Right" modifiers="GDK_CONTROL_MASK" signal="activate"/>
-
-		      <child internal-child="image">
-			<widget class="GtkImage" id="image952">
-			  <property name="visible">True</property>
-			  <property name="stock">gnome-stock-about</property>
-			  <property name="icon_size">1</property>
-			  <property name="xalign">0.5</property>
-			  <property name="yalign">0.5</property>
-			  <property name="xpad">0</property>
-			  <property name="ypad">0</property>
-			</widget>
-		      </child>
-		    </widget>
-		  </child>
-
-		  <child>
-		    <widget class="GtkMenuItem" id="information_menu_item_separator">
-		      <property name="visible">True</property>
-		    </widget>
-		  </child>
-
-		  <child>
-		    <widget class="GtkImageMenuItem" id="information_menu_item">
-		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">P_roperties</property>
-		      <property name="use_underline">True</property>
-		      <signal name="activate" handler="HandleInformationCommand" last_modification_time="Fri, 27 Feb 2004 21:36:20 GMT"/>
-		      <accelerator key="I" modifiers="GDK_CONTROL_MASK" signal="activate"/>
-
-		      <child internal-child="image">
-			<widget class="GtkImage" id="image953">
-			  <property name="visible">True</property>
-			  <property name="stock">gtk-properties</property>
-			  <property name="icon_size">1</property>
-			  <property name="xalign">0.5</property>
-			  <property name="yalign">0.5</property>
-			  <property name="xpad">0</property>
-			  <property name="ypad">0</property>
-			</widget>
-		      </child>
-		    </widget>
-		  </child>
-		</widget>
-	      </child>
 	    </widget>
 	  </child>
 
@@ -344,7 +167,7 @@
 		      <accelerator key="S" modifiers="0" signal="activate"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image954">
+			<widget class="GtkImage" id="image1000">
 			  <property name="visible">True</property>
 			  <property name="stock">gnome-stock-about</property>
 			  <property name="icon_size">1</property>
@@ -366,7 +189,7 @@
 		      <accelerator key="A" modifiers="0" signal="activate"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image955">
+			<widget class="GtkImage" id="image1001">
 			  <property name="visible">True</property>
 			  <property name="stock">gnome-stock-about</property>
 			  <property name="icon_size">1</property>
@@ -380,7 +203,7 @@
 		  </child>
 
 		  <child>
-		    <widget class="GtkMenuItem" id="separator7">
+		    <widget class="GtkSeparatorMenuItem" id="separator7">
 		      <property name="visible">True</property>
 		    </widget>
 		  </child>
@@ -394,7 +217,7 @@
 		      <accelerator key="Delete" modifiers="0" signal="activate"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image956">
+			<widget class="GtkImage" id="image1002">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-remove</property>
 			  <property name="icon_size">1</property>
@@ -427,7 +250,7 @@
 		  </child>
 
 		  <child>
-		    <widget class="GtkMenuItem" id="separator10">
+		    <widget class="GtkSeparatorMenuItem" id="separator10">
 		      <property name="visible">True</property>
 		    </widget>
 		  </child>
