@@ -1,6 +1,6 @@
 AC_INIT(src/main.cs)
 AC_CANONICAL_SYSTEM
-AM_INIT_AUTOMAKE(FastOpen, 0.2)
+AM_INIT_AUTOMAKE(FastOpen, 0.2.1)
 AM_MAINTAINER_MODE
 
 dnl Version dependencies

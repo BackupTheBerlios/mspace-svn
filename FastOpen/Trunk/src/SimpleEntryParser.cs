@@ -20,6 +20,7 @@
 namespace FastOpen 
 {
     using System;
+    using System.Diagnostics;
     using System.IO;
 
     public class SimpleEntryParser : IEntryParser
@@ -27,29 +28,25 @@ namespace FastOpen
 	
 	public void Parse (string entry)
 	{
-	    string command;
-	    if (entry.StartsWith (":"))
-	    {
-		Console.WriteLine ("stripping..");
+	    string command = entry;
+	    
+	    if ( Directory.Exists (entry) ||
+		 Array.IndexOf (vfsUrls, command) != -1) {
+		Process.Start ("nautilus", entry);
+		
+	    } else if (command.StartsWith ("http://")) {
+		Gnome.Url.Show (command);
+		
+	    } else if (command.StartsWith (":")) {
 		command = entry.Substring (1,entry.Length - 1);
-	    }else
-		command = entry;
-	    int index = command.IndexOf (':');
-	    if (index != -1) {
-		if ( Array.IndexOf (vfsUrls, command) != -1 
-			|| command.StartsWith ("http://")
-			|| command.StartsWith ("/"))
-		{
-		    string sToOpen = command;
-		    if (command.StartsWith ("/"))
-			    sToOpen = "file:" + command;
-		    Gnome.Url.Show (sToOpen);
-		} else { 
+		int index = command.IndexOf (':');
+		if (index != -1) {
 		    string tmpString;
 		    if ((tmpString = GetShortcutURL (command)) != null) {
 			Gnome.Url.Show (tmpString);
 		    }
 		}
+	    
 	    } else
 		Gnome.Url.Show ("http://" + command);
 	}
