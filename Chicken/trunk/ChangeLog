@@ -1,5 +1,10 @@
 2004-10-21  Sergio Rubio  <sergio.rubio@hispalinux.es>
 
+	* configure.in: cleaned
+	* doc/Makefile.am: Fixed dist-hook
+
+2004-10-21  Sergio Rubio  <sergio.rubio@hispalinux.es>
+
 	* src/Gnome/TrayIcon/libtrayicon/Makefile.am: removed -avoid-version
 	to solve packaging issues.
 
