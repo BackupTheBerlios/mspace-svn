@@ -11,6 +11,7 @@ namespace ComponentModel.ComponentTest.Components.Saludator.Bo {
        [ComponentMethod (ViewName = "ComponentModel.ComponentTest.Components.Saludator.Form.SaludatorForm", ResponseName = "ResponseSaluda")]
        public int Saluda () {
            Console.WriteLine ("Que pasa co !!");
+           throw new System.Exception ("Yeahhh");
            return 1;
        }
    }

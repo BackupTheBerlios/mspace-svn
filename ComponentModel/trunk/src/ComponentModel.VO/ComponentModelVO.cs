@@ -4,7 +4,6 @@ using System.Collections;
 namespace ComponentModel.VO {
     public class ComponentModelVO {
         private string name;
-        private string interfaceFile;
         private Hashtable methods;
 
         private string className;
@@ -28,11 +27,6 @@ namespace ComponentModel.VO {
         public Hashtable Methods {
             get {return methods;}
             set {methods = value;}
-        }
-        
-        public string InterfaceFile {
-            get {return interfaceFile;}
-            set {interfaceFile = value;}
         }
 
         public string Name {
