@@ -1,9 +1,6 @@
 AC_INIT(Muine/Muine.cs)
-
-dnl AM_CONFIG_HEADER(config.h)
-
+AC_CANONICAL_SYSTEM
 AM_INIT_AUTOMAKE(muine, 0.6.3.99)
-
 AM_MAINTAINER_MODE
 
 dnl Version dependencies
@@ -45,5 +42,4 @@ Sdk/Muine.Sdk.dll.config
 Muine/Makefile
 Muine/muine
 Muine/muine.exe.config
-#Plugins/Makefile
 ])
