@@ -23,7 +23,7 @@ using GConf;
 
 public class AppContext
 {
-	private PluginManager pluginManager = new PluginManager ();
+    private PluginManager pluginManager = new PluginManager ();
 	
     public static readonly EventBus EBus = new EventBus ();
     
@@ -31,16 +31,17 @@ public class AppContext
     
     public static GConf.Client GConfClient;
 
-	public static SongDatabase DB;
+    public static SongDatabase DB;
 
-	public static CoverDatabase CoverDB;
+    public static CoverDatabase CoverDB;
 
-	public static ActionThread ActionThread;
+    public static ActionThread ActionThread;
 
-	public static GettextCatalog Catalog;
+    public static GettextCatalog Catalog;
     
     public AppContext ()
     {
+	StockIcons.Initialize ();
     	pluginManager.LoadPlugins ();
     	Catalog = new GettextCatalog ("muine");
     	/* Init GConf */

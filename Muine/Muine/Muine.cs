@@ -56,7 +56,6 @@ public class Muine : Gnome.Program
 		
 
 		/* Register stock icons */
-		StockIcons.Initialize ();
 
 		/* Set default window icon */
 		SetDefaultWindowIcon ();
