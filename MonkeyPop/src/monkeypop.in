@@ -1,2 +1,0 @@
-#!/bin/bash 
-mono @prefix@/lib/MonkeyPop/MonkeyPop.exe $@
