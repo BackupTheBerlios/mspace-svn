@@ -8,6 +8,7 @@ namespace FastOpen
 	{
 	    Gnome.Program program = new Gnome.Program("FastOpen", "1.0", Gnome.Modules.UI, args);
 	    FastOpenWindow fs = new FastOpenWindow ();
+	    fs.ShowAll ();
 	    program.Run ();
 	}
     }

@@ -20,14 +20,13 @@
 namespace FastOpen
 {
     using Gtk;
-    using Glade;
     using System;
     using System.Diagnostics;
     using System.Collections;
     using System.Text;
     using System.IO;
 
-    public class FastOpenWindow
+    public class FastOpenWindow : Window
     {
 	private string[] vfsUrls = {
 				"preferences:",
@@ -42,23 +41,19 @@ namespace FastOpen
 				"trash:"
 				};
 
-	[Glade.Widget] Window window;
-	[Glade.Widget] Entry entry;
-
-	XML gxml;
 	private StringBuilder buffer = new StringBuilder ();
 	private bool ignore = false;
 
-	public FastOpenWindow ()
-	{	
-	    InitComponent ();
-	}
+	private Entry entry;
 
-	public void InitComponent ()
-	{
-	    gxml = new XML (null, "fastopen.glade", "window", null);
-	    gxml.Autoconnect (this);
-	    window.Icon = new Gdk.Pixbuf (null, "fastopen.png");
+	public FastOpenWindow () : base (WindowType.Toplevel)
+	{	
+	    Icon = new Gdk.Pixbuf (null, "fastopen.png");
+	    entry = new Entry ();
+	    entry.Activated += EntryActivated;
+	    BorderWidth = 12;
+	    Add (entry);
+	    WindowPosition = WindowPosition.Center;
 	    AppContext.Init ();
 	}
 
@@ -128,16 +123,11 @@ namespace FastOpen
 	    return null;
 	}
 
-	public void Changed (object obj, EventArgs args)
+	protected override bool OnKeyPressEvent (Gdk.EventKey evt)
 	{
-	    entry.FinishEditing ();
-	    entry.SelectRegion (0, entry.CursorPosition);
-	}
-	
-	public void KeyPressed (object obj, KeyPressEventArgs args)
-	{
-	    if (args.Event.Key == Gdk.Key.Escape)
+	    if (evt.Key == Gdk.Key.Escape)
 		Application.Quit ();
+	    return base.OnKeyPressEvent (evt);
 	}
     }
 }

@@ -1,6 +1,5 @@
 SUBDIRS = 		\
 	data		\
-	glade		\
 	src
 
 bin_SCRIPTS = fastopen
