@@ -1,10 +1,26 @@
 #!/usr/bin/python
 import os
 import time
+import sys
 
 files = []
 targets = ""
-command = "tar czvfP backup-" + time.strftime ("%Y_%m_%d_%H_%M") + ".tar.gz "
+command = "tar czvfP"
+destdir = ""
+destfile = "backup-" + time.strftime ("%Y_%m_%d_%H_%M") + ".tar.gz"
+
+def usage ():
+    print """
+    backupbuddy [destdir]
+    
+    destdir: the destination directory of the backup file.
+    """
+
+# arg 1 is dest dir
+if len(sys.argv) > 1:
+    destdir = sys.argv[1]
+    
+
 rcfilepath = os.getenv ("HOME") + "/.backupduderc"
 try:
     rcfile = open (rcfilepath)
@@ -15,4 +31,4 @@ except:
 for i in files:
     targets += i.replace ("\n", "") + " "
 
-os.system (command + targets)
+os.system (command + " " + destdir + "/" + destfile + " " + targets)
