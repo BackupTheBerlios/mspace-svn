@@ -31,45 +31,21 @@
         <remarks>To be added</remarks>
       </Docs>
     </Member>
-    <Member MemberName=".ctor" Deprecated="true">
-      <MemberSignature Language="C#" Value="public NotificationMessage (string htmlcontent, Chicken.Gnome.TrayIcon.BlinkingTrayIcon icon);" />
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public NotificationMessage (string source, Chicken.Gnome.Notification.NotificationSource sourceType, Chicken.Gnome.Notification.NotificationContent contentType);" />
       <MemberType>Constructor</MemberType>
       <ReturnValue />
       <Parameters>
-        <Parameter Name="htmlcontent" Type="System.String" />
-        <Parameter Name="icon" Type="Chicken.Gnome.TrayIcon.BlinkingTrayIcon" />
+        <Parameter Name="source" Type="System.String" />
+        <Parameter Name="sourceType" Type="Chicken.Gnome.Notification.NotificationSource" />
+        <Parameter Name="contentType" Type="Chicken.Gnome.Notification.NotificationContent" />
       </Parameters>
       <Docs>
         <summary>To be added</summary>
-        <param name="htmlcontent">a <see cref="T:System.String" /></param>
-        <param name="icon">a <see cref="T:Chicken.Gnome.TrayIcon.BlinkingTrayIcon" /></param>
+        <param name="source">a <see cref="T:System.String" /></param>
+        <param name="sourceType">a <see cref="T:System.Int32" /></param>
+        <param name="contentType">a <see cref="T:System.Int32" /></param>
         <returns>a <see cref="T:Chicken.Gnome.Notification.NotificationMessage" /></returns>
-        <remarks>To be added</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="MessageWidth" Deprecated="true">
-      <MemberSignature Language="C#" Value="public int MessageWidth { set; get; };" />
-      <MemberType>Property</MemberType>
-      <ReturnValue>
-        <ReturnType>System.Int32</ReturnType>
-      </ReturnValue>
-      <Parameters />
-      <Docs>
-        <summary>To be added</summary>
-        <returns>a <see cref="T:System.Int32" /></returns>
-        <remarks>To be added</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="MessageHeight" Deprecated="true">
-      <MemberSignature Language="C#" Value="public int MessageHeight { set; get; };" />
-      <MemberType>Property</MemberType>
-      <ReturnValue>
-        <ReturnType>System.Int32</ReturnType>
-      </ReturnValue>
-      <Parameters />
-      <Docs>
-        <summary>To be added</summary>
-        <returns>a <see cref="T:System.Int32" /></returns>
         <remarks>To be added</remarks>
       </Docs>
     </Member>
@@ -109,26 +85,6 @@
       <Docs>
         <summary>To be added</summary>
         <returns>a <see cref="T:System.Int32" /></returns>
-        <remarks>To be added</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public NotificationMessage (System.IO.Stream stream, Chicken.Gnome.Notification.NotificationType type, string header, string text);" />
-      <MemberType>Constructor</MemberType>
-      <ReturnValue />
-      <Parameters>
-        <Parameter Name="stream" Type="System.IO.Stream" />
-        <Parameter Name="type" Type="Chicken.Gnome.Notification.NotificationType" />
-        <Parameter Name="header" Type="System.String" />
-        <Parameter Name="text" Type="System.String" />
-      </Parameters>
-      <Docs>
-        <summary>To be added</summary>
-        <param name="stream">a <see cref="T:System.IO.Stream" /></param>
-        <param name="type">a <see cref="T:System.Int32" /></param>
-        <param name="header">a <see cref="T:System.String" /></param>
-        <param name="text">a <see cref="T:System.String" /></param>
-        <returns>a <see cref="T:Chicken.Gnome.Notification.NotificationMessage" /></returns>
         <remarks>To be added</remarks>
       </Docs>
     </Member>

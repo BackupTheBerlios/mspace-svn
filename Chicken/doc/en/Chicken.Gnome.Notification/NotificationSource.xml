@@ -1,5 +1,5 @@
-<Type Name="NotificationType" FullName="Chicken.Gnome.Notification.NotificationType">
-  <TypeSignature Language="C#" Value="public enum NotificationType" Maintainer="auto" />
+<Type Name="NotificationSource" FullName="Chicken.Gnome.Notification.NotificationSource">
+  <TypeSignature Language="C#" Value="public enum NotificationSource" Maintainer="auto" />
   <AssemblyInfo>
     <AssemblyName>Chicken</AssemblyName>
     <AssemblyPublicKey>
@@ -29,11 +29,11 @@
   </Interfaces>
   <Attributes />
   <Members>
-    <Member MemberName="Info">
-      <MemberSignature Language="C#" Value="Info" />
+    <Member MemberName="Text">
+      <MemberSignature Language="C#" Value="Text" />
       <MemberType>Field</MemberType>
       <ReturnValue>
-        <ReturnType>Chicken.Gnome.Notification.NotificationType</ReturnType>
+        <ReturnType>Chicken.Gnome.Notification.NotificationSource</ReturnType>
       </ReturnValue>
       <Parameters>
       </Parameters>
@@ -42,11 +42,11 @@
         <remarks>To be added</remarks>
       </Docs>
     </Member>
-    <Member MemberName="Warning">
-      <MemberSignature Language="C#" Value="Warning" />
+    <Member MemberName="File">
+      <MemberSignature Language="C#" Value="File" />
       <MemberType>Field</MemberType>
       <ReturnValue>
-        <ReturnType>Chicken.Gnome.Notification.NotificationType</ReturnType>
+        <ReturnType>Chicken.Gnome.Notification.NotificationSource</ReturnType>
       </ReturnValue>
       <Parameters>
       </Parameters>
@@ -55,11 +55,11 @@
         <remarks>To be added</remarks>
       </Docs>
     </Member>
-    <Member MemberName="Error">
-      <MemberSignature Language="C#" Value="Error" />
+    <Member MemberName="Url">
+      <MemberSignature Language="C#" Value="Url" />
       <MemberType>Field</MemberType>
       <ReturnValue>
-        <ReturnType>Chicken.Gnome.Notification.NotificationType</ReturnType>
+        <ReturnType>Chicken.Gnome.Notification.NotificationSource</ReturnType>
       </ReturnValue>
       <Parameters>
       </Parameters>

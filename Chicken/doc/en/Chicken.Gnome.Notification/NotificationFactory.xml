@@ -19,24 +19,124 @@
   <Interfaces />
   <Attributes />
   <Members>
-    <Member MemberName="ShowMessageNotification">
-      <MemberSignature Language="C#" Value="public static void ShowMessageNotification (string svgfile, string header, string text, int timeout);" />
+    <Member MemberName="ShowHtmlNotification">
+      <MemberSignature Language="C#" Value="public static void ShowHtmlNotification (string source, Chicken.Gnome.Notification.NotificationSource nsource, int width, int height, int timeout);" />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="svgfile" Type="System.String" />
-        <Parameter Name="header" Type="System.String" />
-        <Parameter Name="text" Type="System.String" />
+        <Parameter Name="source" Type="System.String" />
+        <Parameter Name="nsource" Type="Chicken.Gnome.Notification.NotificationSource" />
+        <Parameter Name="width" Type="System.Int32" />
+        <Parameter Name="height" Type="System.Int32" />
         <Parameter Name="timeout" Type="System.Int32" />
       </Parameters>
       <Docs>
         <summary>To be added</summary>
-        <param name="svgfile">a <see cref="T:System.String" /></param>
-        <param name="header">a <see cref="T:System.String" /></param>
-        <param name="text">a <see cref="T:System.String" /></param>
+        <param name="source">a <see cref="T:System.String" /></param>
+        <param name="nsource">a <see cref="T:System.Int32" /></param>
+        <param name="width">a <see cref="T:System.Int32" /></param>
+        <param name="height">a <see cref="T:System.Int32" /></param>
         <param name="timeout">a <see cref="T:System.Int32" /></param>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ShowSvgNotification">
+      <MemberSignature Language="C#" Value="public static void ShowSvgNotification (string source, string header, string body, int width, int height, int timeout);" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="source" Type="System.String" />
+        <Parameter Name="header" Type="System.String" />
+        <Parameter Name="body" Type="System.String" />
+        <Parameter Name="width" Type="System.Int32" />
+        <Parameter Name="height" Type="System.Int32" />
+        <Parameter Name="timeout" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <summary>To be added</summary>
+        <param name="source">a <see cref="T:System.String" /></param>
+        <param name="header">a <see cref="T:System.String" /></param>
+        <param name="body">a <see cref="T:System.String" /></param>
+        <param name="width">a <see cref="T:System.Int32" /></param>
+        <param name="height">a <see cref="T:System.Int32" /></param>
+        <param name="timeout">a <see cref="T:System.Int32" /></param>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ShowSvgNotification">
+      <MemberSignature Language="C#" Value="public static void ShowSvgNotification (string source, Chicken.Gnome.Notification.NotificationSource nsource, string header, string body, int timeout, int width, int height, Chicken.Gnome.Notification.NotificationType type);" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="source" Type="System.String" />
+        <Parameter Name="nsource" Type="Chicken.Gnome.Notification.NotificationSource" />
+        <Parameter Name="header" Type="System.String" />
+        <Parameter Name="body" Type="System.String" />
+        <Parameter Name="timeout" Type="System.Int32" />
+        <Parameter Name="width" Type="System.Int32" />
+        <Parameter Name="height" Type="System.Int32" />
+        <Parameter Name="type" Type="Chicken.Gnome.Notification.NotificationType" />
+      </Parameters>
+      <Docs>
+        <summary>To be added</summary>
+        <param name="source">a <see cref="T:System.String" /></param>
+        <param name="nsource">a <see cref="T:System.Int32" /></param>
+        <param name="header">a <see cref="T:System.String" /></param>
+        <param name="body">a <see cref="T:System.String" /></param>
+        <param name="timeout">a <see cref="T:System.Int32" /></param>
+        <param name="width">a <see cref="T:System.Int32" /></param>
+        <param name="height">a <see cref="T:System.Int32" /></param>
+        <param name="type">a <see cref="T:System.Int32" /></param>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ShowMessageNotification">
+      <MemberSignature Language="C#" Value="public static void ShowMessageNotification (string header, string body, int timeout, int width, int height, Chicken.Gnome.Notification.NotificationType type);" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="header" Type="System.String" />
+        <Parameter Name="body" Type="System.String" />
+        <Parameter Name="timeout" Type="System.Int32" />
+        <Parameter Name="width" Type="System.Int32" />
+        <Parameter Name="height" Type="System.Int32" />
+        <Parameter Name="type" Type="Chicken.Gnome.Notification.NotificationType" />
+      </Parameters>
+      <Docs>
+        <summary>To be added</summary>
+        <param name="header">a <see cref="T:System.String" /></param>
+        <param name="body">a <see cref="T:System.String" /></param>
+        <param name="timeout">a <see cref="T:System.Int32" /></param>
+        <param name="width">a <see cref="T:System.Int32" /></param>
+        <param name="height">a <see cref="T:System.Int32" /></param>
+        <param name="type">a <see cref="T:System.Int32" /></param>
+        <remarks>To be added</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ShowMessageNotification">
+      <MemberSignature Language="C#" Value="public static void ShowMessageNotification (string header, string body, Chicken.Gnome.Notification.NotificationType type);" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="header" Type="System.String" />
+        <Parameter Name="body" Type="System.String" />
+        <Parameter Name="type" Type="Chicken.Gnome.Notification.NotificationType" />
+      </Parameters>
+      <Docs>
+        <summary>To be added</summary>
+        <param name="header">a <see cref="T:System.String" /></param>
+        <param name="body">a <see cref="T:System.String" /></param>
+        <param name="type">a <see cref="T:System.Int32" /></param>
         <remarks>To be added</remarks>
       </Docs>
     </Member>

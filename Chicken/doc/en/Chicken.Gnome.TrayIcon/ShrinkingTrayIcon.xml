@@ -1,5 +1,5 @@
-<Type Name="BlinkingTrayIcon" FullName="Chicken.Gnome.TrayIcon.BlinkingTrayIcon">
-  <TypeSignature Language="C#" Value="public class BlinkingTrayIcon : Chicken.Gnome.TrayIcon.AnimatedTrayIcon, Implementor, IWrapper, IDisposable" Maintainer="auto" />
+<Type Name="ShrinkingTrayIcon" FullName="Chicken.Gnome.TrayIcon.ShrinkingTrayIcon">
+  <TypeSignature Language="C#" Value="public class ShrinkingTrayIcon : Chicken.Gnome.TrayIcon.AnimatedTrayIcon, Implementor, IWrapper, IDisposable" Maintainer="auto" />
   <AssemblyInfo>
     <AssemblyName>Chicken</AssemblyName>
     <AssemblyPublicKey>
@@ -42,18 +42,18 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public BlinkingTrayIcon (string name, Gdk.Pixbuf[] pixbufArray);" />
+      <MemberSignature Language="C#" Value="public ShrinkingTrayIcon (string name, Gdk.Pixbuf icon);" />
       <MemberType>Constructor</MemberType>
       <ReturnValue />
       <Parameters>
         <Parameter Name="name" Type="System.String" />
-        <Parameter Name="pixbufArray" Type="Gdk.Pixbuf[]" />
+        <Parameter Name="icon" Type="Gdk.Pixbuf" />
       </Parameters>
       <Docs>
         <summary>To be added</summary>
         <param name="name">a <see cref="T:System.String" /></param>
-        <param name="pixbufArray">a <see cref="T:Gdk.Pixbuf" /></param>
-        <returns>a <see cref="T:Chicken.Gnome.TrayIcon.BlinkingTrayIcon" /></returns>
+        <param name="icon">a <see cref="T:Gdk.Pixbuf" /></param>
+        <returns>a <see cref="T:Chicken.Gnome.TrayIcon.ShrinkingTrayIcon" /></returns>
         <remarks>To be added</remarks>
       </Docs>
     </Member>
