@@ -1,0 +1,52 @@
+<Overview>
+  <Assembly Version="0.2.0.0">MonoVim</Assembly>
+  <Remarks>To be added.</Remarks>
+  <Copyright>To be added.</Copyright>
+  <Types>
+    <Namespace Name="org.vim.Components.VimBuffer.Model">
+      <Type Name="IVimBuffer" />
+      <Type Name="VimBuffer" />
+    </Namespace>
+    <Namespace Name="org.vim.Components.VimEntry.Model">
+      <Type Name="IVimEntryHandler" />
+      <Type Name="VimEntryHandler" />
+    </Namespace>
+    <Namespace Name="org.vim.Components.VimEntry.Controller">
+      <Type Name="IVimEntryController" />
+      <Type Name="VimEntryController" />
+    </Namespace>
+    <Namespace Name="org.vim.Components.VimEntry.View">
+      <Type Name="IVimEntryView" />
+      <Type Name="VimEntryView" />
+    </Namespace>
+    <Namespace Name="org.vim.Components.BufferedVimControl">
+      <Type Name="BufferedVimMain" />
+    </Namespace>
+    <Namespace Name="org.vim.Components.VimControl">
+      <Type Name="VimControlMain" />
+    </Namespace>
+    <Namespace Name="org.vim.Components.VimBuffer">
+      <Type Name="VimBufferMain" />
+    </Namespace>
+    <Namespace Name="org.vim.Components.VimEntry">
+      <Type Name="VimEntryMain" />
+    </Namespace>
+    <Namespace Name="org.vim.Components">
+      <Type Name="VimFactory" />
+    </Namespace>
+    <Namespace Name="org.vim.Main">
+      <Type Name="Launcher" />
+    </Namespace>
+  </Types>
+  <Attributes>
+    <Attribute>
+      <AttributeName>System.Reflection.AssemblyCopyright(Copyright="Copyright (c) 2005 NÃ©stor Salceda Alonso")</AttributeName>
+    </Attribute>
+    <Attribute>
+      <AttributeName>System.Reflection.AssemblyDescription(Description="A little editor, as vim.  Using Mono &amp; GTK#")</AttributeName>
+    </Attribute>
+    <Attribute>
+      <AttributeName>System.Reflection.AssemblyTitle(Title="MonoVim")</AttributeName>
+    </Attribute>
+  </Attributes>
+</Overview>

@@ -1,0 +1,26 @@
+<Type Name="IVimEntryHandler" FullName="org.vim.Components.VimEntry.Model.IVimEntryHandler">
+  <TypeSignature Language="C#" Value="public interface IVimEntryHandler" />
+  <AssemblyInfo>
+    <AssemblyName>MonoVim</AssemblyName>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Interfaces />
+  <Members>
+    <Member MemberName="Command">
+      <MemberSignature Language="C#" Value="public string Command { set; get; };" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+  <Docs>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+</Type>

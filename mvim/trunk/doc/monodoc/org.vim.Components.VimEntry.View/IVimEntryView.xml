@@ -1,0 +1,13 @@
+<Type Name="IVimEntryView" FullName="org.vim.Components.VimEntry.View.IVimEntryView">
+  <TypeSignature Language="C#" Value="public interface IVimEntryView" />
+  <AssemblyInfo>
+    <AssemblyName>MonoVim</AssemblyName>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Interfaces />
+  <Members />
+  <Docs>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+</Type>
