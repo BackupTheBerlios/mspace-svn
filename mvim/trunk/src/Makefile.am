@@ -9,8 +9,8 @@ LIB_REFERENCES = log4net.dll
 
 LIB_REFERENCES_BUILD=$(addprefix -reference:,$(LIB_REFERENCES))
 
-RESOURCES_REFERENCES= \
-resources/log4net.config
+RESOURCES_REFERENCES= 
+#resources/log4net.config
 
 RESOURCES_REFERENCES_BUILD=$(foreach res, $(RESOURCES_REFERENCES),$(addprefix -resource:,$(res)),$(notdir $(res)))
 

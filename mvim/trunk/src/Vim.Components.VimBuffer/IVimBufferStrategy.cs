@@ -24,7 +24,7 @@ namespace Vim.Components.VimBuffer {
          * Insert text in offset position.
          */
         void Insert (int offset, string text);
-
+        
         /**
          * Remove length characters, to offset position.
          */
@@ -33,7 +33,7 @@ namespace Vim.Components.VimBuffer {
         /**
          * Replace position offset and length to text.
          */
-        void Replace (int offset,int length, string text);
+        void Replace (int offset, int length, string text);
 
         /**
          * Get buffer or a buffer subset from offset & length.

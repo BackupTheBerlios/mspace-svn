@@ -1,5 +1,4 @@
 using System;
-using Vim.Components.VimEntry.Model;
 namespace Vim.Main {
     public class Launcher {
 /**
