@@ -1,4 +1,4 @@
-dpd.exe:
+dpd.exe: *.cs
 	mcs DPD.cs -o dpd.exe
 	
 install:
