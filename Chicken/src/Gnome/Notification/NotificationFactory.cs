@@ -29,19 +29,26 @@ namespace Chicken.Gnome.Notification
     {
 	private NotificationFactory (){}
 
-	public static void ShowHtmlNotification (string source, NotificationSource nsource, int width, int height, int timeout)
+	public static void ShowHtmlNotification (string source, NotificationSource nsource,
+						    int width, int height,
+						    int timeout, TimerEndedHandler thandler)
 	{
-	    NotificationMessage msg = new NotificationMessage (source, nsource, NotificationContent.Html);
+	    NotificationAreaMessage msg = new NotificationAreaMessage (source, nsource, NotificationContent.Html);
 	    msg.BubbleWidth = width;
+	    if (thandler != null)
+		msg.TimerEndedEvent += thandler;
 	    msg.BubbleHeight = height;
 	    msg.TimeOut = timeout;
 	    msg.Notify ();
 		    
 	}
 
-	public static void ShowSvgNotification (string source, string header, string body, int width, int height, int timeout)
+	public static void ShowSvgNotification (string source, string header,
+						string body, int width, int height,
+						int timeout, TimerEndedHandler thandler)
 	{
-	    ShowSvgNotification (source, NotificationSource.File, header, body, timeout, width, height, NotificationType.Info);
+	    ShowSvgNotification
+		(source, NotificationSource.File, header, body, timeout, width, height, NotificationType.Info, thandler);
 	}
 
 	private static void ShowSvgNotification (string source,
@@ -51,7 +58,8 @@ namespace Chicken.Gnome.Notification
 						int timeout,
 						int width,
 						int height,
-						NotificationType type)
+						NotificationType type,
+						TimerEndedHandler thandler)
 	{
 	    Stream stream;
 	    string svg = "";
@@ -76,7 +84,9 @@ namespace Chicken.Gnome.Notification
 	    }
 	     
 	    svg = ReplaceMacros (svg, header, body);
-	    NotificationMessage msg = new NotificationMessage (svg, NotificationSource.Text, NotificationContent.Svg);
+	    NotificationAreaMessage msg = new NotificationAreaMessage (svg, NotificationSource.Text, NotificationContent.Svg);
+	    if (thandler != null)
+		msg.TimerEndedEvent += thandler;
 	    msg.TimeOut = timeout;
 	    msg.BubbleWidth = width;
 	    msg.BubbleHeight = height;
@@ -84,19 +94,17 @@ namespace Chicken.Gnome.Notification
 	    
 	}
 
-	public static void ShowMessageNotification (string header, 
-						    string body,
-						    int timeout,
-						    int width,
-						    int height,
-						    NotificationType type)
+	public static void ShowMessageNotification (string header, string body,
+						    int timeout, int width,
+						    int height, NotificationType type,
+						    TimerEndedHandler thandler)
 	{
-	    ShowSvgNotification (null, NotificationSource.Text, header, body, timeout, width, height, type);
+	    ShowSvgNotification (null, NotificationSource.Text, header, body, timeout, width, height, type, thandler);
 	}
 
-	public static void ShowMessageNotification (string header, string body, NotificationType type)
+	public static void ShowMessageNotification (string header, string body, NotificationType type, TimerEndedHandler thandler)
 	{
-	    NotificationFactory.ShowMessageNotification (header, body, 5000, 200, 75, type); 
+	    NotificationFactory.ShowMessageNotification (header, body, 5000, 200, 75, type, thandler); 
 	}
 
 	private static string ReplaceMacros (string svg, string header, string text)

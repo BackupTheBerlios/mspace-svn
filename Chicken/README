@@ -5,6 +5,8 @@ http://mono-project.com
 
 ./configure && make && make install
 
+If monodoc is present in your system, the docs should be installed automatically.
+
 WEB
 ---
 See http://mspace.berlios.de/gunther-user/view.php/page/Chicken-Framework for more info

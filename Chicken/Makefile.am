@@ -1,4 +1,4 @@
-SUBDIRS = src doc images
+SUBDIRS = src doc images examples
 TMPDIR=/tmp/chicken-$(VERSION)
 SRC=chicken-$(VERSION)-src.tar.gz
 

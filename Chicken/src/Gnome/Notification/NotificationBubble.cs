@@ -22,39 +22,20 @@ namespace Chicken.Gnome.Notification
     using System;    
     using Gecko;
     using Gtk;
-    using Chicken.Gnome.TrayIcon;
     using System.Threading;
     using System.IO;
-    using System.Reflection;
 
-    public enum NotificationSource {
-	Text,
-	File,
-	Url
-    }
 
-    public enum NotificationContent {
-	Svg,
-	Html,
-	PlainText
-    }
-
-    public enum NotificationType {
-	Info,
-	Warning,
-	Error
-    }
-
-    public class NotificationMessage
+    public class NotificationBubble : Window
     {
 	private WebControl webcontrol;
-	private ShrinkingTrayIcon icon;
-	private Window window;
 	private String source;
 	private NotificationSource sourceType;
 	private NotificationContent contentType;
 	
-	public NotificationMessage (string source, NotificationSource sourceType, NotificationContent contentType)
+	public NotificationBubble (string source, NotificationSource sourceType, 
+				    NotificationContent contentType)
+	    : base (WindowType.Popup)
 	{
 	    this.contentType = contentType;
 	    this.sourceType = sourceType;
@@ -67,12 +48,11 @@ namespace Chicken.Gnome.Notification
 
 	private void InitComponent ()
 	{
-	    window = new Window (WindowType.Popup);
-	    icon = new ShrinkingTrayIcon ("Message", Gdk.Pixbuf.LoadFromResource ("tray-icon.png"));
-	    icon.ButtonPressEvent += ButtonPressed;
-	    window.DefaultWidth = bubbleWidth;
-	    window.DefaultHeight = bubbleHeight;
+	    DefaultWidth = bubbleWidth;
+	    DefaultHeight = bubbleHeight;
 	}
+
+	public event TimerEndedHandler TimerEndedEvent;
 
 	private int timeout = 5000;
 	public int TimeOut {
@@ -91,7 +71,7 @@ namespace Chicken.Gnome.Notification
 	    }
 	    set {
 		bubbleWidth = value;	
-		window.Resize (bubbleWidth, bubbleHeight);
+		Resize (bubbleWidth, bubbleHeight);
 	    }
 	}
 
@@ -102,11 +82,18 @@ namespace Chicken.Gnome.Notification
 	    }
 	    set {
 		bubbleHeight = value;
-		window.Resize (bubbleWidth, bubbleHeight);
+		Resize (bubbleWidth, bubbleHeight);
 	    }
 	}
 
-	public void Notify ()
+	public void RenderWithTimer()
+	{
+	    Render ();
+	    Timer timer;
+	    timer = new Timer (new TimerCallback (TimerRunner), null, timeout, 0);
+	}
+
+	public void Render ()
 	{
 	    switch (contentType)
 	    {
@@ -120,72 +107,21 @@ namespace Chicken.Gnome.Notification
 		    RenderPlainText ();
 		    break;
 	    }
-	    PositionWindow ();
-	    window.ShowAll ();
-	    icon.Run ();
-	    Timer timer;
-	    timer = new Timer (new TimerCallback (StartTimer), null, timeout, 0);
 	}
 
-	private void StartTimer (object obj)
+	private void TimerRunner (object obj)
 	{
-	    icon.Stop ();
-	    Application.Quit ();
+	    Destroy ();
+	    Dispose ();
+	    if (TimerEndedEvent != null)
+		TimerEndedEvent ();
 	}
-
-	private void PositionWindow ()
-	{
-	    window.Realize ();
-	    int ourWidth;
-	    int ourHeight;
-	    int tmp1, tmp2, tmp3;
-	    window.GdkWindow.GetGeometry (out tmp1, out tmp2, out ourWidth, out ourHeight, out tmp3);
-
-	    window.Stick ();
-	    window.SkipTaskbarHint = true;
-	    window.SkipPagerHint = true;
-	    window.TypeHint = Gdk.WindowTypeHint.Dock;
-
-	    // Get the dimensions/position of the widgetToAlignWith
-	    icon.Realize();
-	    int entryX, entryY;
-	    icon.GdkWindow.GetOrigin (out entryX, out entryY);
-	    int entryWidth, entryHeight;
-	    icon.GdkWindow.GetGeometry (out tmp1, out tmp2, out entryWidth, out entryHeight, out tmp3);
-
-	    // Get the screen dimensions
-	    int screenHeight = Gdk.Screen.Default.Height;
-	    int screenWidth = Gdk.Screen.Default.Width;
-
-	    int extra = 10;
-	    int newX;
-	    if ((entryX + ourWidth) < screenWidth)
-		// Align to the left of the entry
-		newX = entryX - extra;
-	    else
-		// Align to the right of the entry
-		newX = (entryX + entryWidth + extra) - ourWidth;
-
-	    int newY;
-	    if (entryY + entryHeight + ourHeight < screenHeight)
-		// Align to the bottom of the entry
-		newY = entryY + entryHeight + extra;
-	    else
-		newY = entryY - ourHeight -extra;
-
-	    // -"Coordinates locked in captain."
-	    // -"Engage."
-	    window.Move(newX, newY);
-	}
-	
-	private void ButtonPressed (object obj, ButtonPressEventArgs args)
-        {
-	    icon.Stop ();
-	    Application.Quit ();
-        }
 
 	private void RenderHtml ()
 	{
+	    webcontrol = new WebControl ();
+	    Add (webcontrol);
+	    webcontrol.Show ();
 	    switch (sourceType)
 	    {
 		case NotificationSource.File:
@@ -202,16 +138,12 @@ namespace Chicken.Gnome.Notification
 
 	private void RenderHtmlFromFile ()
 	{
-	    webcontrol = new WebControl ();
 	    webcontrol.LoadUrl ("file://" + source);
-	    window.Add (webcontrol);
 	}
 
 	private void RenderHtmlFromUrl ()
 	{
-	    webcontrol = new WebControl ();
 	    webcontrol.LoadUrl (source);
-	    window.Add (webcontrol);
 	}
 
 	private void RenderHtmlFromText ()
@@ -223,9 +155,7 @@ namespace Chicken.Gnome.Notification
 	    StreamWriter writer = new StreamWriter (new FileStream (tmpfile, FileMode.Create, FileAccess.Write));
 	    writer.Write (source);
 	    writer.Close ();
-	    webcontrol = new WebControl ();
 	    webcontrol.LoadUrl ("file://" + tmpfile);
-	    window.Add (webcontrol);
 	    //File.Delete (tmpfile);
 	}
 
@@ -261,7 +191,7 @@ namespace Chicken.Gnome.Notification
 	    writer.Close ();
 	    Image img = new Image (Rsvg.Pixbuf.FromFileAtSize (tmpfile, BubbleWidth, BubbleHeight));
 	    File.Delete (tmpfile);
-	    window.Add (img);
+	    Add (img);
 	}
 
 	private void RenderSvgFromFile ()
@@ -272,10 +202,8 @@ namespace Chicken.Gnome.Notification
 		return;
 	    }
 	    Image img = new Image (Rsvg.Pixbuf.FromFileAtSize (source, BubbleWidth, BubbleHeight));
-	    window.Add (img);
+	    Add (img);
 	}
-
-
 
     }
 }
