@@ -21,7 +21,7 @@ class PathUtils:
 		return elements[index]
 
 
-	public static def GetPathElements (path as string) as IList:
+	static def GetPathElements (path as string) as IList:
 		sep = Path.DirectorySeparatorChar
 		elements = []
 		tokens = path.Trim ().Split ( (sep,) )

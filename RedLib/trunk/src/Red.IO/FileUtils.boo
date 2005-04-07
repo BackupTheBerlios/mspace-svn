@@ -20,25 +20,20 @@ public class FileUtils:
 		return dirs
 	
 	private	static def GetAllDirectoryFiles (dir as string, rx as regex, files as ArrayList, discardHidden as bool) as ArrayList:
+		for f in Directory.GetFiles (dir):
+			name = Path.GetFileName (f)
+			if not (discardHidden and name.StartsWith (".")):
+				if rx:
+					if f =~ rx:
+						files.Add (f)
+				else:
+					files.Add (f)
 		//Recurse through the directories
 		for d in Directory.GetDirectories (dir):
-			if not (d.StartsWith (".") and discardHidden):
-				for f in Directory.GetFiles (d):
-					if rx:
-						if f =~ rx:
-							files.Add (f)
-					else:
-						files.Add (f)
+			name = PathUtils.GetPathElements (d)[-1]
+			if not (discardHidden and name.StartsWith (".")):
 				GetAllDirectoryFiles (d, rx, files, discardHidden)
 		
-		//Add the files from the top directory
-		for f in Directory.GetFiles (dir):
-			if rx:
-				if f =~ rx:
-					files.Add (f)
-			else:
-				files.Add (f)
-			
 		return files
 	
 
