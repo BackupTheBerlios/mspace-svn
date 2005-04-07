@@ -1,5 +1,9 @@
 2005-04-08  Sergio Rubio  <sergio.rubio@hispalinux.es>
 
+	* default.build: do not delete the build dir, only its contents
+
+2005-04-08  Sergio Rubio  <sergio.rubio@hispalinux.es>
+
 	* src/MainWindow.boo: dot files are ignored by default when importing the
 	project files
 

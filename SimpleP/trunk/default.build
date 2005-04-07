@@ -24,7 +24,11 @@
 
     <!-- Elimina los ficheros existentes en bin y en doc -->
     <target name="clean">
-        <delete dir="${bindir}" if="${directory::exists(bindir)}" failonerror="false"/> 
+        <delete failonerror="false">
+			<fileset>
+				<include name="build/*"/>
+			</fileset>
+		</delete>
         <tstamp/>
     </target>
 
