@@ -1,3 +1,7 @@
+2005-04-08  Sergio Rubio  <sergio.rubio@hispalinux.es>
+
+	* default.build: Do not delete the build dir, only its contents
+
 2005-04-05  Sergio Rubio  <sergio.rubio@hispalinux.es>
 
 	* Makefile: Not needed anymore
