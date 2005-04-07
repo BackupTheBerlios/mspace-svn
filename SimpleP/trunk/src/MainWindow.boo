@@ -153,7 +153,7 @@ class MainWindow (Window):
 		project = Services.ProjectManager.CurrentProject
 		if project:
 			lastFileCount = project.Files.Count
-			project.ImportFiles (false)
+			project.ImportFiles (true)
 			fileCount = project.Files.Count - lastFileCount
 			DialogFactory.ShowInfoDialog (self, "<b>Importing files</b>\n\n<b>${fileCount}</b> files imported.")
 

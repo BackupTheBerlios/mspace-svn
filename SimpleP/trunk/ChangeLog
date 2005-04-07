@@ -1,3 +1,8 @@
+2005-04-08  Sergio Rubio  <sergio.rubio@hispalinux.es>
+
+	* src/MainWindow.boo: dot files are ignored by default when importing the
+	project files
+
 2005-04-05  Sergio Rubio  <sergio.rubio@hispalinux.es>
 
 	* Makefile: Fixed dll importing
