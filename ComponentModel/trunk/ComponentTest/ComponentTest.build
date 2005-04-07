@@ -66,6 +66,9 @@
                 <include name="**/${lib}/*.dll"/>
                 <include name="**/${lib}/components/*.dll"/>
             </references>
+            <pkg-references>
+                <package name="gtk-sharp-2.0"/>
+            </pkg-references>
         </csc>
         <tstamp/>
     </target>
@@ -82,6 +85,9 @@
                 <include name="**/${lib}/components/*.dll"/>
                 <include name="**/${bin}/*.dll"/>    
             </references>
+            <pkg-references>
+                <package name="gtk-sharp-2.0"/>
+            </pkg-references>
         </csc>
           
         <exec program="${bin}/${component_name}.exe" useruntimeengine="true">

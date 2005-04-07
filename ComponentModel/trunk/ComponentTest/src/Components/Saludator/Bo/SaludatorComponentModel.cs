@@ -2,7 +2,7 @@ using System;
 using ComponentModel;
 
 namespace ComponentModel.ComponentTest.Components.Saludator.Bo {
-   [Component (ComponentName="Saludator", ExceptionManager="ComponentModel.ComponentTest.Components.Saludator.Exception.SaludatorExceptionManager")] 
+   [Component (ComponentName="Saludator", ExceptionManager="ComponentModel.ComponentTest.Components.Saludator.Exceptions.SaludatorExceptionManager")] 
    public sealed class SaludatorComponentModel : DefaultComponentModel {
        public SaludatorComponentModel () : base () {
        }
@@ -14,6 +14,7 @@ namespace ComponentModel.ComponentTest.Components.Saludator.Bo {
         [ComponentMethod (ViewName = "ComponentModel.ComponentTest.Components.Saludator.Form.SaludatorForm", ResponseName = "ResponseSaluda")]
         public int Saluda () {
             Console.WriteLine ("Que pasa co !!");
+            throw new Exception ("Yeahhhh");
             return 1;
         }
 

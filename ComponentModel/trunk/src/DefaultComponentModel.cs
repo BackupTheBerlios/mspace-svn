@@ -12,13 +12,14 @@ namespace ComponentModel {
         //Logging
         private Logger logger = LogManager.GetLogger ("ComponentModel.DefaultComponentModel");
         private ComponentModelVO vO;
-        private DefaultExceptionManager defaultExceptionManager;
+        private IExceptionManager defaultExceptionManager;
 
-        public DefaultExceptionManager DefaultExceptionManager {
+        public IExceptionManager DefaultExceptionManager {
             get {return defaultExceptionManager;}
             set {defaultExceptionManager = value;}
         }
-        
+
+ 
         //Properties
         public ComponentModelVO VO {
             get {return vO;}
@@ -42,7 +43,7 @@ namespace ComponentModel {
                     }
                 }
             }
-            //Si llega aquí, no ha encontrado el exceptionManager.
+            //Si llega aquí, no ha encontrado el tipo del exceptionManager.
             throw new ExceptionManagerNotFoundException ("Exception Manager Can't be found in Component.");
             //return null;
         }
@@ -61,12 +62,15 @@ namespace ComponentModel {
         }
         
         private MethodInfo GetMethodResponse (Type viewType, ComponentMethodAttribute componentMethodAttribute) {
+            if (componentMethodAttribute == null) {
+                throw new ResponseNotFoundException ("Please set up correctly Response Attribute.");    
+            }
             MethodInfo responseMethod = viewType.GetMethod (componentMethodAttribute.ResponseName, BindingFlags.Instance | BindingFlags.DeclaredOnly | BindingFlags.Public) ;
             if (responseMethod == null) {
                 throw new ResponseNotFoundException ("Response: " + componentMethodAttribute.ResponseName + " not found in: " + viewType.ToString ());
             } 
             else {
-            logger.Debug ("Finded response to execute: " + responseMethod.ToString () + " in: " + viewType.ToString ());
+                logger.Debug ("Finded response to execute: " + responseMethod.ToString () + " in: " + viewType.ToString ());
             }
             return responseMethod;
         } 
@@ -75,7 +79,7 @@ namespace ComponentModel {
             if (defaultExceptionManager == null) {
                 logger.Debug ("Trying to instantiate ExceptionManager.");
                 Type typeManager = this.GetTypeExceptionManager (this.VO.ExceptionClassName);
-                this.defaultExceptionManager = (DefaultExceptionManager)typeManager.GetConstructor (null).Invoke (null);
+                this.defaultExceptionManager = (IExceptionManager)typeManager.GetConstructor (null).Invoke (null);
                 logger.Debug ("Exception manager instatiated.");
             }
             logger.Debug ("Exception manager already instatiated.");
@@ -91,6 +95,7 @@ namespace ComponentModel {
                 object obj = viewType.GetConstructor (null).Invoke (null);
                 logger.Debug ("Executing response method: " + methodResponse.ToString ());
                 methodResponse.Invoke (obj, new object[] {responseMethodVO});
+                responseMethodVO.ExecutionSuccess = true;
                 return responseMethodVO;
             }
             catch (TargetInvocationException exception) {
@@ -122,11 +127,14 @@ namespace ComponentModel {
         }
         
         private Type GetViewType (ComponentMethodAttribute componentMethodAttribute) {
+            if (componentMethodAttribute == null)
+                throw new ViewNotFoundException ("Please set up attributes correctly.");
             foreach (Assembly assembly in DefaultContainer.Instance.Assemblies) {
                 foreach (Type type in assembly.GetTypes ()) {
                     if ((type.ToString ()).Equals (componentMethodAttribute.ViewName)) {
                         logger.Debug ("ViewType finded: " + type.ToString ());
-                        return type;
+                        if (type.GetInterface ("IViewHandler") != null)    
+                            return type;
                     }
                 }
             }

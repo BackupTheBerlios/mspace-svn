@@ -8,7 +8,8 @@ namespace ComponentModel.ComponentTest.Components.Saludator.Exceptions {
         public SaludatorExceptionManager () {
         }
         public override void ProcessException (Exception exception) {
-            base.ProcessException (exception); 
+            base.ProcessException (exception);
+            Console.WriteLine ("Ha ocurrido una exception.");
         }
     }
 }

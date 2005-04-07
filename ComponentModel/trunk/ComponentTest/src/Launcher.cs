@@ -14,10 +14,8 @@ namespace ComponentModel.ComponentTest {
                 Console.WriteLine ("Dcm no es null");
             else
                 Console.WriteLine ("Dcm es null");
+            dcm.Execute ("InitApp", null);
             dcm.Execute ("Saluda", null);
-            dcm.Execute ("SaludaATodos", null);
-            dcm = (DefaultComponentModel)defaultContainer.GetComponentByName ("Saludador!");
-            Console.WriteLine ("Fin exec terminated program.");
         }
     }
 }

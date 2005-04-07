@@ -2,25 +2,29 @@ using System;
 using ComponentModel;
 using ComponentModel.Container;
 using ComponentModel.VO;
+using ComponentModel.Interfaces;
 using Gtk;
 
 namespace ComponentModel.ComponentTest.Components.Saludator.Form {
-    public class SaludatorForm  {
+    public class SaludatorForm : IViewHandler {
         private Window window;
         private Button button;
         
         public SaludatorForm ()  {
+        /**
             Application.Init ();
             window = new Window ("Saludator Form from Component Test");
             button = new Button ("Pulsame");
             button.Clicked += new EventHandler (OnButtonClicked);
             window.Add (button);
+       */
         }
        
         public void ResponseInitApp (ResponseMethodVO response) {
-            window.ShowAll ();
+         //   window.ShowAll ();
+         //   Application.Run ();
+         //   Application.RunIteration ();
             Console.WriteLine ("Response Initapp executed.");
-            Application.Run ();
         }
         
         public void ResponseSaluda (ResponseMethodVO response) {
