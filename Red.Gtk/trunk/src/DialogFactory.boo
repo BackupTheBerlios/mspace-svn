@@ -14,6 +14,9 @@ class DialogFactory:
 		dialog.Run ()
 		dialog.Destroy ()
 	
+	public static def ShowWarningDialog (parent as Window, description as string, msg as string):
+		ShowWarningDialog (parent, "<b><big>${description}</big></b>\n\n${msg}")
+	
 	public static def ShowQuestionDialog (parent as Window, msg as string) as int:
 		dialog = MessageDialog (parent,
 						DialogFlags.Modal,
@@ -25,7 +28,10 @@ class DialogFactory:
 		response = dialog.Run ()
 		dialog.Destroy ()
 		return response
-
+	
+	public static def ShowQuestionDialog (parent as Window, description as string, msg as string):
+		return ShowQuestionDialog (parent, "<b><big>${description}</big></b>\n\n${msg}")
+	
 	public static def ShowInfoDialog (parent as Window, msg as string):
 		dialog = MessageDialog (parent,
 						DialogFlags.Modal,
@@ -37,6 +43,9 @@ class DialogFactory:
 		dialog.Run ()
 		dialog.Destroy ()
 	
+	public static def ShowInfoDialog (parent as Window, description as string, msg as string):
+		ShowInfoDialog (parent, "<b><big>${description}</big></b>\n\n${msg}")
+	
 	public static def ShowErrorDialog (parent as Window, msg as string):
 		dialog = MessageDialog (parent,
 						DialogFlags.Modal,
@@ -47,3 +56,6 @@ class DialogFactory:
 						)
 		dialog.Run ()
 		dialog.Destroy ()
+	
+	public static def ShowErrorDialog (parent as Window, description as string, msg as string):
+		ShowErrorDialog (parent, "<b><big>${description}</big></b>\n\n${msg}")

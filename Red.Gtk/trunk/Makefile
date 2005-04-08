@@ -1,7 +1,7 @@
 REFERENCES=														\
-		-r:/usr/share/dotnet/mono/gtk-sharp-2.0/gtk-sharp.dll 	\
-    	-r:/usr/share/dotnet/mono/gtk-sharp-2.0/glade-sharp.dll \
-		-r:/usr/share/dotnet/mono/gtk-sharp-2.0/gdk-sharp.dll
+		-r:/opt/mono-1.1.6/lib/mono/gtk-sharp-2.0/gtk-sharp.dll 	\
+    	-r:/opt/mono-1.1.6/lib/mono/gtk-sharp-2.0/glade-sharp.dll \
+		-r:/opt/mono-1.1.6/lib/mono/gtk-sharp-2.0/gdk-sharp.dll
 
 all: build/Red.Gtk.dll
 									
