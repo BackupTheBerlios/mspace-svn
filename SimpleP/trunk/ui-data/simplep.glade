@@ -47,7 +47,7 @@
 		      <signal name="activate" handler="NewFileMenuClicked" last_modification_time="Fri, 25 Mar 2005 20:32:32 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image110">
+			<widget class="GtkImage" id="image128">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-new</property>
 			  <property name="icon_size">1</property>
@@ -81,7 +81,7 @@
 		      <signal name="activate" handler="NewProjectMenuClicked" last_modification_time="Fri, 25 Mar 2005 20:31:38 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image111">
+			<widget class="GtkImage" id="image129">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-new</property>
 			  <property name="icon_size">1</property>
@@ -102,7 +102,7 @@
 		      <signal name="activate" handler="OpenMenuClicked" last_modification_time="Thu, 24 Mar 2005 17:47:04 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image112">
+			<widget class="GtkImage" id="image130">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-open</property>
 			  <property name="icon_size">1</property>
@@ -129,7 +129,7 @@
 		      <signal name="activate" handler="RemoveProjectClicked" last_modification_time="Mon, 04 Apr 2005 12:25:38 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image113">
+			<widget class="GtkImage" id="image131">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-delete</property>
 			  <property name="icon_size">1</property>
@@ -150,7 +150,7 @@
 		      <signal name="activate" handler="ImportProjectFilesClicked" last_modification_time="Sat, 26 Mar 2005 18:33:55 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image114">
+			<widget class="GtkImage" id="image132">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-refresh</property>
 			  <property name="icon_size">1</property>
@@ -166,12 +166,12 @@
 		  <child>
 		    <widget class="GtkImageMenuItem" id="clear1">
 		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">_Clear</property>
+		      <property name="label" translatable="yes">_Reimport files</property>
 		      <property name="use_underline">True</property>
-		      <signal name="activate" handler="ClearProjectClicked" last_modification_time="Sat, 26 Mar 2005 19:43:27 GMT"/>
+		      <signal name="activate" handler="ReimportProjectClicked" last_modification_time="Fri, 08 Apr 2005 13:31:56 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image115">
+			<widget class="GtkImage" id="image133">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-clear</property>
 			  <property name="icon_size">1</property>
@@ -213,7 +213,7 @@
 		      <signal name="activate" handler="AboutMenuClicked" last_modification_time="Thu, 24 Mar 2005 17:47:04 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image116">
+			<widget class="GtkImage" id="image134">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-about</property>
 			  <property name="icon_size">1</property>

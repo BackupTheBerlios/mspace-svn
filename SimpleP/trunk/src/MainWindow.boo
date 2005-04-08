@@ -95,18 +95,18 @@ class MainWindow (Window):
 			try:
 				Services.ProjectManager.SetActiveProject (name)
 				if Services.ProjectManager.MissingFiles != null: 
-					DialogFactory.ShowInfoDialog (self,"<b>Missing files</b>\nSome files in the project are missing.")
+					DialogFactory.ShowInfoDialog (self,"Missing filesgc", "Some files in the project are missing.")
 				Title = "SimpleP - ${name}"
 
 			except ex as InvalidProjectFileException:
 				print "MESSAGE: ${ex.Message}"
 				print "STACK TRACE:\n" + ex.StackTrace
-				DialogFactory.ShowErrorDialog (self, "<b>Invalid project file</b>\nThe project file is corrupted.")
+				DialogFactory.ShowErrorDialog (self, "Invalid project file","The project file is corrupted.")
 				
 			except ex as Exception:
 				print "MESSAGE: ${ex.Message}"
 				print "STACK TRACE:\n" + ex.StackTrace
-				DialogFactory.ShowErrorDialog (self, "<b>Error changing project</b>\nProject file cannot be loaded.")	
+				DialogFactory.ShowErrorDialog (self, "Error changing project","Project file cannot be loaded.")	
 
 		
 	_lastWidget as Widget
@@ -152,17 +152,24 @@ class MainWindow (Window):
 	private def ImportProjectFilesClicked (sender, args):
 		project = Services.ProjectManager.CurrentProject
 		if project:
-			DialogFactory.ShowInfoDialog (self, "<b>Importing notice</b>\n\ndot files and directories (i.e. .svn or .cvsignore) are discarded when importing files.")
+			DialogFactory.ShowInfoDialog (self, "Importing notice", "dot files and directories (i.e. .svn or .cvsignore) are discarded when importing files.")
 			lastFileCount = project.Files.Count
 			project.ImportFiles (true)
 			fileCount = project.Files.Count - lastFileCount
-			DialogFactory.ShowInfoDialog (self, "<b>Importing files</b>\n\n<b>${fileCount}</b> files imported.")
+			DialogFactory.ShowInfoDialog (self, "Importing files","<b>${fileCount}</b> files imported.")
 		else:
-			DialogFactory.ShowInfoDialog (self, "<b>No project selected</b>\n\nYou should choose a project first, then try to import the files again.")
+			DialogFactory.ShowInfoDialog (self, "No project selected","You should choose a project first, then try to import the files again.")
 
-	private def ClearProjectClicked (sernder, args):
-		Services.ProjectManager.CurrentProject.Clear ()
-		Services.ProjectManager.CurrentProject.Save ()
+	private def ReimportProjectClicked (sernder, args):
+		currentProject = Services.ProjectManager.CurrentProject
+		if currentProject:
+			Services.ProjectManager.CurrentProject.Clear ()
+			currentProject.ImportFiles (true)
+			fileCount = currentProject.Files.Count
+			Services.ProjectManager.CurrentProject.Save ()
+			DialogFactory.ShowInfoDialog (self, "Importing files","<b>${fileCount}</b> files imported.")
+		else:
+			DialogFactory.ShowInfoDialog (self, "No project selected", "You should choose a project first, then try to import the files again.")
 
 	private def MessagePushed (sender,args as  MessagePushedArgs):
 		statusbar.Push (statusbar.GetContextId (args.Message), args.Message)
@@ -197,7 +204,10 @@ class MainWindow (Window):
 			cast(ListStore, model).AppendValues ( (name,) )
 		
 	private def RemoveProjectClicked (sender, args):
-		response = DialogFactory.ShowQuestionDialog (self, "<b>Removing project</b>\nDo you want to remove the project ${Services.ProjectManager.CurrentProject.Name}?\n\n<b>Note:</b>\nThe project files will not be deleted")
-		if response == -8:
-			Services.ProjectManager.RemoveCurrentProject ()
-		
+		currentProject = Services.ProjectManager.CurrentProject
+		if currentProject:
+			response = DialogFactory.ShowQuestionDialog (self, "Removing project","Do you want to remove the project ${Services.ProjectManager.CurrentProject.Name}?\n\n<b>Note:</b>\nThe project files will not be deleted")
+			if response == -8:
+				Services.ProjectManager.RemoveCurrentProject ()
+		else:
+			DialogFactory.ShowInfoDialog (self, "No project selected","Choose a project first and then remove it.")

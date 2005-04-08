@@ -1,5 +1,10 @@
 2005-04-08  Sergio Rubio  <sergio.rubio@hispalinux.es>
 
+	* src/MainWindow.boo: Used the the dialog factory methods in Red.Gtk
+	* ui-data/simplep.glade: Chaged the Clear project menu item to reimport
+
+2005-04-08  Sergio Rubio  <sergio.rubio@hispalinux.es>
+
 	* simplep: fixed starting path
 	* src/MainWindow.boo: Added a couple of dialogs when importing project
 	files
