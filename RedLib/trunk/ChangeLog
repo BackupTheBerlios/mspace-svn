@@ -1,3 +1,7 @@
+2005-04-09  Sergio Rubio  <sergio.rubio@hispalinux.es>
+
+	* src/AssemblyInfo.boo: Not needed
+
 2005-04-08  Sergio Rubio  <sergio.rubio@hispalinux.es>
 
 	* src/Red.IO/FileUtils.boo: Fixed dot file ignoring behaviour
