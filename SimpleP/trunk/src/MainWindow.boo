@@ -152,10 +152,13 @@ class MainWindow (Window):
 	private def ImportProjectFilesClicked (sender, args):
 		project = Services.ProjectManager.CurrentProject
 		if project:
+			DialogFactory.ShowInfoDialog (self, "<b>Importing notice</b>\n\ndot files and directories (i.e. .svn or .cvsignore) are discarded when importing files.")
 			lastFileCount = project.Files.Count
 			project.ImportFiles (true)
 			fileCount = project.Files.Count - lastFileCount
 			DialogFactory.ShowInfoDialog (self, "<b>Importing files</b>\n\n<b>${fileCount}</b> files imported.")
+		else:
+			DialogFactory.ShowInfoDialog (self, "<b>No project selected</b>\n\nYou should choose a project first, then try to import the files again.")
 
 	private def ClearProjectClicked (sernder, args):
 		Services.ProjectManager.CurrentProject.Clear ()

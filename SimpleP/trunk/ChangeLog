@@ -1,5 +1,14 @@
 2005-04-08  Sergio Rubio  <sergio.rubio@hispalinux.es>
 
+	* simplep: fixed starting path
+	* src/MainWindow.boo: Added a couple of dialogs when importing project
+	files
+	
+	* src/NewProjectWindow.boo: start browsing in the default dir when
+	opening the FileChooserDialog
+
+2005-04-08  Sergio Rubio  <sergio.rubio@hispalinux.es>
+
 	* default.build: do not delete the build dir, only its contents
 
 2005-04-08  Sergio Rubio  <sergio.rubio@hispalinux.es>

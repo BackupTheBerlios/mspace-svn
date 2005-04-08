@@ -49,6 +49,7 @@ class NewProjectWindow (Window):
 
 	def ChooserButtonClicked (sender, args):
 		chooser = FileChooserDialog ("Choose the project directory", self, FileChooserAction.SelectFolder, ("_Ok", -5))
+		chooser.SetCurrentFolder (projectDirEntry.Text)
 		response = chooser.Run ()
 		if response == -5:
 			projectDirEntry.Text = chooser.CurrentFolder

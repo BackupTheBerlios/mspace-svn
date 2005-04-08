@@ -1,4 +1,4 @@
 #!/bin/bash
-pushd build/
+pushd `dirname $0`/build/
 mono SimpleP.exe
 popd
