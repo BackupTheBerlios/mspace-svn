@@ -95,7 +95,7 @@ class MainWindow (Window):
 			try:
 				Services.ProjectManager.SetActiveProject (name)
 				if Services.ProjectManager.MissingFiles != null: 
-					DialogFactory.ShowInfoDialog (self,"Missing filesgc", "Some files in the project are missing.")
+					DialogFactory.ShowInfoDialog (self,"Missing files", "Some files in the project are missing.")
 				Title = "SimpleP - ${name}"
 
 			except ex as InvalidProjectFileException:

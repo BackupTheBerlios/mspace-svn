@@ -1,3 +1,10 @@
+2005-04-09  Sergio Rubio  <sergio.rubio@hispalinux.es>
+
+	* src/Contexts/SourceContext/ProjectBrowser.boo: Implemented Add new file
+	functionaliy
+	* src/MainWindow.boo: Fixed typo
+	* ui-data/simplep.glade: Added New File dialog
+
 2005-04-08  Sergio Rubio  <sergio.rubio@hispalinux.es>
 
 	* src/MainWindow.boo: Used the the dialog factory methods in Red.Gtk

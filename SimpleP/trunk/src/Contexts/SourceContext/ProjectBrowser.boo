@@ -139,14 +139,34 @@ class ProjectBrowser (TreeView):
 			if response == cast(int,ResponseType.Yes):
 				currentProject.RemoveDir (file, true)
 		else:
-			relPath = file.Replace (currentProject.Location, "")
-			msg = "<b>Remove file</b>\n\nDo you want to remove the file <b>${relPath}</b> from the disk?"
-			response = DialogFactory.ShowQuestionDialog (null, msg)
+			relPath = System.IO.Path.GetFileName (file)
+			response = DialogFactory.ShowQuestionDialog (null, "Remove file from disk",
+													"You are going to remove the file <b>${relPath}</b> from the disk, Are you sure?")
 			if response == cast(int,ResponseType.Yes):
 				currentProject.RemoveFile (file, true)
 
 	private def AddNewFileClicked ():
-		print "Adding new file"
+		currentProject = Services.ProjectManager.CurrentProject
+		if currentProject:
+			xml = Glade.XML (Globals.Resources, "simplep.glade", "newFileDialog", null)
+			dialog = xml["newFileDialog"] as Dialog
+			entry = xml["entry"] as Entry
+			response = dialog.Run ()
+			if response == cast (int,ResponseType.Ok):
+				if entry.Text != string.Empty:
+					file = System.IO.Path.Combine (currentProject.Navigator.CurrentPath , entry.Text)
+					if currentProject.Contains (file):
+						DialogFactory.ShowInfoDialog (null, "File exists", "The file you are trying to add already exist in the project. Choose another name")
+					else:
+						try :
+							currentProject.NewFile (file)
+						except:
+							DialogFactory.ShowErrorDialog (null, "Unknown error", "Something happened creating the file")
+				else:
+					DialogFactory.ShowInfoDialog (null, "Invalid file name", "File name is invalid or empty. Please use a correct file name.")
+			dialog.Destroy ()
+				
+			
 
 	private def AddNewDirectoryClicked ():
 		print "Adding new folder"
