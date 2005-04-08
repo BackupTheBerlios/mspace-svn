@@ -67,6 +67,9 @@ class Project (IEnumerable):
 		get:
 			return _folderCollection
 
+	def Contains ([required]fileName as string) as bool:
+		return fileCollection.Contains (fileName)
+
 	//Move this out of here
 	def GetFilesFromSubdir ([required]subdir as string) as IList:
 		dir = Path.Combine (Location, subdir)
@@ -102,7 +105,6 @@ class Project (IEnumerable):
 		Save ()
 
 	def NewFile ([required]relPath as string) as ProjectFile:
-		assert not System.IO.Path.IsPathRooted (relPath)
 		fullPath = System.IO.Path.Combine (Location, relPath)
 		if File.Exists (fullPath):
 			raise ArgumentException ("File already exists")
