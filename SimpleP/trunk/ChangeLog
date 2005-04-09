@@ -1,5 +1,9 @@
 2005-04-09  Sergio Rubio  <sergio.rubio@hispalinux.es>
 
+	* config.ini: Changed default Height
+
+2005-04-09  Sergio Rubio  <sergio.rubio@hispalinux.es>
+
 	* Makefile: Added a reference to Nini.dll
 	* config.ini: Default config file
 	* src/ConfigurationService.boo: New service
