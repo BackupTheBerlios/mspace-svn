@@ -1,5 +1,18 @@
 2005-04-09  Sergio Rubio  <sergio.rubio@hispalinux.es>
 
+	* Makefile: added gtkhtml-sharp reference
+	* config.ini: moved to resources/
+	* images/images.list: new images
+	
+	* src/Contexts/StartPage/StartPageContext.boo:
+	* src/Contexts/StartPage/StartPageWidget.boo:
+	* src/MainWindow.boo:
+	* src/Run.boo:
+	Added a new Start Page context. The main window now shows it as the
+	default context.
+
+2005-04-09  Sergio Rubio  <sergio.rubio@hispalinux.es>
+
 	* config.ini: Changed default Height
 
 2005-04-09  Sergio Rubio  <sergio.rubio@hispalinux.es>

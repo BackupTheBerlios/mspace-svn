@@ -22,6 +22,7 @@ try:
 	Services.ContextManager.RegisterContext (GladeContext ())
 	Services.ContextManager.RegisterContext (TargetsContext ())
 	Services.ContextManager.RegisterContext (OthersContext ())
+	Services.ContextManager.RegisterContext (StartPageContext ())
 	MainWindow ().ShowAll ()
 	Application.Run ()
 except ex as Exception:

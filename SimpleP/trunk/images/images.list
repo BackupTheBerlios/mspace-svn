@@ -9,5 +9,6 @@ IMAGES += /resource:images/SimpleP-full-logo.png,SimpleP-full-logo.png
 IMAGES += /resource:images/SimpleP-icon-gears.png,SimpleP-icon-gears.png
 IMAGES += /resource:images/simplep.png,simplep.png
 IMAGES += /resource:images/Source-icon.png,Source-icon.png
+IMAGES += /resource:images/start-page.png,start-page.png
 IMAGES += /resource:images/target.png,target.png
 IMAGES += /resource:images/UI-icon.png,UI-icon.png

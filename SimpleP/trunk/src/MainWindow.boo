@@ -28,6 +28,7 @@ class MainWindow (Window):
 	[Glade.Widget] contextMenues as MenuItem
 	iContextMenues as Menu
 	projectView as TreeView 
+	_lastWidget as Widget 
 	
 	projectStore as ListStore
 	gxml as XML
@@ -49,6 +50,11 @@ class MainWindow (Window):
 	private def Init ():
 		DeleteEvent += WindowDeleted
 		Icon = Gdk.Pixbuf (Globals.Resources,"SimpleP-icon-gears.png")
+		
+		startPage = Services.ContextManager.GetContext ("Start page")
+		itemViewBox.Add (startPage.View)
+		startPage.Activate ()
+		_lastWidget = startPage.View
 
 		SetupProjectView ()
 		Services.Statusbar.MessagePushed += MessagePushed
@@ -74,9 +80,6 @@ class MainWindow (Window):
 		Services.Config["YPos"] = y.ToString ()
 		Services.Config.SaveConfig ()
 		Application.Quit ()
-
-	protected override def OnDeleteEvent (evt as Gdk.Event) as bool:
-		super.OnDeleteEvent (evt)
 
 	private def SizeChanged (sender, args as SizeAllocatedArgs):
 		Services.Config["Width"] = args.Allocation.Width.ToString ()
@@ -131,7 +134,6 @@ class MainWindow (Window):
 				DialogFactory.ShowErrorDialog (self, "Error changing project","Project file cannot be loaded.")	
 
 		
-	_lastWidget as Widget
 	private def CursorChanged (sender, args):
 		column as TreeViewColumn
 		path as TreePath
