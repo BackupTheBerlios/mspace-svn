@@ -1,5 +1,14 @@
 2005-04-09  Sergio Rubio  <sergio.rubio@hispalinux.es>
 
+	* Makefile:
+	* default.build:
+	Replaced the Makefile with a nant build file
+	
+	* src/Red.Parsers/Makefile.boo:
+	Added a simple makefile parser
+
+2005-04-09  Sergio Rubio  <sergio.rubio@hispalinux.es>
+
 	* src/AssemblyInfo.boo: Not needed
 
 2005-04-08  Sergio Rubio  <sergio.rubio@hispalinux.es>

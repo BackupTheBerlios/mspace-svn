@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+    (c) Néstor Salceda & Sergio Rubio  (Monkey Space Developers)
+    File: 
+        nant.xml
+    Description:
+        base nant file template for automate basic task deployment.
+
+      INSERTAR LA WEB DE MONKEY SPACE Y TAL  
+-->
+
+<project basedir="." default="build" name="RedLib">
+<!-- Properties -->
+   
+    <property name="nant.settings.currentframework" value="mono-1.0"/>
+   
+    <property name="version" value="1.0"/>
+    <property name="description" value="Red Library"/>
+    <property name="bindir" value="build/"/>
+    <property name="docdir" value="doc/"/>
+
+<!-- Targets -->
+
+    <!-- Elimina los ficheros existentes en bin y en doc -->
+    <target name="clean">
+        <delete failonerror="false">
+			<fileset>
+				<include name="build/*"/>
+			</fileset>
+		</delete>
+        <tstamp/>
+    </target>
+
+    <target name="build">
+        <booc target="library" output="${bindir}/Red.dll">
+			<sources basedir=".">
+				<include name="src/**/*.boo"/>
+			</sources>
+			<references>
+				<include name="ext/ICSharpCode.SharpZipLib.dll"/>
+			</references>
+        </booc>
+		<copy file="ext/ICSharpCode.SharpZipLib.dll" todir="build"/>
+        <tstamp/>
+    </target>
+
+    <!-- Por defecto compilará el componente y escribirá la documentación-->
+    <target name="all" depends="build,doc">
+        <tstamp/>
+    </target>
+
+    <!-- Documenta el componente y lo guarda en doc-->
+    <target name="doc" depends="build">
+        <tstamp/>
+    </target>
+
+    <!-- Ayuda sobre este fichero -->
+    <target name="usage">
+        <echo>
+            ${description}
+
+            Available task:
+                
+                -all
+                    Compile, and creates binary files.
+
+                -doc
+                    Creates documentation.  ¿Monodoc or ndoc?
+
+                -clean
+                    Delete component binaries.
+                
+                -build
+                    Build component.
+               
+                -usage
+                    Show this help.
+        </echo>
+        <tstamp/>
+    </target>
+</project>
