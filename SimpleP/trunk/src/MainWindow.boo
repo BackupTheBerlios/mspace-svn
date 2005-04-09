@@ -36,12 +36,18 @@ class MainWindow (Window):
 	def constructor ():
 		super ("SimpleP")
 		gxml = XML (Globals.Resources, "simplep.glade", "projectManagerWindow", null)
-		gxml.Autoconnect (self)
 		self.Raw = gxml["projectManagerWindow"].Raw
+		SizeAllocated += SizeChanged
+		width = Int32.Parse (Services.Config["Width"])
+		height = Int32.Parse (Services.Config["Height"])
+		Resize (width, height)
+		x, y = Int32.Parse (Services.Config["XPos"]), Int32.Parse (Services.Config["YPos"])
+		Move (x, y)
+		gxml.Autoconnect (self)
 		Init ()
-	
+
 	private def Init ():
-		DeleteEvent += Application.Quit
+		DeleteEvent += WindowDeleted
 		Icon = Gdk.Pixbuf (Globals.Resources,"SimpleP-icon-gears.png")
 
 		SetupProjectView ()
@@ -60,9 +66,25 @@ class MainWindow (Window):
 		Services.ProjectManager.ProjectAdded += ProjectAddedHandler
 		Services.ProjectManager.ProjectRemoved += ProjectRemovedHandler
 
+	private def WindowDeleted (sender, args as DeleteEventArgs):
+		x as int
+		y as int
+		GetPosition (x, y)
+		Services.Config["XPos"] = x.ToString ()
+		Services.Config["YPos"] = y.ToString ()
+		Services.Config.SaveConfig ()
+		Application.Quit ()
+
+	protected override def OnDeleteEvent (evt as Gdk.Event) as bool:
+		super.OnDeleteEvent (evt)
+
+	private def SizeChanged (sender, args as SizeAllocatedArgs):
+		Services.Config["Width"] = args.Allocation.Width.ToString ()
+		Services.Config["Height"] = args.Allocation.Height.ToString ()
+		Services.Config.SaveConfig ()
+
 	private def SetupProjectView ():
 		projectStore = ListStore ( (typeof (Gdk.Pixbuf), typeof (string)) )	
-		
 		menuItems = 0
 		iContextMenues = Menu ()
 		contextMenues.Submenu = iContextMenues

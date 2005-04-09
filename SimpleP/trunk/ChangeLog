@@ -1,5 +1,14 @@
 2005-04-09  Sergio Rubio  <sergio.rubio@hispalinux.es>
 
+	* Makefile: Added a reference to Nini.dll
+	* config.ini: Default config file
+	* src/ConfigurationService.boo: New service
+	* src/MainWindow.boo: Save window size an position in preferences
+	* src/Services.boo: Added ConfigurationService
+	* ui-data/simplep.glade:
+
+2005-04-09  Sergio Rubio  <sergio.rubio@hispalinux.es>
+
 	* src/Contexts/SourceContext/ProjectBrowser.boo: Implemented Add new file
 	functionaliy
 	* src/MainWindow.boo: Fixed typo

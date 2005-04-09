@@ -51,3 +51,10 @@ class Services:
 			if not _popupMenuService:
 				_popupMenuService = PopupMenuService ()
 			return _popupMenuService
+
+	static _configService as ConfigurationService
+	public static Config as ConfigurationService:
+		get:
+			if not _configService:
+				_configService = ConfigurationService ()
+			return _configService
