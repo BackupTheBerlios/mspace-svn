@@ -1,5 +1,12 @@
 2005-04-10  Sergio Rubio  <sergio.rubio@hispalinux.es>
 
+	* resources/welcome.html: Cosmetic changes
+	* src/MainWindow.boo: do not use the glade window, only load
+	the main VBox and add it to MainWindow
+
+
+2005-04-10  Sergio Rubio  <sergio.rubio@hispalinux.es>
+
 	* resources/welcome.html: improved a little
 	* src/Contexts/StartPage/StartPageWidget.boo: improved a little
 	* src/MainWindow.boo: Save the position of the HPaned when exit

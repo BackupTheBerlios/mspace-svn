@@ -37,15 +37,17 @@ class MainWindow (Window):
 
 	def constructor ():
 		super ("SimpleP")
-		gxml = XML (Globals.Resources, "simplep.glade", "projectManagerWindow", null)
-		self.Raw = gxml["projectManagerWindow"].Raw
+		WidthRequest = 300
+		HeightRequest = 350
+		gxml = XML (Globals.Resources, "simplep.glade", "mainBox", null)
+		gxml.Autoconnect (self)
+		Add (gxml["mainBox"])
 		SizeAllocated += SizeChanged
 		width = Int32.Parse (Services.Config["Width"])
 		height = Int32.Parse (Services.Config["Height"])
 		Resize (width, height)
 		x, y = Int32.Parse (Services.Config["XPos"]), Int32.Parse (Services.Config["YPos"])
 		Move (x, y)
-		gxml.Autoconnect (self)
 		hpaned.Position = Services.Config.MainConfig.GetInt ("HPanedPosition", 150)
 		Init ()
 
