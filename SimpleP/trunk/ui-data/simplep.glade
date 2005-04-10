@@ -4,10 +4,10 @@
 <glade-interface>
 
 <widget class="GtkWindow" id="projectManagerWindow">
-  <property name="width_request">450</property>
+  <property name="width_request">300</property>
   <property name="height_request">350</property>
   <property name="visible">True</property>
-  <property name="title" translatable="yes">R Project Manager</property>
+  <property name="title" translatable="yes">SimpleP</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_NONE</property>
   <property name="modal">False</property>
@@ -238,7 +238,7 @@
       </child>
 
       <child>
-	<widget class="GtkHPaned" id="hpaned1">
+	<widget class="GtkHPaned" id="hpaned">
 	  <property name="visible">True</property>
 	  <property name="can_focus">True</property>
 	  <property name="position">160</property>

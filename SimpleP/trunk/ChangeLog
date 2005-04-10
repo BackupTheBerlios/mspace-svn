@@ -1,3 +1,10 @@
+2005-04-10  Sergio Rubio  <sergio.rubio@hispalinux.es>
+
+	* resources/welcome.html: improved a little
+	* src/Contexts/StartPage/StartPageWidget.boo: improved a little
+	* src/MainWindow.boo: Save the position of the HPaned when exit
+	* ui-data/simplep.glade: Cosmetic changes
+
 2005-04-09  Sergio Rubio  <sergio.rubio@hispalinux.es>
 
 	* Makefile: added gtkhtml-sharp reference

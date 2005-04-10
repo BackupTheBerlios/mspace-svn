@@ -26,6 +26,7 @@ class MainWindow (Window):
 	[Glade.Widget] projectCombo as ComboBox
 	[Glade.Widget] statusbar as Statusbar
 	[Glade.Widget] contextMenues as MenuItem
+	[Glade.Widget] hpaned as HPaned
 	iContextMenues as Menu
 	projectView as TreeView 
 	_lastWidget as Widget 
@@ -45,6 +46,7 @@ class MainWindow (Window):
 		x, y = Int32.Parse (Services.Config["XPos"]), Int32.Parse (Services.Config["YPos"])
 		Move (x, y)
 		gxml.Autoconnect (self)
+		hpaned.Position = Services.Config.MainConfig.GetInt ("HPanedPosition", 150)
 		Init ()
 
 	private def Init ():
@@ -78,6 +80,7 @@ class MainWindow (Window):
 		GetPosition (x, y)
 		Services.Config["XPos"] = x.ToString ()
 		Services.Config["YPos"] = y.ToString ()
+		Services.Config["HPanedPosition"] = hpaned.Position.ToString ()
 		Services.Config.SaveConfig ()
 		Application.Quit ()
 
