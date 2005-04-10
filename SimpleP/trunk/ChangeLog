@@ -1,5 +1,10 @@
 2005-04-10  Sergio Rubio  <sergio.rubio@hispalinux.es>
 
+	* resources/config.ini: Changed default size
+	* src/MimetypeService.boo: Changed vim initial position
+
+2005-04-10  Sergio Rubio  <sergio.rubio@hispalinux.es>
+
 	* resources/welcome.html: Cosmetic changes
 	* src/MainWindow.boo: do not use the glade window, only load
 	the main VBox and add it to MainWindow

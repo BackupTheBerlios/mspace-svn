@@ -66,7 +66,7 @@ class MimetypeService:
 			print "Can't start the process: " + ex.Message
 	
 	def StartServer ():
-		info = ProcessStartInfo ("gvim", "-geometry 85x30+250+30 --servername simplep")
+		info = ProcessStartInfo ("gvim", "-geometry 85x30+320+30 --servername simplep")
 		info.UseShellExecute = false 
 		info.RedirectStandardInput = true
 		_serverProcess = Process.Start (info)
