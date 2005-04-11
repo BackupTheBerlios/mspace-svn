@@ -1,3 +1,15 @@
+2005-04-11  Sergio Rubio  <sergio.rubio@hispalinux.es>
+
+	* resources/welcome.html: Renamed the Open last project link to
+	OpenLastProject
+	* src/ContextViewStore.boo: New store for the context view
+	* src/Contexts/StartPage/StartPageWidget.boo: Make the Open last project
+	actually work
+	* src/MainWindow.boo: Changed the store for the context view added some
+	cosmetic changes to the ui
+	* ui-data/simplep.glade: added some coolnes to the ui (Choose project
+	label over the projects combo)
+
 2005-04-10  Sergio Rubio  <sergio.rubio@hispalinux.es>
 
 	* resources/config.ini: Changed default size

@@ -27,6 +27,8 @@ class MainWindow (Window):
 	[Glade.Widget] statusbar as Statusbar
 	[Glade.Widget] contextMenues as MenuItem
 	[Glade.Widget] hpaned as HPaned
+	[Glade.Widget] projectsLabel as Label
+	[Glade.Widget] projectsLabelBox as EventBox
 	iContextMenues as Menu
 	projectView as TreeView 
 	_lastWidget as Widget 
@@ -54,12 +56,9 @@ class MainWindow (Window):
 	private def Init ():
 		DeleteEvent += WindowDeleted
 		Icon = Gdk.Pixbuf (Globals.Resources,"SimpleP-icon-gears.png")
-		
-		startPage = Services.ContextManager.GetContext ("Start page")
-		itemViewBox.Add (startPage.View)
-		startPage.Activate ()
-		_lastWidget = startPage.View
 
+		projectsLabelBox.ModifyBg (StateType.Normal, Gdk.Color (76,76,76))
+		
 		SetupProjectView ()
 		Services.Statusbar.MessagePushed += MessagePushed
 
@@ -83,6 +82,9 @@ class MainWindow (Window):
 		Services.Config["XPos"] = x.ToString ()
 		Services.Config["YPos"] = y.ToString ()
 		Services.Config["HPanedPosition"] = hpaned.Position.ToString ()
+		currentProject = Services.ProjectManager.CurrentProject
+		if currentProject:
+			Services.Config["LastProject"] = currentProject.Name
 		Services.Config.SaveConfig ()
 		Application.Quit ()
 
@@ -92,7 +94,7 @@ class MainWindow (Window):
 		Services.Config.SaveConfig ()
 
 	private def SetupProjectView ():
-		projectStore = ListStore ( (typeof (Gdk.Pixbuf), typeof (string)) )	
+		projectStore = ContextViewStore ( (typeof (Gdk.Pixbuf), typeof (string)) )	
 		menuItems = 0
 		iContextMenues = Menu ()
 		contextMenues.Submenu = iContextMenues
@@ -107,9 +109,10 @@ class MainWindow (Window):
 			contextMenues.Sensitive = false
 		
 		projectView = TreeView ()
+		
 		projectView.HeadersVisible = false
 		projectView.Model = projectStore
-		
+		projectView.Reorderable = false
 		projectView.AppendColumn ("Icon", CellRendererPixbuf (), ("pixbuf", 0))
 		textRenderer = CellRendererText ()
 		textRenderer.Visible = true
@@ -206,19 +209,23 @@ class MainWindow (Window):
 	private def ProjectChangedHandler (sender, args):
 		if Services.ProjectManager.CurrentProject:
 			iter as TreeIter
+			model as ListStore
+			model = projectCombo.Model
 			if projectCombo.GetActiveIter (iter):
 				name = projectCombo.Model.GetValue (iter, 0)
 				currentName = Services.ProjectManager.CurrentProject.Name
 				if name != currentName:
-					model as ListStore = projectCombo.Model
 					model.Foreach (ChangedForeach)
+			else:
+				model.Foreach (ChangedForeach)
 
 	private def ChangedForeach (model as TreeModel, path as TreePath, iter as TreeIter) as bool:
 		currentName = Services.ProjectManager.CurrentProject.Name
 		name = model.GetValue (iter, 0)
 		if name == currentName:
 			projectCombo.SetActiveIter (iter)
-		return true
+			return true
+		return false
 				
 	private def ProjectAddedHandler (sender, args as ProjectAddedArgs):
 		model = projectCombo.Model
