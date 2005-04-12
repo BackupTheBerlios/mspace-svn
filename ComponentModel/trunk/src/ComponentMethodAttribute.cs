@@ -4,25 +4,43 @@ namespace ComponentModel {
 
     [AttributeUsage (AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
     public class ComponentMethodAttribute : Attribute {
+        //Campos
         private string responseName;
         private string viewName;
 
+        //Propiedades públicas.
         public string ViewName {
             get {return viewName;}
-            set {viewName = value;}
         }
         
         public string ResponseName {
             get {return responseName;}
-            set {responseName = value;}
         }
 
-        public ComponentMethodAttribute () : base () {
+        //Métodos privados.
+        private void SetViewName (string viewName) {
+            if (viewName == null)
+                throw new Exception ("Null value not allowed.");
+            if (viewName.Equals (String.Empty))
+                throw new Exception ("String empty not allowed.");
+            this.viewName = viewName;
         }
         
+        private void SetResponseName (string responseName) {
+            if (responseName == null)
+                throw new Exception ("Null value not allowed.");
+            if (responseName.Equals (String.Empty))
+                throw new Exception ("String empty not allowed.");
+            this.responseName = responseName;
+        }
+
+        /**
+         * Generalmente los parámetros requeridos se le pasan en orden al
+         * constructor.  Los opcionales se le pasarán como propiedades.
+         */
         public ComponentMethodAttribute (string viewName, string responseName) : base () {
-            this.ViewName = viewName;
-            this.ResponseName = responseName;
+            this.SetViewName (viewName);
+            this.SetResponseName (responseName);
         }
         
     }

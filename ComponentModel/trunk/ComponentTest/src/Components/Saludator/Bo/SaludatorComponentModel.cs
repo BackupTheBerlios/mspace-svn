@@ -2,23 +2,23 @@ using System;
 using ComponentModel;
 
 namespace ComponentModel.ComponentTest.Components.Saludator.Bo {
-   [Component (ComponentName="Saludator", ExceptionManager="ComponentModel.ComponentTest.Components.Saludator.Exceptions.SaludatorExceptionManager")] 
+   [Component ("Saludator","ComponentModel.ComponentTest.Components.Saludator.Exceptions.SaludatorExceptionManager")] 
    public sealed class SaludatorComponentModel : DefaultComponentModel {
        public SaludatorComponentModel () : base () {
        }
 
-        [ComponentMethod (ViewName = "ComponentModel.ComponentTest.Components.Saludator.Form.SaludatorForm", ResponseName = "ResponseInitApp")]
+        [ComponentMethod ("ComponentModel.ComponentTest.Components.Saludator.Form.SaludatorForm", "ResponseInitApp")]
         public void InitApp () {
         }
        
-        [ComponentMethod (ViewName = "ComponentModel.ComponentTest.Components.Saludator.Form.SaludatorForm", ResponseName = "ResponseSaluda")]
+        [ComponentMethod ("ComponentModel.ComponentTest.Components.Saludator.Form.SaludatorForm", "ResponseSaluda")]
         public int Saluda () {
             Console.WriteLine ("Que pasa co !!");
             throw new Exception ("Yeahhhh");
             return 1;
         }
 
-        [ComponentMethod (ViewName = "ComponentModel.ComponentTest.Components.Saludator.Form.SaludatorForm", ResponseName = "ResponseSaludaATodos")]
+        [ComponentMethod ("ComponentModel.ComponentTest.Components.Saludator.Form.SaludatorForm", "ResponseSaludaATodos")]
         public void SaludaATodos () {
             Console.WriteLine ("Saludaré a todos si me los pides, bellaco !!"); 
         }

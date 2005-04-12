@@ -2,10 +2,10 @@ using System;
 using System.Reflection;
 using ComponentModel.Interfaces;
 using ComponentModel.VO;
-using NLog;
 using ComponentModel.Container;
 using ComponentModel.ExceptionManager;
 using ComponentModel.Exceptions;
+using NLog;
 
 namespace ComponentModel {
     public class DefaultComponentModel : IComponentModel {
@@ -30,6 +30,8 @@ namespace ComponentModel {
         }
       
         private Type GetTypeExceptionManager (string exceptionManagerClassName) {
+            //Precondition: exceptionManagerClassName != null &&
+            //exceptionManagerClassName != String.Empty
             if ((exceptionManagerClassName == null) | (exceptionManagerClassName.Equals (String.Empty))) {
                 throw new ExceptionManagerNotFoundException ("Null exception managerClassName.");
             }
@@ -43,12 +45,15 @@ namespace ComponentModel {
                     }
                 }
             }
+            //PostCondition: return != null
             //Si llega aquí, no ha encontrado el tipo del exceptionManager.
             throw new ExceptionManagerNotFoundException ("Exception Manager Can't be found in Component.");
             //return null;
         }
         
         private MethodInfo GetMethodToExecute (string methodName, Type componentType) {
+            //Precondition: methodName != null && methodName != String.Empty &&
+            //componentType != null
             logger.Debug ("Entering GetMethodToExecute. Searching: " + methodName + " in: " + componentType.ToString ());
             MethodInfo methodInfo = componentType.GetMethod (methodName, BindingFlags.Instance | BindingFlags.DeclaredOnly | BindingFlags.Public);
             //Checkeamos que lo haya encontrado
@@ -58,6 +63,7 @@ namespace ComponentModel {
             else {
                 logger.Debug ("Finded method to execute: " + methodInfo.ToString ());
             }
+            //PostCondition: methodInfo != null
             return methodInfo;
         }
         

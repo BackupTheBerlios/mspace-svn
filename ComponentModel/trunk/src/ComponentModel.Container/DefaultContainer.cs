@@ -7,7 +7,6 @@ using ComponentModel.Container.Dao;
 using ComponentModel.Exceptions;
 using NLog;
 
-using System.Threading;
 
 namespace ComponentModel.Container {
     public class DefaultContainer : IContainer {
@@ -19,6 +18,7 @@ namespace ComponentModel.Container {
         
         internal Assembly[] Assemblies {
             get {
+                //Esta parte igual sobra.
                 if (assemblies == null) {
                     AppDomain appDomain = AppDomain.CurrentDomain;
                     assemblies = appDomain.GetAssemblies ();
@@ -49,6 +49,7 @@ namespace ComponentModel.Container {
             logger.Debug ("Finded " + collection.Count + " components");
             IEnumerator enumerator = collection.GetEnumerator ();
             while (enumerator.MoveNext ()) {
+                //¿Intefaces ?!!
                 DefaultComponentModel defaultComponentModel = (DefaultComponentModel)enumerator.Current;
                 this.Add (defaultComponentModel); 
             }
