@@ -1,0 +1,21 @@
+Gksu and Gksu.UI bindings
+**************************
+Managed wrappers to libgksu and libgksuui libraries.
+
+GKSu is a library that provides a Gtk+ frontend to su and sudo.
+See http://www.nongnu.org/gksu/
+
+Requirements:
+*************
+You will need gtk-sharp >= 1.9 installed to compile the libraries
+
+Compile:
+********
+Type "make"
+After the short compilation you can find the binaries in bin/ dir.
+
+Examples:
+*********
+There is a little example in the examples directory. It demostrates both Gksu and Gksu.UI libraries.
+The example is written in Boo (http://boo.codehaus.org), so you will need the Boo runtime installed to
+run the example.

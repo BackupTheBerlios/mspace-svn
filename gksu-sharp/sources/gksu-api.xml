@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<api>
+  <!--
+
+        This file was automatically generated.
+        Please DO NOT MODIFY THIS FILE, modify .metadata files instead.
+
+-->
+  <namespace name="Gksu" library="gksu">
+    <enum name="ContextError" cname="GksuContextError" type="enum">
+      <member cname="GKSU_CONTEXT_ERROR_XAUTH" name="Xauth" />
+      <member cname="GKSU_CONTEXT_ERROR_HELPER" name="Helper" />
+      <member cname="GKSU_CONTEXT_ERROR_NOCOMMAND" name="Nocommand" />
+      <member cname="GKSU_CONTEXT_ERROR_NOPASSWORD" name="Nopassword" />
+      <member cname="GKSU_CONTEXT_ERROR_FORK" name="Fork" />
+      <member cname="GKSU_CONTEXT_ERROR_EXEC" name="Exec" />
+      <member cname="GKSU_CONTEXT_ERROR_PIPE" name="Pipe" />
+      <member cname="GKSU_CONTEXT_ERROR_PIPEREAD" name="Piperead" />
+      <member cname="GKSU_CONTEXT_ERROR_WRONGPASS" name="Wrongpass" />
+      <member cname="GKSU_CONTEXT_ERROR_CHILDFAILED" name="Childfailed" />
+    </enum>
+    <object cname="GksuContext" parent="GObject" name="SuContext">
+      <field name="Xauth" cname="xauth" type="gchar*" />
+      <field name="Dir" cname="dir" type="gchar*" />
+      <field name="Display" cname="display" type="gchar*" />
+      <field name="User" cname="user" type="gchar*" />
+      <field name="Password" cname="password" type="gchar*" />
+      <field name="Command" cname="command" type="gchar*" />
+      <field name="LoginShell" cname="login_shell" type="gboolean" />
+      <field name="KeepEnv" cname="keep_env" type="gboolean" />
+      <field name="Debug" cname="debug" type="gboolean" />
+      <field name="SshFwd" cname="ssh_fwd" type="gboolean" />
+      <method name="Free" cname="gksu_context_free">
+        <return-type type="void" />
+      </method>
+      <method name="GetCommand" cname="gksu_context_get_command">
+        <return-type type="const-gchar*" />
+      </method>
+      <method name="GetDebug" cname="gksu_context_get_debug">
+        <return-type type="gboolean" />
+      </method>
+      <method name="GetKeepEnv" cname="gksu_context_get_keep_env">
+        <return-type type="gboolean" />
+      </method>
+      <method name="GetLoginShell" cname="gksu_context_get_login_shell">
+        <return-type type="gboolean" />
+      </method>
+      <method name="GetPassword" cname="gksu_context_get_password">
+        <return-type type="const-gchar*" />
+      </method>
+      <method name="GetSshFwd" cname="gksu_context_get_ssh_fwd">
+        <return-type type="gboolean" />
+      </method>
+      <method name="GetType" cname="gksu_context_get_type" shared="true">
+        <return-type type="GType" />
+      </method>
+      <method name="GetUser" cname="gksu_context_get_user">
+        <return-type type="const-gchar*" />
+      </method>
+      <constructor cname="gksu_context_new" />
+      <method name="Run" cname="gksu_context_run">
+        <return-type type="gboolean" />
+        <parameters>
+          <parameter type="GError**" name="error" />
+        </parameters>
+      </method>
+      <method name="SetCommand" cname="gksu_context_set_command">
+        <return-type type="void" />
+        <parameters>
+          <parameter type="gchar*" name="command" />
+        </parameters>
+      </method>
+      <method name="SetDebug" cname="gksu_context_set_debug">
+        <return-type type="void" />
+        <parameters>
+          <parameter type="gboolean" name="value" />
+        </parameters>
+      </method>
+      <method name="SetKeepEnv" cname="gksu_context_set_keep_env">
+        <return-type type="void" />
+        <parameters>
+          <parameter type="gboolean" name="value" />
+        </parameters>
+      </method>
+      <method name="SetLoginShell" cname="gksu_context_set_login_shell">
+        <return-type type="void" />
+        <parameters>
+          <parameter type="gboolean" name="value" />
+        </parameters>
+      </method>
+      <method name="SetPassword" cname="gksu_context_set_password">
+        <return-type type="void" />
+        <parameters>
+          <parameter type="gchar*" name="password" />
+        </parameters>
+      </method>
+      <method name="SetSshFwd" cname="gksu_context_set_ssh_fwd">
+        <return-type type="void" />
+        <parameters>
+          <parameter type="gboolean" name="value" />
+        </parameters>
+      </method>
+      <method name="SetUser" cname="gksu_context_set_user">
+        <return-type type="void" />
+        <parameters>
+          <parameter type="gchar*" name="username" />
+        </parameters>
+      </method>
+      <method name="SudoRun" cname="gksu_context_sudo_run">
+        <return-type type="gboolean" />
+        <parameters>
+          <parameter type="GError**" name="error" />
+        </parameters>
+      </method>
+    </object>
+  </namespace>
+</api>

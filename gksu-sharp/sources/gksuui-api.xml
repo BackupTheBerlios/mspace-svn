@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<api>
+  <!--
+
+        This file was automatically generated.
+        Please DO NOT MODIFY THIS FILE, modify .metadata files instead.
+
+-->
+  <namespace name="Gksu.UI" library="gksuui">
+    <object cname="GksuuiDialog" parent="GtkDialog" name="SuDialog">
+      <field name="MainVbox" cname="main_vbox" type="GtkWidget*" />
+      <field name="Hbox" cname="hbox" type="GtkWidget*" />
+      <field name="Image" cname="image" type="GtkWidget*" />
+      <field name="EntryVbox" cname="entry_vbox" type="GtkWidget*" />
+      <field name="Label" cname="label" type="GtkWidget*" />
+      <field name="Entry" cname="entry" type="GtkWidget*" />
+      <field name="OkButton" cname="ok_button" type="GtkWidget*" />
+      <field name="CancelButton" cname="cancel_button" type="GtkWidget*" />
+      <method name="GetIcon" cname="gksuui_dialog_get_icon">
+        <return-type type="GtkWidget*" />
+      </method>
+      <method name="GetMessage" cname="gksuui_dialog_get_message">
+        <return-type type="const-gchar*" />
+      </method>
+      <method name="GetPassword" cname="gksuui_dialog_get_password">
+        <return-type type="gchar*" />
+      </method>
+      <method name="GetType" cname="gksuui_dialog_get_type" shared="true">
+        <return-type type="GType" />
+      </method>
+      <constructor cname="gksuui_dialog_new" />
+      <method name="SetIcon" cname="gksuui_dialog_set_icon">
+        <return-type type="void" />
+        <parameters>
+          <parameter type="GdkPixbuf*" name="icon" />
+        </parameters>
+      </method>
+      <method name="SetMessage" cname="gksuui_dialog_set_message">
+        <return-type type="void" />
+        <parameters>
+          <parameter type="gchar*" name="message" />
+        </parameters>
+      </method>
+    </object>
+  </namespace>
+</api>

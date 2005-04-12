@@ -1,0 +1,9 @@
+<gapi-parser-input>
+  <api filename="gksu-api.xml">
+    <library name="gksu">
+      <namespace name="Gksu">
+        <dir>libgksu1.2-1.2.5a/libgksu</dir>
+      </namespace>
+    </library>
+  </api>
+</gapi-parser-input>
