@@ -36,7 +36,7 @@ namespace ComponentModel.Container {
             GetAllComponents (); 
         }
 
-        public void GetAllComponents () {
+        private void GetAllComponents () {
             foreach (Assembly ass  in Assemblies) {
                 ICollection collection = DefaultContainerDao.Instance.ProcessAssembly (ass);
                 if (collection.Count != 0)
@@ -75,6 +75,11 @@ namespace ComponentModel.Container {
         }
 
         public void Add (IComponentModel component) {
+            /**
+             * Dado que un componente es un peso pesado para la carga de un
+             * sistema no se permite más de una instancia, así que con pasarle
+             * la referencia será suficiente.
+             */
             if (componentList.Contains (component))
                 return;
             componentList.Add (component);
