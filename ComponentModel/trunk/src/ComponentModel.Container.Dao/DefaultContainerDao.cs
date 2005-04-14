@@ -35,12 +35,12 @@ namespace ComponentModel.Container.Dao {
                         ComponentModelVO componentModelVO = this.fillVO (types[i]);
                         ConstructorInfo constructorInfo = types[i].GetConstructor (null);
                         DefaultComponentModel defaultComponentModel = (DefaultComponentModel)constructorInfo.Invoke (null);
-                        /**
-                        FieldInfo voFieldInfo = types[i].GetField ("vO", BindingFlags.NonPublic);
+                        //Seteamos el vo con reflection y mantener oculto el
+                        //resto.
+                        FieldInfo voFieldInfo = types[i].GetField ("vO", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.SetField); // | BindingFlags.DeclaredOnly);
+                        if (voFieldInfo == null)
+                            Console.WriteLine ("FieldInfo == null.");
                         voFieldInfo.SetValue (defaultComponentModel, componentModelVO);
-                        */
-                        //TODO Reflect it !!
-                        defaultComponentModel.SetVO (componentModelVO);
                         list.Add (defaultComponentModel);
                     }
                 }

@@ -11,19 +11,21 @@ namespace ComponentModel {
     public class DefaultComponentModel : IComponentModel {
         //Logging
         private Logger logger = LogManager.GetLogger ("ComponentModel.DefaultComponentModel");
+        //Value object with information associated to component
         private ComponentModelVO vO;
+        //Exception manager to process exceptions.
         private IExceptionManager defaultExceptionManager;
 
         public IExceptionManager DefaultExceptionManager {
             get {return defaultExceptionManager;}
             set {defaultExceptionManager = value;}
         }
-
  
         //Properties
         public ComponentModelVO VO {
             get {return vO;}
         }
+        
         //Ctor
         protected DefaultComponentModel () {
             logger.Debug ("Executing ctor for: " + this.GetType ().FullName);
@@ -100,8 +102,9 @@ namespace ComponentModel {
                 logger.Debug ("Redirecting to view: " + viewType.ToString () + " to response Method: " + methodResponse.ToString ());
                 object obj = viewType.GetConstructor (null).Invoke (null);
                 logger.Debug ("Executing response method: " + methodResponse.ToString ());
-                methodResponse.Invoke (obj, new object[] {responseMethodVO});
                 responseMethodVO.ExecutionSuccess = true;
+                logger.Debug ("Setting excecuttion success as true.");
+                methodResponse.Invoke (obj, new object[] {responseMethodVO});
                 return responseMethodVO;
             }
             catch (TargetInvocationException exception) {
@@ -113,22 +116,6 @@ namespace ComponentModel {
                     defaultExceptionManager.ProcessException (exception);
                 }
             }
-            /**
-            catch (Exception exception) {
-                //if (exception is ComponentModelException) {
-                if (exception is TargetInvocationException) {
-                    //Tirar la exception para arriba.
-                    logger.Debug ("A ComponentModelException has been caugth");
-                    logger.Debug (exception.InnerException.ToString ());
-                    throw new ComponentModelException("ComponentModel Exception.");
-                }
-                else {
-                    this.InstantiateExceptionManager ();
-                    defaultExceptionManager.ProcessException (exception);
-                }
-                logger.Debug ("A exception has been caught.");
-            }
-            */
             return null;
         }
         
@@ -148,23 +135,19 @@ namespace ComponentModel {
             //return null;
         }
         
-        //Other (Aux @DEPRECATED)
-        internal void SetVO (ComponentModelVO vo) {
-            this.vO = vo;
-        }
-        
         //Public Methods
-        public ResponseMethodVO Execute (string methodName, object[] parameters) {
+        public ResponseMethodVO Execute (string methodName, params object[] parameters) {
             Type type = this.GetType ();
-            logger.Debug ("Type of component invoke. " + type.ToString ());
 
             //Recollecting data for execution.
             MethodInfo methodToExecute = this.GetMethodToExecute (methodName, type);
             Attribute[] attributes = (Attribute[]) methodToExecute.GetCustomAttributes (typeof (ComponentMethodAttribute), false);
             ComponentMethodAttribute componentMethodAttribute = (ComponentMethodAttribute) attributes[0];
             Type viewType = this.GetViewType (componentMethodAttribute);
+            
+            //Execute method
             MethodInfo responseMethod = this.GetMethodResponse (viewType, componentMethodAttribute);
-            //Executing 
+            //Executing response to method
             ResponseMethodVO responseMethodVO = this.ExecuteCompleteSequence (methodToExecute, parameters, viewType, responseMethod); 
             return responseMethodVO;
         }
