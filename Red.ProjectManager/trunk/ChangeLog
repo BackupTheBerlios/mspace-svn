@@ -1,3 +1,9 @@
+2005-04-15  Sergio Rubio  <sergio.rubio@hispalinux.es>
+
+	* src/Red.ProjectManager/IProjectFile.boo:
+	* src/Red.ProjectManager/IProjectNavigator.boo:
+	Added the interfaces to some components
+
 2005-04-09  Sergio Rubio  <sergio.rubio@hispalinux.es>
 
 	* .svnignore: added ignores
