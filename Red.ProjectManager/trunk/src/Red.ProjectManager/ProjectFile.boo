@@ -3,12 +3,19 @@ namespace Red.ProjectManager
 import System
 import System.IO
 
-class ProjectFile:
+class ProjectFile (IProjectFile):
 
-	public Name as string	
-	public FullName as string
+	_name as string
+	public Name as string:
+		get:
+			return _name
+			
+	_fullName as string
+	public FullName as string:
+		get:
+			return _fullName
 
 	def constructor (fullName as string):
 		assert fullName; assert Path.IsPathRooted (fullName)
-		FullName = fullName
-		Name = Path.GetFileName (fullName)
+		_fullName = fullName
+		_name = Path.GetFileName (fullName)

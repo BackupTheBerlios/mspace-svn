@@ -77,7 +77,7 @@ class Project (IEnumerable):
 			dir = dir[:-1]
 		
 		files as IList = []
-		for file as ProjectFile in Files:
+		for file as IProjectFile in Files:
 			dirname = System.IO.Path.GetDirectoryName (file.FullName)
 			files.Add (file) if dirname == dir
 		return files
@@ -85,7 +85,7 @@ class Project (IEnumerable):
 	//Move this out of here
 	def GetFilesWithExtension (extensions as IList) as IList:
 		files as IList = []
-		for file as ProjectFile in fileCollection.Values:
+		for file as IProjectFile in fileCollection.Values:
 			if Path.GetExtension (file.Name) in extensions:
 				files.Add (file)
 		return files
@@ -93,7 +93,7 @@ class Project (IEnumerable):
 	//Move this out of here
 	def GetFilesWithoutExtension (extensions as IList) as IList:
 		files as IList = []
-		for file as ProjectFile in fileCollection.Values:
+		for file as IProjectFile in fileCollection.Values:
 			if not (Path.GetExtension (file.Name) in extensions):
 				files.Add (file)
 		return files
@@ -104,17 +104,17 @@ class Project (IEnumerable):
 		ContentsChanged (self, EventArgs.Empty) if ContentsChanged
 		Save ()
 
-	def NewFile ([required]relPath as string) as ProjectFile:
+	def NewFile ([required]relPath as string) as IProjectFile:
 		fullPath = System.IO.Path.Combine (Location, relPath)
 		if File.Exists (fullPath):
 			raise ArgumentException ("File already exists")
 		stream as FileStream = File.Create (fullPath)
 		stream.Close ()
-		file as ProjectFile = Red.ProjectManager.ProjectFile(fullPath)
+		file as IProjectFile = Red.ProjectManager.ProjectFile(fullPath)
 		AddFile (file)
 		return file
 
-	def AddFile ([required]file as ProjectFile):
+	def AddFile ([required]file as IProjectFile):
 		if not File.Exists (file.FullName):
 			raise FileNotFoundException ("File does not exist", file.FullName)
 		fileCollection.Add (file.FullName, file)

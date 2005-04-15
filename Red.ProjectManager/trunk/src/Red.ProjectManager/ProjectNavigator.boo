@@ -15,7 +15,7 @@ import Red.IO from Red
 import System.Collections
 import System.IO
 
-class ProjectNavigator:
+class ProjectNavigator (IProjectNavigator):
 
 	dirs = {}
 	sep = System.IO.Path.DirectorySeparatorChar
