@@ -1,24 +1,41 @@
-namespace Red.ProjectManager
+namespace Red.Components.Project
 import System
 
 [Flags]
 enum ProjectEventType:
-	FileAdded
-	FileRemoved
+	ItemAdded
+	ItemRemoved
 	ContentsChanged
 	Cleared
+	ProjectSaved
+	ProjectLoaded
 	
 interface IProjectEventListener:
-	def OnFileAdded(sender as object, args as FileChangedArgs)
-	def OnFileRemoved(sender as object, args as FileChangedArgs)
+	def OnItemAdded(sender as object, args as ItemEventArgs)
+	def OnItemRemoved(sender as object, args as ItemEventArgs)
 	def OnContentsChanged(sender as object, args as EventArgs)
 	def OnCleared(sender as object, args as EventArgs)
+	def OnLoad(sender as object, args as ProjectEventArgs)
+	def OnSave(sender as object, args as ProjectEventArgs)
 
-class FileChangedArgs(EventArgs):
-	def constructor(file as string):
-		File = file
-	
-	public File as string
-	
 
+class ItemEventArgs(EventArgs):
+	
+	def constructor(item as IProjectItem):
+		_item = item
+	
+	_item as IProjectItem
+	Item as IProjectItem:
+		get:
+			return _item
+
+class ProjectEventArgs (EventArgs):
+	
+	def constructor (project as IProject):
+		_project = project
+	
+	_project as IProject
+	Project as IProject:
+		get:
+			return _project
 

@@ -1,0 +1,13 @@
+2005-04-16  Sergio Rubio  <sergio.rubio@hispalinux.es>
+
+	* Project/Interface/IProject.boo: 
+	* Project/Interface/IProjectEventListener.boo:
+	* Project/Interface/IProjectEventManager.boo:
+	* Project/Interface/IProjectItem.boo:
+	* Project/Interface/IProjectNavigator.boo:
+	* Project/Interface/IProjectSerializer.boo:
+	* default.build:
+	New component interface.
+	
+	* Project/Interface/IProjectFile.boo: Removed
+

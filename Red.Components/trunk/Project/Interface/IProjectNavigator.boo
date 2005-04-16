@@ -1,4 +1,4 @@
-namespace Red.ProjectManager
+namespace Red.Components.Project
 
 import System.Collections
 
