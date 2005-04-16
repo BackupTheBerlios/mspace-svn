@@ -1,0 +1,65 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[activeacute,spanish]{babel}
+\author{Néstor Salceda}
+\title{MSpace ComponentModel 0.1}
+\date{\today}
+\begin{document}
+\maketitle
+\section{Propiedades y requisitos que cada componente software debe cumplir:}
+\begin{itemize}
+\item Cumplimiento del paradigma de la programación orientada a componentes
+software.
+\item Separación clara entre modelo, vista y controlador.
+\item Independencia entre componentes.
+\item ¿Variación del comportamiento de un componente según una definición
+exterior, sin modificar el código fuente?
+\item Estandarización de la nomenclatura y de la jerarquia de clases interna de
+un componente.
+\end{itemize}
+\section{Propiedades de la framework para la versión 0.1:}
+\begin{itemize}
+\item Localización de los componentes por un nombre e identificador único.
+\item Ejecución de los casos de uso de un componente dinámicamente.
+\item Posiblidad de redirección a la vista:
+\begin{itemize}
+\item Indicar manejo de la vista.
+\item Indicar que método rebe ser ejecutado en la vista como respuesta a un caso
+de uso.
+\item Indicar qué instancia de la vista se debe utilizar.
+\end{itemize}
+\item Posibilidad de llamar a métodos no bloqueantes.
+\item Concentración en el manejo de excepciones.
+\end{itemize}
+\section{Explicación de cada una de las propiedades:}
+\subsection{Localización de componentes por nombre:}
+Para tener acceso a los servicios que nos brinda un componente se debe conseguir
+una instancia de dicho componente, para conseguir esta instancia se le pasará el
+nombre (identificador) de un componente.
+Una vez conseguida la instancia se provee una interface común para el acceso a
+los servicios que ofrece el componente.
+\subsection{Ejecución de los métodos dinámicamente:}
+Resolución de los métodos a ejecutar en tiempo de ejecución, pudiendo variar el
+comportamiento de la ejecución de los casos de uso; según los parámetros
+pasados.
+\subsection{Redirección a la vista:}
+Cuando ejecutamos un caso de uso del componente, se puede optar por redirigir a
+la vista la salida de ejecución de dicho caso de uso.  Al igual que a veces no
+tiene porqué ser necesario el redirigirlo a una vista.  Y también se debe poder
+especificar a qué vista queremos que se le redirija.
+\subsection{Métodos no bloqueantes:}
+Se trata de no esperar a que un método finalice su ejecución para poder
+proseguir con la siguiente ejecución.  Un ejemplo claro es la ejecución de un
+método en segundo plano.
+\subsection{Manejo de excepciones:}
+A través de un controlador de excepciones, todas las excepciones producidas de
+la ejecución de un método serán redirigidas a un controlador de excepciones y
+desde ahí exisitirá un método común de procesado de las excepciones.
+\section{Posibles propiedades de la framework en versiones futuras:}
+\begin{itemize}
+\item Acceso a los casos de uso mediante roles.
+\item Ejecución de los métodos y las respuestas de manera transaccional.
+\item Métodos virtuales.
+\item Preejecución, postejecución e intercepción de métodos.
+\end{itemize}
+\end{document}
