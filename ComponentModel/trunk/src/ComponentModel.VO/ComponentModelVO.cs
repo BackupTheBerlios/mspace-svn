@@ -3,36 +3,23 @@ using System.Collections;
 
 namespace ComponentModel.VO {
     public class ComponentModelVO {
-        private string name;
-        private Hashtable methods;
+        private string componentName;
+        private string componentClassName;
+        private string exceptionManagerClassName;
 
-        private string className;
-        private string exceptionClassName;
-
-
-        public ComponentModelVO () {
-            methods = new Hashtable ();
+        public string ExceptionManagerClassName {
+            get {return exceptionManagerClassName;}
+            set {exceptionManagerClassName = value;}
         }
         
-        public string ExceptionClassName {
-            get {return exceptionClassName;}
-            set {exceptionClassName = value;}
+        public string ComponentClassName {
+            get {return componentClassName;}
+            set {componentClassName = value;}
         }
         
-        public string ClassName {
-            get {return className;}
-            set {className = value;}
+        public string ComponentName {
+            get {return componentName;}
+            set {componentName = value;}
         }
-        
-        public Hashtable Methods {
-            get {return methods;}
-            set {methods = value;}
-        }
-
-        public string Name {
-            get {return name;}
-            set {name = value;}
-        }
-
     }
 }

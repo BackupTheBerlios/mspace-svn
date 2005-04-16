@@ -32,6 +32,7 @@ namespace ComponentModel {
         }
       
         private Type GetTypeExceptionManager (string exceptionManagerClassName) {
+
             //Precondition: exceptionManagerClassName != null &&
             //exceptionManagerClassName != String.Empty
             if ((exceptionManagerClassName == null) | (exceptionManagerClassName.Equals (String.Empty))) {
@@ -86,7 +87,7 @@ namespace ComponentModel {
         private void InstantiateExceptionManager () {
             if (defaultExceptionManager == null) {
                 logger.Debug ("Trying to instantiate ExceptionManager.");
-                Type typeManager = this.GetTypeExceptionManager (this.VO.ExceptionClassName);
+                Type typeManager = this.GetTypeExceptionManager (this.VO.ExceptionManagerClassName);
                 this.defaultExceptionManager = (IExceptionManager)typeManager.GetConstructor (null).Invoke (null);
                 logger.Debug ("Exception manager instatiated.");
             }
@@ -98,11 +99,11 @@ namespace ComponentModel {
                 ResponseMethodVO responseMethodVO = new ResponseMethodVO ();
                 logger.Debug ("Method " + methodToInvoke + " executing.");
                 object ret = methodToInvoke.Invoke (this, parameters);
-                responseMethodVO.ResponseValue = ret;
+                responseMethodVO.MethodResult = ret;
                 logger.Debug ("Redirecting to view: " + viewType.ToString () + " to response Method: " + methodResponse.ToString ());
                 object obj = viewType.GetConstructor (null).Invoke (null);
                 logger.Debug ("Executing response method: " + methodResponse.ToString ());
-                responseMethodVO.ExecutionSuccess = true;
+                responseMethodVO.SetExecutionSuccess (true);
                 logger.Debug ("Setting excecuttion success as true.");
                 methodResponse.Invoke (obj, new object[] {responseMethodVO});
                 return responseMethodVO;
@@ -132,7 +133,6 @@ namespace ComponentModel {
                 }
             }
             throw new ViewNotFoundException ("View " +componentMethodAttribute.ViewName + " not found");
-            //return null;
         }
         
         //Public Methods

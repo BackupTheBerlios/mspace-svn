@@ -55,9 +55,9 @@ namespace ComponentModel.Container.Dao {
             ComponentModelVO componentModelVO = new ComponentModelVO ();
             ComponentAttribute componentAttribute = (ComponentAttribute)(type.GetCustomAttributes (typeof (ComponentAttribute), true)[0]);
             
-            componentModelVO.ClassName = type.FullName;
-            componentModelVO.Name = componentAttribute.ComponentName;
-            componentModelVO.ExceptionClassName = componentAttribute.ExceptionManager;
+            componentModelVO.ComponentClassName = type.FullName;
+            componentModelVO.ComponentName = componentAttribute.ComponentName;
+            componentModelVO.ExceptionManagerClassName = componentAttribute.ExceptionManager;
             
             return componentModelVO;
         }

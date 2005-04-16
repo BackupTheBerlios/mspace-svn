@@ -28,11 +28,11 @@ namespace ComponentModel.ComponentTest.Components.Saludator.Form {
         }
         
         public void ResponseSaluda (ResponseMethodVO response) {
-            Console.WriteLine (response.IsExecutionSuccess);
-            if (response.IsExecutionSuccess)  {
+            Console.WriteLine (response.ExecutionSuccess);
+            if (response.ExecutionSuccess)  {
                 Console.WriteLine ("Hola luis.");
                 Console.WriteLine ("Response hola !!");
-                Console.WriteLine ((int)response.ResponseValue);
+                Console.WriteLine ((int)response.MethodResult);
             }
         }
 

@@ -2,25 +2,25 @@ using System;
 
 namespace ComponentModel.VO {
     public class ResponseMethodVO {
-        private object responseValue; 
         private bool executionSuccess;
+        private object methodResult;
 
         public ResponseMethodVO () {
-            this.ExecutionSuccess = false;
+            this.SetExecutionSuccess (false);
         }
         
-        public bool IsExecutionSuccess {
+        public object MethodResult {
+            get {return methodResult;}
+            set {methodResult = value;}
+        }
+        
+        public bool ExecutionSuccess {
             get {return executionSuccess;}
         }
 
-        internal bool ExecutionSuccess {
-            set {executionSuccess = value;}
+        internal void SetExecutionSuccess (bool executionSuccess) {
+            this.executionSuccess = executionSuccess;
         }
         
-        public object ResponseValue {
-            get {return responseValue;}
-            set {responseValue = value;}
-        }
-
     }
 }

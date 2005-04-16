@@ -66,7 +66,7 @@ namespace ComponentModel.Container {
 
         public IComponentModel GetComponentByName (string componentName) {
             for (int i = 0; i < componentList.Count; i++) {
-                if ((componentList[i] as DefaultComponentModel).VO.Name.Equals (componentName)) {
+                if ((componentList[i] as DefaultComponentModel).VO.ComponentName.Equals (componentName)) {
                     return (IComponentModel)componentList[i];
                 }
             }
@@ -83,7 +83,7 @@ namespace ComponentModel.Container {
             if (componentList.Contains (component))
                 return;
             componentList.Add (component);
-            logger.Debug ("Registering component: " + component + " as Name: " + component.VO.Name);
+            logger.Debug ("Registering component: " + component + " as Name: " + component.VO.ComponentName);
         }
 
         public void Remove (IComponentModel component) {
