@@ -3,6 +3,8 @@ using System.Reflection;
 using ComponentModel.Interfaces;
 using ComponentModel.VO;
 using ComponentModel.Container;
+using ComponentModel.Container.Dao;
+using ComponentModel.Factory;
 using ComponentModel.ExceptionManager;
 using ComponentModel.Exceptions;
 using NLog;
@@ -38,20 +40,17 @@ namespace ComponentModel {
             if ((exceptionManagerClassName == null) | (exceptionManagerClassName.Equals (String.Empty))) {
                 throw new ExceptionManagerNotFoundException ("Null exception managerClassName.");
             }
-            foreach (Assembly assembly in DefaultContainer.Instance.Assemblies) {
-                foreach (Type type in assembly.GetTypes ()) {
-                    if (type.IsSubclassOf (typeof (DefaultExceptionManager)) || type.IsSubclassOf (typeof (IExceptionManager))) {
-                        if (type.ToString().Equals (exceptionManagerClassName)) {
-                            logger.Debug ("Getting type of exception manager: " + type.ToString ());
-                            return type;
-                        }
-                    }
-                }
+            try {
+                Type type = DefaultContainerDao.Instance.GetType (exceptionManagerClassName);
+                if (type.IsSubclassOf (typeof (DefaultExceptionManager)) || (type.GetInterface ("IExceptionManager") != null)) 
+                    return type;
             }
+            catch (TypeNotFoundException ex) {
             //PostCondition: return != null
             //Si llega aquí, no ha encontrado el tipo del exceptionManager.
-            throw new ExceptionManagerNotFoundException ("Exception Manager Can't be found in Component.");
-            //return null;
+                throw new ExceptionManagerNotFoundException ("Exception Manager Can't be found in Component.");
+            }
+            return null;
         }
         
         private MethodInfo GetMethodToExecute (string methodName, Type componentType) {
@@ -75,12 +74,10 @@ namespace ComponentModel {
                 throw new ResponseNotFoundException ("Please set up correctly Response Attribute.");    
             }
             MethodInfo responseMethod = viewType.GetMethod (componentMethodAttribute.ResponseName, BindingFlags.Instance | BindingFlags.DeclaredOnly | BindingFlags.Public) ;
-            if (responseMethod == null) {
+            if (responseMethod == null) 
                 throw new ResponseNotFoundException ("Response: " + componentMethodAttribute.ResponseName + " not found in: " + viewType.ToString ());
-            } 
-            else {
+            else 
                 logger.Debug ("Finded response to execute: " + responseMethod.ToString () + " in: " + viewType.ToString ());
-            }
             return responseMethod;
         } 
         
@@ -96,7 +93,7 @@ namespace ComponentModel {
         
         private ResponseMethodVO ExecuteCompleteSequence (MethodInfo methodToInvoke, object[] parameters, Type viewType, MethodInfo methodResponse) {
             try {
-                ResponseMethodVO responseMethodVO = new ResponseMethodVO ();
+                ResponseMethodVO responseMethodVO =  FactoryVO.Instance.CreateResponseMethodVO ();
                 logger.Debug ("Method " + methodToInvoke + " executing.");
                 object ret = methodToInvoke.Invoke (this, parameters);
                 responseMethodVO.MethodResult = ret;
@@ -109,9 +106,8 @@ namespace ComponentModel {
                 return responseMethodVO;
             }
             catch (TargetInvocationException exception) {
-                if (exception.InnerException is ComponentModelException) {
+                if (exception.InnerException is ComponentModelException) 
                     throw exception.InnerException;
-                }
                 else {
                     this.InstantiateExceptionManager ();
                     defaultExceptionManager.ProcessException (exception);
@@ -119,20 +115,25 @@ namespace ComponentModel {
             }
             return null;
         }
+       
+        private Type GetViewType (string viewType) {
+            if ((viewType == null) || (viewType.Equals (String.Empty)))
+                throw new ViewNotFoundException ("Please, set up attributes correctly.");
+            try {
+                Type type = DefaultContainerDao.Instance.GetType (viewType);
+                if (type.GetInterface ("IViewHandler") != null)
+                    return type;
+            }
+            catch (TypeNotFoundException exception) {
+                throw new ViewNotFoundException ("View" + viewType + "not found.");
+            }
+            return null;
+        }
         
         private Type GetViewType (ComponentMethodAttribute componentMethodAttribute) {
             if (componentMethodAttribute == null)
                 throw new ViewNotFoundException ("Please set up attributes correctly.");
-            foreach (Assembly assembly in DefaultContainer.Instance.Assemblies) {
-                foreach (Type type in assembly.GetTypes ()) {
-                    if ((type.ToString ()).Equals (componentMethodAttribute.ViewName)) {
-                        logger.Debug ("ViewType finded: " + type.ToString ());
-                        if (type.GetInterface ("IViewHandler") != null)    
-                            return type;
-                    }
-                }
-            }
-            throw new ViewNotFoundException ("View " +componentMethodAttribute.ViewName + " not found");
+            return this.GetViewType (componentMethodAttribute.ViewName);
         }
         
         //Public Methods
@@ -140,12 +141,18 @@ namespace ComponentModel {
             Type type = this.GetType ();
 
             //Recollecting data for execution.
+            // Check if exists use case to execute
             MethodInfo methodToExecute = this.GetMethodToExecute (methodName, type);
+            // Read attributes for this use case.
             Attribute[] attributes = (Attribute[]) methodToExecute.GetCustomAttributes (typeof (ComponentMethodAttribute), false);
             ComponentMethodAttribute componentMethodAttribute = (ComponentMethodAttribute) attributes[0];
+            //Gets viewType from information of attributes.
             Type viewType = this.GetViewType (componentMethodAttribute);
-            
+            // Si existe algún miembro requerido para la ejecución que no es
+            // encontrado; no ejecutará nada denada.
+            //
             //Execute method
+            // Get information from respone for view.
             MethodInfo responseMethod = this.GetMethodResponse (viewType, componentMethodAttribute);
             //Executing response to method
             ResponseMethodVO responseMethodVO = this.ExecuteCompleteSequence (methodToExecute, parameters, viewType, responseMethod); 

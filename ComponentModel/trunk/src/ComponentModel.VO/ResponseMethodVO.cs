@@ -5,8 +5,8 @@ namespace ComponentModel.VO {
         private bool executionSuccess;
         private object methodResult;
 
-        public ResponseMethodVO () {
-            this.SetExecutionSuccess (false);
+        internal ResponseMethodVO () {
+            //this.SetExecutionSuccess (false);
         }
         
         public object MethodResult {

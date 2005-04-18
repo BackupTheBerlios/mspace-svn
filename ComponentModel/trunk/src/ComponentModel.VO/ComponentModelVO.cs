@@ -7,6 +7,9 @@ namespace ComponentModel.VO {
         private string componentClassName;
         private string exceptionManagerClassName;
 
+        internal ComponentModelVO () {
+        }
+        
         public string ExceptionManagerClassName {
             get {return exceptionManagerClassName;}
             set {exceptionManagerClassName = value;}

@@ -2,8 +2,10 @@ using System;
 using System.Collections;
 using System.Reflection;
 using ComponentModel.Interfaces;
+using ComponentModel.Factory;
 using ComponentModel.Container;
 using ComponentModel.VO;
+using ComponentModel.Exceptions;
 
 namespace ComponentModel.Container.Dao {
     public class DefaultContainerDao {
@@ -20,6 +22,18 @@ namespace ComponentModel.Container.Dao {
             }
         }
 
+        public Type GetType (string type) {
+            Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies (); 
+            for (int i = 0; i < assemblies.Length; i++) {
+                Type[] types = assemblies[i].GetTypes ();
+                for (int j = 0; j < types.Length; j++) {
+                    if (types[j].FullName.Equals (type))
+                        return types[j];
+                }
+            }
+            throw new TypeNotFoundException ("Type can't be resolved in current app domain.");
+        }
+        
         public ICollection ProcessAssembly (Assembly assembly) {
             ArrayList list = new ArrayList ();
             Type[] types = assembly.GetTypes ();
@@ -52,7 +66,7 @@ namespace ComponentModel.Container.Dao {
          * Rellenamos el VO con los valores que tenga asociado ese tipo.
          */
         private ComponentModelVO fillVO (Type type) {
-            ComponentModelVO componentModelVO = new ComponentModelVO ();
+            ComponentModelVO componentModelVO =  FactoryVO.Instance.CreateComponentModelVO ();
             ComponentAttribute componentAttribute = (ComponentAttribute)(type.GetCustomAttributes (typeof (ComponentAttribute), true)[0]);
             
             componentModelVO.ComponentClassName = type.FullName;
