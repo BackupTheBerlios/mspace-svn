@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Diagnostics;
 using System.Reflection;
 using System.Collections;
@@ -11,42 +12,62 @@ using NLog;
 namespace ComponentModel.Container {
     public class DefaultContainer : IContainer {
         private static DefaultContainer instance = null; 
-        private static Assembly[] assemblies; 
         private IList componentList;
         //Logging
         Logger logger = LogManager.GetLogger ("ComponentModel.Container.DefaultContainer");
         
-        internal Assembly[] Assemblies {
-            get {
-                //Esta parte igual sobra.
-                if (assemblies == null) {
-                    AppDomain appDomain = AppDomain.CurrentDomain;
-                    assemblies = appDomain.GetAssemblies ();
-                }
-                logger.Debug ("Finded: " + assemblies.Length +" assemblies.");
-                return assemblies;
-            }
-        }
-        
         private DefaultContainer () {
             logger.Debug ("Init DefaultContainer");
+            logger.Debug ("Getting Relative Search Path: " + AppDomain.CurrentDomain.RelativeSearchPath);
+            logger.Debug ("Getting Dynamic Directory: " + AppDomain.CurrentDomain.DynamicDirectory);
+            logger.Debug ("Getting Private Binary Path: " + AppDomain.CurrentDomain.SetupInformation.PrivateBinPath);
+            logger.Debug ("Getting Private Binary Path 2: " + AppDomain.CurrentDomain.SetupInformation.PrivateBinPathProbe);
+            logger.Debug ("Get MONO_PATH : " + Environment.GetEnvironmentVariable ("MONO_PATH"));
+            //Antes de nada, cargar los ensamblados que se encuentren en el
+            //MONO_PATH
+            this.LoadAssembliesInPath ();
+            //Getting data from assembly resolv.
             componentList = new ArrayList ();
             //En cada ensamblado, cargará el / los componente y lo registrará con el
             //nombre que se le ha dado al atributo.
             GetAllComponents (); 
         }
 
+        private void LoadAssembliesInPath () {
+            //Get el path
+            string monoPathEnvironment = Environment.GetEnvironmentVariable ("MONO_PATH");
+            string[] monoPaths = monoPathEnvironment.Split (':');
+            //GetAssembliesInPath
+            for (int i = 0; i< monoPaths.Length; i++) {
+                this.GetAssembliesInPath (monoPaths[i]);
+            }
+        }
+        
+        private void GetAssembliesInPath (string monoPath) {
+            logger.Debug ("Getting all assemblies in: " + monoPath);
+            if (Directory.Exists (monoPath)) {
+                String[] assemblies = Directory.GetFiles (monoPath, "*.dll"); 
+                foreach (String assembly in assemblies) {
+                    logger.Debug ("Assembly finded: " + assembly);
+                    Assembly.LoadFrom (assembly);
+                }
+            }
+        }
+        
         private void GetAllComponents () {
-            foreach (Assembly ass  in Assemblies) {
+            //Append private path assemblies to current domain :)
+            foreach (Assembly ass  in AppDomain.CurrentDomain.GetAssemblies ()) {
                 ICollection collection = DefaultContainerDao.Instance.ProcessAssembly (ass);
                 if (collection.Count != 0)
                     RegisterComponent (collection);
             }
+            //TODO: Get Private Components
+        
         }
         
         private void RegisterComponent (ICollection collection) {
             logger.Debug ("Entering RegisterComponent.");
-            logger.Debug ("Finded " + collection.Count + " components");
+            logger.Info ("Finded " + collection.Count + " components");
             IEnumerator enumerator = collection.GetEnumerator ();
             while (enumerator.MoveNext ()) {
                 //¿Intefaces ?!!
@@ -83,7 +104,7 @@ namespace ComponentModel.Container {
             if (componentList.Contains (component))
                 return;
             componentList.Add (component);
-            logger.Debug ("Registering component: " + component + " as Name: " + component.VO.ComponentName);
+            logger.Info ("Registering component: " + component + " as Name: " + component.VO.ComponentName);
         }
 
         public void Remove (IComponentModel component) {

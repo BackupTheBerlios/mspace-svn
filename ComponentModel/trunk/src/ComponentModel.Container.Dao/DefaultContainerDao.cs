@@ -35,6 +35,7 @@ namespace ComponentModel.Container.Dao {
         }
         
         public ICollection ProcessAssembly (Assembly assembly) {
+            Console.WriteLine ("Assembly to Process: " + assembly.FullName);
             ArrayList list = new ArrayList ();
             Type[] types = assembly.GetTypes ();
             //TODO filter with memberfilter :)
