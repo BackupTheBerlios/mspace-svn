@@ -1,8 +1,12 @@
 <nlog>
 	<appenders>
-            <appender name="debug"  type="Console" />
+            <appender name="debug"  type="Console" layout="
+${longdate} |
+${level} | 
+${callsite} --> ${message}"
+            />
         </appenders>
 	<rules>
-		<logger name="*" levels="Info,Warn,Debug" appendTo="debug"/>
+		<logger name="*" levels="Debug,Warn,Info" appendTo="debug"/>
 	</rules>
 </nlog>
