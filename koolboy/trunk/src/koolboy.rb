@@ -1,6 +1,7 @@
 #!/usr/bin/ruby
 
 require 'Korundum'
+require 'libkoolnotes.rb'
 
 class SysTrayThing < KDE::SystemTray
 	slots   'sAboutToQuit()',
@@ -10,12 +11,16 @@ class SysTrayThing < KDE::SystemTray
 		super(nil, name)
 		setPixmap( KDE::SystemTray::loadIcon("kgpg"))
 
-		@windows = []
+		# stuff related with closing app
 		@shuttingDown = false
 
 		connect(self, SIGNAL('quitSelected()'),
 			self, SLOT('sAboutToQuit()'))
 
+		# array to keep a list of windows
+		@windows = []
+
+		# create left menu
 		@leftMenu = KDE::PopupMenu.new(self)
 		@leftMenu.insertItem( i18n( "&New note" ), self, SLOT('sNewNote()') )
 	end
@@ -46,32 +51,27 @@ class SysTrayThing < KDE::SystemTray
 end
 
 class NoteWindow < KDE::MainWindow
-
 	def initialize( name )
 		name or name = "New note"
 		super(nil, name)
 		setCaption(name)
 
+		# we need to increase refCount to be able
+		# to use kmainwindows in this manner
+		$kapp.ref
+
+		# load note from database
+		@note = KoolNoteWell.instance.getNote(name)
+
 		@text = KDE::TextEdit.new(self)
-		loadText
+		@text.setText(@note.contents)
 		self.setCentralWidget(@text)
 	end
 
-	def loadText
-		file = KDE::StandardDirs::locateLocal("appdata","note")
-		test ?r, file and
-			File.open(file) { |f| @text.setText(f.gets(nil)) }
-	end
-
 	def queryClose
-		if not @shuttingDown
-			hide
-			return false
-		else
-			file = KDE::StandardDirs::locateLocal("appdata","note")
-			File.open(file,"w") { |f| f.print(@text.text) }
-			return true	
-		end
+		@note.contents = @text.text
+		KoolNoteWell.instance.storeNote(@note)
+		return true
 	end
 end
 
@@ -82,6 +82,8 @@ a = KDE::Application.new()
 
 thing = SysTrayThing.new( "our fooboy" )
 thing.show
+
+KoolNoteWell.setFile(KDE::StandardDirs::locateLocal("appdata","koolnotes.db"))
 
 a.mainWidget = thing
 a.exec 
