@@ -12,12 +12,6 @@ class SysTrayThing < KDE::SystemTray
 		super(nil, name)
 		setPixmap( KDE::SystemTray::loadIcon("kgpg"))
 
-		# stuff related with closing app
-		@shuttingDown = false
-
-		connect(self, SIGNAL('quitSelected()'),
-			self, SLOT('sAboutToQuit()'))
-
 		# array to keep a list of windows
 		@windows = []
 	end
@@ -34,10 +28,6 @@ class SysTrayThing < KDE::SystemTray
 			id = @leftMenu.insertItem( note['title'], self, SLOT('sShowNote(int)') )
 			@menuTitles[id] = note['title']
 		}
-	end
-
-	def sAboutToQuit
-		@shuttingDown = true
 	end
 
 	def sNewNote
