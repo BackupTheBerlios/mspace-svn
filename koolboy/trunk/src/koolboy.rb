@@ -5,7 +5,8 @@ require 'libkoolnotes.rb'
 
 class SysTrayThing < KDE::SystemTray
 	slots   'sAboutToQuit()',
-		'sNewNote()'
+		'sNewNote()',
+		'sShowNote(int)'
 
 	def initialize(name )
 		super(nil, name)
@@ -19,10 +20,20 @@ class SysTrayThing < KDE::SystemTray
 
 		# array to keep a list of windows
 		@windows = []
+	end
 
+	def regenMenu
 		# create left menu
 		@leftMenu = KDE::PopupMenu.new(self)
 		@leftMenu.insertItem( i18n( "&New note" ), self, SLOT('sNewNote()') )
+		@leftMenu.insertSeparator
+
+		@menuTitles = {}
+
+		KoolNoteWell.instance.lastNotes.each { |note|
+			id = @leftMenu.insertItem( note['title'], self, SLOT('sShowNote(int)') )
+			@menuTitles[id] = note['title']
+		}
 	end
 
 	def sAboutToQuit
@@ -30,8 +41,23 @@ class SysTrayThing < KDE::SystemTray
 	end
 
 	def sNewNote
-		p "New note!"
 		window = NoteWindow.new(nil)
+		size = window.sizeHint
+		winPos = Qt::Point.new( width - size.width/2, 
+			height - size.height/2)
+		winPos = mapToGlobal(winPos)
+		window.move(winPos)
+		window.show
+		@windows << window
+	end
+
+	def sShowNote (id)
+		window = NoteWindow.new(@menuTitles[id])
+		size = window.sizeHint
+		winPos = Qt::Point.new( width - size.width/2, 
+			height - size.height/2)
+		winPos = mapToGlobal(winPos)
+		window.move(winPos)
 		window.show
 		@windows << window
 	end
@@ -39,6 +65,7 @@ class SysTrayThing < KDE::SystemTray
 	def mousePressEvent( ev )
 		case ev.button
 		when Qt::LeftButton
+			regenMenu
 			@leftMenu.popup(ev.globalPos)
 
 		when Qt::MidButton
@@ -69,7 +96,14 @@ class NoteWindow < KDE::MainWindow
 	end
 
 	def queryClose
-		@note.contents = @text.text
+		text = @text.text.strip
+		if text.length != 0
+		then
+			@note.title = text.split("\n").first
+			@note.contents = @text.text
+		else
+			@note.title = ''
+		end 
 		KoolNoteWell.instance.storeNote(@note)
 		return true
 	end
