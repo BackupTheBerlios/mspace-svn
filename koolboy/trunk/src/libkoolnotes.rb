@@ -46,14 +46,18 @@ class KoolNoteWell
 	end
 
 	def storeNote ( note )
-		note.title.length != 0 or return
-
 		count = @db.get_first_value("SELECT COUNT(*) FROM notes WHERE id=#{note.id}")
 		date=Qt::DateTime.currentDateTime.toString(Qt::ISODate)
 		if count == "1"
-			@db.execute("UPDATE notes SET title='#{note.title}', contents='#{note.contents}', date='#{date}' WHERE id=#{note.id}")
+			if note.title.length != 0
+				@db.execute("UPDATE notes SET title='#{note.title}', contents='#{note.contents}', date='#{date}' WHERE id=#{note.id}")
+			else
+				@db.execute("DELETE FROM notes WHERE id=#{note.id}")
+			end
 		else
-			@db.execute("INSERT INTO notes VALUES (NULL, '#{note.title}', '#{note.contents}', '#{date}')")
+			if note.title.length != 0
+				@db.execute("INSERT INTO notes VALUES (NULL, '#{note.title}', '#{note.contents}', '#{date}')")
+			end
 		end
 
 	end
