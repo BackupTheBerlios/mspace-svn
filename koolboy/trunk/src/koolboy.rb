@@ -11,9 +11,6 @@ class SysTrayThing < KDE::SystemTray
 	def initialize(name )
 		super(nil, name)
 		setPixmap( KDE::SystemTray::loadIcon("kgpg"))
-
-		# array to keep a list of windows
-		@windows = []
 	end
 
 	def regenMenu
@@ -26,6 +23,7 @@ class SysTrayThing < KDE::SystemTray
 
 		KoolNoteWell.instance.lastNotes.each { |note|
 			id = @leftMenu.insertItem( note['title'], self, SLOT('sShowNote(int)') )
+			# we need to map from menu id to note title
 			@menuTitles[id] = note['title']
 		}
 	end
@@ -38,7 +36,6 @@ class SysTrayThing < KDE::SystemTray
 		winPos = mapToGlobal(winPos)
 		window.move(winPos)
 		window.show
-		@windows << window
 	end
 
 	def sShowNote (id)
@@ -49,7 +46,6 @@ class SysTrayThing < KDE::SystemTray
 		winPos = mapToGlobal(winPos)
 		window.move(winPos)
 		window.show
-		@windows << window
 	end
 
 	def mousePressEvent( ev )
@@ -101,10 +97,9 @@ end
 
 about = KDE::AboutData.new("koolboy", "Koolboy", "0.1")
 KDE::CmdLineArgs.init(ARGV, about)
-#a = KDE::UniqueApplication.new()
-a = KDE::Application.new()
+a = KDE::UniqueApplication.new()
 
-thing = SysTrayThing.new( "our fooboy" )
+thing = SysTrayThing.new( "koolboy" )
 thing.show
 
 KoolNoteWell.setFile(KDE::StandardDirs::locateLocal("appdata","koolnotes.db"))
