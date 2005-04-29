@@ -1,6 +1,48 @@
 require 'sqlite3'
 require 'singleton'
 
+# FIXME
+# Use the strategy pattern to allow diferent backends
+# i.e. SQL, XML (Tomboy), etc
+# NoteManager should not be data backend aware
+
+# Implement a base NoteDB and make KoolNoteWell and
+# Tomboy XML backend inherit NoteDB
+# NoteDB should be the Strategy used in NoteManager
+
+#NoteManager should be a singleton also
+class NoteManager
+	attr_reader :dir, :notes
+
+	def initialize (notesDir = "#{ENV['HOME']+ "/.tomboy"}")
+		@dir = notesDir
+		@notes = {}
+		loadNotes()
+	end
+
+	def getNote ( title )
+	end
+	
+	def lastNotes ()
+	end
+	
+	private
+	def loadNotes ()
+		Dir.foreach(@dir) do |file|
+			full = @dir + "/" + file
+			#if file[-1,1] != "~" && !File.directory?(full)
+			if file =~ /.*note$/
+				note = XmlNote.new(full)
+				notes[note.title] = note
+			end
+		end
+	end
+		
+end
+
+#######################################
+#			Notes implementations
+#######################################
 class KoolNote
 	attr_accessor :title
 	attr_accessor :contents
@@ -11,6 +53,46 @@ class KoolNote
 		@id = id
 		@contents = contents
 	end
+end
+
+class XmlNote
+	require "rexml/document"
+	include REXML
+	
+	attr_accessor :title, :xml, :text
+	attr_reader :file
+	
+	def initialize(file)
+		@file = file
+		@xml = IO.readlines(file).join("\n")
+		begin
+			@doc = Document.new(@xml)
+			@title = @doc.root.elements["title"].text
+			@text = @doc.root.elements["text"]
+		rescue
+			print "IGNORING Note: " + @file
+			print $!
+		end
+	end
+
+	def to_s()
+		return @xml
+	end
+	
+end
+
+###############################################
+#				NoteDB Implementations
+###############################################
+
+# FIXME
+# Add DB interface here
+class NoteDB
+end
+
+# FIXME
+# Inherit from NoteDB and
+class TomboyStore
 end
 
 class KoolNoteWell
