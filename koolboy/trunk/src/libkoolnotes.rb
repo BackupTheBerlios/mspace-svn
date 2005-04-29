@@ -12,7 +12,7 @@ require 'singleton'
 
 #NoteManager should be a singleton also
 class NoteManager
-	attr_reader :dir, :notes
+	attr_reader :dir
 
 	def initialize (notesDir = "#{ENV['HOME']+ "/.tomboy"}")
 		@dir = notesDir
@@ -20,6 +20,12 @@ class NoteManager
 		loadNotes()
 	end
 
+	def each
+		@notes.values.each do |note|
+			yield note
+		end
+	end
+	
 	def getNote ( title )
 	end
 	
@@ -33,7 +39,7 @@ class NoteManager
 			#if file[-1,1] != "~" && !File.directory?(full)
 			if file =~ /.*note$/
 				note = XmlNote.new(full)
-				notes[note.title] = note
+				@notes[note.title] = note
 			end
 		end
 	end
