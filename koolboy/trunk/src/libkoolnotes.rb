@@ -1,16 +1,6 @@
 require 'sqlite3'
 require 'singleton'
 
-# FIXME
-# Use the strategy pattern to allow diferent backends
-# i.e. SQL, XML (Tomboy), etc
-# NoteManager should not be data backend aware
-
-# Implement a base NoteDB and make KoolNoteWell and
-# Tomboy XML backend inherit NoteDB
-# NoteDB should be the Strategy used in NoteManager
-
-#NoteManager should be a singleton also
 class NoteManager
 	
 	include Singleton
@@ -62,16 +52,6 @@ class XmlNote
 		@read = false
 	end
 
-	def doc
-		@read or read;
-		return @doc
-	end
-
-	def text 
-		@read or read;
-		return @text
-	end
-
 	def read
 		file = KDE::StandardDirs::locateLocal(
 			"appdata","notes/#{@title}.note")
@@ -96,7 +76,7 @@ class XmlNote
 		attrs.each do |a|
 			module_eval <<-EOF
 			def #{a}
-			read unless @read
+			@read or read
 			@#{a}
 			end
 			EOF
