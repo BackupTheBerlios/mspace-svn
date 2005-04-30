@@ -22,15 +22,17 @@ class NoteManager
 	def getNote ( title )
 	end
 	
-	def lastNotes ()
+	def lastNotes
+		#may be a little unreadable but it rocks :P
+		@notes.sort {|a,b| a[1].time <=> b[1].time }.collect { |x| x[0] }[0..5]
 	end
 	
 	private
-	def loadNotes ()
+	def loadNotes
 		Dir.foreach(@dir) do |file|
 			#if file[-1,1] != "~" && !File.directory?(full)
-			if file =~ /.*note$/
-				note = XmlNote.new(file)
+			if file =~ /(.*)\.note$/
+				note = XmlNote.new($1)
 				@notes[note.title] = note
 			end
 		end
@@ -45,17 +47,18 @@ class XmlNote
 	require "rexml/document"
 	include REXML
 	
-	attr_accessor :title
+	attr_accessor :title, :time
 	
 	def initialize(title)
 		@title = title
 		@read = false
+		@file = KDE::StandardDirs::locateLocal(
+			"appdata","notes/#{@title}.note")
+		@time = File.new(@file).mtime
 	end
 
 	def read
-		file = KDE::StandardDirs::locateLocal(
-			"appdata","notes/#{@title}.note")
-		@xml = IO.readlines(file).join("\n")
+		@xml = IO.readlines(@file).join("\n")
 		begin
 			@doc = Document.new(@xml)
 			@text = @doc.root.elements["text"]

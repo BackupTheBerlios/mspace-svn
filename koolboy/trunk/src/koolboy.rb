@@ -21,10 +21,10 @@ class SysTrayThing < KDE::SystemTray
 
 		@menuTitles = {}
 
-		KoolNoteWell.instance.lastNotes.each { |note|
-			id = @leftMenu.insertItem( note['title'], self, SLOT('sShowNote(int)') )
+		NoteManager.instance.lastNotes.each { |note|
+			id = @leftMenu.insertItem( note, self, SLOT('sShowNote(int)') )
 			# we need to map from menu id to note title
-			@menuTitles[id] = note['title']
+			@menuTitles[id] = note
 		}
 	end
 
@@ -74,7 +74,7 @@ class NoteWindow < KDE::MainWindow
 		$kapp.ref
 
 		# load note from database
-		@note = KoolNoteWell.instance.getNote(name)
+		@note = NoteManager.instance.getNote(name)
 
 		@text = KDE::TextEdit.new(self)
 		@text.setText(@note.contents)
@@ -90,7 +90,7 @@ class NoteWindow < KDE::MainWindow
 		else
 			@note.title = ''
 		end 
-		KoolNoteWell.instance.storeNote(@note)
+		NoteManager.instance.storeNote(@note)
 		return true
 	end
 end
