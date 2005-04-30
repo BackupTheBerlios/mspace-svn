@@ -40,11 +40,6 @@ class SysTrayThing < KDE::SystemTray
 
 	def sShowNote (id)
 		window = NoteWindow.new(@menuTitles[id])
-		size = window.sizeHint
-		winPos = Qt::Point.new( width - size.width/2, 
-			height - size.height/2)
-		winPos = mapToGlobal(winPos)
-		window.move(winPos)
 		window.show
 	end
 
@@ -75,6 +70,9 @@ class NoteWindow < KDE::MainWindow
 
 		# load note from database
 		@note = NoteManager.instance.getNote(name)
+
+		resize(@note.size)
+		move(@note.loc)
 
 		@text = KDE::TextEdit.new(self)
 		@text.setText(@note.text)
