@@ -88,9 +88,13 @@ class XmlNote
 				@read or read
 				@#{a}
 			end
+
+			def #{a}= (val)
+				@#{a} = val
+			end
 			EOF
 		end
 	end
 
-	attr_after_read :doc, :text, :size, :loc
+	attr_after_read :text, :size, :loc
 end
