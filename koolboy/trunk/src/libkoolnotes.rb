@@ -12,10 +12,13 @@ require 'singleton'
 
 #NoteManager should be a singleton also
 class NoteManager
+	
+	include Singleton
+
 	attr_reader :dir
 
-	def initialize (notesDir = "#{ENV['HOME']+ "/.tomboy"}")
-		@dir = notesDir
+	def initialize
+		@dir = KDE::StandardDirs::locateLocal("appdata","notes/")
 		@notes = {}
 		loadNotes()
 	end
@@ -35,10 +38,9 @@ class NoteManager
 	private
 	def loadNotes ()
 		Dir.foreach(@dir) do |file|
-			full = @dir + "/" + file
 			#if file[-1,1] != "~" && !File.directory?(full)
 			if file =~ /.*note$/
-				note = XmlNote.new(full)
+				note = XmlNote.new(file)
 				@notes[note.title] = note
 			end
 		end
@@ -47,106 +49,59 @@ class NoteManager
 end
 
 #######################################
-#			Notes implementations
+#	Notes implementations
 #######################################
-class KoolNote
-	attr_accessor :title
-	attr_accessor :contents
-	attr_reader :id
-
-	def initialize ( title, id=-1, contents='' )
-		@title = title
-		@id = id
-		@contents = contents
-	end
-end
-
 class XmlNote
 	require "rexml/document"
 	include REXML
 	
-	attr_accessor :title, :xml, :text
-	attr_reader :file
+	attr_accessor :title
 	
-	def initialize(file)
-		@file = file
+	def initialize(title)
+		@title = title
+		@read = false
+	end
+
+	def doc
+		@read or read;
+		return @doc
+	end
+
+	def text 
+		@read or read;
+		return @text
+	end
+
+	def read
+		file = KDE::StandardDirs::locateLocal(
+			"appdata","notes/#{@title}.note")
 		@xml = IO.readlines(file).join("\n")
 		begin
 			@doc = Document.new(@xml)
-			@title = @doc.root.elements["title"].text
 			@text = @doc.root.elements["text"]
+			@read = true
 		rescue
-			print "IGNORING Note: " + @file
-			print $!
+			p "IGNORING Note: " + @file
+			p $!
 		end
 	end
 
 	def to_s()
 		return @xml
 	end
-	
-end
 
-###############################################
-#				NoteDB Implementations
-###############################################
+	private
 
-# FIXME
-# Add DB interface here
-class NoteDB
-end
-
-# FIXME
-# Inherit from NoteDB and
-class TomboyStore
-end
-
-class KoolNoteWell
-	include Singleton
-
-	@@file = ''
-
-	def KoolNoteWell.setFile( file )
-		@@file = file
-	end
-
-	def initialize
-		@db = SQLite3::Database.new(@@file)
-		@db.results_as_hash = true
-		count = @db.get_first_value("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name='notes'")
-		count == "1" or 
-			@db.execute("CREATE TABLE notes ( id integer primary key autoincrement, title text, contents text, date text)")
-	end
-
-	def lastNotes
-		@db.execute("SELECT * FROM notes ORDER BY date LIMIT 5")
-	end
-
-	def getNote ( title )
-		note = nil
-		rows = @db.execute("SELECT * FROM notes WHERE title='#{title}'")
-		if rows.length == 1
-			note = KoolNote.new(title, rows[0]['id'], rows[0]['contents'])
-		else
-			note = KoolNote.new(title)
-		end
-		note
-	end
-
-	def storeNote ( note )
-		count = @db.get_first_value("SELECT COUNT(*) FROM notes WHERE id=#{note.id}")
-		date=Qt::DateTime.currentDateTime.toString(Qt::ISODate)
-		if count == "1"
-			if note.title.length != 0
-				@db.execute("UPDATE notes SET title='#{note.title}', contents='#{note.contents}', date='#{date}' WHERE id=#{note.id}")
-			else
-				@db.execute("DELETE FROM notes WHERE id=#{note.id}")
+	def self.attr_after_read (*attrs)
+		attrs.each do |a|
+			module_eval <<-EOF
+			def #{a}
+			read unless @read
+			@#{a}
 			end
-		else
-			if note.title.length != 0
-				@db.execute("INSERT INTO notes VALUES (NULL, '#{note.title}', '#{note.contents}', '#{date}')")
-			end
+			EOF
 		end
-
 	end
+
+	attr_after_read :doc, :text
 end

@@ -102,7 +102,5 @@ a = KDE::UniqueApplication.new()
 thing = SysTrayThing.new( "koolboy" )
 thing.show
 
-KoolNoteWell.setFile(KDE::StandardDirs::locateLocal("appdata","koolnotes.db"))
-
 a.mainWidget = thing
 a.exec 
