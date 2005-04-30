@@ -77,7 +77,7 @@ class NoteWindow < KDE::MainWindow
 		@note = NoteManager.instance.getNote(name)
 
 		@text = KDE::TextEdit.new(self)
-		@text.setText(@note.contents)
+		@text.setText(@note.text)
 		self.setCentralWidget(@text)
 	end
 
@@ -86,7 +86,7 @@ class NoteWindow < KDE::MainWindow
 		if text.length != 0
 		then
 			@note.title = text.split("\n").first
-			@note.contents = @text.text
+			@note.text = @text.text
 		else
 			@note.title = ''
 		end 

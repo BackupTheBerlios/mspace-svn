@@ -20,11 +20,13 @@ class NoteManager
 	end
 	
 	def getNote ( title )
+		@notes[title]
 	end
 	
 	def lastNotes
 		#may be a little unreadable but it rocks :P
-		@notes.sort {|a,b| a[1].time <=> b[1].time }.collect { |x| x[0] }[0..5]
+		#@notes.sort {|a,b| a[1].time <=> b[1].time }.collect { |x| x[0] }[0..5]
+		@notes.values.sort_by { |x| x.time }[0..5].map { |x| x.title }
 	end
 	
 	private
@@ -61,11 +63,11 @@ class XmlNote
 		@xml = IO.readlines(@file).join("\n")
 		begin
 			@doc = Document.new(@xml)
-			@text = @doc.root.elements["text"]
-			@size = Qt::Size.new(@doc.root.elements["height"],
-					@doc.root.elements["width"])
-			@loc = Qt::Point.new(@doc.root.elements["x"],
-					@doc.root.elements["y"])
+			@text = @doc.root.elements["text"].text.to_s
+			@size = Qt::Size.new(@doc.root.elements["height"].text.to_i,
+					@doc.root.elements["width"].text.to_i)
+			@loc = Qt::Point.new(@doc.root.elements["x"].text.to_i,
+					@doc.root.elements["y"].text.to_i)
 			@read = true
 		rescue
 			p "IGNORING Note: " + @file
