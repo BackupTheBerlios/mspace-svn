@@ -59,6 +59,10 @@ class XmlNote
 		begin
 			@doc = Document.new(@xml)
 			@text = @doc.root.elements["text"]
+			@size = Qt::Size.new(@doc.root.elements["height"],
+					@doc.root.elements["width"])
+			@loc = Qt::Point.new(@doc.root.elements["x"],
+					@doc.root.elements["y"])
 			@read = true
 		rescue
 			p "IGNORING Note: " + @file
@@ -76,12 +80,12 @@ class XmlNote
 		attrs.each do |a|
 			module_eval <<-EOF
 			def #{a}
-			@read or read
-			@#{a}
+				@read or read
+				@#{a}
 			end
 			EOF
 		end
 	end
 
-	attr_after_read :doc, :text
+	attr_after_read :doc, :text, :size, :loc
 end
