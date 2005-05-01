@@ -115,7 +115,31 @@ namespace ComponentModel {
             }
             return null;
         }
-       
+        
+
+        private ResponseMethodVO ExecuteCompleteSequence (MethodInfo methodToInvoke, object[] parameters, IViewHandler viewHandler, MethodInfo methodResponse) {
+            try {
+                ResponseMethodVO responseMethodVO =  FactoryVO.Instance.CreateResponseMethodVO ();
+                logger.Debug ("Method " + methodToInvoke + " executing.");
+                object ret = methodToInvoke.Invoke (this, parameters);
+                responseMethodVO.MethodResult = ret;
+                logger.Debug ("Executing response method: " + methodResponse.ToString ());
+                responseMethodVO.SetExecutionSuccess (true);
+                logger.Debug ("Setting excecuttion success as true.");
+                methodResponse.Invoke (viewHandler, new object[] {responseMethodVO});
+                return responseMethodVO;
+            }
+            catch (TargetInvocationException exception) {
+                if (exception.InnerException is ComponentModelException) 
+                    throw exception.InnerException;
+                else {
+                    this.InstantiateExceptionManager ();
+                    defaultExceptionManager.ProcessException (exception);
+                }
+            }
+            return null;
+        }
+        
         private Type GetViewType (string viewType) {
             if ((viewType == null) || (viewType.Equals (String.Empty)))
                 throw new ViewNotFoundException ("Please, set up attributes correctly.");
@@ -137,7 +161,7 @@ namespace ComponentModel {
         }
         
         //Public Methods
-        public ResponseMethodVO Execute (string methodName, params object[] parameters) {
+        public ResponseMethodVO Execute (string methodName, object[] parameters) {
             Type type = this.GetType ();
 
             //Recollecting data for execution.
@@ -158,5 +182,22 @@ namespace ComponentModel {
             ResponseMethodVO responseMethodVO = this.ExecuteCompleteSequence (methodToExecute, parameters, viewType, responseMethod); 
             return responseMethodVO;
         }
+        
+        public ResponseMethodVO Execute (string methodName, bool redirect, bool block, object[] parameters) {
+            throw new Exception ("Not implemented yet.");
+        }
+
+        public ResponseMethodVO Execute (string methodName, bool redirect, bool block, object[] parameters, IViewHandler view) {
+            Type type = this.GetType ();
+            
+            MethodInfo methodToExecute = this.GetMethodToExecute (methodName, type);
+            Attribute[] attributes = (Attribute[]) methodToExecute.GetCustomAttributes (typeof (ComponentMethodAttribute), false);
+            ComponentMethodAttribute componentMethodAttribute = (ComponentMethodAttribute) attributes[0];
+            MethodInfo responseMethod = this.GetMethodResponse (view.GetType (), componentMethodAttribute);
+            
+            ResponseMethodVO responseMethodVO = this.ExecuteCompleteSequence (methodToExecute, parameters, view, responseMethod);
+            return responseMethodVO;
+        }
+
     }
 }
