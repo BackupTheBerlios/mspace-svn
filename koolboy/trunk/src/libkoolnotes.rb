@@ -18,9 +18,18 @@ class NoteManager
 			yield note
 		end
 	end
-	
+
+	def unusedName
+		#make this return an unused name
+		"New note"
+	end
+
 	def getNote ( title )
-		@notes[title]
+		if @notes.key?(title)
+			@notes[title]
+		else
+			XmlNote.new(title)
+		end
 	end
 	
 	def lastNotes
@@ -62,10 +71,19 @@ class XmlNote
 	
 	def initialize(title)
 		@title = title
-		@read = false
 		@file = KDE::StandardDirs::locateLocal(
 			"appdata","notes/#{@title}.note")
-		@time = File.new(@file).mtime
+		if File.exists?(@file)
+			@read = false
+			@time = File.mtime(@file)
+		else
+			@read = true
+			@title = title
+			@text = ''
+			@file = KDE::StandardDirs::locateLocal(
+				"appdata","notes/#{@title}.note")
+			@time = Time.new
+		end
 	end
 
 	def read
@@ -84,8 +102,33 @@ class XmlNote
 		end
 	end
 
+	def write
+		@doc = REXML::Document.new("<note/>");
+		title = REXML::Element.new("title")
+		title.text = @title
+		text = REXML::Element.new("text")
+		text.text = @text
+		width = REXML::Element.new("width")
+		width.text = @size.width
+		height = REXML::Element.new("height")
+		height.text = @size.height
+		x = REXML::Element.new("x")
+		x.text = @pos.x
+		y = REXML::Element.new("y")
+		y.text = @pos.y
+		@doc << REXML::XMLDecl.new
+		@doc.root << title
+		@doc.root << text
+		@doc.root << width
+		@doc.root << height
+		@doc.root << x
+		@doc.root << y
+		f = File.new(@file, "w")
+		@doc.write(f)
+	end
+
 	def change (title,text,size,pos)
-		File.delete(@file)	
+		File.exists?(@file) and File.delete(@file)	
 		@title = title
 		@text = text
 		@size = size
@@ -93,7 +136,7 @@ class XmlNote
 		@file = KDE::StandardDirs::locateLocal(
 			"appdata","notes/#{@title}.note")
 		@time = Time.new
-		#rewrite the file
+		write
 	end
 
 	def delete

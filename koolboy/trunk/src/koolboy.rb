@@ -4,13 +4,14 @@ require 'Korundum'
 require 'libkoolnotes.rb'
 
 class SysTrayThing < KDE::SystemTray
-	slots   'sAboutToQuit()',
-		'sNewNote()',
-		'sShowNote(int)'
+	slots   'sNewNote()',
+		'sShowNote(int)',
+		'sRemoveWindow(char*)'
 
 	def initialize(name )
 		super(nil, name)
 		setPixmap( KDE::SystemTray::loadIcon("kgpg"))
+		@windows = {}
 	end
 
 	def regenMenu
@@ -30,17 +31,27 @@ class SysTrayThing < KDE::SystemTray
 
 	def sNewNote
 		window = NoteWindow.new(nil)
-		size = window.sizeHint
-		winPos = Qt::Point.new( width - size.width/2, 
-			height - size.height/2)
-		winPos = mapToGlobal(winPos)
-		window.move(winPos)
+		connect(window, SIGNAL('aboutToClose(char*)'),
+			self, SLOT('sRemoveWindow(char*)'))
 		window.show
+		@windows[window.title] = window
 	end
 
 	def sShowNote (id)
-		window = NoteWindow.new(@menuTitles[id])
-		window.show
+		title = @menuTitles[id]
+		if @windows.key?(title)
+			#just focus and raise
+		else
+			window = NoteWindow.new(title)
+			connect(window, SIGNAL('aboutToClose(char*)'),
+				self, SLOT('sRemoveWindow(char*)'))
+			window.show
+			@windows[window.title] = window
+		end
+	end
+
+	def sRemoveWindow (title)
+		@windows.delete(title)
 	end
 
 	def mousePressEvent( ev )
@@ -59,8 +70,15 @@ class SysTrayThing < KDE::SystemTray
 end
 
 class NoteWindow < KDE::MainWindow
+	signals 'aboutToClose(char*)'
+
 	def initialize( name )
-		name or name = "New note"
+		if not name
+			name = NoteManager.instance.unusedName
+			new = true
+		else
+			new = false
+		end
 		super(nil, name)
 		setCaption(name)
 
@@ -68,19 +86,26 @@ class NoteWindow < KDE::MainWindow
 		# to use kmainwindows in this manner
 		$kapp.ref
 
-		# load note from database
+		# get note
 		@note = NoteManager.instance.getNote(name)
 
-		resize(@note.size)
-		move(@note.pos)
+		if not new
+			resize(@note.size)
+			move(@note.pos)
+		end
 
 		@text = KDE::TextEdit.new(self)
 		@text.setText(@note.text)
 		self.setCentralWidget(@text)
 	end
 
+	def title
+		@note.title
+	end
+
 	def queryClose
 		text = @text.text.strip
+		emit aboutToClose(@note.title)
 		if text.length != 0
 		then
 			title = text.split("\n").first
