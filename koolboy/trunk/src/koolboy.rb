@@ -72,7 +72,7 @@ class NoteWindow < KDE::MainWindow
 		@note = NoteManager.instance.getNote(name)
 
 		resize(@note.size)
-		move(@note.loc)
+		move(@note.pos)
 
 		@text = KDE::TextEdit.new(self)
 		@text.setText(@note.text)
@@ -83,12 +83,11 @@ class NoteWindow < KDE::MainWindow
 		text = @text.text.strip
 		if text.length != 0
 		then
-			@note.title = text.split("\n").first
-			@note.text = @text.text
+			title = text.split("\n").first
+			NoteManager.instance.change(@note,title,text,size,pos)
 		else
-			@note.title = ''
+			NoteManager.instance.delete(@note)
 		end 
-		NoteManager.instance.storeNote(@note)
 		return true
 	end
 end

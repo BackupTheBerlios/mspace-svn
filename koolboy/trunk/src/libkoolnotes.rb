@@ -1,5 +1,6 @@
 require 'sqlite3'
 require 'singleton'
+require 'rexml/document'
 
 class NoteManager
 	
@@ -28,7 +29,18 @@ class NoteManager
 		#@notes.sort {|a,b| a[1].time <=> b[1].time }.collect { |x| x[0] }[0..5]
 		@notes.values.sort_by { |x| x.time }[0..5].map { |x| x.title }
 	end
-	
+
+	def change (note,title,text,size,pos)
+		@notes.delete(note.title)
+		note.change(title,text,size,pos)
+		@notes[title] = note 	
+	end
+
+	def delete (note)
+		@notes.delete(note.title)
+		note.delete
+	end
+
 	private
 	def loadNotes
 		Dir.foreach(@dir) do |file|
@@ -46,8 +58,6 @@ end
 #	Notes implementations
 #######################################
 class XmlNote
-	require "rexml/document"
-	include REXML
 	
 	attr_accessor :title, :time
 	
@@ -62,11 +72,11 @@ class XmlNote
 	def read
 		@xml = IO.readlines(@file).join("\n")
 		begin
-			@doc = Document.new(@xml)
+			@doc = REXML::Document.new(@xml)
 			@text = @doc.root.elements["text"].text.to_s
 			@size = Qt::Size.new(@doc.root.elements["height"].text.to_i,
 					@doc.root.elements["width"].text.to_i)
-			@loc = Qt::Point.new(@doc.root.elements["x"].text.to_i,
+			@pos = Qt::Point.new(@doc.root.elements["x"].text.to_i,
 					@doc.root.elements["y"].text.to_i)
 			@read = true
 		rescue
@@ -75,7 +85,23 @@ class XmlNote
 		end
 	end
 
-	def to_s()
+	def change (title,text,size,pos)
+		File.delete(@file)	
+		@title = title
+		@text = text
+		@size = size
+		@pos = pos
+		@file = KDE::StandardDirs::locateLocal(
+			"appdata","notes/#{@title}.note")
+		@time = Time.new
+		#rewrite the file
+	end
+
+	def delete
+		File.delete(@file)	
+	end
+
+	def to_s
 		return @xml
 	end
 
@@ -96,5 +122,5 @@ class XmlNote
 		end
 	end
 
-	attr_after_read :text, :size, :loc
+	attr_after_read :text, :size, :pos
 end
