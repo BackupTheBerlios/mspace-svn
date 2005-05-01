@@ -1,4 +1,3 @@
-require 'sqlite3'
 require 'singleton'
 require 'rexml/document'
 
