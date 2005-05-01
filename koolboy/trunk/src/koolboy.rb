@@ -40,7 +40,8 @@ class SysTrayThing < KDE::SystemTray
 	def sShowNote (id)
 		title = @menuTitles[id]
 		if @windows.key?(title)
-			#just focus and raise
+			@windows[title].setActiveWindow
+			@windows[title].raise
 		else
 			window = NoteWindow.new(title)
 			connect(window, SIGNAL('aboutToClose(char*)'),
