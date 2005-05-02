@@ -71,6 +71,7 @@ class Koolboy < KDE::SystemTray
 		end
 	end
 
+	#DCOP methods
 	def lastNotes
 		NoteManager.instance.lastNotes
 	end
