@@ -2,7 +2,7 @@ require 'singleton'
 require 'rexml/document'
 
 class NoteManager
-	
+
 	include Singleton
 
 	attr_reader :dir

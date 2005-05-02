@@ -3,10 +3,12 @@
 require 'Korundum'
 require 'libkoolnotes.rb'
 
-class SysTrayThing < KDE::SystemTray
+class Koolboy < KDE::SystemTray
 	slots   'sNewNote()',
 		'sShowNote(int)',
 		'sRemoveWindow(char*)'
+	
+	k_dcop 'QStringList lastNotes()'
 
 	def initialize(name )
 		super(nil, name)
@@ -68,6 +70,10 @@ class SysTrayThing < KDE::SystemTray
 			contextMenu.popup(ev.globalPos)
 		end
 	end
+
+	def lastNotes
+		NoteManager.instance.lastNotes
+	end
 end
 
 class NoteWindow < KDE::MainWindow
@@ -122,8 +128,8 @@ about = KDE::AboutData.new("koolboy", "Koolboy", "0.1")
 KDE::CmdLineArgs.init(ARGV, about)
 a = KDE::UniqueApplication.new()
 
-thing = SysTrayThing.new( "koolboy" )
-thing.show
+koolboy = Koolboy.new( "koolboy" )
+koolboy.show
 
-a.mainWidget = thing
+a.mainWidget = koolboy
 a.exec 
