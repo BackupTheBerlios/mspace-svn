@@ -139,8 +139,9 @@ if $0 == __FILE__
 	about = KDE::AboutData.new("koolboy", "Koolboy", version,
 						   description, KDE::AboutData::License_GPL,
 						   "")
-	about.addAuthor("Isaac Clerencia", "Core developer", "isaac@sindominio.net")
+	about.addAuthor("Isaac Clerencia", "Core developer", "isaac@warp.es")
 	about.addAuthor("Sergio Rubio", "Core developer", "sergio.rubio@hispalinux.es")
+	about.setBugAddress("mspace-koolboy@lists.berlios.de")
 
 	KDE::CmdLineArgs.init(ARGV,about)
 	a = KDE::UniqueApplication.new()
