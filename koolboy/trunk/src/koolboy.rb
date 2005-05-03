@@ -4,9 +4,8 @@ require 'Korundum'
 require 'libkoolnotes.rb'
 
 class Koolboy < KDE::SystemTray
-	slots   'sNewNote()',
-		'sShowNote(int)',
-		'sRemoveWindow(char*)'
+	slots   'sNewNote()', 'sShowNote(int)',
+			'sRemoveWindow(char*)', 'showAbout()'
 	
 	k_dcop 'QStringList lastNotes()'
 
@@ -14,14 +13,20 @@ class Koolboy < KDE::SystemTray
 		super(nil, name)
 		setPixmap( KDE::SystemTray::loadIcon("kgpg"))
 		@windows = {}
+		@icons = KDE::IconLoader.new()
+		#add about to rightclick menu
+		contextMenu().insertItem( Qt::IconSet.new(@icons.loadIcon("about", KDE::Icon::Toolbar)),
+		                          "About Koolboy", self, SLOT('showAbout()') )
 	end
 
 	def regenMenu
+		
+		
 		# create left menu
 		@leftMenu = KDE::PopupMenu.new(self)
 		@leftMenu.insertItem( i18n( "&New note" ), self, SLOT('sNewNote()') )
 		@leftMenu.insertSeparator
-
+		
 		@menuTitles = {}
 
 		NoteManager.instance.lastNotes.each { |note|
@@ -57,6 +62,9 @@ class Koolboy < KDE::SystemTray
 		@windows.delete(title)
 	end
 
+	def showAbout
+		KDE::AboutApplication.new.show
+	end
 	def mousePressEvent( ev )
 		case ev.button
 		when Qt::LeftButton
@@ -125,12 +133,19 @@ class NoteWindow < KDE::MainWindow
 	end
 end
 
-about = KDE::AboutData.new("koolboy", "Koolboy", "0.1")
-KDE::CmdLineArgs.init(ARGV, about)
-a = KDE::UniqueApplication.new()
+if $0 == __FILE__
+	description = "Note taking app"
+	version     = "0.1"
+	about = KDE::AboutData.new("koolboy", "Koolboy", version,
+						   description, KDE::AboutData::License_GPL,
+						   "")
+	about.addAuthor("Isaac Clerencia", "Core developer", "isaac@sindominio.net")
+	about.addAuthor("Sergio Rubio", "Core developer", "sergio.rubio@hispalinux.es")
 
-koolboy = Koolboy.new( "koolboy" )
-koolboy.show
-
-a.mainWidget = koolboy
-a.exec 
+	KDE::CmdLineArgs.init(ARGV,about)
+	a = KDE::UniqueApplication.new()
+	koolboy = Koolboy.new( "koolboy" )
+	koolboy.show
+	a.mainWidget = koolboy
+	a.exec
+end
