@@ -4,8 +4,8 @@ require 'Korundum'
 require 'libkoolnotes.rb'
 
 class Koolboy < KDE::SystemTray
-	slots   'sNewNote()', 'sShowNote(int)',
-			'sRemoveWindow(char*)', 'showAbout()'
+	slots   'sNewNote()', 'sShowNote(int)', 'sRecentChanges()',
+			'sRemoveWindow(char*)', 'showAbout()', 'sSearchNotes()'
 	
 	k_dcop 'QStringList lastNotes()'
 
@@ -16,24 +16,28 @@ class Koolboy < KDE::SystemTray
 		@icons = KDE::IconLoader.new()
 		#add about to rightclick menu
 		contextMenu().insertItem( Qt::IconSet.new(@icons.loadIcon("about", KDE::Icon::Toolbar)),
-		                          "About Koolboy", self, SLOT('showAbout()') )
+		                          i18n("About Koolboy"), self, SLOT('showAbout()') )
 	end
 
 	def regenMenu
-		
-		
 		# create left menu
 		@leftMenu = KDE::PopupMenu.new(self)
-		@leftMenu.insertItem( i18n( "&New note" ), self, SLOT('sNewNote()') )
-		@leftMenu.insertSeparator
-		
+		@leftMenu.insertItem( Qt::IconSet.new(@icons.loadIcon("file_new", KDE::Icon::Toolbar)),
+		                      i18n( "&Create new note" ), self, SLOT('sNewNote()') )
 		@menuTitles = {}
-
 		NoteManager.instance.lastNotes.each { |note|
-			id = @leftMenu.insertItem( note, self, SLOT('sShowNote(int)') )
+			id = @leftMenu.insertItem( Qt::IconSet.new(@icons.loadIcon("knotes", KDE::Icon::Toolbar)),
+			                          note, self, SLOT('sShowNote(int)') )
 			# we need to map from menu id to note title
 			@menuTitles[id] = note
 		}
+
+		@leftMenu.insertSeparator
+		
+		@leftMenu.insertItem( Qt::IconSet.new(@icons.loadIcon("window_list", KDE::Icon::Toolbar)),
+		                     i18n( "&Recent changes" ), self, SLOT('sRecentChanges()') )
+		@leftMenu.insertItem( Qt::IconSet.new(@icons.loadIcon("find", KDE::Icon::Toolbar)),
+		                      i18n( "&Search notes..." ), self, SLOT('sSearchNotes()') )
 	end
 
 	def sNewNote
