@@ -8,6 +8,7 @@ class NoteView < MainWindow
 	slots 'slotLink()',
 	'noteDeleted()', 'slotFind()', 'formatBold()', 'formatUnderline()',
 	'formatStrikeout()', 'formatItalic()'
+	attr_reader :note
 
 	# Receives an XmlNote and handles its content
 	def initialize(note)
@@ -24,12 +25,6 @@ class NoteView < MainWindow
 		@textEdit.text = @note.text if @note.text
 		resize(@note.size) if @note.size
 		move(@note.pos) if @note.size
-	end
-
-	def queryClose
-		puts "CLOSING"
-		puts "Title: " + self.name
-		return true
 	end
 	
 	#####################
