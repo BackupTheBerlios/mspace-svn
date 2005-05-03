@@ -20,9 +20,16 @@ class NoteManager
 	end
 
 	def unusedName
-		#make this return an unused name
-		"New note"
+		return "New note #{Time.now.year}-#{Time.now.month}-#{Time.now.day}" +
+		"(#{Time.now.hour}:#{Time.now.min}:#{Time.now.sec})"
 	end
+
+	def newNote
+		note = XmlNote(unusedName)
+		@notes[note.title] = note
+		return note
+	end
+		
 
 	def getNote ( title )
 		if @notes.key?(title)
@@ -165,4 +172,8 @@ class XmlNote
 	end
 
 	attr_after_read :text, :size, :pos
+end
+
+if $0 == __FILE__
+	puts NoteManager.instance.unusedName
 end
