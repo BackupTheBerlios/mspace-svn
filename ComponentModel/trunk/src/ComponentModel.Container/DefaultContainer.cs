@@ -75,6 +75,7 @@ namespace ComponentModel.Container {
                 this.Add (defaultComponentModel); 
             }
             logger.Debug ("Exiting RegisterComponent.");
+            logger.Info ("Container has : " + componentList.Count + " Components Registered.");
         }
         
         public static DefaultContainer Instance {

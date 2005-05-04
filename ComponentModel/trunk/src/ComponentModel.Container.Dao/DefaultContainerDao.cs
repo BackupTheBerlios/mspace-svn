@@ -6,12 +6,15 @@ using ComponentModel.Factory;
 using ComponentModel.Container;
 using ComponentModel.VO;
 using ComponentModel.Exceptions;
+using NLog;
 
 namespace ComponentModel.Container.Dao {
     public class DefaultContainerDao {
         private static DefaultContainerDao instance = null;
+        private Logger logger;
         
         private DefaultContainerDao () {
+            logger = LogManager.GetLogger (this.GetType ().ToString ());
         }
         
         public static DefaultContainerDao Instance {
@@ -35,7 +38,7 @@ namespace ComponentModel.Container.Dao {
         }
         
         public ICollection ProcessAssembly (Assembly assembly) {
-            Console.WriteLine ("Assembly to Process: " + assembly.FullName);
+            logger.Debug ("Assembly to Process: " + assembly.FullName);
             ArrayList list = new ArrayList ();
             Type[] types = assembly.GetTypes ();
             //TODO filter with memberfilter :)

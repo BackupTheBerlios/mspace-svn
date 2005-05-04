@@ -65,6 +65,8 @@
             <references>
                 <include name="**/${lib}/*.dll"/>
                 <include name="**/${lib}/components/*.dll"/>
+                <include name="System.Windows.Forms.dll"/>
+                <include name="System.Drawing.dll"/>
             </references>
             <pkg-references>
                 <package name="gtk-sharp-2.0"/>
@@ -84,6 +86,8 @@
                 <include name="**/${lib}/*.dll"/>
                 <include name="**/${lib}/components/*.dll"/>
                 <include name="**/${bin}/*.dll"/>    
+                <include name="System.Windows.Forms.dll"/>
+                <include name="System.Drawing.dll"/>
             </references>
             <pkg-references>
                 <package name="gtk-sharp-2.0"/>

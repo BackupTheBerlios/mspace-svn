@@ -110,7 +110,8 @@ namespace ComponentModel {
                     throw exception.InnerException;
                 else {
                     this.InstantiateExceptionManager ();
-                    defaultExceptionManager.ProcessException (exception);
+                    //Console.WriteLine (exception.InnerException.GetType ().ToString ());
+                    defaultExceptionManager.ProcessException (exception.InnerException);
                 }
             }
             return null;
@@ -127,6 +128,7 @@ namespace ComponentModel {
                 responseMethodVO.SetExecutionSuccess (true);
                 logger.Debug ("Setting excecuttion success as true.");
                 methodResponse.Invoke (viewHandler, new object[] {responseMethodVO});
+                logger.Debug ("Returning ResponseMethodVO");
                 return responseMethodVO;
             }
             catch (TargetInvocationException exception) {
@@ -134,7 +136,8 @@ namespace ComponentModel {
                     throw exception.InnerException;
                 else {
                     this.InstantiateExceptionManager ();
-                    defaultExceptionManager.ProcessException (exception);
+                    //Console.WriteLine (exception.InnerException.GetType ().ToString ());
+                    defaultExceptionManager.ProcessException (exception.InnerException);
                 }
             }
             return null;
