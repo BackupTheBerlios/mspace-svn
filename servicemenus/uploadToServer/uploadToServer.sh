@@ -1,9 +1,15 @@
 #!/bin/sh
 
-FILEPATH=$1
-FILENAME=$2
+##### EDIT THIS #######
 SERVER_URL="fish://rubiojr.no-ip.org/home/rubiojr/public_html/Download/"
 DOWNLOAD_URL="http://rubiojr.no-ip.org/~rubiojr/Download/$FILENAME"
+#######################
+
+##############################
+###### DO NOT EDIT ###########
+##############################
+FILEPATH=$1
+FILENAME=$2
 
 ## Copy the file to the server using kfmclient
 kfmclient copy $FILEPATH $SERVER_URL
