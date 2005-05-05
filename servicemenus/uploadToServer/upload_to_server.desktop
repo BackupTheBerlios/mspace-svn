@@ -1,0 +1,9 @@
+[Desktop Entry]
+Actions=upload_to_server
+ServiceTypes=all/allfiles
+Encoding=UTF8
+
+[Desktop Action upload_to_server]
+Name=Upload to server
+Icon=network
+Exec=$HOME/.kde/bin/uploadToServer.sh %U

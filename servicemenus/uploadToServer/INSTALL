@@ -1,0 +1,4 @@
+* Copy the scripts to $HOME/.kde/bin
+* Copy the .desktop files to $HOME/.kde/share/apps/konqueror/servicemenus
+* Create any of the directories above if they don't exist
+
