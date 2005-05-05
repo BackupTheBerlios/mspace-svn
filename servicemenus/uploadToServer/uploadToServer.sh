@@ -2,7 +2,7 @@
 
 ##### EDIT THIS #######
 SERVER_URL="fish://rubiojr.no-ip.org/home/rubiojr/public_html/Download/"
-DOWNLOAD_URL="http://rubiojr.no-ip.org/~rubiojr/Download/$FILENAME"
+DOWNLOAD_URL="http://rubiojr.no-ip.org/~rubiojr/Download"
 #######################
 
 ##############################
@@ -15,7 +15,7 @@ FILENAME=$2
 kfmclient copy $FILEPATH $SERVER_URL
 
 ## Set the URL in clipboard
-dcop klipper klipper setClipboardContents "$DOWNLOAD_URL"
+dcop klipper klipper setClipboardContents "$DOWNLOAD_URL/$FILENAME"
 
 ## Notify when finished
 dcop knotify Notify notify "URL received" "<b>File Uploader</b>" "Download URL <b><font color='red'>ready</font></b> in klipper" "" "" 16 0
