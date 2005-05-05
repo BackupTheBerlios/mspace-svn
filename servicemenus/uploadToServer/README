@@ -1,0 +1,2 @@
+Uploads the selected file to a server using ssh (fish://)
+and puts the URL back in klipper
