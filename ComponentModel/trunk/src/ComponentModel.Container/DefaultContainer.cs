@@ -104,6 +104,14 @@ namespace ComponentModel.Container {
              */
             if (componentList.Contains (component))
                 return;
+            /*Chequeamos que no existan dos componentes con el mismo nombre.*/
+            for (int i = 0; i< componentList.Count; i++) {
+                if (((IComponentModel)componentList[i]).VO.ComponentName.Equals (component.VO.ComponentName)) {
+                    /*No lanzo una excepción porque no se debe parar la
+                     * ejecución del programa por este error.*/
+                    return;
+                }
+            }
             componentList.Add (component);
             logger.Info ("Registering component: " + component + " as Name: " + component.VO.ComponentName);
         }

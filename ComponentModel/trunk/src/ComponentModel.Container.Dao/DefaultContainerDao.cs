@@ -56,8 +56,8 @@ namespace ComponentModel.Container.Dao {
                         //Seteamos el vo con reflection y mantener oculto el
                         //resto.
                         FieldInfo voFieldInfo = types[i].GetField ("vO", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.SetField); // | BindingFlags.DeclaredOnly);
-                        if (voFieldInfo == null)
-                            Console.WriteLine ("FieldInfo == null.");
+                        //if (voFieldInfo == null)
+                        //    Console.WriteLine ("FieldInfo == null.");
                         voFieldInfo.SetValue (defaultComponentModel, componentModelVO);
                         list.Add (defaultComponentModel);
                     }
