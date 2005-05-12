@@ -20,6 +20,14 @@ namespace ComponentModel.Threading {
         IViewHandler viewHandler;
         MethodInfo methodToResponse;
         ResponseMethodVO responseMethodVO;
+
+        internal ResponseMethodVO ResponseMethodVO {
+            get {
+                lock (responseMethodVO) {
+                    return responseMethodVO;
+                }
+            }
+        }
         
         internal ComponentActionDispatcher () {}
         
@@ -56,28 +64,40 @@ namespace ComponentModel.Threading {
             thread = new Thread (threadStart);
         }
         
-        internal void CallBackExecuteRedirectNewView () {
-            responseMethodVO = FactoryVO.Instance.CreateResponseMethodVO ();
-            object ret = methodToExecute.Invoke (componentModel, parameters);
-            responseMethodVO.MethodResult = ret;
-            responseMethodVO.SetExecutionSuccess (true);
-            object obj = viewType.GetConstructor (null).Invoke (null);
-            methodToResponse.Invoke (obj, new object[] {responseMethodVO});
+        private void CallBackExecuteRedirectNewView () {
+            lock (responseMethodVO) {
+                responseMethodVO = FactoryVO.Instance.CreateResponseMethodVO ();
+                object ret = methodToExecute.Invoke (componentModel, parameters);
+                responseMethodVO.MethodResult = ret;
+                responseMethodVO.SetExecutionSuccess (true);
+                object obj = viewType.GetConstructor (null).Invoke (null);
+                methodToResponse.Invoke (obj, new object[] {responseMethodVO});
+            }
         }
 
-        internal void CallBackExecuteRedirectView () {
-            responseMethodVO = FactoryVO.Instance.CreateResponseMethodVO ();
-            object ret = methodToExecute.Invoke (componentModel, parameters);
-            responseMethodVO.MethodResult = ret;
-            responseMethodVO.SetExecutionSuccess (true);
-            methodToResponse.Invoke (viewHandler, new object[] {responseMethodVO});
+        private void CallBackExecuteRedirectView () {
+            lock (responseMethodVO) {
+                responseMethodVO = FactoryVO.Instance.CreateResponseMethodVO ();
+                object ret = methodToExecute.Invoke (componentModel, parameters);
+                responseMethodVO.MethodResult = ret;
+                responseMethodVO.SetExecutionSuccess (true);
+                methodToResponse.Invoke (viewHandler, new object[] {responseMethodVO});
+            }
         }
 
-        internal void CallBackExecuteNoRedirect () {
-            responseMethodVO = FactoryVO.Instance.CreateResponseMethodVO ();
-            object ret = methodToExecute.Invoke (componentModel, parameters);
-            responseMethodVO.MethodResult = ret;
-            responseMethodVO.SetExecutionSuccess (true);
+        private void CallBackExecuteNoRedirect () {
+            lock (responseMethodVO) {
+                responseMethodVO = FactoryVO.Instance.CreateResponseMethodVO ();
+                object ret = methodToExecute.Invoke (componentModel, parameters);
+                responseMethodVO.MethodResult = ret;
+                responseMethodVO.SetExecutionSuccess (true);
+            }
+        }
+
+        internal void Do () {
+            if (thread != null) {
+                thread.Start ();
+            }
         }
     }
 }

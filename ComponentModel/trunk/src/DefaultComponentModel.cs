@@ -6,6 +6,7 @@ using ComponentModel.Container;
 using ComponentModel.Container.Dao;
 using ComponentModel.Factory;
 using ComponentModel.ExceptionManager;
+using ComponentModel.Threading;
 using ComponentModel.Exceptions;
 using NLog;
 
@@ -219,24 +220,33 @@ namespace ComponentModel {
                 }
             }
             else {
+                ComponentActionDispatcher componentActionDispatcher;
                 //Operaciones bloqueantes, envolver en un hilo
-                throw new Exception ("NOT IMPLEMENTED YET !!");
                 if (redirect) {
                     MethodInfo methodToResponse;
                     Type viewType;
                     if (viewHandler == null) {
                         viewType = this.GetViewType (componentMethodAttribute);
                         methodToResponse = this.GetMethodToResponse (viewType, componentMethodAttribute);
+                        componentActionDispatcher = new ComponentActionDispatcher (this, methodToExecute, parameters, viewType, methodToResponse);
+                        componentActionDispatcher.Do ();
+                        return componentActionDispatcher.ResponseMethodVO;
                     }
                     else {
                         viewType = viewHandler.GetType ();
                         methodToResponse = this.GetMethodToResponse (viewType, componentMethodAttribute);
+                        componentActionDispatcher = new ComponentActionDispatcher (this, methodToExecute, parameters, viewHandler, methodToResponse);
+                        componentActionDispatcher.Do ();
+                        return componentActionDispatcher.ResponseMethodVO;
                     }
                 }
                 else {
+                   componentActionDispatcher = new ComponentActionDispatcher (this, methodToExecute, parameters); 
+                   componentActionDispatcher.Do ();
+                   return componentActionDispatcher.ResponseMethodVO;
                 }
             }
-            return null;
+            //return null;
         }
 
     }
