@@ -45,7 +45,7 @@ namespace ComponentModel.ComponentTest.Components.Saludator.Form
 		void Button1Click(object sender, System.EventArgs ev) {
                     DefaultComponentModel dcm = (DefaultComponentModel) DefaultContainer.Instance.GetComponentByName ("Saludator"); 
                     //dcm.Execute ("Saluda", null);
-                    dcm.Execute ("Saluda", false, false, null, this);
+                    dcm.Execute ("Saluda", null, this);
 		}
 		
                 public void ResponseInitApp (ResponseMethodVO response) {

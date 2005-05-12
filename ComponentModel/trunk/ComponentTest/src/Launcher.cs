@@ -13,7 +13,7 @@ namespace ComponentModel.ComponentTest {
                 Console.WriteLine ("Dcm no es null");
             else
                 Console.WriteLine ("Dcm es null");
-            dcm.Execute ("InitApp", null);
+            dcm.Execute ("InitApp", null, null);
             dcm.Execute ("Saluda", null);
         }
     }

@@ -18,7 +18,7 @@ namespace ComponentModel.ComponentTest.Components.Saludator.Bo {
         public int Saluda () {
             Console.WriteLine ("//-----------------//");
             Console.WriteLine ("Que pasa co !!");
-            //throw new Exception ("Yeahhhh");
+            throw new Exception ("Yeahhhh");
             Console.WriteLine ("//-----------------//");
             return 1;
         }

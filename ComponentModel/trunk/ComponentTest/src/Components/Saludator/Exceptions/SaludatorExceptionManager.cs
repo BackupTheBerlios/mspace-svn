@@ -5,6 +5,7 @@ namespace ComponentModel.ComponentTest.Components.Saludator.Exceptions {
 
     
     public class SaludatorExceptionManager : DefaultExceptionManager {
+
         public SaludatorExceptionManager () {
         }
         public override void ProcessException (Exception exception) {

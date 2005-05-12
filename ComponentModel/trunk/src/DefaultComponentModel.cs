@@ -68,8 +68,12 @@ namespace ComponentModel {
             //PostCondition: methodInfo != null
             return methodInfo;
         }
+
+        private MethodInfo GetMethodToExecute (string methodName) {
+            return this.GetMethodToExecute (methodName, this.GetType ());
+        }
         
-        private MethodInfo GetMethodResponse (Type viewType, ComponentMethodAttribute componentMethodAttribute) {
+        private MethodInfo GetMethodToResponse (Type viewType, ComponentMethodAttribute componentMethodAttribute) {
             if (componentMethodAttribute == null) {
                 throw new ResponseNotFoundException ("Please set up correctly Response Attribute.");    
             }
@@ -81,66 +85,16 @@ namespace ComponentModel {
             return responseMethod;
         } 
         
-        private void InstantiateExceptionManager () {
-            if (defaultExceptionManager == null) {
-                logger.Debug ("Trying to instantiate ExceptionManager.");
-                Type typeManager = this.GetTypeExceptionManager (this.VO.ExceptionManagerClassName);
-                this.defaultExceptionManager = (IExceptionManager)typeManager.GetConstructor (null).Invoke (null);
-                logger.Debug ("Exception manager instatiated.");
-            }
-            logger.Debug ("Exception manager already instatiated.");
-        }
-        
-        private ResponseMethodVO ExecuteCompleteSequence (MethodInfo methodToInvoke, object[] parameters, Type viewType, MethodInfo methodResponse) {
-            try {
-                ResponseMethodVO responseMethodVO =  FactoryVO.Instance.CreateResponseMethodVO ();
-                logger.Debug ("Method " + methodToInvoke + " executing.");
-                object ret = methodToInvoke.Invoke (this, parameters);
-                responseMethodVO.MethodResult = ret;
-                logger.Debug ("Redirecting to view: " + viewType.ToString () + " to response Method: " + methodResponse.ToString ());
-                object obj = viewType.GetConstructor (null).Invoke (null);
-                logger.Debug ("Executing response method: " + methodResponse.ToString ());
-                responseMethodVO.SetExecutionSuccess (true);
-                logger.Debug ("Setting excecuttion success as true.");
-                methodResponse.Invoke (obj, new object[] {responseMethodVO});
-                return responseMethodVO;
-            }
-            catch (TargetInvocationException exception) {
-                if (exception.InnerException is ComponentModelException) 
-                    throw exception.InnerException;
-                else {
-                    this.InstantiateExceptionManager ();
-                    //Console.WriteLine (exception.InnerException.GetType ().ToString ());
-                    defaultExceptionManager.ProcessException (exception.InnerException);
+        private void MapException (Exception exception) {
+            if (exception.InnerException is ComponentModelException) 
+                throw exception.InnerException;
+            else {
+                if (this.defaultExceptionManager == null) {
+                    Type typeManager = this.GetTypeExceptionManager (this.VO.ExceptionManagerClassName);
+                    this.defaultExceptionManager = (IExceptionManager) typeManager.GetConstructor (null).Invoke (null);
                 }
+                this.defaultExceptionManager.ProcessException (exception.InnerException);
             }
-            return null;
-        }
-        
-
-        private ResponseMethodVO ExecuteCompleteSequence (MethodInfo methodToInvoke, object[] parameters, IViewHandler viewHandler, MethodInfo methodResponse) {
-            try {
-                ResponseMethodVO responseMethodVO =  FactoryVO.Instance.CreateResponseMethodVO ();
-                logger.Debug ("Method " + methodToInvoke + " executing.");
-                object ret = methodToInvoke.Invoke (this, parameters);
-                responseMethodVO.MethodResult = ret;
-                logger.Debug ("Executing response method: " + methodResponse.ToString ());
-                responseMethodVO.SetExecutionSuccess (true);
-                logger.Debug ("Setting excecuttion success as true.");
-                methodResponse.Invoke (viewHandler, new object[] {responseMethodVO});
-                logger.Debug ("Returning ResponseMethodVO");
-                return responseMethodVO;
-            }
-            catch (TargetInvocationException exception) {
-                if (exception.InnerException is ComponentModelException) 
-                    throw exception.InnerException;
-                else {
-                    this.InstantiateExceptionManager ();
-                    //Console.WriteLine (exception.InnerException.GetType ().ToString ());
-                    defaultExceptionManager.ProcessException (exception.InnerException);
-                }
-            }
-            return null;
         }
         
         private Type GetViewType (string viewType) {
@@ -162,44 +116,127 @@ namespace ComponentModel {
                 throw new ViewNotFoundException ("Please set up attributes correctly.");
             return this.GetViewType (componentMethodAttribute.ViewName);
         }
+    
+        private ComponentMethodAttribute GetComponentAttributes (MethodInfo methodInfo) {
+            //Pre: MethodInfo != null
+            if (methodInfo == null)
+                //TODO: ¿Es buena la excepción?
+                throw new MethodNotFoundException ("Please set up attributes correctly.");
+            Attribute[] atts = (Attribute[]) methodInfo.GetCustomAttributes (typeof (ComponentMethodAttribute), true);
+            //Post: atts != null
+            if (atts[0] == null)
+                throw new MethodNotFoundException ("Can't find ComponentMethodAttribute.");
+            return ((ComponentMethodAttribute)atts[0]);
+        }
+
+
+        private ResponseMethodVO ExecuteRedirectNewView (MethodInfo methodToExecute, object[] parameters, Type viewType, MethodInfo methodToResponse) {
+            try {
+                ResponseMethodVO responseMethodVO =  FactoryVO.Instance.CreateResponseMethodVO ();
+                object ret = methodToExecute.Invoke (this, parameters);
+                responseMethodVO.MethodResult = ret;
+                object obj = viewType.GetConstructor (null).Invoke (null);
+                responseMethodVO.SetExecutionSuccess (true);
+                methodToResponse.Invoke (obj, new object[] {responseMethodVO});
+                return responseMethodVO;
+            }
+            catch (TargetInvocationException exception) {
+                this.MapException (exception);
+            }
+            return null;
+        }
+
+        private ResponseMethodVO ExecuteRedirectView (MethodInfo methodToExecute, object[] parameters, IViewHandler viewHandler, MethodInfo methodToResponse) {
+            try {
+                ResponseMethodVO responseMethodVO =  FactoryVO.Instance.CreateResponseMethodVO ();
+                object ret = methodToExecute.Invoke (this, parameters);
+                responseMethodVO.MethodResult = ret;
+                responseMethodVO.SetExecutionSuccess (true);
+                methodToResponse.Invoke (viewHandler, new object[] {responseMethodVO});
+                return responseMethodVO;
+            }
+            catch (TargetInvocationException exception) {
+                this.MapException (exception);
+            }
+            return null;
+        }
         
-        //Public Methods
+        private ResponseMethodVO ExecuteNoRedirect (MethodInfo methodToExecute, object[] parameters) {
+            try {
+                ResponseMethodVO responseMethodVO =  FactoryVO.Instance.CreateResponseMethodVO ();
+                object ret = methodToExecute.Invoke (this, parameters);
+                responseMethodVO.MethodResult = ret;
+                responseMethodVO.SetExecutionSuccess (true);
+                return responseMethodVO;
+            }
+            catch (TargetInvocationException exception) {
+                this.MapException (exception);
+            }
+            return null;
+        }
+        
+        /*Executor overloads*/
         public ResponseMethodVO Execute (string methodName, object[] parameters) {
-            Type type = this.GetType ();
-
-            //Recollecting data for execution.
-            // Check if exists use case to execute
-            MethodInfo methodToExecute = this.GetMethodToExecute (methodName, type);
-            // Read attributes for this use case.
-            Attribute[] attributes = (Attribute[]) methodToExecute.GetCustomAttributes (typeof (ComponentMethodAttribute), false);
-            ComponentMethodAttribute componentMethodAttribute = (ComponentMethodAttribute) attributes[0];
-            //Gets viewType from information of attributes.
-            Type viewType = this.GetViewType (componentMethodAttribute);
-            // Si existe algún miembro requerido para la ejecución que no es
-            // encontrado; no ejecutará nada denada.
-            //
-            //Execute method
-            // Get information from respone for view.
-            MethodInfo responseMethod = this.GetMethodResponse (viewType, componentMethodAttribute);
-            //Executing response to method
-            ResponseMethodVO responseMethodVO = this.ExecuteCompleteSequence (methodToExecute, parameters, viewType, responseMethod); 
-            return responseMethodVO;
+            return this.Execute (methodName, parameters, true, null, true);
         }
         
-        public ResponseMethodVO Execute (string methodName, bool redirect, bool block, object[] parameters) {
-            throw new Exception ("Not implemented yet.");
+        public ResponseMethodVO Execute (string methodName, object[] parameters, bool redirect) {
+            return this.Execute (methodName, parameters, redirect, null, true);
         }
-
-        public ResponseMethodVO Execute (string methodName, bool redirect, bool block, object[] parameters, IViewHandler view) {
-            Type type = this.GetType ();
-            
-            MethodInfo methodToExecute = this.GetMethodToExecute (methodName, type);
-            Attribute[] attributes = (Attribute[]) methodToExecute.GetCustomAttributes (typeof (ComponentMethodAttribute), false);
-            ComponentMethodAttribute componentMethodAttribute = (ComponentMethodAttribute) attributes[0];
-            MethodInfo responseMethod = this.GetMethodResponse (view.GetType (), componentMethodAttribute);
-            
-            ResponseMethodVO responseMethodVO = this.ExecuteCompleteSequence (methodToExecute, parameters, view, responseMethod);
-            return responseMethodVO;
+        
+        public ResponseMethodVO Execute (string methodName, object[] parameters, IViewHandler viewHandler) {
+            return this.Execute (methodName, parameters, true, viewHandler, true);
+        }       
+        
+        /*Executor commander !*/
+        public ResponseMethodVO Execute (string methodName, object[] parameters, bool redirect, IViewHandler viewHandler, bool block) {
+            /*Existen cosas que siempre deben de buscarse*/
+            MethodInfo methodToExecute = this.GetMethodToExecute (methodName); 
+            ComponentMethodAttribute componentMethodAttribute = this.GetComponentAttributes (methodToExecute);
+            /*Primero discernimos si es bloqueante o no lo es*/
+            if (block) {
+                //Operaciones que son bloqueantes
+                if (redirect) {
+                    MethodInfo methodToResponse ;
+                    Type viewType;
+                    if (viewHandler == null) {
+                        //FIX: Aún se podria mejorar esta invocación.
+                        viewType = this.GetViewType (componentMethodAttribute);
+                        methodToResponse = this.GetMethodToResponse (viewType, componentMethodAttribute);
+                        return ExecuteRedirectNewView (methodToExecute, parameters, viewType, methodToResponse);
+                    }
+                    else {
+                        //Redirigimos a la que nos pide
+                        viewType = viewHandler.GetType ();
+                        methodToResponse = this.GetMethodToResponse (viewType, componentMethodAttribute);
+                        return ExecuteRedirectView (methodToExecute, parameters, viewHandler, methodToResponse);
+                    }
+                }
+                else {
+                    //No necesitamos información sobre la vista, ni el response.
+                    //No se va a ejecutar.
+                    return ExecuteNoRedirect (methodToExecute, parameters);
+                }
+            }
+            else {
+                //Operaciones bloqueantes, envolver en un hilo
+                throw new Exception ("NOT IMPLEMENTED YET !!");
+                if (redirect) {
+                    MethodInfo methodToResponse;
+                    Type viewType;
+                    if (viewHandler == null) {
+                        viewType = this.GetViewType (componentMethodAttribute);
+                        methodToResponse = this.GetMethodToResponse (viewType, componentMethodAttribute);
+                    }
+                    else {
+                        viewType = viewHandler.GetType ();
+                        methodToResponse = this.GetMethodToResponse (viewType, componentMethodAttribute);
+                    }
+                }
+                else {
+                }
+            }
+            return null;
         }
 
     }
