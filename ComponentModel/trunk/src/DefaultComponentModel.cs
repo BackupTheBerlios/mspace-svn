@@ -132,8 +132,8 @@ namespace ComponentModel {
 
 
         private ResponseMethodVO ExecuteRedirectNewView (MethodInfo methodToExecute, object[] parameters, Type viewType, MethodInfo methodToResponse) {
+            ResponseMethodVO responseMethodVO = FactoryVO.Instance.CreateResponseMethodVO (); 
             try {
-                ResponseMethodVO responseMethodVO =  FactoryVO.Instance.CreateResponseMethodVO ();
                 object ret = methodToExecute.Invoke (this, parameters);
                 responseMethodVO.MethodResult = ret;
                 object obj = viewType.GetConstructor (null).Invoke (null);
@@ -144,36 +144,34 @@ namespace ComponentModel {
             catch (TargetInvocationException exception) {
                 this.MapException (exception);
             }
-            return null;
+            return responseMethodVO;
         }
 
         private ResponseMethodVO ExecuteRedirectView (MethodInfo methodToExecute, object[] parameters, IViewHandler viewHandler, MethodInfo methodToResponse) {
+            ResponseMethodVO responseMethodVO =  FactoryVO.Instance.CreateResponseMethodVO ();
             try {
-                ResponseMethodVO responseMethodVO =  FactoryVO.Instance.CreateResponseMethodVO ();
                 object ret = methodToExecute.Invoke (this, parameters);
                 responseMethodVO.MethodResult = ret;
                 responseMethodVO.SetExecutionSuccess (true);
                 methodToResponse.Invoke (viewHandler, new object[] {responseMethodVO});
-                return responseMethodVO;
             }
             catch (TargetInvocationException exception) {
                 this.MapException (exception);
             }
-            return null;
+            return responseMethodVO;
         }
         
         private ResponseMethodVO ExecuteNoRedirect (MethodInfo methodToExecute, object[] parameters) {
+            ResponseMethodVO responseMethodVO = FactoryVO.Instance.CreateResponseMethodVO ();
             try {
-                ResponseMethodVO responseMethodVO =  FactoryVO.Instance.CreateResponseMethodVO ();
                 object ret = methodToExecute.Invoke (this, parameters);
                 responseMethodVO.MethodResult = ret;
                 responseMethodVO.SetExecutionSuccess (true);
-                return responseMethodVO;
             }
             catch (TargetInvocationException exception) {
                 this.MapException (exception);
             }
-            return null;
+            return responseMethodVO;
         }
         
         /*Executor overloads*/
@@ -226,24 +224,40 @@ namespace ComponentModel {
                     MethodInfo methodToResponse;
                     Type viewType;
                     if (viewHandler == null) {
+                        //Exception handling ¿¿
                         viewType = this.GetViewType (componentMethodAttribute);
                         methodToResponse = this.GetMethodToResponse (viewType, componentMethodAttribute);
                         componentActionDispatcher = new ComponentActionDispatcher (this, methodToExecute, parameters, viewType, methodToResponse);
-                        componentActionDispatcher.Do ();
+                        try {
+                            componentActionDispatcher.Do ();
+                        }
+                        catch (TargetInvocationException exception) {
+                            this.MapException (exception);
+                        }
                         return componentActionDispatcher.ResponseMethodVO;
                     }
                     else {
                         viewType = viewHandler.GetType ();
                         methodToResponse = this.GetMethodToResponse (viewType, componentMethodAttribute);
                         componentActionDispatcher = new ComponentActionDispatcher (this, methodToExecute, parameters, viewHandler, methodToResponse);
-                        componentActionDispatcher.Do ();
+                        try {
+                            componentActionDispatcher.Do ();
+                        }
+                        catch (TargetInvocationException exception) {
+                            this.MapException (exception);
+                        }
                         return componentActionDispatcher.ResponseMethodVO;
                     }
                 }
                 else {
-                   componentActionDispatcher = new ComponentActionDispatcher (this, methodToExecute, parameters); 
-                   componentActionDispatcher.Do ();
-                   return componentActionDispatcher.ResponseMethodVO;
+                    componentActionDispatcher = new ComponentActionDispatcher (this, methodToExecute, parameters); 
+                    try {
+                        componentActionDispatcher.Do ();
+                    }
+                    catch (TargetInvocationException exception) {
+                        this.MapException (exception);
+                    }
+                    return componentActionDispatcher.ResponseMethodVO;
                 }
             }
             //return null;
