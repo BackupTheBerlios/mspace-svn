@@ -2,10 +2,11 @@
 
 require 'Korundum'
 require 'libkoolnotes.rb'
+require 'noteview.rb'
 
 class Koolboy < KDE::SystemTray
-	slots   'sNewNote()', 'sShowNote(int)', 'sRecentChanges()',
-			'sRemoveWindow(char*)', 'showAbout()', 'sSearchNotes()'
+	slots 'sNewNote()', 'sShowNote(int)', 'sRecentChanges()',
+		'sRemoveWindow(char*)', 'showAbout()', 'sSearchNotes()'
 	
 	k_dcop 'QStringList lastNotes()'
 
@@ -41,7 +42,8 @@ class Koolboy < KDE::SystemTray
 	end
 
 	def sNewNote
-		window = NoteWindow.new(nil)
+		note = NoteManager.newNote
+		window = NoteView.new(note)
 		connect(window, SIGNAL('aboutToClose(char*)'),
 			self, SLOT('sRemoveWindow(char*)'))
 		window.show
@@ -54,11 +56,14 @@ class Koolboy < KDE::SystemTray
 			@windows[title].setActiveWindow
 			@windows[title].raise
 		else
-			window = NoteWindow.new(title)
+			# get note
+			note = NoteManager.instance.getNote(title)
+
+			window = NoteView.new(note)
 			connect(window, SIGNAL('aboutToClose(char*)'),
 				self, SLOT('sRemoveWindow(char*)'))
 			window.show
-			@windows[window.title] = window
+			@windows[note.title] = window
 		end
 	end
 
@@ -86,54 +91,6 @@ class Koolboy < KDE::SystemTray
 	#DCOP methods
 	def lastNotes
 		NoteManager.instance.lastNotes
-	end
-end
-
-class NoteWindow < KDE::MainWindow
-	signals 'aboutToClose(char*)'
-
-	def initialize( name )
-		if not name
-			name = NoteManager.instance.unusedName
-			new = true
-		else
-			new = false
-		end
-		super(nil, name)
-		setCaption(name)
-
-		# we need to increase refCount to be able
-		# to use kmainwindows in this manner
-		$kapp.ref
-
-		# get note
-		@note = NoteManager.instance.getNote(name)
-
-		if not new
-			resize(@note.size)
-			move(@note.pos)
-		end
-
-		@text = KDE::TextEdit.new(self)
-		@text.setText(@note.text)
-		self.setCentralWidget(@text)
-	end
-
-	def title
-		@note.title
-	end
-
-	def queryClose
-		text = @text.text.strip
-		emit aboutToClose(@note.title)
-		if text.length != 0
-		then
-			title = text.split("\n").first
-			NoteManager.instance.change(@note,title,text,size,pos)
-		else
-			NoteManager.instance.delete(@note)
-		end 
-		return true
 	end
 end
 

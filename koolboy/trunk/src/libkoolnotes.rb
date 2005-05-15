@@ -75,7 +75,7 @@ end
 class XmlNote
 	
 	attr_accessor :title, :time
-	
+
 	def initialize(title)
 		@title = title
 		@file = KDE::StandardDirs::locateLocal(
@@ -94,8 +94,8 @@ class XmlNote
 	end
 
 	def read
-		@xml = IO.readlines(@file).join("\n")
 		begin
+			@xml = IO.readlines(@file).join("\n")
 			@doc = REXML::Document.new(@xml)
 			@text = @doc.root.elements["text"].text.to_s
 			@size = Qt::Size.new(@doc.root.elements["height"].text.to_i,
@@ -132,14 +132,12 @@ class XmlNote
 		@doc.root << y
 		f = File.new(@file, "w")
 		@doc.write(f)
+		f.close
 	end
 
-	def change (title,text,size,pos)
+	def changeTitle(title)
 		File.exists?(@file) and File.delete(@file)	
 		@title = title
-		@text = text
-		@size = size
-		@pos = pos
 		@file = KDE::StandardDirs::locateLocal(
 			"appdata","notes/#{@title}.note")
 		@time = Time.new
@@ -151,6 +149,7 @@ class XmlNote
 	end
 
 	def to_s
+		@read or read
 		return @xml
 	end
 
@@ -166,6 +165,7 @@ class XmlNote
 
 			def #{a}= (val)
 				@#{a} = val
+				write
 			end
 			EOF
 		end
