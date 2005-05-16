@@ -8,12 +8,12 @@ end
 
 def normalizeDir(dir)
 	Dir.foreach(dir) { |file|
-		return if File.directory?(dir)
-		normalizeFile(dir + "/" + file)
+		normalizeFile(dir + File::SEPARATOR + file) if !File.directory?(file)
 	}
 end
 
 def normalizeFile(file)
+	puts "Renaming #{file}"
 	ext = file[file.rindex(".") .. file.length]
 	basename = File.basename(file, ext)
 	dir = File.dirname(file)
