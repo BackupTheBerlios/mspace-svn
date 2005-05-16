@@ -1,0 +1,1 @@
+mencoder $1 -aid 129 -noskip -vf scale=320:240 -of mpeg -ovc lavc -lavcopts vcodec=mpeg1video:vbitrate=400000:vrc_minrate=100:vrc_maxrate=500:vrc_buf_size=300:vpass=1 -oac lavc -lavcopts acodec=mp2:abitrate=96 -o PPC_$1
