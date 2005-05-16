@@ -3,6 +3,7 @@ require "fileutils"
 
 def usage
 	puts "Usage: #{__FILE__} <directory> | <file>"
+	exit
 end
 
 def normalizeDir(dir)
