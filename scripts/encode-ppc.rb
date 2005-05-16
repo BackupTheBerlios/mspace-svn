@@ -20,7 +20,7 @@ def encodeDir(dir)
 	puts "Encoding al files in #{dir}"
 	fcount = 0
 	Dir.foreach(ARGV[0]) { |file|
-		encodeFile(file) if file =~ /.*\.(rb|avi|mpeg|mpg|divx)$/
+		encodeFile(dir + "/" + file) if file =~ /.*\.(rb|avi|mpeg|mpg|divx)$/
 		fcount.next
 	}
 	puts "#{fcount} files encoded."
