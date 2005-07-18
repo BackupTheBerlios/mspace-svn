@@ -6,6 +6,7 @@ using System.Collections;
 using ComponentModel.Interfaces;
 using ComponentModel.Container.Dao;
 using ComponentModel.Exceptions;
+using ComponentModel.VO;
 using NLog;
 
 
@@ -120,6 +121,24 @@ namespace ComponentModel.Container {
             if (componentList.Contains (component)) {
                 componentList.Remove (component);
             }
+        }
+
+        /*Servicio ejecutor*/
+        public ResponseMethodVO Execute (string componentName, string methodName, object[] parameters, bool redirect, IViewHandler viewHandler, bool block) {
+            IComponentModel componentModel = this.GetComponentByName (componentName);
+            return componentModel.Execute (methodName, parameters, redirect, viewHandler, block);
+        }
+
+        public ResponseMethodVO Execute (string componentName, string methodName, object[] parameters, IViewHandler viewHandler) {
+            return this.Execute (componentName, methodName, parameters, true, viewHandler, true);
+        }       
+
+        public ResponseMethodVO Execute (string componentName, string methodName, object[] parameters, bool redirect) {
+            return this.Execute (componentName, methodName, parameters, redirect, null, true);
+        }
+
+        public ResponseMethodVO Execute (string componentName, string methodName, object[] parameters) {
+            return this.Execute (componentName, methodName, parameters, true, null, true);
         }
     }
 }
