@@ -11,6 +11,7 @@ namespace ComponentModel.ComponentTest.Components.Saludator.Exceptions {
         public override void ProcessException (Exception exception) {
             base.ProcessException (exception);
             Console.WriteLine ("Ha ocurrido una exception." + exception.Message);
+            Console.WriteLine (exception.ToString ());
         }
     }
 }

@@ -19,6 +19,13 @@ namespace ComponentModel {
         //Exception manager to process exceptions.
         private IExceptionManager defaultExceptionManager;
 
+        private VirtualMethod virtualMethod;
+
+        public VirtualMethod VirtualMethod {
+            get {return virtualMethod;}
+            set {virtualMethod = value;}
+        }
+        
         public IExceptionManager DefaultExceptionManager {
             get {return defaultExceptionManager;}
             set {defaultExceptionManager = value;}
@@ -138,6 +145,10 @@ namespace ComponentModel {
                 responseMethodVO.MethodResult = ret;
                 object obj = viewType.GetConstructor (null).Invoke (null);
                 responseMethodVO.SetExecutionSuccess (true);
+                if (VirtualMethod != null) {
+                    VirtualMethod (responseMethodVO);
+                    VirtualMethod = null;
+                }
                 methodToResponse.Invoke (obj, new object[] {responseMethodVO});
                 return responseMethodVO;
             }
@@ -153,6 +164,10 @@ namespace ComponentModel {
                 object ret = methodToExecute.Invoke (this, parameters);
                 responseMethodVO.MethodResult = ret;
                 responseMethodVO.SetExecutionSuccess (true);
+                if (VirtualMethod != null) {
+                    VirtualMethod (responseMethodVO);
+                    VirtualMethod = null;
+                }
                 methodToResponse.Invoke (viewHandler, new object[] {responseMethodVO});
             }
             catch (TargetInvocationException exception) {
@@ -167,6 +182,10 @@ namespace ComponentModel {
                 object ret = methodToExecute.Invoke (this, parameters);
                 responseMethodVO.MethodResult = ret;
                 responseMethodVO.SetExecutionSuccess (true);
+                if (VirtualMethod != null) {
+                    VirtualMethod (responseMethodVO);
+                    VirtualMethod = null;
+                }
             }
             catch (TargetInvocationException exception) {
                 this.MapException (exception);

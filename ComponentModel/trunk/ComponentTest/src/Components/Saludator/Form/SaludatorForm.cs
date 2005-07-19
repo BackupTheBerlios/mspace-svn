@@ -9,7 +9,8 @@ namespace ComponentModel.ComponentTest.Components.Saludator.Form
 {
 	public class SaludatorForm : System.Windows.Forms.Form, IViewHandler
 	{
-		private System.Windows.Forms.Button button1;
+		private Button button1;
+                private Button button2;
 		private bool changeButton;
                 
                 public SaludatorForm() : base ()
@@ -21,7 +22,8 @@ namespace ComponentModel.ComponentTest.Components.Saludator.Form
 		
 		private void InitializeComponent() {
 			this.button1 = new System.Windows.Forms.Button();
-			this.SuspendLayout();
+			this.button2 = new Button ();
+                        this.SuspendLayout();
 			// 
 			// button1
 			// 
@@ -31,17 +33,34 @@ namespace ComponentModel.ComponentTest.Components.Saludator.Form
 			this.button1.TabIndex = 0;
 			this.button1.Text = "button1";
 			this.button1.Click += new System.EventHandler(this.Button1Click);
-			// 
+			
+                        this.button2.Location = new Point (200, 96);
+                        this.button2.Size = new Size (88, 40);
+                        this.button1.TabIndex = 0;
+                        this.button2.Click += new EventHandler (this.Button2Click);
+                        this.button2.Text = "Hello from container";
+                        // 
 			// MainForm
 			// 
 			this.AutoScaleBaseSize = new System.Drawing.Size(6, 15);
 			this.ClientSize = new System.Drawing.Size(292, 266);
 			this.Controls.Add(this.button1);
+                        this.Controls.Add (this.button2);
 			this.Name = "MainForm";
 			this.Text = "MainForm";
 			this.ResumeLayout(false);
                 }
-
+                
+                void Virtual (ResponseMethodVO responseMethodVO) {
+                    Console.WriteLine ("Que pasa nenggg, soy el fucking virtual !!");
+                }
+                
+                
+                void Button2Click (object sender, EventArgs evt) {
+                    DefaultContainer.Instance.GetComponentByName ("Saludator").VirtualMethod += new VirtualMethod (this.Virtual);
+                    DefaultContainer.Instance.Execute ("Saludator", "SaludaATodos", null, this);
+                }
+                
 		void Button1Click(object sender, System.EventArgs ev) {
                     DefaultComponentModel dcm = (DefaultComponentModel) DefaultContainer.Instance.GetComponentByName ("Saludator"); 
                     //dcm.Execute ("Saluda", null);

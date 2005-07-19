@@ -13,7 +13,8 @@ using NLog;
 namespace ComponentModel.Container {
     public class DefaultContainer : IContainer {
         private static DefaultContainer instance = null; 
-        private IList componentList;
+        //private IList componentList;
+        private Hashtable componentHashtable;
         //Logging
         Logger logger = LogManager.GetLogger ("ComponentModel.Container.DefaultContainer");
         
@@ -28,7 +29,8 @@ namespace ComponentModel.Container {
             //MONO_PATH
             this.LoadAssembliesInPath ();
             //Getting data from assembly resolv.
-            componentList = new ArrayList ();
+            //componentList = new ArrayList ();
+            componentHashtable = new Hashtable ();
             //En cada ensamblado, cargará el / los componente y lo registrará con el
             //nombre que se le ha dado al atributo.
             GetAllComponents (); 
@@ -76,7 +78,7 @@ namespace ComponentModel.Container {
                 this.Add (defaultComponentModel); 
             }
             logger.Debug ("Exiting RegisterComponent.");
-            logger.Info ("Container has : " + componentList.Count + " Components Registered.");
+            logger.Info ("Container has : " + componentHashtable.Count + " Components Registered.");
         }
         
         public static DefaultContainer Instance {
@@ -88,12 +90,17 @@ namespace ComponentModel.Container {
         }
 
         public IComponentModel GetComponentByName (string componentName) {
-            for (int i = 0; i < componentList.Count; i++) {
-                if ((componentList[i] as DefaultComponentModel).VO.ComponentName.Equals (componentName)) {
-                    return (IComponentModel)componentList[i];
-                }
+            //for (int i = 0; i < componentList.Count; i++) {
+            //    if ((componentList[i] as DefaultComponentModel).VO.ComponentName.Equals (componentName)) {
+            //        return (IComponentModel)componentList[i];
+            //    }
+            //}
+            try {
+                return (IComponentModel)componentHashtable[componentName];
             }
-            throw new ComponentNotFoundException ("Component " + componentName + " not found in container.");
+            catch (Exception e) {
+                throw new ComponentNotFoundException ("Component " + componentName + " not found in container.");
+            }
             //return null;
         }
 
@@ -103,24 +110,25 @@ namespace ComponentModel.Container {
              * sistema no se permite más de una instancia, así que con pasarle
              * la referencia será suficiente.
              */
-            if (componentList.Contains (component))
-                return;
+            //if (componentList.Contains (component))
+            //    return;
             /*Chequeamos que no existan dos componentes con el mismo nombre.*/
-            for (int i = 0; i< componentList.Count; i++) {
-                if (((IComponentModel)componentList[i]).VO.ComponentName.Equals (component.VO.ComponentName)) {
+            //for (int i = 0; i< componentList.Count; i++) {
+            //    if (((IComponentModel)componentList[i]).VO.ComponentName.Equals (component.VO.ComponentName)) {
                     /*No lanzo una excepción porque no se debe parar la
                      * ejecución del programa por este error.*/
-                    return;
-                }
-            }
-            componentList.Add (component);
+            //        return;
+            //    }
+            //}
+            componentHashtable.Add (component.VO.ComponentName, component);
             logger.Info ("Registering component: " + component + " as Name: " + component.VO.ComponentName);
         }
 
         public void Remove (IComponentModel component) {
-            if (componentList.Contains (component)) {
-                componentList.Remove (component);
-            }
+            //if (componentList.Contains (component)) {
+            //    componentList.Remove (component);
+            //}
+            componentHashtable.Remove (component.VO.ComponentName);
         }
 
         /*Servicio ejecutor*/

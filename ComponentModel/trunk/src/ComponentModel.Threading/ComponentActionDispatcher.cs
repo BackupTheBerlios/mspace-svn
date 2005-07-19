@@ -70,6 +70,10 @@ namespace ComponentModel.Threading {
                 object ret = methodToExecute.Invoke (componentModel, parameters);
                 responseMethodVO.MethodResult = ret;
                 responseMethodVO.SetExecutionSuccess (true);
+                if (componentModel.VirtualMethod != null) {
+                    componentModel.VirtualMethod (responseMethodVO);
+                    componentModel.VirtualMethod = null;
+                }
                 object obj = viewType.GetConstructor (null).Invoke (null);
                 methodToResponse.Invoke (obj, new object[] {responseMethodVO});
             }
@@ -81,6 +85,10 @@ namespace ComponentModel.Threading {
                 object ret = methodToExecute.Invoke (componentModel, parameters);
                 responseMethodVO.MethodResult = ret;
                 responseMethodVO.SetExecutionSuccess (true);
+                if (componentModel.VirtualMethod != null) {
+                    componentModel.VirtualMethod (responseMethodVO);
+                    componentModel.VirtualMethod = null;
+                }
                 methodToResponse.Invoke (viewHandler, new object[] {responseMethodVO});
             }
         }
@@ -91,6 +99,10 @@ namespace ComponentModel.Threading {
                 object ret = methodToExecute.Invoke (componentModel, parameters);
                 responseMethodVO.MethodResult = ret;
                 responseMethodVO.SetExecutionSuccess (true);
+                if (componentModel.VirtualMethod != null) {
+                    componentModel.VirtualMethod (responseMethodVO);
+                    componentModel.VirtualMethod = null;
+                }
             }
         }
 
