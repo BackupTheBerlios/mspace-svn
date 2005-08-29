@@ -11,6 +11,9 @@ using ComponentModel.Exceptions;
 using NLog;
 
 namespace ComponentModel {
+    // TODO: En los getMethodXXX --> se debería realizar también una búsqueda
+    // con parámetros para poder permitir la sobrecarga de métodos.  Y para las
+    // respuestas nos taparía un error muy majo :)
     public class DefaultComponentModel : IComponentModel {
         //Logging
         private Logger logger = LogManager.GetLogger ("ComponentModel.DefaultComponentModel");
