@@ -1,6 +1,9 @@
 Próximas mejoras en las próximas versiones.
 ---------------------------------------------
 
+* Errores en la búsqueda de métodos.  A día de hoy, esta version no permite
+  sobrecarga de casos de uso según la firma.  Esto es sencillo de arreglar.
+
 * Implementación de un ViewCache, almacenando todas las vistas de un componente;
   poder acceder así a cada una de ellas.  Será así un modo de tener un Proxy en
   cada componente que pueda autogestionar sus vistas; y en caso necesario poder
