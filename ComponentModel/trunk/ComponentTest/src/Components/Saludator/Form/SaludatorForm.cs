@@ -55,10 +55,15 @@ namespace ComponentModel.ComponentTest.Components.Saludator.Form
                     Console.WriteLine ("Que pasa nenggg, soy el fucking virtual !!");
                 }
                 
+                void Virtual2 (ResponseMethodVO responseMethodVO) {
+                    Console.WriteLine ("Vritual 2 respondiendo");
+                }
                 
                 void Button2Click (object sender, EventArgs evt) {
                     DefaultContainer.Instance.GetComponentByName ("Saludator").VirtualMethod += new VirtualMethod (this.Virtual);
-                    DefaultContainer.Instance.Execute ("Saludator", "SaludaATodos", null, this);
+                    DefaultContainer.Instance.GetComponentByName ("Saludator").VirtualMethod += new VirtualMethod (this.Virtual2);
+                    DefaultContainer.Instance.Execute ("Saludator", "Saluda", null, this);
+                    
                 }
                 
 		void Button1Click(object sender, System.EventArgs ev) {
