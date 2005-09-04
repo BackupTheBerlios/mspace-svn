@@ -3,6 +3,7 @@ Próximas mejoras en las próximas versiones.
 
 * Errores en la búsqueda de métodos.  A día de hoy, esta version no permite
   sobrecarga de casos de uso según la firma.  Esto es sencillo de arreglar.
+  Hay una implementación de referencia sin testear.
 
 * Implementación de un ViewCache, almacenando todas las vistas de un componente;
   poder acceder así a cada una de ellas.  Será así un modo de tener un Proxy en
@@ -31,3 +32,5 @@ Próximas mejoras en las próximas versiones.
   callbacks.
 
 * ?¿¿?¿? Uso de delegates para poder responder a varios responses de golpe.
+
+* Dejar de hacer los test a pelo !! Uso intensivo de NUnit para ello.

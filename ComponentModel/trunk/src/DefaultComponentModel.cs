@@ -82,6 +82,30 @@ namespace ComponentModel {
             }
             return null;
         }
+
+        // Implementación de referencia para obtener la sobrecarga.  No es
+        // llamada, dado que aún no ha sido testeado su funcionamiento.
+        private MethodInfo GetMethodToExecute (string methodName, object[] parameters, Type componentType) {
+            //Precondition: methodName != null && methodName != String.Empty &&
+            //componentType != null
+            logger.Debug ("Entering GetMethodToExecute.  Searching " + methodName + "in: " + componentType.ToString ());
+            Type[] typeParam = new Type[parameters.Length];
+            for (int i = 0; i < typeParam.Length; i++) {
+                typeParam[i] = parameters[i].GetType ();
+            }
+            //Busca solamente los publicos.  Cambiar el Binder puede ser un lio
+            //grande, ojo con esto.
+            MethodInfo methodInfo = componentType.GetMethod (methodName, typeParam);
+            //¿encontrado?
+            if (methodInfo == null) {
+                throw new MethodNotFoundException ("Method to execute: " + methodName + " not found.");
+            }
+            else {
+                logger.Debug ("Finded method to execute: " + methodInfo.ToString ());
+            }
+            //Post: methodInfo != null
+            return methodInfo;
+        }
         
         private MethodInfo GetMethodToExecute (string methodName, Type componentType) {
             //Precondition: methodName != null && methodName != String.Empty &&
