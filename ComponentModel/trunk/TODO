@@ -1,6 +1,7 @@
 Próximas mejoras en las próximas versiones.
 ---------------------------------------------
 
+
 * Errores en la búsqueda de métodos.  A día de hoy, esta version no permite
   sobrecarga de casos de uso según la firma.  Esto es sencillo de arreglar.
   Hay una implementación de referencia sin testear.
