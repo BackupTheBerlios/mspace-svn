@@ -1,0 +1,30 @@
+Próximas mejoras en las próximas versiones.
+---------------------------------------------
+
+* Implementación de un ViewCache, almacenando todas las vistas de un componente;
+  poder acceder así a cada una de ellas.  Será así un modo de tener un Proxy en
+  cada componente que pueda autogestionar sus vistas; y en caso necesario poder
+  conseguir nosotros a una vista asociada a un componente.
+
+* Implementación de métodos para conseguir la devolución de Propiedades que
+  tenga un componente.
+
+* Mejora de la concurrencia de un componente, varios accesos; varias llamadas,
+  respuestas y esperas.
+
+* Optimizaciones de búsqueda.  Añadir también búsqueda de componentes dentro del
+  GAC, al igual que descarga automática en memoria de ensamblados que no
+  contengan componentes.  Ya se encargará el JIT de cargar esos ensamblados
+  según lo vea necesario.
+
+* Problemas de nomenclatura; deprecar el interface IVO, dado que no es
+  estrictamente un Value Object.  Sustituir por IDataTransferObject.
+
+* El interface de la vista, dejará de estar vacio; para implementar 3 métodos
+  que se suelen utilizar en las vistas siempre, esto es GetDataForm,
+  LoadDataForm y ClearForm.
+
+* Preejecución y postejecución; con métodos virtuales e implementación de
+  callbacks.
+
+* ?¿¿?¿? Uso de delegates para poder responder a varios responses de golpe.
