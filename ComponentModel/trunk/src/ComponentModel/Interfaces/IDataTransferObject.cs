@@ -20,11 +20,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 using System;
 
 namespace ComponentModel.Interfaces {
-    public interface IViewHandler {
-        IDataTransferObject GetDataForm ();
-        LoadDataForm (IDataTransferObject dataTransferObject);
-        void ClearForm ();
-
-        //Probablemente en un futuro proximo, llevara algun tipo de activate.
+    public interface IDataTransferObject {
     }
 }
