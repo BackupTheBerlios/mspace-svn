@@ -33,7 +33,7 @@ namespace ComponentModel {
     // TODO: En los getMethodXXX --> se debería realizar también una búsqueda
     // con parámetros para poder permitir la sobrecarga de métodos.  Y para las
     // respuestas nos taparía un error muy majo :)
-    public class DefaultComponentModel : IComponentModel {
+    public abstract class DefaultComponentModel : IComponentModel {
         //Logging
         private Logger logger = LogManager.GetLogger ("ComponentModel.DefaultComponentModel");
         //Value object with information associated to component
@@ -67,7 +67,7 @@ namespace ComponentModel {
 
             //Precondition: exceptionManagerClassName != null &&
             //exceptionManagerClassName != String.Empty
-            if ((exceptionManagerClassName == null) | (exceptionManagerClassName.Equals (String.Empty))) {
+            if ((exceptionManagerClassName == null) || (exceptionManagerClassName.Equals (String.Empty))) {
                 throw new ExceptionManagerNotFoundException ("Null exception managerClassName.");
             }
             try {
