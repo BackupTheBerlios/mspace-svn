@@ -59,7 +59,7 @@
     <!-- Compila el componente y lo guarda en bin -->
     <target name="build" depends="create-skeleton">
         <csc target="library" output="${bin}/${component_name}.dll" debug="true"
-        verbose="true">
+        verbose="false">
             <sources basedir="${src_component}">
                 <include name="**/*.cs"/>
             </sources>

@@ -22,9 +22,8 @@ using System;
 namespace ComponentModel.Interfaces {
     public interface IViewHandler {
         IDataTransferObject GetDataForm ();
-        LoadDataForm (IDataTransferObject dataTransferObject);
+        void LoadDataForm (IDataTransferObject dataTransferObject);
         void ClearForm ();
-
         //Probablemente en un futuro proximo, llevara algun tipo de activate.
     }
 }
