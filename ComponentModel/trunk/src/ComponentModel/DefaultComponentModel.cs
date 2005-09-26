@@ -53,7 +53,7 @@ namespace ComponentModel {
             set {defaultExceptionManager = value;}
         }
  
-        //Properties
+        //Properties}
         public ComponentModelVO VO {
             get {return vO;}
         }
@@ -89,9 +89,12 @@ namespace ComponentModel {
             //Precondition: methodName != null && methodName != String.Empty &&
             //componentType != null
             logger.Debug ("Entering GetMethodToExecute.  Searching " + methodName + "in: " + componentType.ToString ());
-            Type[] typeParam = new Type[parameters.Length];
-            for (int i = 0; i < typeParam.Length; i++) {
-                typeParam[i] = parameters[i].GetType ();
+            Type[] typeParam = Type.EmptyTypes;
+            if (parameters != null) {
+                typeParam = new Type[parameters.Length];
+                for (int i = 0; i < typeParam.Length; i++) {
+                    typeParam[i] = parameters[i].GetType ();
+                }
             }
             //Busca solamente los publicos.  Cambiar el Binder puede ser un lio
             //grande, ojo con esto.
@@ -107,6 +110,12 @@ namespace ComponentModel {
             return methodInfo;
         }
         
+        /*
+         * Deprecated !
+         *
+         * Este método no soporta la búsqueda mediante la sobrecarga de métodos.
+         * 
+         */ 
         private MethodInfo GetMethodToExecute (string methodName, Type componentType) {
             //Precondition: methodName != null && methodName != String.Empty &&
             //componentType != null
@@ -123,8 +132,8 @@ namespace ComponentModel {
             return methodInfo;
         }
 
-        private MethodInfo GetMethodToExecute (string methodName) {
-            return this.GetMethodToExecute (methodName, this.GetType ());
+        private MethodInfo GetMethodToExecute (string methodName, object[] parameters) {
+            return this.GetMethodToExecute (methodName, parameters, this.GetType ());
         }
         
         private MethodInfo GetMethodToResponse (Type viewType, ComponentMethodAttribute componentMethodAttribute) {
@@ -255,7 +264,7 @@ namespace ComponentModel {
         /*Executor commander !*/
         public ResponseMethodVO Execute (string methodName, object[] parameters, bool redirect, IViewHandler viewHandler, bool block) {
             /*Existen cosas que siempre deben de buscarse*/
-            MethodInfo methodToExecute = this.GetMethodToExecute (methodName); 
+            MethodInfo methodToExecute = this.GetMethodToExecute (methodName, parameters); 
             ComponentMethodAttribute componentMethodAttribute = this.GetComponentAttributes (methodToExecute);
             /*Primero discernimos si es bloqueante o no lo es*/
             if (block) {
