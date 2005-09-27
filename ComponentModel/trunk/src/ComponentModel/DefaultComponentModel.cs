@@ -116,6 +116,7 @@ namespace ComponentModel {
          * Este método no soporta la búsqueda mediante la sobrecarga de métodos.
          * 
          */ 
+        /*
         private MethodInfo GetMethodToExecute (string methodName, Type componentType) {
             //Precondition: methodName != null && methodName != String.Empty &&
             //componentType != null
@@ -131,7 +132,8 @@ namespace ComponentModel {
             //PostCondition: methodInfo != null
             return methodInfo;
         }
-
+        */
+        
         private MethodInfo GetMethodToExecute (string methodName, object[] parameters) {
             return this.GetMethodToExecute (methodName, parameters, this.GetType ());
         }

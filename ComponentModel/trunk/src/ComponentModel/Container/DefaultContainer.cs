@@ -38,6 +38,7 @@ namespace ComponentModel.Container {
         Logger logger = LogManager.GetLogger ("ComponentModel.Container.DefaultContainer");
         
         private DefaultContainer () {
+            Console.WriteLine ("--- Babuine Component Model & Babuine Framework Inicializated ----");
             logger.Debug ("Init DefaultContainer");
             logger.Debug ("Getting Relative Search Path: " + AppDomain.CurrentDomain.RelativeSearchPath);
             logger.Debug ("Getting Dynamic Directory: " + AppDomain.CurrentDomain.DynamicDirectory);

@@ -3,6 +3,6 @@
             <appender name="debug"  type="Console" />
         </appenders>
 	<rules>
-		<logger name="*" levels="Info,Warn,Debug" appendTo="debug"/>
+		<logger name="*" levels="Info, Warn, Debug" appendTo="debug"/>
 	</rules>
 </nlog>

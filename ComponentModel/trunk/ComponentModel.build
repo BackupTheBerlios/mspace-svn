@@ -34,6 +34,7 @@
     <property name="src_component" value="${src}/ComponentModel"/>
     <property name="src_unit_test" value="${src}/UnitTest"/>
     <property name="lib" value="lib"/>
+    <property name="lib_nunit" value="${lib}/nunit"/>
     <!-- Other mspace components -->
     <property name="components" value="lib/components"/>
     <property name="doc" value="doc"/>
@@ -75,7 +76,7 @@
     <!-- Ejecuta el componente (Lo compila como un exe y luego lo ejecuta) -->
     <!-- En este caso solo deberá ejecutar los test de unidad-->
     <target name="run" depends="build">
-        <csc target="exe" output="${bin}/${component_name}UnitTest.exe" debug="true"
+        <csc target="library" output="${bin}/${component_name}UnitTest.dll" debug="true"
         verbose="false">
             <sources basedir="${src_unit_test}">
                 <include name="**/*.cs"/>
@@ -84,21 +85,25 @@
                 <include name="**/${lib}/*.dll"/>
                 <include name="**/${lib}/components/*.dll"/>
                 <include name="**/${bin}/*.dll"/>    
+                <include name="**/${lib_nunit}/*.dll"/>
             </references>
         </csc>
-          
-        <exec program="${bin}/${component_name}UnitTest.exe" useruntimeengine="true">
+        <exec program="${lib_nunit}/nunit-console.exe" useruntimeengine="true"
+        verbose = "false">
+            <!-- Esto se queda ahi temporalmente, se deberá hacer que se meta a
+            resources/ComponentModelTest.xml-->
+            <arg line="/xml:ComponentModelTest.xml ${bin}/${component_name}UnitTest.dll"/>
             <environment>
                 <variable name="MONO_PATH">
                     <path>
                         <pathelement file="${lib}"/>
                         <pathelement file="${components}"/>
                         <pathelement file="${bin}"/>
+                        <pathelement file="${lib_nunit}"/>
                     </path>
                 </variable>
             </environment>
         </exec>
-
         <tstamp/>
     </target>
 
