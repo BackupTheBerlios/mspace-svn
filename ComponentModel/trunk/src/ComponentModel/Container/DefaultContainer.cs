@@ -115,12 +115,19 @@ namespace ComponentModel.Container {
             //        return (IComponentModel)componentList[i];
             //    }
             //}
+            /**
             try {
                 return (IComponentModel)componentHashtable[componentName];
             }
             catch (Exception e) {
                 throw new ComponentNotFoundException ("Component " + componentName + " not found in container.");
             }
+            */
+            IComponentModel componentModel = (IComponentModel) componentHashtable[componentName];
+            if (componentModel == null) {
+                throw new ComponentNotFoundException ("Component " + componentName + " not found in container.");
+            }
+            return componentModel;
             //return null;
         }
 

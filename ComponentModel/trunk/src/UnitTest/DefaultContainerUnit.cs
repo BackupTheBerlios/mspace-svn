@@ -1,5 +1,7 @@
 using System;
 using ComponentModel.Container;
+using ComponentModel.Interfaces;
+using ComponentModel.Exceptions;
 using NUnit.Framework;
 
 namespace UnitTest {
@@ -22,6 +24,18 @@ namespace UnitTest {
         [Test]
         public void InitContainer () {
             Assert.IsNotNull (DefaultContainer.Instance);
+        }
+
+        [Test]
+        public void GetComponentByName () {
+            Assert.IsNotNull (DefaultContainer.Instance.GetComponentByName ("TestUnidad1"));
+        }
+
+        [Test]
+        [ExpectedException (typeof (ComponentNotFoundException))]
+        public void FailGetComponentByName () {
+            IComponentModel componentModel = DefaultContainer.Instance.GetComponentByName ("NoName");
+            Assert.IsNull (componentModel);
         }
     }
 }
