@@ -86,6 +86,7 @@
                 <include name="**/${lib}/components/*.dll"/>
                 <include name="**/${bin}/*.dll"/>    
                 <include name="**/${lib_nunit}/*.dll"/>
+                <include name="System.Windows.Forms.dll"/>
             </references>
         </csc>
         <exec program="${lib_nunit}/nunit-console.exe" useruntimeengine="true"

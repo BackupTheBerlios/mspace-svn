@@ -44,5 +44,48 @@ namespace UnitTest.Components.TestComponent {
                 //Assert.AreNotSame (returnValue, x);
             }
         }
+
+        [Test]
+        public void ExecutionNonRedirectOverload () {
+            char c = 'a';
+            ResponseMethodVO responseMethodVO;
+            char returnValue;
+
+            IComponentModel componentModel = DefaultContainer.Instance.GetComponentByName ("TestUnidad1");
+            responseMethodVO = componentModel.Execute ("ReturnValue", new object[]{c}, false);
+            Assert.AreEqual (responseMethodVO.ExecutionSuccess, true);
+            Assert.IsNotNull (responseMethodVO.MethodResult);
+            if (responseMethodVO.ExecutionSuccess == true) {
+                returnValue = (char) responseMethodVO.MethodResult;
+                Assert.AreEqual (returnValue, c);
+            }
+        }
+
+        [Test]
+        public void ExecuteRedirectNewView () {
+            int x = 4;
+            ResponseMethodVO responseMethodVO;
+            int returnValue;
+
+            IComponentModel componentModel = DefaultContainer.Instance.GetComponentByName ("TestUnidad1");
+            responseMethodVO = componentModel.Execute ("ReturnValue", new object[]{x});
+            Assert.AreEqual (responseMethodVO.ExecutionSuccess, true);
+            Assert.IsNotNull (responseMethodVO.MethodResult);
+        }
+
+        [Test]
+        public void GetProperty () {
+            IComponentModel componentModel = DefaultContainer.Instance.GetComponentByName ("TestUnidad1");
+            Assert.IsNotNull (componentModel.GetProperty ("Entero"));
+            Assert.AreEqual ((int) componentModel.GetProperty ("Entero"), 0); 
+        }
+
+        [Test]
+        public void SetProperty () {
+            IComponentModel componentModel = DefaultContainer.Instance.GetComponentByName ("TestUnidad1");
+            componentModel.SetProperty ("Entero", 5);
+            Assert.IsNotNull (componentModel.GetProperty ("Entero"));
+            Assert.AreEqual ((int) componentModel.GetProperty ("Entero"), 5);
+        }
     }
 }

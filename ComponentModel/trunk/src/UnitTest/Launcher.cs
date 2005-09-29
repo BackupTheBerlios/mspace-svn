@@ -12,8 +12,8 @@ namespace UnitTest {
         public static TestSuite Suite {
             get {
                 TestSuite suite = new TestSuite("All Tests");
-                suite.Add (new DefaultContainerUnit ());
                 suite.Add (new TestComponentUnit ());
+                suite.Add (new DefaultContainerUnit ());
                 return suite;
             }
         }

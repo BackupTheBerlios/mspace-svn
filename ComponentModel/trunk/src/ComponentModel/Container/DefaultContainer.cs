@@ -32,7 +32,6 @@ using NLog;
 namespace ComponentModel.Container {
     public class DefaultContainer : IContainer {
         private static DefaultContainer instance = null; 
-        //private IList componentList;
         private Hashtable componentHashtable;
         //Logging
         Logger logger = LogManager.GetLogger ("ComponentModel.Container.DefaultContainer");
@@ -49,7 +48,6 @@ namespace ComponentModel.Container {
             //MONO_PATH
             this.LoadAssembliesInPath ();
             //Getting data from assembly resolv.
-            //componentList = new ArrayList ();
             componentHashtable = new Hashtable ();
             //En cada ensamblado, cargará el / los componente y lo registrará con el
             //nombre que se le ha dado al atributo.
@@ -110,51 +108,19 @@ namespace ComponentModel.Container {
         }
 
         public IComponentModel GetComponentByName (string componentName) {
-            //for (int i = 0; i < componentList.Count; i++) {
-            //    if ((componentList[i] as DefaultComponentModel).VO.ComponentName.Equals (componentName)) {
-            //        return (IComponentModel)componentList[i];
-            //    }
-            //}
-            /**
-            try {
-                return (IComponentModel)componentHashtable[componentName];
-            }
-            catch (Exception e) {
-                throw new ComponentNotFoundException ("Component " + componentName + " not found in container.");
-            }
-            */
             IComponentModel componentModel = (IComponentModel) componentHashtable[componentName];
             if (componentModel == null) {
                 throw new ComponentNotFoundException ("Component " + componentName + " not found in container.");
             }
             return componentModel;
-            //return null;
         }
 
         public void Add (IComponentModel component) {
-            /**
-             * Dado que un componente es un peso pesado para la carga de un
-             * sistema no se permite más de una instancia, así que con pasarle
-             * la referencia será suficiente.
-             */
-            //if (componentList.Contains (component))
-            //    return;
-            /*Chequeamos que no existan dos componentes con el mismo nombre.*/
-            //for (int i = 0; i< componentList.Count; i++) {
-            //    if (((IComponentModel)componentList[i]).VO.ComponentName.Equals (component.VO.ComponentName)) {
-                    /*No lanzo una excepción porque no se debe parar la
-                     * ejecución del programa por este error.*/
-            //        return;
-            //    }
-            //}
             componentHashtable.Add (component.VO.ComponentName, component);
             logger.Info ("Registering component: " + component + " as Name: " + component.VO.ComponentName);
         }
 
         public void Remove (IComponentModel component) {
-            //if (componentList.Contains (component)) {
-            //    componentList.Remove (component);
-            //}
             componentHashtable.Remove (component.VO.ComponentName);
         }
 

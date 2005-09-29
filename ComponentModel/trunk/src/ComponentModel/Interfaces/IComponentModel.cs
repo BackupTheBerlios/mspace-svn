@@ -31,5 +31,8 @@ namespace ComponentModel.Interfaces {
         ResponseMethodVO Execute (string methodName, object[] parameters, IViewHandler viewHandler);//Redirige y elige vista.
         ResponseMethodVO Execute (string methodName, object[] parameters, bool redirect);//Redirige o no redirige, si redirige vista nueva.
         ResponseMethodVO Execute (string methodName, object[] parameters, bool redirect, IViewHandler viewHandler, bool block);
+
+        object GetProperty (string propertyName);
+        void SetProperty (string propertyName, object valor);
     }
 }

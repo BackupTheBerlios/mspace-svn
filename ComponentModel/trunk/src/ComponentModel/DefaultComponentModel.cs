@@ -30,9 +30,6 @@ using ComponentModel.Exceptions;
 using NLog;
 
 namespace ComponentModel {
-    // TODO: En los getMethodXXX --> se debería realizar también una búsqueda
-    // con parámetros para poder permitir la sobrecarga de métodos.  Y para las
-    // respuestas nos taparía un error muy majo :)
     public abstract class DefaultComponentModel : IComponentModel {
         //Logging
         private Logger logger = LogManager.GetLogger ("ComponentModel.DefaultComponentModel");
@@ -64,7 +61,6 @@ namespace ComponentModel {
         }
       
         private Type GetTypeExceptionManager (string exceptionManagerClassName) {
-
             //Precondition: exceptionManagerClassName != null &&
             //exceptionManagerClassName != String.Empty
             if ((exceptionManagerClassName == null) || (exceptionManagerClassName.Equals (String.Empty))) {
@@ -96,6 +92,10 @@ namespace ComponentModel {
                     typeParam[i] = parameters[i].GetType ();
                 }
             }
+            logger.Debug ("Types of method invocation: ");
+            for (int i = 0;i < typeParam.Length;i++) {
+                logger.Debug ("Parameter: " + i + " " + typeParam[i]);
+            }
             //Busca solamente los publicos.  Cambiar el Binder puede ser un lio
             //grande, ojo con esto.
             MethodInfo methodInfo = componentType.GetMethod (methodName, typeParam);
@@ -109,30 +109,6 @@ namespace ComponentModel {
             //Post: methodInfo != null
             return methodInfo;
         }
-        
-        /*
-         * Deprecated !
-         *
-         * Este método no soporta la búsqueda mediante la sobrecarga de métodos.
-         * 
-         */ 
-        /*
-        private MethodInfo GetMethodToExecute (string methodName, Type componentType) {
-            //Precondition: methodName != null && methodName != String.Empty &&
-            //componentType != null
-            logger.Debug ("Entering GetMethodToExecute. Searching: " + methodName + " in: " + componentType.ToString ());
-            MethodInfo methodInfo = componentType.GetMethod (methodName, BindingFlags.Instance | BindingFlags.DeclaredOnly | BindingFlags.Public);
-            //Checkeamos que lo haya encontrado
-            if (methodInfo == null) {
-                throw new MethodNotFoundException ("Method to execute: " + methodName + " not found.");
-            }
-            else {
-                logger.Debug ("Finded method to execute: " + methodInfo.ToString ());
-            }
-            //PostCondition: methodInfo != null
-            return methodInfo;
-        }
-        */
         
         private MethodInfo GetMethodToExecute (string methodName, object[] parameters) {
             return this.GetMethodToExecute (methodName, parameters, this.GetType ());
@@ -171,7 +147,7 @@ namespace ComponentModel {
                     return type;
             }
             catch (TypeNotFoundException exception) {
-                throw new ViewNotFoundException ("View" + viewType + "not found.");
+                throw new ViewNotFoundException ("View " + viewType + " not found.");
             }
             return null;
         }
@@ -339,5 +315,45 @@ namespace ComponentModel {
             //return null;
         }
 
+
+        /*B�squeda de propiedades*/
+
+        private PropertyInfo GetPropertyToExecute (string propertyName) {
+            if ((propertyName == null) || (propertyName.Length != 0)) {
+                Type type = this.GetType ();
+                PropertyInfo propertyInfo = type.GetProperty (propertyName);
+                if (propertyInfo == null) {
+                    throw new PropertyNotFoundException ("Property " + propertyName + " not found");
+                }
+                return propertyInfo;
+            }
+            return null;
+        }
+        
+        public object GetProperty (string propertyName) {
+            PropertyInfo propertyInfo = this.GetPropertyToExecute (propertyName);
+            if (propertyInfo.CanRead) {
+                MethodInfo methodInfo = propertyInfo.GetGetMethod ();
+                return methodInfo.Invoke (this, null);
+                //Suponemos que como se puede leer no va a ser null el
+                //methodInfo.
+            }
+            else {
+                throw new PropertyCanReadException ("Property can't access to getter Method.");
+            }
+        }
+
+        public void SetProperty (string propertyName, object valor) {
+            PropertyInfo propertyInfo = this.GetPropertyToExecute (propertyName);
+            if (propertyInfo.CanWrite) {
+                MethodInfo methodInfo = propertyInfo.GetSetMethod ();
+                methodInfo.Invoke (this, new object[]{valor});
+                //Suponemos que como se puede escribir no va a ser null el
+                //methodInfo.
+            }
+            else {
+                throw new PropertyCanWriteException ("Property can't access to setter Method.");
+            }
+        }
     }
 }

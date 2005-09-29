@@ -4,10 +4,21 @@ using ComponentModel;
 namespace UnitTest.Components.TestComponent {
     [Component ("TestUnidad1", "UnitTest.Components.TestComponent.Exceptions.TestComponentExceptionManager")]
     public sealed class TestComponentComponentModel : DefaultComponentModel {
+        private int entero;
+
+        public int Entero {
+            get {return entero;}
+            set {entero = value;}
+        }
         
-        [ComponentMethod ("ResponseReturnValue","UnitTest.Components.TestComponent.Form.MainTestComponentForm")]
+        [ComponentMethod ("UnitTest.Components.TestComponent.Form.MainTestComponentForm", "ResponseReturnValue")]
         public int ReturnValue (int x) {
             return x;
+        }
+
+        [ComponentMethod ("UnitTest.Components.TestComponent.Form.MainTestComponentForm", "ResponseReturnValue")]
+        public char ReturnValue (char obj) {
+            return obj;
         }
 
     }
