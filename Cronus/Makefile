@@ -4,8 +4,6 @@
 SOURCES = \
 ./Main.cs \
 ./libmonotimer/Project.cs \
-./libmonotimer/hilo.cs \
-./libmonotimer/ProjectFactory.cs \
 ./libmonotimer/Communication.cs \
 ./Control/Controller.cs \
 ./Views/MainView.cs \

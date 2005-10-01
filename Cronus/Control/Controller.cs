@@ -23,104 +23,28 @@
 using System;
 using libmonotimer;
 using System.Threading;
-using Mono.Unix;
 
 namespace Control{
 
 	
-//class TimerExampleState {
-//	int counter = 0;
-//	public Timer tmr;
-//}
-public struct CollabProject {
-	public int id;
-	public string nombre;
-}
-
-public class Controller{
-	
-	string login = "";
-	string password = "";
-	
-	proyecto[] Array_Projects;
-	Project[] lista_proyectos;
-	
-	private Project currentProject;
-	public event EventHandler timer;
-	
-	public Controller(){
-		
-		Projects = Communication.login (login, password);
-		if (Projects.Length == 0) {
-			Console.WriteLine ("Autenticacion fallida");
-		}
-		else {
-			//lista_proyectos = new Proyect [Projects.Length];
-			foreach ( proyecto aux in Projects ) {
-				
-			}			
-		}
-
-
-		
-		
-		
-		
-		
-		//this.counter = 0;
-
-		/*TimerExampleState s = new TimerExampleState();
-		// Create the delegate that invokes methods for the timer.
-		TimerCallback timerDelegate = new TimerCallback(CheckStatus);
-		// Create a timer that waits one second, then invokes every second.
-		Timer timer = new Timer(timerDelegate, s,0, 1000);
-   
-		// Keep a handle to the timer, so it can be disposed.
-		s.tmr = timer;
-		// The main thread does nothing until the timer is disposed.
-		while (s.tmr != null)
-		Thread.Sleep(0);
-		Console.WriteLine("Timer example done.");
-		*/
-	}
-	/*
-	public string CurrentProject{
-		get{
-			return currentProject;
-		}
-		set{
-			currentProject = value;
-		}
-	}
-	*/
-	
-	public void incCounter(){
-		//this.counter++;
-		//this.label.Text = this.counter.ToString();;
-	}
-
-	public void StartTimer (){
-		for (int i = 0; i < 10; i++) {
-			Syscall.sleep (1);
-			Console.WriteLine (i);
-			timer (this, EventArgs.Empty);
-		}
-		
-	}
-
-	public void stop(){
+	public struct CollabProject {
+		public int id;
+		public string nombre;
 	}
 	
-	/*static void CheckStatus(Object state) {
-		TimerExampleState s = (TimerExampleState) state;
-		s.counter++;
-		Console.WriteLine(s.counter);
-
-	}*/
+	public sealed class Controller{
+		
+		CollabProject[] Array_Projects;
+		public event EventHandler timer;
+		
+		public Controller(string login, string password) {
+			
+			Array_Projects = Communication.login (login, password);
+			if (Array_Projects.Length == 0)
+				Console.WriteLine ("Autenticacion fallida");
+		}	
+	}
 	
-	
-}
-
 }
 
 
