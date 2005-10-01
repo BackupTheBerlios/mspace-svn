@@ -8,7 +8,7 @@ public struct proyecto {
 	public string nombre;
 }
 
-[XmlRpcUrl("URL_del_servidor_xmlrpc")]
+[XmlRpcUrl("http://fragg.homeip.net/phpcollab/xmlrpc_server.php")]
 interface IStateName
 {
 
@@ -22,7 +22,7 @@ public class Launcher {
 
 		
 		IStateName proxy = (IStateName)XmlRpcProxyGen.Create(typeof(IStateName));	
-		proyecto[] valor = proxy.timeControl ("", "");
+		proyecto[] valor = proxy.timeControl ("admin", "collab_proyectos");
 		if (valor.Length == 0) {
 			Console.WriteLine ("Respuesta vacia");
 		}

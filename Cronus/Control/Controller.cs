@@ -33,6 +33,8 @@ namespace Control{
 	}
 	
 	public sealed class Controller{
+	
+		private Project CurrentProject;
 		
 		CollabProject[] Array_Projects;
 		public event EventHandler timer;
@@ -46,5 +48,3 @@ namespace Control{
 	}
 	
 }
-
-
