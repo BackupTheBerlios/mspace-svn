@@ -2,18 +2,17 @@
 # Do not modify this file
 
 SOURCES = \
-./Main.cs \
 ./libmonotimer/Project.cs \
 ./libmonotimer/Communication.cs \
 ./Control/Controller.cs \
 ./Views/MainView.cs \
+./pruebas/Serializer.cs \
 
 PKG_REFERENCES = \
 gnome-sharp \
 gtk-sharp \
 glade-sharp \
 gnome-vfs-sharp-2.0 \
-gda-sharp-2.0
 
 
 PKG_REFERENCES_BUILD = $(addprefix -pkg:, $(PKG_REFERENCES))
@@ -25,7 +24,7 @@ MCS_OPTIONS =
 all: monotimer.exe
 
 monotimer.exe: $(SOURCES)
-	mcs $(MCS_OPTIONS) -r:Mono.Posix -r:CookComputing.XmlRpc.dll -target:exe -out:"monotimer.exe" $(PKG_REFERENCES_BUILD) $(SOURCES)
+	mcs $(MCS_OPTIONS) -r:Mono.Posix -r:dll/CookComputing.XmlRpc.dll -target:exe -out:"monotimer.exe" $(PKG_REFERENCES_BUILD) $(SOURCES)
 
 clean:
 	rm -f monotimer.exe

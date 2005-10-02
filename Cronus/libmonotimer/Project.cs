@@ -19,10 +19,11 @@
  * write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
  * Boston, MA 02111-1307, USA.
  */
-
+using System;
 using System.Threading;
 
-namespace libmonotimer{
+namespace libmonotimer
+{
 
 	public class Crono {
 		public int counter = 0;
@@ -34,8 +35,26 @@ namespace libmonotimer{
 		private static Project instance;
 		private string name;
 		private int id;
+		[NonSerialized()]
 		private Timer timer;
-		private counter;
+		private int counter;
+		private static int contador = 0;
+		
+		private Project(){
+			contador ++;
+			counter = 0;
+			id = contador;
+			Crono crono = new Crono ();
+			TimerCallback timerDelegate = new TimerCallback (Tick);
+			timer = new Timer (timerDelegate, crono, 0, 1000);
+   			/*
+			crono.timer = timer;
+
+			while (crono.timer != null)
+				Thread.Sleep(0);
+			Console.WriteLine("Final del contador");
+			*/
+		}
 		
 		public static Project Instance {
 			get {
@@ -46,17 +65,20 @@ namespace libmonotimer{
 			}
 		}
 		
-		private Project(){
-			Crono crono = new Crono ();
-			TimerCallback timerDelegate = new TimerCallback (Tick);
-			timer = new Timer (timerDelegate, crono, 0, 1000);
-   
-			crono.timer = timer;
-
-			while (crono.timer != null)
-				Thread.Sleep(0);
-			Console.WriteLine("Final del contador");
+		public string Name {
+			get {
+				return name;
+			}
+			set {
+				name = value;
+			}
 		}
+		public int Id {
+			get {
+				return id;
+			}
+		}
+		
 		
 		private static void Tick (Object state) {
 			Crono crono = (Crono) state;
@@ -64,4 +86,5 @@ namespace libmonotimer{
 			Console.WriteLine(crono.counter);
 		}
 
+	}
 }

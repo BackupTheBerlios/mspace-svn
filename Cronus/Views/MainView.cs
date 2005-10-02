@@ -51,9 +51,9 @@ public class MainView{
 	public void OKButtonCb (object o, EventArgs args) {
 		print("ok");
 		label1.Text = "OK";
-		app.incCounter();
-		System.Threading.Thread counter = new System.Threading.Thread ( new ThreadStart (app.StartTimer) );
-		counter.Start ();
+		//app.incCounter();
+		//System.Threading.Thread counter = new System.Threading.Thread ( new ThreadStart (app.StartTimer) );
+		//counter.Start ();
 		
 		//app.StartTimer ();
 	}
