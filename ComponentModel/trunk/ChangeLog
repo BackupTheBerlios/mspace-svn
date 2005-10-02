@@ -1,3 +1,8 @@
+29-09-2005 -- Néstor Salceda <nestor.salceda@gmail.com>
+    DefaultComponentModel:
+	Support for property management.
+    UnitTest:
+	Various Tests.
 27-09-2005 -- Néstor Salceda <nestor.salceda@gmail.com>
     DefaultComponentModel:
 	Support for overloaded execution of use case.

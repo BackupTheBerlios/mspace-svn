@@ -17,6 +17,8 @@ namespace UnitTest.Components.TestComponent {
 
         [TearDown]
         public void TearDown () {
+            IComponentModel componentModel = DefaultContainer.Instance.GetComponentByName ("TestUnidad1");
+            componentModel.SetProperty ("Entero", 0);
         }
 
         /*A partir de aqui escribiremos los tests*/
@@ -86,6 +88,16 @@ namespace UnitTest.Components.TestComponent {
             componentModel.SetProperty ("Entero", 5);
             Assert.IsNotNull (componentModel.GetProperty ("Entero"));
             Assert.AreEqual ((int) componentModel.GetProperty ("Entero"), 5);
+        }
+
+        [Test]
+        public void Exception () {
+            ResponseMethodVO responseMethodVO;
+            
+            IComponentModel componentModel = DefaultContainer.Instance.GetComponentByName ("TestUnidad1");
+            responseMethodVO = componentModel.Execute ("TestException", null, false);
+            Assert.AreEqual (responseMethodVO.ExecutionSuccess, false);
+            Assert.IsNull (responseMethodVO.MethodResult);
         }
     }
 }

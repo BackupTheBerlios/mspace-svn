@@ -21,5 +21,10 @@ namespace UnitTest.Components.TestComponent {
             return obj;
         }
 
+        [ComponentMethod ("UnitTest.Components.TestComponent.Form.MainTestComponentForm", "ResponseTestException")]
+        public void TestException () {
+            throw new Exception ("Testing exception Manager, and flags");
+        }
+
     }
 }
