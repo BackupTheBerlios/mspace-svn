@@ -59,6 +59,16 @@ namespace ComponentModel.Container.Dao {
         public ICollection ProcessAssembly (Assembly assembly) {
             logger.Debug ("Assembly to Process: " + assembly.FullName);
             ArrayList list = new ArrayList ();
+            //VAmos a comprobar que no se procesen ensamblados que sean del
+            //core.
+            
+            if (assembly.FullName.StartsWith ("mscorlib") ||
+                assembly.FullName.StartsWith ("System")
+                    ) {
+                logger.Debug ("Core Assembly detected: " + assembly.FullName);
+                return list;
+            }
+            
             Type[] types = assembly.GetTypes ();
             //TODO filter with memberfilter :)
             for (int i = 0; i < types.Length; i++) {

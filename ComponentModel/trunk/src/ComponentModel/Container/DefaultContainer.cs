@@ -47,13 +47,14 @@ namespace ComponentModel.Container {
             //Antes de nada, cargar los ensamblados que se encuentren en el
             //MONO_PATH
             this.LoadAssembliesInPath ();
+            
             //Getting data from assembly resolv.
             componentHashtable = new Hashtable ();
             //En cada ensamblado, cargará el / los componente y lo registrará con el
             //nombre que se le ha dado al atributo.
             GetAllComponents (); 
         }
-
+        
         private void LoadAssembliesInPath () {
             //Get el path
             string monoPathEnvironment = Environment.GetEnvironmentVariable ("MONO_PATH");

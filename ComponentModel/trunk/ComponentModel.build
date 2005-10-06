@@ -23,7 +23,7 @@
    
     <!--Configuracion (Igual sería recomendable que coincidieran con el
     manifiesto del ensamblado)-->
-    <property name="version" value="0.1"/>
+    <property name="version" value="0.2"/>
     <property name="description" value="MSpace Component Model for develop
     Components"/>
     <property name="component_name" value="ComponentModel"/> 
