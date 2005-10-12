@@ -3,10 +3,12 @@
 
 SOURCES = \
 ./libmonotimer/Project.cs \
-./libmonotimer/Communication.cs \
+./libmonotimer/ISource.cs \
+./libmonotimer/SourcesFactory.cs \
+./libmonotimer/XMLSource.cs \
+./libmonotimer/RPCSource.cs \
 ./Control/Controller.cs \
-./Views/MainView.cs \
-./pruebas/Serializer.cs \
+./GTKViews/MainView.cs \
 
 PKG_REFERENCES = \
 gnome-sharp \

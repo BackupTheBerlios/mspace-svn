@@ -25,6 +25,11 @@ using System.Threading;
 namespace libmonotimer
 {
 
+	struct SProject {
+		int id;
+		string name;
+	}
+	
 	public class Crono {
 		public int counter = 0;
 		public Timer timer;
