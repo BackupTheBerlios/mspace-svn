@@ -26,24 +26,14 @@ using System.Threading;
 
 namespace Control{
 
-	
-	public struct CollabProject {
-		public int id;
-		public string nombre;
-	}
-	
 	public sealed class Controller{
 	
 		private Project CurrentProject;
-		
-		CollabProject[] Array_Projects;
+		private SProject[] projects;	
 		public event EventHandler timer;
 		
-		public Controller(string login, string password) {
-			
-			Array_Projects = Communication.login (login, password);
-			if (Array_Projects.Length == 0)
-				Console.WriteLine ("Autenticacion fallida");
+		public Controller(string[] args) {
+			projects = Factory.GetObject (args);
 		}	
 	}
 	

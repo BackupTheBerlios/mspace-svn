@@ -8,14 +8,21 @@ namespace libmonotimer
 
 	public class Factory {
 		
-		public ISource GetObject (string url, string login, string password) {
-			ISource source = new RPCSource ();
+		ISource source;
+		
+		public static ISource GetObject (string[] args) {
+			switch (args.Length) {
+				case 1:
+					source = new XMLSource ();
+					break;
+				case 3:
+					source = new RPCSource ();
+					break;
+				default:
+					source = null;
+			}
 			return source;
 		}
 
-		public ISource GetObjetc (string path) {
-			ISource source = new XMLSource ();
-			return source;
-		}
 	}
 }

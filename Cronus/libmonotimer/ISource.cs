@@ -8,7 +8,7 @@ namespace libmonotimer
 	public interface ISource {
 		SProject[] getProjects ();
 		Project loadProject ();
-		bool saveProject ();
+		void saveProject (SProject[] projects);
 	}
 }
 
