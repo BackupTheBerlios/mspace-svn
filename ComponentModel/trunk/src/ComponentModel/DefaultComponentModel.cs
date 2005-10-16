@@ -27,6 +27,7 @@ using ComponentModel.Factory;
 using ComponentModel.ExceptionManager;
 using ComponentModel.Threading;
 using ComponentModel.Exceptions;
+using ComponentModel.Collections;
 using NLog;
 
 namespace ComponentModel {
@@ -39,7 +40,13 @@ namespace ComponentModel {
         private IExceptionManager defaultExceptionManager;
 
         private VirtualMethod virtualMethod;
+        private IViewHandlerCollection viewHandlerCollection;
 
+        public IViewHandlerCollection ViewHandlerCollection {
+            get {return viewHandlerCollection;}
+            set {viewHandlerCollection = value;}
+        }
+        
         public VirtualMethod VirtualMethod {
             get {return virtualMethod;}
             set {virtualMethod = value;}
@@ -58,6 +65,7 @@ namespace ComponentModel {
         //Ctor
         protected DefaultComponentModel () {
             logger.Debug ("Executing ctor for: " + this.GetType ().FullName);
+            viewHandlerCollection = new IViewHandlerCollection ();
         }
       
         private Type GetTypeExceptionManager (string exceptionManagerClassName) {
@@ -84,7 +92,7 @@ namespace ComponentModel {
         private MethodInfo GetMethodToExecute (string methodName, object[] parameters, Type componentType) {
             //Precondition: methodName != null && methodName != String.Empty &&
             //componentType != null
-            logger.Debug ("Entering GetMethodToExecute.  Searching " + methodName + "in: " + componentType.ToString ());
+            logger.Debug ("Entering GetMethodToExecute.  Searching " + methodName + " in: " + componentType.ToString ());
             Type[] typeParam = Type.EmptyTypes;
             if (parameters != null) {
                 typeParam = new Type[parameters.Length];

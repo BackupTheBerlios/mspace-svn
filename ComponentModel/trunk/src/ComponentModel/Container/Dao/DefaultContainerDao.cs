@@ -66,6 +66,7 @@ namespace ComponentModel.Container.Dao {
                 assembly.FullName.StartsWith ("System")
                     ) {
                 logger.Debug ("Core Assembly detected: " + assembly.FullName);
+                logger.Info ("* SKIPPING * Core Assembly: " + assembly.FullName);
                 return list;
             }
             

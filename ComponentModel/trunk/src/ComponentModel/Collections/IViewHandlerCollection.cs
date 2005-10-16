@@ -52,8 +52,6 @@ namespace ComponentModel.Collections {
             arrayList.CopyTo (array, index);
         }
 
-
-        //IViewHandler enumerator please.
         public IViewHandlerEnumerator GetEnumerator () {
             return new IViewHandlerEnumerator (this);
         }
