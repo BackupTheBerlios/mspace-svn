@@ -1,7 +1,7 @@
 using System;
 using ComponentModel.Container;
 using ComponentModel.Interfaces;
-using ComponentModel.VO;
+using ComponentModel.DTO;
 using NUnit.Framework;
 
 namespace UnitTest.Components.TestComponent {
@@ -31,15 +31,15 @@ namespace UnitTest.Components.TestComponent {
         [Test]
         public void ExecutionNonRedirect () {
             int x = 4;
-            ResponseMethodVO responseMethodVO;
+            ResponseMethodDTO responseMethodDTO;
             int returnValue;
             
             IComponentModel componentModel = DefaultContainer.Instance.GetComponentByName ("TestUnidad1");
-            responseMethodVO = componentModel.Execute ("ReturnValue", new object[]{x}, false);
-            Assert.AreEqual (responseMethodVO.ExecutionSuccess, true);
-            Assert.IsNotNull (responseMethodVO.MethodResult);
-            if (responseMethodVO.ExecutionSuccess == true) {
-                returnValue = (int) responseMethodVO.MethodResult;    
+            responseMethodDTO = componentModel.Execute ("ReturnValue", new object[]{x}, false);
+            Assert.AreEqual (responseMethodDTO.ExecutionSuccess, true);
+            Assert.IsNotNull (responseMethodDTO.MethodResult);
+            if (responseMethodDTO.ExecutionSuccess == true) {
+                returnValue = (int) responseMethodDTO.MethodResult;    
                 Assert.AreEqual (returnValue, x);
                 //Al estar usando reflection, no creo que se devuelva la misma
                 //posición de memoria.
@@ -50,15 +50,15 @@ namespace UnitTest.Components.TestComponent {
         [Test]
         public void ExecutionNonRedirectOverload () {
             char c = 'a';
-            ResponseMethodVO responseMethodVO;
+            ResponseMethodDTO responseMethodDTO;
             char returnValue;
 
             IComponentModel componentModel = DefaultContainer.Instance.GetComponentByName ("TestUnidad1");
-            responseMethodVO = componentModel.Execute ("ReturnValue", new object[]{c}, false);
-            Assert.AreEqual (responseMethodVO.ExecutionSuccess, true);
-            Assert.IsNotNull (responseMethodVO.MethodResult);
-            if (responseMethodVO.ExecutionSuccess == true) {
-                returnValue = (char) responseMethodVO.MethodResult;
+            responseMethodDTO = componentModel.Execute ("ReturnValue", new object[]{c}, false);
+            Assert.AreEqual (responseMethodDTO.ExecutionSuccess, true);
+            Assert.IsNotNull (responseMethodDTO.MethodResult);
+            if (responseMethodDTO.ExecutionSuccess == true) {
+                returnValue = (char) responseMethodDTO.MethodResult;
                 Assert.AreEqual (returnValue, c);
             }
         }
@@ -66,13 +66,13 @@ namespace UnitTest.Components.TestComponent {
         [Test]
         public void ExecuteRedirectNewView () {
             int x = 4;
-            ResponseMethodVO responseMethodVO;
+            ResponseMethodDTO responseMethodDTO;
 
             IComponentModel componentModel = DefaultContainer.Instance.GetComponentByName ("TestUnidad1");
-            responseMethodVO = componentModel.Execute ("ReturnValue", new object[]{x});
-            Assert.AreEqual (responseMethodVO.ExecutionSuccess, true);
-            Assert.IsNotNull (responseMethodVO.MethodResult);
-            Assert.AreEqual (responseMethodVO.MethodResult, x);
+            responseMethodDTO = componentModel.Execute ("ReturnValue", new object[]{x});
+            Assert.AreEqual (responseMethodDTO.ExecutionSuccess, true);
+            Assert.IsNotNull (responseMethodDTO.MethodResult);
+            Assert.AreEqual (responseMethodDTO.MethodResult, x);
             Assert.IsTrue (componentModel.ViewHandlerCollection.Count != 0);
         }
 
@@ -93,12 +93,12 @@ namespace UnitTest.Components.TestComponent {
 
         [Test]
         public void Exception () {
-            ResponseMethodVO responseMethodVO;
+            ResponseMethodDTO responseMethodDTO;
             
             IComponentModel componentModel = DefaultContainer.Instance.GetComponentByName ("TestUnidad1");
-            responseMethodVO = componentModel.Execute ("TestException", null, false);
-            Assert.AreEqual (responseMethodVO.ExecutionSuccess, false);
-            Assert.IsNull (responseMethodVO.MethodResult);
+            responseMethodDTO = componentModel.Execute ("TestException", null, false);
+            Assert.AreEqual (responseMethodDTO.ExecutionSuccess, false);
+            Assert.IsNull (responseMethodDTO.MethodResult);
         }
     }
 }

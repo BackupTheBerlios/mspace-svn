@@ -85,7 +85,7 @@ namespace ComponentModel.Container.Dao {
                         DefaultComponentModel defaultComponentModel = (DefaultComponentModel)constructorInfo.Invoke (null);
                         //Seteamos el vo con reflection y mantener oculto el
                         //resto.
-                        FieldInfo voFieldInfo = types[i].GetField ("vO", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.SetField); // | BindingFlags.DeclaredOnly);
+                        FieldInfo voFieldInfo = types[i].GetField ("componentModelDTO", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.SetField); // | BindingFlags.DeclaredOnly);
                         //if (voFieldInfo == null)
                         //    Console.WriteLine ("FieldInfo == null.");
                         voFieldInfo.SetValue (defaultComponentModel, componentModelDTO);
