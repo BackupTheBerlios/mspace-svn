@@ -18,32 +18,41 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 using System;
-using ComponentModel.VO;
+using ComponentModel.DTO;
+using ComponentModel.Interfaces;
 
 namespace ComponentModel.Factory {
-    [Obsolete ("FactoryVO is being removed at next version.  Please use FactoryDto instead.")]
-    public sealed class FactoryVO {
-        private static FactoryVO instance;
+    public enum CreateDTO {
+        ComponentModel,
+        ResponseMethod
+    }
+    
+    public sealed class FactoryDTO {
+        private static FactoryDTO instance;
 
-        private FactoryVO () {
+        private FactoryDTO () {
         }
 
-        public static FactoryVO Instance {
+        public static FactoryDTO Instance {
             get {
                 if (instance == null)
-                    instance = new FactoryVO ();
+                    instance = new FactoryDTO ();
                 return instance;
             }
         }
 
-        public ComponentModelVO CreateComponentModelVO () {
-            return new ComponentModelVO ();
+        public IComponentModelDTO Create (CreateDTO value) {
+            switch (value) {
+                case CreateDTO.ComponentModel:
+                    return new ComponentModelDTO ();
+                case CreateDTO.ResponseMethod:
+                    ResponseMethodDTO responseMethodDTO = new ResponseMethodDTO ();
+                    responseMethodDTO.SetExecutionSuccess (false); //Por defecto inicializará a false.
+                    return responseMethodDTO;
+                default:
+                    return null;
+            }
         }
 
-        public ResponseMethodVO CreateResponseMethodVO () {
-            ResponseMethodVO responseMethodVO = new ResponseMethodVO ();
-            responseMethodVO.SetExecutionSuccess (false);
-            return responseMethodVO;
-        }
     }
 }

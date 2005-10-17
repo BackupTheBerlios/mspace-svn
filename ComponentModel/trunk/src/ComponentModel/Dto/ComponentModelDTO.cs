@@ -18,32 +18,31 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 using System;
-using ComponentModel.VO;
+using System.Collections;
+using ComponentModel.Interfaces;
 
-namespace ComponentModel.Factory {
-    [Obsolete ("FactoryVO is being removed at next version.  Please use FactoryDto instead.")]
-    public sealed class FactoryVO {
-        private static FactoryVO instance;
+namespace ComponentModel.DTO {
+    public sealed class ComponentModelDTO : IComponentModelDTO {
+        private string componentName;
+        private string componentClassName;
+        private string exceptionManagerClassName;
 
-        private FactoryVO () {
+        internal ComponentModelDTO () {
         }
-
-        public static FactoryVO Instance {
-            get {
-                if (instance == null)
-                    instance = new FactoryVO ();
-                return instance;
-            }
+        
+        public string ExceptionManagerClassName {
+            get {return exceptionManagerClassName;}
+            set {exceptionManagerClassName = value;}
         }
-
-        public ComponentModelVO CreateComponentModelVO () {
-            return new ComponentModelVO ();
+        
+        public string ComponentClassName {
+            get {return componentClassName;}
+            set {componentClassName = value;}
         }
-
-        public ResponseMethodVO CreateResponseMethodVO () {
-            ResponseMethodVO responseMethodVO = new ResponseMethodVO ();
-            responseMethodVO.SetExecutionSuccess (false);
-            return responseMethodVO;
+        
+        public string ComponentName {
+            get {return componentName;}
+            set {componentName = value;}
         }
     }
 }

@@ -25,7 +25,7 @@ using System.Collections;
 using ComponentModel.Interfaces;
 using ComponentModel.Container.Dao;
 using ComponentModel.Exceptions;
-using ComponentModel.VO;
+using ComponentModel.DTO;
 using NLog;
 
 
@@ -117,29 +117,29 @@ namespace ComponentModel.Container {
         }
 
         public void Add (IComponentModel component) {
-            componentHashtable.Add (component.VO.ComponentName, component);
-            logger.Info ("Registering component: " + component + " as Name: " + component.VO.ComponentName);
+            componentHashtable.Add (component.ComponentModelDTO.ComponentName, component);
+            logger.Info ("Registering component: " + component + " as Name: " + component.ComponentModelDTO.ComponentName);
         }
 
         public void Remove (IComponentModel component) {
-            componentHashtable.Remove (component.VO.ComponentName);
+            componentHashtable.Remove (component.ComponentModelDTO.ComponentName);
         }
 
         /*Servicio ejecutor*/
-        public ResponseMethodVO Execute (string componentName, string methodName, object[] parameters, bool redirect, IViewHandler viewHandler, bool block) {
+        public ResponseMethodDTO Execute (string componentName, string methodName, object[] parameters, bool redirect, IViewHandler viewHandler, bool block) {
             IComponentModel componentModel = this.GetComponentByName (componentName);
             return componentModel.Execute (methodName, parameters, redirect, viewHandler, block);
         }
 
-        public ResponseMethodVO Execute (string componentName, string methodName, object[] parameters, IViewHandler viewHandler) {
+        public ResponseMethodDTO Execute (string componentName, string methodName, object[] parameters, IViewHandler viewHandler) {
             return this.Execute (componentName, methodName, parameters, true, viewHandler, true);
         }       
 
-        public ResponseMethodVO Execute (string componentName, string methodName, object[] parameters, bool redirect) {
+        public ResponseMethodDTO Execute (string componentName, string methodName, object[] parameters, bool redirect) {
             return this.Execute (componentName, methodName, parameters, redirect, null, true);
         }
 
-        public ResponseMethodVO Execute (string componentName, string methodName, object[] parameters) {
+        public ResponseMethodDTO Execute (string componentName, string methodName, object[] parameters) {
             return this.Execute (componentName, methodName, parameters, true, null, true);
         }
     }

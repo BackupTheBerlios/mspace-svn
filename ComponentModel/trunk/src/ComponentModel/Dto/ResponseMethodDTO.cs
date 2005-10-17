@@ -18,8 +18,29 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 using System;
+using ComponentModel.Interfaces;
 
-namespace ComponentModel.Interfaces {
-    public interface IComponentModelVO {
+namespace ComponentModel.DTO {
+    public sealed class ResponseMethodDTO : IComponentModelDTO {
+        private bool executionSuccess;
+        private object methodResult;
+
+        internal ResponseMethodDTO () {
+            //this.SetExecutionSuccess (false);
+        }
+        
+        public object MethodResult {
+            get {return methodResult;}
+            set {methodResult = value;}
+        }
+        
+        public bool ExecutionSuccess {
+            get {return executionSuccess;}
+        }
+
+        internal void SetExecutionSuccess (bool executionSuccess) {
+            this.executionSuccess = executionSuccess;
+        }
+        
     }
 }

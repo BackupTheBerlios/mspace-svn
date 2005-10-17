@@ -19,11 +19,11 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 using System;
 using System.Threading;
-using ComponentModel.VO;
 using System.Reflection;
 using ComponentModel;
 using ComponentModel.Factory;
 using ComponentModel.Interfaces;
+using ComponentModel.DTO;
 
 namespace ComponentModel.Threading {
     internal class ComponentActionDispatcher  {
@@ -38,12 +38,12 @@ namespace ComponentModel.Threading {
         Type viewType;
         IViewHandler viewHandler;
         MethodInfo methodToResponse;
-        ResponseMethodVO responseMethodVO;
+        ResponseMethodDTO responseMethodDTO;
 
-        internal ResponseMethodVO ResponseMethodVO {
+        internal ResponseMethodDTO ResponseMethodDTO {
             get {
-                lock (responseMethodVO) {
-                    return responseMethodVO;
+                lock (responseMethodDTO) {
+                    return responseMethodDTO;
                 }
             }
         }
@@ -84,42 +84,42 @@ namespace ComponentModel.Threading {
         }
         
         private void CallBackExecuteRedirectNewView () {
-            lock (responseMethodVO) {
-                responseMethodVO = FactoryVO.Instance.CreateResponseMethodVO ();
+            lock (responseMethodDTO) {
+                responseMethodDTO = (ResponseMethodDTO) FactoryDTO.Instance.Create (CreateDTO.ResponseMethod);
                 object ret = methodToExecute.Invoke (componentModel, parameters);
-                responseMethodVO.MethodResult = ret;
-                responseMethodVO.SetExecutionSuccess (true);
+                responseMethodDTO.MethodResult = ret;
+                responseMethodDTO.SetExecutionSuccess (true);
                 if (componentModel.VirtualMethod != null) {
-                    componentModel.VirtualMethod (responseMethodVO);
+                    componentModel.VirtualMethod (responseMethodDTO);
                     componentModel.VirtualMethod = null;
                 }
                 object obj = viewType.GetConstructor (null).Invoke (null);
-                methodToResponse.Invoke (obj, new object[] {responseMethodVO});
+                methodToResponse.Invoke (obj, new object[] {responseMethodDTO});
             }
         }
 
         private void CallBackExecuteRedirectView () {
-            lock (responseMethodVO) {
-                responseMethodVO = FactoryVO.Instance.CreateResponseMethodVO ();
+            lock (responseMethodDTO) {
+                responseMethodDTO = (ResponseMethodDTO)FactoryDTO.Instance.Create (CreateDTO.ResponseMethod);
                 object ret = methodToExecute.Invoke (componentModel, parameters);
-                responseMethodVO.MethodResult = ret;
-                responseMethodVO.SetExecutionSuccess (true);
+                responseMethodDTO.MethodResult = ret;
+                responseMethodDTO.SetExecutionSuccess (true);
                 if (componentModel.VirtualMethod != null) {
-                    componentModel.VirtualMethod (responseMethodVO);
+                    componentModel.VirtualMethod (responseMethodDTO);
                     componentModel.VirtualMethod = null;
                 }
-                methodToResponse.Invoke (viewHandler, new object[] {responseMethodVO});
+                methodToResponse.Invoke (viewHandler, new object[] {responseMethodDTO});
             }
         }
 
         private void CallBackExecuteNoRedirect () {
-            lock (responseMethodVO) {
-                responseMethodVO = FactoryVO.Instance.CreateResponseMethodVO ();
+            lock (responseMethodDTO) {
+                responseMethodDTO = (ResponseMethodDTO)FactoryDTO.Instance.Create (CreateDTO.ResponseMethod);
                 object ret = methodToExecute.Invoke (componentModel, parameters);
-                responseMethodVO.MethodResult = ret;
-                responseMethodVO.SetExecutionSuccess (true);
+                responseMethodDTO.MethodResult = ret;
+                responseMethodDTO.SetExecutionSuccess (true);
                 if (componentModel.VirtualMethod != null) {
-                    componentModel.VirtualMethod (responseMethodVO);
+                    componentModel.VirtualMethod (responseMethodDTO);
                     componentModel.VirtualMethod = null;
                 }
             }

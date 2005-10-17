@@ -21,7 +21,8 @@ using System;
 using System.Collections;
 
 namespace ComponentModel.VO {
-    public class ComponentModelVO {
+    [Obsolete ("ComponentModelVO is being removed in future Babuine Component Model version.  Please, use ComponentModelDto instead")]    
+    public sealed class ComponentModelVO {
         private string componentName;
         private string componentClassName;
         private string exceptionManagerClassName;

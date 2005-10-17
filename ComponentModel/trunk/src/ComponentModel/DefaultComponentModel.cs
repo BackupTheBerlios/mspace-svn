@@ -1,6 +1,6 @@
 /*
 Babuine Component Model & Babuine Framework
-Copyright (C) 2005  NÃ©stor Salceda Alonso
+Copyright (C) 2005  Néstor Salceda Alonso
 
 This library is free software; you can redistribute it and/or
 modify it under the terms of the GNU Lesser General Public
@@ -21,6 +21,7 @@ using System;
 using System.Reflection;
 using ComponentModel.Interfaces;
 using ComponentModel.VO;
+using ComponentModel.DTO;
 using ComponentModel.Container;
 using ComponentModel.Container.Dao;
 using ComponentModel.Factory;
@@ -35,7 +36,11 @@ namespace ComponentModel {
         //Logging
         private Logger logger = LogManager.GetLogger ("ComponentModel.DefaultComponentModel");
         //Value object with information associated to component
+        [Obsolete ("This field is deprecated.")]
         private ComponentModelVO vO;
+        
+        private ComponentModelDTO componentModelDTO;
+        
         //Exception manager to process exceptions.
         private IExceptionManager defaultExceptionManager;
 
@@ -60,6 +65,10 @@ namespace ComponentModel {
         //Properties}
         public ComponentModelVO VO {
             get {return vO;}
+        }
+
+        public ComponentModelDTO ComponentModelDTO {
+            get {return componentModelDTO;}
         }
         
         //Ctor
@@ -139,7 +148,8 @@ namespace ComponentModel {
                 throw exception.InnerException;
             else {
                 if (this.defaultExceptionManager == null) {
-                    Type typeManager = this.GetTypeExceptionManager (this.VO.ExceptionManagerClassName);
+                    //Type typeManager = this.GetTypeExceptionManager (this.VO.ExceptionManagerClassName);
+                    Type typeManager = this.GetTypeExceptionManager (this.ComponentModelDTO.ExceptionManagerClassName);
                     this.defaultExceptionManager = (IExceptionManager) typeManager.GetConstructor (null).Invoke (null);
                 }
                 this.defaultExceptionManager.ProcessException (exception.InnerException);
@@ -179,76 +189,96 @@ namespace ComponentModel {
         }
 
 
-        private ResponseMethodVO ExecuteRedirectNewView (MethodInfo methodToExecute, object[] parameters, Type viewType, MethodInfo methodToResponse) {
-            ResponseMethodVO responseMethodVO = FactoryVO.Instance.CreateResponseMethodVO (); 
+        private ResponseMethodDTO ExecuteRedirectNewView (MethodInfo methodToExecute, object[] parameters, Type viewType, MethodInfo methodToResponse) {
+            ResponseMethodDTO responseMethodDTO = (ResponseMethodDTO) FactoryDTO.Instance.Create (CreateDTO.ResponseMethod); 
             try {
                 object ret = methodToExecute.Invoke (this, parameters);
-                responseMethodVO.MethodResult = ret;
+                responseMethodDTO.MethodResult = ret;
                 object obj = viewType.GetConstructor (null).Invoke (null);
-                responseMethodVO.SetExecutionSuccess (true);
+                responseMethodDTO.SetExecutionSuccess (true);
                 if (VirtualMethod != null) {
-                    VirtualMethod (responseMethodVO);
+                    VirtualMethod (responseMethodDTO);
                     VirtualMethod = null;
                 }
-                methodToResponse.Invoke (obj, new object[] {responseMethodVO});
-                return responseMethodVO;
+                methodToResponse.Invoke (obj, new object[] {responseMethodDTO});
+                //Beta Implementation
+                //
+                //Siempre se va a añadir esta vista puesto que es una vista
+                //nueva.
+                ViewHandlerCollection.Add ((IViewHandler)obj);
+                logger.Debug ("A new view has been added to View Cache.");
+                //
+                //End
+                return responseMethodDTO;
             }
             catch (TargetInvocationException exception) {
                 this.MapException (exception);
             }
-            return responseMethodVO;
+            return responseMethodDTO;
         }
 
-        private ResponseMethodVO ExecuteRedirectView (MethodInfo methodToExecute, object[] parameters, IViewHandler viewHandler, MethodInfo methodToResponse) {
-            ResponseMethodVO responseMethodVO =  FactoryVO.Instance.CreateResponseMethodVO ();
+        private ResponseMethodDTO ExecuteRedirectView (MethodInfo methodToExecute, object[] parameters, IViewHandler viewHandler, MethodInfo methodToResponse) {
+            ResponseMethodDTO responseMethodDTO = (ResponseMethodDTO) FactoryDTO.Instance.Create (CreateDTO.ResponseMethod);
             try {
                 object ret = methodToExecute.Invoke (this, parameters);
-                responseMethodVO.MethodResult = ret;
-                responseMethodVO.SetExecutionSuccess (true);
+                responseMethodDTO.MethodResult = ret;
+                responseMethodDTO.SetExecutionSuccess (true);
                 if (VirtualMethod != null) {
-                    VirtualMethod (responseMethodVO);
+                    VirtualMethod (responseMethodDTO);
                     VirtualMethod = null;
                 }
-                methodToResponse.Invoke (viewHandler, new object[] {responseMethodVO});
+                //Beta Implementation
+                //
+                if (!ViewHandlerCollection.Contains (viewHandler)) {
+                    ViewHandlerCollection.Add (viewHandler);
+                    logger.Debug ("A new view has been added to View Cache");
+                }
+                else {
+                    logger.Debug ("This view has already been registered at View Cache.");
+                }
+                //
+                //End
+                
+                methodToResponse.Invoke (viewHandler, new object[] {responseMethodDTO});
             }
             catch (TargetInvocationException exception) {
                 this.MapException (exception);
             }
-            return responseMethodVO;
+            return responseMethodDTO;
         }
         
-        private ResponseMethodVO ExecuteNoRedirect (MethodInfo methodToExecute, object[] parameters) {
-            ResponseMethodVO responseMethodVO = FactoryVO.Instance.CreateResponseMethodVO ();
+        private ResponseMethodDTO ExecuteNoRedirect (MethodInfo methodToExecute, object[] parameters) {
+            ResponseMethodDTO responseMethodDTO = (ResponseMethodDTO) FactoryDTO.Instance.Create (CreateDTO.ResponseMethod);
             try {
                 object ret = methodToExecute.Invoke (this, parameters);
-                responseMethodVO.MethodResult = ret;
-                responseMethodVO.SetExecutionSuccess (true);
+                responseMethodDTO.MethodResult = ret;
+                responseMethodDTO.SetExecutionSuccess (true);
                 if (VirtualMethod != null) {
-                    VirtualMethod (responseMethodVO);
+                    VirtualMethod (responseMethodDTO);
                     VirtualMethod = null;
                 }
             }
             catch (TargetInvocationException exception) {
                 this.MapException (exception);
             }
-            return responseMethodVO;
+            return responseMethodDTO;
         }
         
         /*Executor overloads*/
-        public ResponseMethodVO Execute (string methodName, object[] parameters) {
+        public ResponseMethodDTO Execute (string methodName, object[] parameters) {
             return this.Execute (methodName, parameters, true, null, true);
         }
         
-        public ResponseMethodVO Execute (string methodName, object[] parameters, bool redirect) {
+        public ResponseMethodDTO Execute (string methodName, object[] parameters, bool redirect) {
             return this.Execute (methodName, parameters, redirect, null, true);
         }
         
-        public ResponseMethodVO Execute (string methodName, object[] parameters, IViewHandler viewHandler) {
+        public ResponseMethodDTO Execute (string methodName, object[] parameters, IViewHandler viewHandler) {
             return this.Execute (methodName, parameters, true, viewHandler, true);
         }       
         
         /*Executor commander !*/
-        public ResponseMethodVO Execute (string methodName, object[] parameters, bool redirect, IViewHandler viewHandler, bool block) {
+        public ResponseMethodDTO Execute (string methodName, object[] parameters, bool redirect, IViewHandler viewHandler, bool block) {
             /*Existen cosas que siempre deben de buscarse*/
             MethodInfo methodToExecute = this.GetMethodToExecute (methodName, parameters); 
             ComponentMethodAttribute componentMethodAttribute = this.GetComponentAttributes (methodToExecute);
@@ -294,7 +324,7 @@ namespace ComponentModel {
                         catch (TargetInvocationException exception) {
                             this.MapException (exception);
                         }
-                        return componentActionDispatcher.ResponseMethodVO;
+                        return componentActionDispatcher.ResponseMethodDTO;
                     }
                     else {
                         viewType = viewHandler.GetType ();
@@ -306,7 +336,7 @@ namespace ComponentModel {
                         catch (TargetInvocationException exception) {
                             this.MapException (exception);
                         }
-                        return componentActionDispatcher.ResponseMethodVO;
+                        return componentActionDispatcher.ResponseMethodDTO;
                     }
                 }
                 else {
@@ -317,7 +347,7 @@ namespace ComponentModel {
                     catch (TargetInvocationException exception) {
                         this.MapException (exception);
                     }
-                    return componentActionDispatcher.ResponseMethodVO;
+                    return componentActionDispatcher.ResponseMethodDTO;
                 }
             }
             //return null;

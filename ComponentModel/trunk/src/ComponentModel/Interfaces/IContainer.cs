@@ -18,7 +18,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 using System;
-using ComponentModel.VO;
+using ComponentModel.DTO;
 
 namespace ComponentModel.Interfaces {
     //Igual si extendemos de System.ComponentModel.IContainer está bien también.
@@ -28,9 +28,9 @@ namespace ComponentModel.Interfaces {
         void Add (IComponentModel componentModel);
         void Remove (IComponentModel componentModel);
 
-        ResponseMethodVO Execute (string componentName, string methodName, object[] parameters);//Redirige & bloquea a la vista por defecto.
-        ResponseMethodVO Execute (string componentName, string methodName, object[] parameters, IViewHandler viewHandler);//Redirige y elige vista.
-        ResponseMethodVO Execute (string componentName, string methodName, object[] parameters, bool redirect);//Redirige o no redirige, si redirige vista nueva.
-        ResponseMethodVO Execute (string componentName, string methodName, object[] parameters, bool redirect, IViewHandler viewHandler, bool block);
+        ResponseMethodDTO Execute (string componentName, string methodName, object[] parameters);//Redirige & bloquea a la vista por defecto.
+        ResponseMethodDTO Execute (string componentName, string methodName, object[] parameters, IViewHandler viewHandler);//Redirige y elige vista.
+        ResponseMethodDTO Execute (string componentName, string methodName, object[] parameters, bool redirect);//Redirige o no redirige, si redirige vista nueva.
+        ResponseMethodDTO Execute (string componentName, string methodName, object[] parameters, bool redirect, IViewHandler viewHandler, bool block);
     }
 }

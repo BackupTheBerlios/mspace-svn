@@ -20,6 +20,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 using System;
 
 namespace ComponentModel.Interfaces {
+    [Obsolete ("Please IVO is being removed at next version.  Please use IDto instead.")]
     public interface IVO {
     }
 }

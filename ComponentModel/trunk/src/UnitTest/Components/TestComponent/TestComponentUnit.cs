@@ -67,12 +67,13 @@ namespace UnitTest.Components.TestComponent {
         public void ExecuteRedirectNewView () {
             int x = 4;
             ResponseMethodVO responseMethodVO;
-            int returnValue;
 
             IComponentModel componentModel = DefaultContainer.Instance.GetComponentByName ("TestUnidad1");
             responseMethodVO = componentModel.Execute ("ReturnValue", new object[]{x});
             Assert.AreEqual (responseMethodVO.ExecutionSuccess, true);
             Assert.IsNotNull (responseMethodVO.MethodResult);
+            Assert.AreEqual (responseMethodVO.MethodResult, x);
+            Assert.IsTrue (componentModel.ViewHandlerCollection.Count != 0);
         }
 
         [Test]

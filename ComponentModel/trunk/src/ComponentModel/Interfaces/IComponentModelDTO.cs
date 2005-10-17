@@ -19,28 +19,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 using System;
 
-namespace ComponentModel.VO {
-    [Obsolete ("ResponseMethodVO is being removed at next version.  Please use ResponseMethodDto instead")]
-    public sealed class ResponseMethodVO {
-        private bool executionSuccess;
-        private object methodResult;
-
-        internal ResponseMethodVO () {
-            //this.SetExecutionSuccess (false);
-        }
-        
-        public object MethodResult {
-            get {return methodResult;}
-            set {methodResult = value;}
-        }
-        
-        public bool ExecutionSuccess {
-            get {return executionSuccess;}
-        }
-
-        internal void SetExecutionSuccess (bool executionSuccess) {
-            this.executionSuccess = executionSuccess;
-        }
-        
+namespace ComponentModel.Interfaces {
+    //Usaremos este interfaz para separar los DTO que son propios a la
+    //construcción del modelo de componentes.
+    public interface IComponentModelDTO: IDataTransferObject {
     }
 }

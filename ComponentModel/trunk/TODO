@@ -6,14 +6,20 @@ Próximas mejoras en las próximas versiones.
   sobrecarga de casos de uso según la firma.  Esto es sencillo de arreglar.
   Hay una implementación de referencia sin testear.
 
+    DONE!
+    
 * Implementación de un ViewCache, almacenando todas las vistas de un componente;
   poder acceder así a cada una de ellas.  Será así un modo de tener un Proxy en
   cada componente que pueda autogestionar sus vistas; y en caso necesario poder
   conseguir nosotros a una vista asociada a un componente.
 
+    DONE! (Think at 70%)
+    
 * Implementación de métodos para conseguir la devolución de Propiedades que
   tenga un componente.
 
+    DONE! 
+    
 * Mejora de la concurrencia de un componente, varios accesos; varias llamadas,
   respuestas y esperas.
 
@@ -25,9 +31,13 @@ Próximas mejoras en las próximas versiones.
 * Problemas de nomenclatura; deprecar el interface IVO, dado que no es
   estrictamente un Value Object.  Sustituir por IDataTransferObject.
 
+    DONE! (Think at 50%) -- Only Refactor Now.
+    
 * El interface de la vista, dejará de estar vacio; para implementar 3 métodos
   que se suelen utilizar en las vistas siempre, esto es GetDataForm,
   LoadDataForm y ClearForm.
+
+    DONE!
 
 * Preejecución y postejecución; con métodos virtuales e implementación de
   callbacks.
@@ -35,3 +45,5 @@ Próximas mejoras en las próximas versiones.
 * ?¿¿?¿? Uso de delegates para poder responder a varios responses de golpe.
 
 * Dejar de hacer los test a pelo !! Uso intensivo de NUnit para ello.
+    
+    DONE!
