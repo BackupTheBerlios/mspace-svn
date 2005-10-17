@@ -23,7 +23,7 @@ using System.Reflection;
 using ComponentModel.Interfaces;
 using ComponentModel.Factory;
 using ComponentModel.Container;
-using ComponentModel.VO;
+using ComponentModel.DTO;
 using ComponentModel.Exceptions;
 using NLog;
 
@@ -79,8 +79,8 @@ namespace ComponentModel.Container.Dao {
                     Attribute[] attributes = (Attribute[])types[i].GetCustomAttributes (typeof (ComponentAttribute), true); 
                     if (attributes.Length.Equals (1)) { 
                         //Deberiamos registrar el tipo en el Container. Y
-                        //parsear la información para rellenar su VO.
-                        ComponentModelVO componentModelVO = this.fillVO (types[i]);
+                        //parsear la información para rellenar su DTO.
+                        ComponentModelDTO componentModelDTO = this.fillDTO (types[i]);
                         ConstructorInfo constructorInfo = types[i].GetConstructor (null);
                         DefaultComponentModel defaultComponentModel = (DefaultComponentModel)constructorInfo.Invoke (null);
                         //Seteamos el vo con reflection y mantener oculto el
@@ -88,7 +88,7 @@ namespace ComponentModel.Container.Dao {
                         FieldInfo voFieldInfo = types[i].GetField ("vO", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.SetField); // | BindingFlags.DeclaredOnly);
                         //if (voFieldInfo == null)
                         //    Console.WriteLine ("FieldInfo == null.");
-                        voFieldInfo.SetValue (defaultComponentModel, componentModelVO);
+                        voFieldInfo.SetValue (defaultComponentModel, componentModelDTO);
                         list.Add (defaultComponentModel);
                     }
                 }
@@ -97,17 +97,17 @@ namespace ComponentModel.Container.Dao {
         }
 
         /**
-         * Rellenamos el VO con los valores que tenga asociado ese tipo.
+         * Rellenamos el DTO con los valores que tenga asociado ese tipo.
          */
-        private ComponentModelVO fillVO (Type type) {
-            ComponentModelVO componentModelVO =  FactoryVO.Instance.CreateComponentModelVO ();
+        private ComponentModelDTO fillDTO (Type type) {
+            ComponentModelDTO componentModelDTO =  (ComponentModelDTO) FactoryDTO.Instance.Create (CreateDTO.ComponentModel);
             ComponentAttribute componentAttribute = (ComponentAttribute)(type.GetCustomAttributes (typeof (ComponentAttribute), true)[0]);
             
-            componentModelVO.ComponentClassName = type.FullName;
-            componentModelVO.ComponentName = componentAttribute.ComponentName;
-            componentModelVO.ExceptionManagerClassName = componentAttribute.ExceptionManager;
+            componentModelDTO.ComponentClassName = type.FullName;
+            componentModelDTO.ComponentName = componentAttribute.ComponentName;
+            componentModelDTO.ExceptionManagerClassName = componentAttribute.ExceptionManager;
             
-            return componentModelVO;
+            return componentModelDTO;
         }
     }
 }

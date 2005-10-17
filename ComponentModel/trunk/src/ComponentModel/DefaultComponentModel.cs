@@ -36,9 +36,6 @@ namespace ComponentModel {
         //Logging
         private Logger logger = LogManager.GetLogger ("ComponentModel.DefaultComponentModel");
         //Value object with information associated to component
-        [Obsolete ("This field is deprecated.")]
-        private ComponentModelVO vO;
-        
         private ComponentModelDTO componentModelDTO;
         
         //Exception manager to process exceptions.
@@ -64,7 +61,7 @@ namespace ComponentModel {
  
         //Properties}
         public ComponentModelVO VO {
-            get {return vO;}
+            get {return null;}
         }
 
         public ComponentModelDTO ComponentModelDTO {
