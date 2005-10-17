@@ -32,6 +32,9 @@ Próximas mejoras en las próximas versiones.
   estrictamente un Value Object.  Sustituir por IDataTransferObject.
 
     DONE! (Think at 50%) -- Only Refactor Now.
+    -- Ahora solo queda que al buscar una response lo haga también buscando el
+    parámetro para evitar una ParameterException fea, y por lo menos mapearla y
+    saber cual es el error.
     
 * El interface de la vista, dejará de estar vacio; para implementar 3 métodos
   que se suelen utilizar en las vistas siempre, esto es GetDataForm,
