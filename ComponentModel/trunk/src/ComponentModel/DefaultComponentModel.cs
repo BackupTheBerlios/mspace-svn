@@ -34,7 +34,7 @@ using NLog;
 namespace ComponentModel {
     public abstract class DefaultComponentModel : IComponentModel {
         //Logging
-        private Logger logger = LogManager.GetLogger ("ComponentModel.DefaultComponentModel");
+        private Logger logger = null;//= LogManager.GetLogger (this.GetType ().ToString ());
         //Value object with information associated to component
         private ComponentModelDTO componentModelDTO;
         
@@ -70,6 +70,7 @@ namespace ComponentModel {
         
         //Ctor
         protected DefaultComponentModel () {
+            logger = LogManager.GetLogger (this.GetType ().ToString ());
             logger.Debug ("Executing ctor for: " + this.GetType ().FullName);
             viewHandlerCollection = new IViewHandlerCollection ();
         }

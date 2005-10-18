@@ -50,11 +50,12 @@ namespace ComponentModel.Container {
             
             //Getting data from assembly resolv.
             componentHashtable = new Hashtable ();
-            lock (componentHashtable) {
+            //lock (componentHashtable) {
             //En cada ensamblado, cargará el / los componente y lo registrará con el
             //nombre que se le ha dado al atributo.
             GetAllComponents ();
-            }
+            //}
+            logger.Debug ("Exiting default ctor.");
         }
         
         private void LoadAssembliesInPath () {
@@ -111,13 +112,13 @@ namespace ComponentModel.Container {
         }
 
         public IComponentModel GetComponentByName (string componentName) {
-            lock (componentHashtable) {
+            //lock (componentHashtable) {
             IComponentModel componentModel = (IComponentModel) componentHashtable[componentName];
             if (componentModel == null) {
                 throw new ComponentNotFoundException ("Component " + componentName + " not found in container.");
             }
             return componentModel;
-            }
+            //}
         }
 
         public void Add (IComponentModel component) {
