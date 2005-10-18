@@ -61,12 +61,12 @@ namespace ComponentModel.Container.Dao {
             ArrayList list = new ArrayList ();
             //VAmos a comprobar que no se procesen ensamblados que sean del
             //core.
-            
+           
             if (assembly.FullName.StartsWith ("mscorlib") ||
                 assembly.FullName.StartsWith ("System")
                     ) {
                 logger.Debug ("Core Assembly detected: " + assembly.FullName);
-                logger.Info ("* SKIPPING * Core Assembly: " + assembly.FullName);
+                logger.Debug ("* SKIPPING * Core Assembly: " + assembly.FullName);
                 return list;
             }
             
