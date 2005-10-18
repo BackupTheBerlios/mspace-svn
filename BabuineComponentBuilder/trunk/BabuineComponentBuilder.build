@@ -30,6 +30,8 @@
     <!-- Directory Tree--> 
     <!-- Localizacion de dependencias -->
     <property name="src" value="src"/>
+    <property name="src_component" value="${src}/${component_name}"/>
+    <property name="src_main" value="${src}/MainComponent"/>
     <property name="lib" value="lib"/>
     <!-- Other mspace components -->
     <property name="components" value="lib/components"/>
@@ -58,13 +60,22 @@
     <target name="build" depends="create-skeleton">
         <csc target="library" output="${bin}/${component_name}.dll" debug="true"
         verbose="false">
-            <sources basedir="${src}">
+            <sources basedir="${src_component}">
                 <include name="**/*.cs"/>
             </sources>
             <references>
                 <include name="**/${lib}/*.dll"/>
                 <include name="**/${lib}/components/*.dll"/>
             </references>
+
+            <pkg-references>
+                <package name="gtk-sharp-2.0"/>
+                <package name="glade-sharp-2.0"/>
+            </pkg-references>
+            
+            <resources>
+                <include name="**/*.glade"/>
+            </resources>
         </csc>
         <tstamp/>
     </target>
@@ -72,9 +83,9 @@
     <!-- Ejecuta el componente (Lo compila como un exe y luego lo ejecuta) -->
     <!-- En este caso solo deberá ejecutar los test de unidad-->
     <target name="run" depends="build">
-        <csc target="winexe" output="${bin}/${component_name}.exe" debug="true"
+        <csc target="winexe" output="${bin}/${component_name}Launcher.exe" debug="true"
         verbose="false">
-            <sources basedir="${src}">
+            <sources basedir="${src_main}">
                 <include name="**/*.cs"/>
             </sources>
             <references>
@@ -82,8 +93,11 @@
                 <include name="**/${lib}/components/*.dll"/>
                 <include name="**/${bin}/*.dll"/>    
             </references>
+            <pkg-references>
+                <package name="gtk-sharp-2.0"/>
+            </pkg-references>
         </csc>
-        <exec program="${bin}/{component_name}.exe" useruntimeengine="true"
+        <exec program="${bin}/${component_name}Launcher.exe" useruntimeengine="true"
         verbose = "false">
             <!-- Esto se queda ahi temporalmente, se deberá hacer que se meta a
             resources/ComponentModelTest.xml-->
