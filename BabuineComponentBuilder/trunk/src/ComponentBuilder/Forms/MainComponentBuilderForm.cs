@@ -8,10 +8,20 @@ namespace ComponentBuilder.Forms {
     public sealed class MainComponentBuilderForm : IViewHandler {
         Glade.XML gxml = null;
         [Widget] Statusbar statusbar1;
+        [Widget] TreeView viewsTreeView, methodsTreeView;
         
         public MainComponentBuilderForm () {
             gxml = new Glade.XML (null, "MainComponentBuilderForm.glade", "window1", null);
             gxml.Autoconnect (this);
+
+            //Vamos a setar los models para los treeViews
+            viewsTreeView.AppendColumn ("View Type Name", new CellRendererText (), "text", 0);
+            
+            methodsTreeView.AppendColumn ("Method Name", new CellRendererText (), "text", 0);
+            methodsTreeView.AppendColumn ("Return Type", new CellRendererText (), "text", 1);
+            methodsTreeView.AppendColumn ("Parameters", new CellRendererText (), "text", 2);
+            methodsTreeView.AppendColumn ("View To Reponse", new CellRendererText (), "text", 3);
+            methodsTreeView.AppendColumn ("Response Method", new CellRendererText (), "text", 4);
         }
         
         public IDataTransferObject GetDataForm () {

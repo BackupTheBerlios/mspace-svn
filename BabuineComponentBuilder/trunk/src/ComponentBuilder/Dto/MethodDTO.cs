@@ -9,11 +9,11 @@ namespace ComponentBuilder.DTO {
         private string methodName;
         private string viewToResponse;
         private string responseMethod;
-        private IList parameterCollection;
+        private IList parametersCollection;
 
-        public IList ParameterCollection {
-            get {return parameterCollection;}
-            set {parameterCollection = value;}
+        public IList ParametersCollection {
+            get {return parametersCollection;}
+            set {parametersCollection = value;}
         }
         
         public string ResponseMethod {

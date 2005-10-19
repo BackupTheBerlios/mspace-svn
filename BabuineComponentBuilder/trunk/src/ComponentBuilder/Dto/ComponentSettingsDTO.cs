@@ -11,18 +11,18 @@ namespace ComponentBuilder.DTO {
         //Gestor de exceptions
         private string classExceptionManager;
         //Collection de vistas
-        private StringCollection viewCollections; 
+        private StringCollection viewsCollection; 
         //Collection de casos de uso
-        private IList methodCollection;
+        private IList methodsCollection;
 
-        public IList MethodCollection {
-            get {return methodCollection;}
-            set {methodCollection = value;}
+        public IList MethodsCollection {
+            get {return methodsCollection;}
+            set {methodsCollection = value;}
         }
 
-        public StringCollection ViewCollections {
-            get {return viewCollections;}
-            set {viewCollections = value;}
+        public StringCollection ViewsCollection {
+            get {return viewsCollection;}
+            set {viewsCollection = value;}
         }
 
         public string ClassExceptionManager {
