@@ -81,6 +81,7 @@
 
       <child>
 	<widget class="GtkTable" id="table1">
+	  <property name="border_width">20</property>
 	  <property name="visible">True</property>
 	  <property name="n_rows">6</property>
 	  <property name="n_columns">2</property>
@@ -89,7 +90,7 @@
 	  <property name="column_spacing">0</property>
 
 	  <child>
-	    <widget class="GtkEntry" id="entry1">
+	    <widget class="GtkEntry" id="componentNameEntry">
 	      <property name="visible">True</property>
 	      <property name="can_focus">True</property>
 	      <property name="editable">True</property>
@@ -110,7 +111,7 @@
 	  </child>
 
 	  <child>
-	    <widget class="GtkEntry" id="entry2">
+	    <widget class="GtkEntry" id="exceptionManagerClassNameEntry">
 	      <property name="visible">True</property>
 	      <property name="can_focus">True</property>
 	      <property name="editable">True</property>

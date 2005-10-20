@@ -1,6 +1,8 @@
 using System;
 using ComponentModel.Interfaces;
 using ComponentModel.DTO;
+using ComponentBuilder.DTO;
+using ComponentBuilder.Forms.TableModel;
 using Gtk;
 using Glade;
 
@@ -29,6 +31,9 @@ namespace ComponentBuilder.Forms {
         }
 
         public void LoadDataForm (IDataTransferObject dto) {
+            if (dto is ComponentSettingsDTO) {
+                ComponentSettingsDTO componentSettingsDTO = (ComponentSettingsDTO) dto;
+            }
         }
 
         public void ClearForm () {
@@ -38,6 +43,9 @@ namespace ComponentBuilder.Forms {
             if (response.ExecutionSuccess) {
                 response.MethodResult = gxml["vbox1"];
                 statusbar1.Push (0, String.Format ("Welcome to Babuine Component Builder: {0}@{1}", Environment.UserName, Environment.MachineName));
+                //Vamos a instanciar también los modelos de las vistas.
+                viewsTreeView.Model = new ViewTableModel ().ListStore;
+                methodsTreeView.Model = new MethodTableModel ().ListStore;
             }
         }
         
