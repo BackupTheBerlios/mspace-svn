@@ -9,6 +9,7 @@ namespace ComponentBuilder.Forms.TableModel {
     public sealed class MethodTableModel : ITableModel {
         private ListStore listStore; 
         private Type[] tipos;
+        private IList list;
 
         public MethodTableModel () {
             tipos = new Type[5];
@@ -16,6 +17,7 @@ namespace ComponentBuilder.Forms.TableModel {
                 tipos[i] = typeof (string);
             }
             listStore = new ListStore (tipos);
+            list = new ArrayList ();
         }
 
         public MethodTableModel (IList list) {
@@ -34,15 +36,21 @@ namespace ComponentBuilder.Forms.TableModel {
                         methodDTO.ResponseMethod,
                         methodDTO.ParametersCollection.ToString ()
                         );
+                list.Add (methodDTO);
             }
         }
 
         public void Clear () {
             listStore.Clear ();
+            list.Clear ();
         }
         
         public ListStore ListStore {
             get {return listStore;}
+        }
+
+        public IList ListModel {
+            get {return list;}
         }
 
     }

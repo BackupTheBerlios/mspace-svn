@@ -9,8 +9,10 @@ namespace ComponentBuilder.Forms.TableModel {
     public sealed class ViewTableModel : ITableModel {
         private ListStore listStore; 
         private Type[] tipos;
+        private IList list;
 
         public ViewTableModel () {
+            list = new ArrayList ();
             tipos = new Type[1];
             for (int i = 0; i < tipos.Length; i++) {
                 tipos[i] = typeof (string);
@@ -26,6 +28,7 @@ namespace ComponentBuilder.Forms.TableModel {
 
         public void Add (string view) {
             listStore.AppendValues (view);
+            list.Add (view);
         }
         
         public void Add (IDataTransferObject dto) {
@@ -34,10 +37,15 @@ namespace ComponentBuilder.Forms.TableModel {
 
         public void Clear () {
             listStore.Clear ();
+            list.Clear ();
         }
         
         public ListStore ListStore {
             get {return listStore;}
+        }
+
+        public IList ListModel {
+            get {return list;}
         }
 
     }
