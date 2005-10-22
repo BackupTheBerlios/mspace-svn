@@ -11,6 +11,10 @@ namespace ComponentBuilder.DTO {
         private string responseMethod;
         private IList parametersCollection;
 
+        public MethodDTO () {
+            parametersCollection = new ArrayList ();
+        }
+        
         public IList ParametersCollection {
             get {return parametersCollection;}
             set {parametersCollection = value;}
