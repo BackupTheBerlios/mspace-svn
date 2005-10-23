@@ -1,0 +1,21 @@
+/*
+ * A view for Component ${component_name}.
+ */
+
+using System;
+using ComponentModel.Interfaces;
+using ComponentModel.DTO;
+
+namespace ${component_name}.Forms {
+    public sealed class ${view_name} : IViewHandler {
+        public void LoadDataForm (IDataTransferObject dto) {
+        }
+
+        public IDataTransferObject GetDataForm () {
+            return null;
+        }
+
+        public void ClearForm () {
+        }
+    }
+}
