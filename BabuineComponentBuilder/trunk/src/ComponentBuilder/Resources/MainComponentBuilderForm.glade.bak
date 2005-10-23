@@ -47,6 +47,7 @@
 	      <property name="visible_horizontal">True</property>
 	      <property name="visible_vertical">True</property>
 	      <property name="is_important">False</property>
+	      <signal name="clicked" handler="OnNewComponentClicked" last_modification_time="Sun, 23 Oct 2005 11:45:01 GMT"/>
 	    </widget>
 	    <packing>
 	      <property name="expand">False</property>
@@ -69,7 +70,20 @@
 	  </child>
 
 	  <child>
-	    <placeholder/>
+	    <widget class="GtkToolButton" id="toolbutton3">
+	      <property name="visible">True</property>
+	      <property name="label" translatable="yes">Generar</property>
+	      <property name="use_underline">True</property>
+	      <property name="stock_id">gtk-execute</property>
+	      <property name="visible_horizontal">True</property>
+	      <property name="visible_vertical">True</property>
+	      <property name="is_important">False</property>
+	      <signal name="clicked" handler="OnGenerateComponentClicked" last_modification_time="Sun, 23 Oct 2005 11:51:35 GMT"/>
+	    </widget>
+	    <packing>
+	      <property name="expand">False</property>
+	      <property name="homogeneous">True</property>
+	    </packing>
 	  </child>
 	</widget>
 	<packing>
@@ -824,7 +838,7 @@
 	      <property name="window_placement">GTK_CORNER_TOP_LEFT</property>
 
 	      <child>
-		<widget class="GtkTreeView" id="treeview1">
+		<widget class="GtkTreeView" id="parametersTreeView">
 		  <property name="visible">True</property>
 		  <property name="can_focus">True</property>
 		  <property name="headers_visible">True</property>

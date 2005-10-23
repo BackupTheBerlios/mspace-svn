@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Specialized;
 using ComponentModel.Interfaces;
 using ComponentBuilder.DTO;
 using ComponentBuilder.Interfaces;
@@ -44,7 +45,17 @@ namespace ComponentBuilder.Forms.TableModel {
             get {return listStore;}
         }
 
-        public IList ListModel {
+        public StringCollection ListModel {
+            get {
+                StringCollection stringCollection = new StringCollection ();
+                foreach (string view in list) {
+                    stringCollection.Add (view);
+                }
+                return stringCollection;
+            }
+        }
+        
+        IList ITableModel.ListModel {
             get {return list;}
         }
 

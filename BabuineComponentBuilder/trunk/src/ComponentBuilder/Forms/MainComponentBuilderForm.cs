@@ -1,6 +1,7 @@
 using System;
 using ComponentModel.Interfaces;
 using ComponentModel.DTO;
+using ComponentModel.Container;
 using ComponentBuilder.DTO;
 using ComponentBuilder.Forms.TableModel;
 using Gtk;
@@ -11,11 +12,13 @@ namespace ComponentBuilder.Forms {
         Glade.XML gxml, newViewDialog, newMethodDialog, newParameterDialog = null;
         [Widget] Statusbar statusbar1;
         [Widget] TreeView viewsTreeView, methodsTreeView;
-
+        [Widget] Entry componentNameEntry, exceptionManagerClassNameEntry;
+        
         ViewTableModel viewTableModel;
         MethodTableModel methodTableModel;
         ParameterTableModel parameterTableModel;
         
+        /* Ctor */
         public MainComponentBuilderForm () {
             //La gracia sería sacar el VBox y pasarlo como si fuera un
             //container.
@@ -32,8 +35,23 @@ namespace ComponentBuilder.Forms {
             methodsTreeView.AppendColumn ("Parameters", new CellRendererText (), "text", 4);
         }
         
+        /*Helpers implementation*/
+
+
         public IDataTransferObject GetDataForm () {
-            return null;
+            if (ValidateForm ()) {
+                ComponentSettingsDTO componentSettingsDTO = new ComponentSettingsDTO ();                
+                componentSettingsDTO.ComponentName = componentNameEntry.Text;
+                componentSettingsDTO.ClassExceptionManager = exceptionManagerClassNameEntry.Text;
+                componentSettingsDTO.ViewsCollection = viewTableModel.ListModel;
+                componentSettingsDTO.MethodsCollection = methodTableModel.ListModel;
+                return componentSettingsDTO;
+            }
+            return new ComponentSettingsDTO ();
+        }
+
+        private bool ValidateForm () {
+            return true;
         }
 
         public void LoadDataForm (IDataTransferObject dto) {
@@ -43,8 +61,16 @@ namespace ComponentBuilder.Forms {
         }
 
         public void ClearForm () {
+            componentNameEntry.Text = String.Empty;
+            exceptionManagerClassNameEntry.Text = String.Empty;
+            viewTableModel = new ViewTableModel ();
+            viewsTreeView.Model = viewTableModel.ListStore;
+            methodTableModel = new MethodTableModel ();
+            methodsTreeView.Model = methodTableModel.ListStore;
         }
 
+        /*Responses */
+        
         public void ResponseShowForm (ResponseMethodDTO response) {
             if (response.ExecutionSuccess) {
                 response.MethodResult = gxml["vbox1"];
@@ -56,11 +82,31 @@ namespace ComponentBuilder.Forms {
                 methodsTreeView.Model = methodTableModel.ListStore;
             }
         }
+
+        public void ResponseGenerateComponent (ResponseMethodDTO response) {
+            if (response.ExecutionSuccess) {
+                Console.WriteLine ("Todo ha ido bien :)");
+            }
+        }
+
+        /*Gui Events*/
         
         private void OnWindow1DeleteEvent (object sender, DeleteEventArgs args) {
             Application.Quit ();
         }
 
+        /*Toolbar*/
+
+        private void OnNewComponentClicked (object sender, EventArgs args) {
+            ClearForm ();
+        }
+
+        private void OnGenerateComponentClicked (object sender, EventArgs args) {
+            ComponentSettingsDTO componentSettingsDTO = (ComponentSettingsDTO) GetDataForm (); 
+            DefaultContainer.Instance.Execute ("ComponentBuilder", "GenerateComponent", new object[]{componentSettingsDTO}, this);
+        }
+        /*Views & Methods buttons*/
+        
         private void OnNewViewClicked (object sender, EventArgs args) {
             newViewDialog = new Glade.XML (null, "MainComponentBuilderForm.glade", "newViewDialog", null);
             Dialog dialog = (Dialog) newViewDialog ["newViewDialog"];
@@ -139,6 +185,7 @@ namespace ComponentBuilder.Forms {
                 default:
                     break;
             }
+            parameterTableModel = null;
             dialog.Destroy ();
             newMethodDialog = null;
         }
