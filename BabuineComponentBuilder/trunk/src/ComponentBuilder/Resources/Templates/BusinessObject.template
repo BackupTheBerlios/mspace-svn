@@ -7,8 +7,7 @@ using System;
 using ComponentModel;
 
 namespace ${component_name}.Bo {
-    [Component ("${component_name}",
-    "${component_name}.Exceptions.${exception_manager_class_name}")]
+    [Component ("${component_name}", "${component_name}.Exceptions.${exception_manager_class_name}")]
     public sealed class ${component_name}ComponentModel : DefaultComponentModel {
         
     }
