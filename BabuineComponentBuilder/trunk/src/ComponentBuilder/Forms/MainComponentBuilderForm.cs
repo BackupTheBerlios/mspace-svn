@@ -49,8 +49,14 @@ namespace ComponentBuilder.Forms {
             }
             return new ComponentSettingsDTO ();
         }
-
+        
         private bool ValidateForm () {
+            if (componentNameEntry.Text.Length == 0) {
+                return false;
+            }
+            if (exceptionManagerClassNameEntry.Text.Length == 0) {
+                return false;
+            }
             return true;
         }
 

@@ -1,6 +1,8 @@
 using System;
+using System.Collections;
 using System.Reflection;
 using System.IO;
+using System.Text;
 using ComponentModel;
 using ComponentBuilder.DTO;
 
@@ -28,14 +30,33 @@ namespace ComponentBuilder.Bo {
          *      tocandole las peloticas al heap creando y eliminando.
          */ 
         
+        private Hashtable GetTemplates () {
+            Hashtable hashtable = new Hashtable ();
+            hashtable = AddToTemplateTable (hashtable, TemplateNamesDTO.BusinessObject);
+            hashtable = AddToTemplateTable (hashtable, TemplateNamesDTO.ExceptionManager);
+            hashtable = AddToTemplateTable (hashtable, TemplateNamesDTO.MethodBody);
+            hashtable = AddToTemplateTable (hashtable, TemplateNamesDTO.ResponseMethod);
+            hashtable = AddToTemplateTable (hashtable, TemplateNamesDTO.ViewHandler);
+            return hashtable;
+        }
+
+        private Hashtable AddToTemplateTable (Hashtable hashtable, string templateName) {
+            StreamReader streamReader = new StreamReader (this.GetType ().Assembly.GetManifestResourceStream (templateName));
+            hashtable.Add (templateName, streamReader.ReadToEnd ());
+            streamReader.Close ();
+            return hashtable;
+        }
+        
         [ComponentMethod ("ComponentBuilder.Forms.MainComponentBuilderForm", "ResponseGenerateComponent")]
         public void GenerateComponent (ComponentSettingsDTO componentSettingsDTO) {
             Console.WriteLine ("/----/");
-            Stream stream = this.GetType ().Assembly.GetManifestResourceStream (TemplateNamesDTO.BusinessObject); 
-            StreamReader streamReader = new StreamReader (stream);
-            Console.WriteLine (streamReader.ReadToEnd ().Replace ("${component_name}", componentSettingsDTO.ComponentName));
-            streamReader.Close ();
-            stream.Close ();
+            Hashtable templateTable = GetTemplates ();
+            IDictionaryEnumerator enumerator = templateTable.GetEnumerator ();
+            while (enumerator.MoveNext ()) {
+                StringBuilder stringBuilder = new StringBuilder ((string)enumerator.Value);
+                stringBuilder = stringBuilder.Replace (TagValuesDTO.ComponentName, componentSettingsDTO.ComponentName);
+                Console.WriteLine (enumerator.Key + "\n" + stringBuilder.ToString ());
+            }
             Console.WriteLine ("/-END-/");
         }
 
