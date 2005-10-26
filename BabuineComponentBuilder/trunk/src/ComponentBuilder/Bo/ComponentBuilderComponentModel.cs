@@ -73,18 +73,17 @@ namespace ComponentBuilder.Bo {
            
             enumerator = (stringCollection as IEnumerable).GetEnumerator ();
             while (enumerator.MoveNext ()) {
-                
                 string currentKey = (string)enumerator.Current;
-                Console.WriteLine (currentKey);
-           
                 StringBuilder stringBuilder = new StringBuilder ((string)componentTable[currentKey]);
-               
                 stringBuilder = stringBuilder.Replace (TagValuesDTO.ComponentName, componentSettingsDTO.ComponentName);
                 stringBuilder = stringBuilder.Replace (TagValuesDTO.ExceptionManager, componentSettingsDTO.ClassExceptionManager);
                 //Ahora para las vistas se discernirá.
-                
+                foreach (String view in componentSettingsDTO.ViewsCollection) { 
+                    if (currentKey.StartsWith (view)) {
+                        stringBuilder = stringBuilder.Replace (TagValuesDTO.ViewName, view);
+                    }
+                }
                 componentTable[currentKey] = stringBuilder.ToString ();
-            
             }
             return componentTable;
         }

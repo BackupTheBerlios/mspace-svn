@@ -47,7 +47,7 @@ namespace ComponentBuilder.Forms {
                 componentSettingsDTO.MethodsCollection = methodTableModel.ListModel;
                 return componentSettingsDTO;
             }
-            return new ComponentSettingsDTO ();
+            return null;
         }
         
         private bool ValidateForm () {
@@ -109,7 +109,9 @@ namespace ComponentBuilder.Forms {
 
         private void OnGenerateComponentClicked (object sender, EventArgs args) {
             ComponentSettingsDTO componentSettingsDTO = (ComponentSettingsDTO) GetDataForm (); 
-            DefaultContainer.Instance.Execute ("ComponentBuilder", "GenerateComponent", new object[]{componentSettingsDTO}, this);
+            if (componentSettingsDTO != null) {
+                DefaultContainer.Instance.Execute ("ComponentBuilder", "GenerateComponent", new object[]{componentSettingsDTO}, this);
+            }
         }
         /*Views & Methods buttons*/
         
