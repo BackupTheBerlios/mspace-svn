@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Specialized;
 using System.Reflection;
 using System.IO;
 using System.Text;
@@ -30,6 +31,7 @@ namespace ComponentBuilder.Bo {
          *      tocandole las peloticas al heap creando y eliminando.
          */ 
         
+        // Obtendrá las templates a pelo.
         private Hashtable GetTemplates () {
             Hashtable hashtable = new Hashtable ();
             hashtable = AddToTemplateTable (hashtable, TemplateNamesDTO.BusinessObject);
@@ -46,16 +48,57 @@ namespace ComponentBuilder.Bo {
             streamReader.Close ();
             return hashtable;
         }
+
+        private Hashtable InitComponentTable (ComponentSettingsDTO componentSettingsDTO, Hashtable templateTable) {
+            Hashtable componentTable = new Hashtable ();
+            //Key fileName without path, string value. 
+            componentTable.Add (componentSettingsDTO.ComponentName+"ComponentModel.cs", templateTable[TemplateNamesDTO.BusinessObject]);
+            //Añadimos el gestor de exceptions
+            componentTable.Add (componentSettingsDTO.ClassExceptionManager+".cs", templateTable[TemplateNamesDTO.ExceptionManager]); 
+            //Añaidmos las vistas
+            StringEnumerator enumerator = componentSettingsDTO.ViewsCollection.GetEnumerator ();
+            while (enumerator.MoveNext ()) {
+                string currentView = enumerator.Current;
+                componentTable.Add (currentView + ".cs", templateTable[TemplateNamesDTO.ViewHandler]); 
+            }
+            return componentTable;
+        }
+
+        private Hashtable FillTable (ComponentSettingsDTO componentSettingsDTO, Hashtable componentTable) {
+            StringCollection stringCollection = new StringCollection ();
+            IEnumerator enumerator = componentTable.Keys.GetEnumerator ();
+            while (enumerator.MoveNext ()) {
+                stringCollection.Add ((string) enumerator.Current);
+            }
+           
+            enumerator = (stringCollection as IEnumerable).GetEnumerator ();
+            while (enumerator.MoveNext ()) {
+                
+                string currentKey = (string)enumerator.Current;
+                Console.WriteLine (currentKey);
+           
+                StringBuilder stringBuilder = new StringBuilder ((string)componentTable[currentKey]);
+               
+                stringBuilder = stringBuilder.Replace (TagValuesDTO.ComponentName, componentSettingsDTO.ComponentName);
+                stringBuilder = stringBuilder.Replace (TagValuesDTO.ExceptionManager, componentSettingsDTO.ClassExceptionManager);
+                //Ahora para las vistas se discernirá.
+                
+                componentTable[currentKey] = stringBuilder.ToString ();
+            
+            }
+            return componentTable;
+        }
         
         [ComponentMethod ("ComponentBuilder.Forms.MainComponentBuilderForm", "ResponseGenerateComponent")]
         public void GenerateComponent (ComponentSettingsDTO componentSettingsDTO) {
             Console.WriteLine ("/----/");
             Hashtable templateTable = GetTemplates ();
-            IDictionaryEnumerator enumerator = templateTable.GetEnumerator ();
+            Hashtable componentTable = InitComponentTable (componentSettingsDTO, templateTable);
+            componentTable = FillTable (componentSettingsDTO, componentTable);
+            
+            IDictionaryEnumerator enumerator = componentTable.GetEnumerator ();
             while (enumerator.MoveNext ()) {
-                StringBuilder stringBuilder = new StringBuilder ((string)enumerator.Value);
-                stringBuilder = stringBuilder.Replace (TagValuesDTO.ComponentName, componentSettingsDTO.ComponentName);
-                Console.WriteLine (enumerator.Key + "\n" + stringBuilder.ToString ());
+                Console.WriteLine (enumerator.Key + "\n" + enumerator.Value);
             }
             Console.WriteLine ("/-END-/");
         }
