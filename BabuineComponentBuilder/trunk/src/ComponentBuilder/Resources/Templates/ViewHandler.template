@@ -17,5 +17,9 @@ namespace ${component_name}.Forms {
 
         public void ClearForm () {
         }
+
+        //Responses
+
+${body}
     }
 }

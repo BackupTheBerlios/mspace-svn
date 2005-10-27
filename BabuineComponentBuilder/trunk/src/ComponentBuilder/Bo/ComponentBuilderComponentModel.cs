@@ -97,24 +97,20 @@ namespace ComponentBuilder.Bo {
                 //TODO:Build parameters
                 StringBuilder methodStringBuilder = new StringBuilder ();
                 foreach (ParameterDTO parameterDTO in methodDTO.ParametersCollection) {
-                    Console.WriteLine ("Parameter detected.");
                     methodStringBuilder.Append (parameterDTO.TypeName);
                     methodStringBuilder.Append (" ");
                     methodStringBuilder.Append (parameterDTO.VarName);
                     methodStringBuilder.Append (", ");
-                    Console.WriteLine (methodStringBuilder.ToString ());
                 }
                 //Eliminamos la coma y el ultimo espacio.
                 if (methodStringBuilder.Length != 0)
                     methodStringBuilder.Remove (methodStringBuilder.Length -2, 2);
-                Console.WriteLine (methodStringBuilder.ToString ());
                 stringBuilder = stringBuilder.Replace (TagValuesDTO.Parameters, methodStringBuilder.ToString ());
                 //Attributes.
                 stringBuilder = stringBuilder.Replace (TagValuesDTO.ComponentName, componentSettingsDTO.ComponentName);
                 stringBuilder = stringBuilder.Replace (TagValuesDTO.ViewName, methodDTO.ViewToResponse);
                 stringBuilder = stringBuilder.Replace (TagValuesDTO.ResponseName, methodDTO.ResponseMethod);
             }
-            Console.WriteLine ("MethodStringBuilder: \n" +  stringBuilder.ToString ());
             //Obtenemos el BO del componente y seteamos el valor, reemplazando.
             //
             StringCollection stringCollection = new StringCollection ();
@@ -140,6 +136,24 @@ namespace ComponentBuilder.Bo {
             return componentTable;
         }
         
+        private Hashtable FillResponses (ComponentSettingsDTO componentSettingsDTO, Hashtable componentTable, Hashtable templateTable) {
+            foreach (string viewName in componentSettingsDTO.ViewsCollection) {
+                StringBuilder responseBuilder = new StringBuilder ();
+                foreach (MethodDTO methodDTO in componentSettingsDTO.MethodsCollection) {
+                    if (methodDTO.ViewToResponse.Equals (viewName)) {
+                        responseBuilder = responseBuilder.Append (templateTable[TemplateNamesDTO.ResponseMethod]);
+                        responseBuilder = responseBuilder.Replace (TagValuesDTO.ResponseName, methodDTO.ResponseMethod);
+                    }
+                }
+                Console.WriteLine (responseBuilder.ToString () + " at ViewName " +  viewName);
+                StringBuilder viewBuilder = new StringBuilder ((string)componentTable [viewName + ".cs"]);
+                Console.WriteLine (viewBuilder.ToString ());
+                viewBuilder = viewBuilder.Replace (TagValuesDTO.Body, responseBuilder.ToString ());
+                componentTable [viewName + ".cs"] = viewBuilder.ToString ();
+            }
+            return componentTable;
+        }
+        
         [ComponentMethod ("ComponentBuilder.Forms.MainComponentBuilderForm", "ResponseGenerateComponent")]
         public void GenerateComponent (ComponentSettingsDTO componentSettingsDTO) {
             Console.WriteLine ("/----/");
@@ -148,6 +162,7 @@ namespace ComponentBuilder.Bo {
             componentTable = FillTable (componentSettingsDTO, componentTable);
             //Haremos una segunda pasada para construir los métodos.
             componentTable = FillMethods (componentSettingsDTO, componentTable, templateTable);
+            componentTable = FillResponses (componentSettingsDTO, componentTable, templateTable);
             
             IDictionaryEnumerator enumerator = componentTable.GetEnumerator ();
             while (enumerator.MoveNext ()) {
