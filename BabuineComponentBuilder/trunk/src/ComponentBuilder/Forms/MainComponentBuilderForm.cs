@@ -171,19 +171,32 @@ namespace ComponentBuilder.Forms {
             parametersTreeView.Model = parameterTableModel.ListStore;
             //Barajar la opción de si merece la pena poner otro controlador para
             //esta vista.
+            //
+            //Grrrr !! Puta mierda de TreeModels !!!!!
+            ComboBox viewToResponseCombo = (ComboBox) newMethodDialog ["viewToResponseCombo"];
+            TreeStore treeStore = new TreeStore (typeof (string));
+            viewToResponseCombo.Model = treeStore;
+            foreach (string viewName in viewTableModel.ListModel) {
+                treeStore.AppendValues (viewName);
+            }
+            
             switch (dialog.Run ()) {
                 case  (int) ResponseType.Ok:
                     Entry nameEntry = (Entry) newMethodDialog ["nameEntry"];
                     Entry returnTypeEntry = (Entry) newMethodDialog ["returnTypeEntry"];
-                    Entry viewToResponseEntry = (Entry) newMethodDialog ["viewToResponseEntry"];
+                    //Entry viewToResponseEntry = (Entry) newMethodDialog ["viewToResponseEntry"];
                     Entry responseMethodEntry = (Entry) newMethodDialog ["responseMethodEntry"];
                     if (nameEntry.Text.Length != 0 && returnTypeEntry.Text.Length != 0 &&
-                        viewToResponseEntry.Text.Length != 0 && responseMethodEntry.Text.Length != 0    
+                        responseMethodEntry.Text.Length != 0    
                         ) {
                         MethodDTO methodDTO = new MethodDTO ();
                         methodDTO.MethodName = nameEntry.Text;
                         methodDTO.ReturnType = returnTypeEntry.Text;
-                        methodDTO.ViewToResponse = viewToResponseEntry.Text;
+                        //methodDTO.ViewToResponse = viewToResponseCombo.ActiveText;
+                        TreeIter iter;
+                        viewToResponseCombo.GetActiveIter (out iter);
+                        methodDTO.ViewToResponse = (string) viewToResponseCombo.Model.GetValue (iter, 0);
+                        //
                         methodDTO.ResponseMethod = responseMethodEntry.Text;
                         methodDTO.ParametersCollection = parameterTableModel.ListModel;
                         methodTableModel.Add (methodDTO);

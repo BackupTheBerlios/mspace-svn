@@ -145,9 +145,7 @@ namespace ComponentBuilder.Bo {
                         responseBuilder = responseBuilder.Replace (TagValuesDTO.ResponseName, methodDTO.ResponseMethod);
                     }
                 }
-                Console.WriteLine (responseBuilder.ToString () + " at ViewName " +  viewName);
                 StringBuilder viewBuilder = new StringBuilder ((string)componentTable [viewName + ".cs"]);
-                Console.WriteLine (viewBuilder.ToString ());
                 viewBuilder = viewBuilder.Replace (TagValuesDTO.Body, responseBuilder.ToString ());
                 componentTable [viewName + ".cs"] = viewBuilder.ToString ();
             }
@@ -156,20 +154,25 @@ namespace ComponentBuilder.Bo {
         
         [ComponentMethod ("ComponentBuilder.Forms.MainComponentBuilderForm", "ResponseGenerateComponent")]
         public void GenerateComponent (ComponentSettingsDTO componentSettingsDTO) {
-            Console.WriteLine ("/----/");
             Hashtable templateTable = GetTemplates ();
             Hashtable componentTable = InitComponentTable (componentSettingsDTO, templateTable);
             componentTable = FillTable (componentSettingsDTO, componentTable);
             //Haremos una segunda pasada para construir los métodos.
             componentTable = FillMethods (componentSettingsDTO, componentTable, templateTable);
+            //Tercera pasada para conseguir las respuestas.
             componentTable = FillResponses (componentSettingsDTO, componentTable, templateTable);
+            
+            //Ahora solo resta guardarlo todo en el disco duro.  Con la ruta por
+            //defecto que se haya configurado.
+            
+
+            //Se contemplará también el escribir un fichero nant con la
+            //información necesaria.
             
             IDictionaryEnumerator enumerator = componentTable.GetEnumerator ();
             while (enumerator.MoveNext ()) {
                 Console.WriteLine (enumerator.Key + "\n" + enumerator.Value);
             }
-            Console.WriteLine ("/-END-/");
         }
-
     }
 }
