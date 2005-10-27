@@ -185,6 +185,7 @@ namespace ComponentBuilder.Forms {
                         methodDTO.ReturnType = returnTypeEntry.Text;
                         methodDTO.ViewToResponse = viewToResponseEntry.Text;
                         methodDTO.ResponseMethod = responseMethodEntry.Text;
+                        methodDTO.ParametersCollection = parameterTableModel.ListModel;
                         methodTableModel.Add (methodDTO);
                     }
                     break;
