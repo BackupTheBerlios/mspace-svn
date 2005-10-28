@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Text;
 using ComponentModel.Interfaces;
 using ComponentBuilder.DTO;
 using ComponentBuilder.Interfaces;
@@ -29,12 +30,24 @@ namespace ComponentBuilder.Forms.TableModel {
         public void Add (IDataTransferObject dto) {
             if (dto is MethodDTO) {
                 MethodDTO methodDTO = (MethodDTO) dto;
+                StringBuilder stringBuilder = new StringBuilder ();
+                foreach (ParameterDTO parameterDTO in methodDTO.ParametersCollection) {
+                    stringBuilder = stringBuilder.Append (parameterDTO.TypeName);
+                    stringBuilder = stringBuilder.Append (" ");
+                    stringBuilder = stringBuilder.Append (parameterDTO.VarName);
+                    stringBuilder = stringBuilder.Append (", ");
+                }
+                if (stringBuilder.Length != 0) {
+                    stringBuilder = stringBuilder.Remove (stringBuilder.Length -2, 2);
+                }
+                
                 listStore.AppendValues (
                         methodDTO.MethodName,
                         methodDTO.ReturnType,
                         methodDTO.ViewToResponse,
                         methodDTO.ResponseMethod,
-                        methodDTO.ParametersCollection.ToString ()
+                        stringBuilder.ToString ()
+                        //methodDTO.ParametersCollection.ToString ()
                         );
                 list.Add (methodDTO);
             }
