@@ -9,5 +9,6 @@ namespace ComponentBuilder.DTO {
         internal const string MethodBody = "MethodBody.template";
         internal const string ResponseMethod = "ResponseMethod.template";
         internal const string ViewHandler = "ViewHandler.template";
+        internal const string NAntBuildfile = "NAnt.template";
     }
 }

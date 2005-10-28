@@ -39,6 +39,7 @@ namespace ComponentBuilder.Bo {
             hashtable = AddToTemplateTable (hashtable, TemplateNamesDTO.MethodBody);
             hashtable = AddToTemplateTable (hashtable, TemplateNamesDTO.ResponseMethod);
             hashtable = AddToTemplateTable (hashtable, TemplateNamesDTO.ViewHandler);
+            hashtable = AddToTemplateTable (hashtable, TemplateNamesDTO.NAntBuildfile);
             return hashtable;
         }
 
@@ -61,6 +62,8 @@ namespace ComponentBuilder.Bo {
                 string currentView = enumerator.Current;
                 componentTable.Add (currentView + ".cs", templateTable[TemplateNamesDTO.ViewHandler]); 
             }
+            //Añadimos el file nant.
+            componentTable.Add (componentSettingsDTO.ComponentName+".build", templateTable[TemplateNamesDTO.NAntBuildfile]);
             return componentTable;
         }
 
@@ -75,7 +78,10 @@ namespace ComponentBuilder.Bo {
             while (enumerator.MoveNext ()) {
                 string currentKey = (string)enumerator.Current;
                 StringBuilder stringBuilder = new StringBuilder ((string)componentTable[currentKey]);
-                stringBuilder = stringBuilder.Replace (TagValuesDTO.ComponentName, componentSettingsDTO.ComponentName);
+                if (currentKey.EndsWith (".build")) 
+                    stringBuilder = stringBuilder.Replace (TagValuesDTO.NAntComponentName, componentSettingsDTO.ComponentName);
+                else 
+                    stringBuilder = stringBuilder.Replace (TagValuesDTO.ComponentName, componentSettingsDTO.ComponentName);
                 stringBuilder = stringBuilder.Replace (TagValuesDTO.ExceptionManager, componentSettingsDTO.ClassExceptionManager);
                 //Ahora para las vistas se discernira para cada una.
                 foreach (String view in componentSettingsDTO.ViewsCollection) { 
@@ -162,7 +168,7 @@ namespace ComponentBuilder.Bo {
             //Tercera pasada para conseguir las respuestas.
             componentTable = FillResponses (componentSettingsDTO, componentTable, templateTable);
             
-            //Ahora solo resta guardarlo todo en el disco duro.  Con la ruta por
+            //Ahora solo resta guardarlo en archivos.  Con la ruta por
             //defecto que se haya configurado.
             
 
