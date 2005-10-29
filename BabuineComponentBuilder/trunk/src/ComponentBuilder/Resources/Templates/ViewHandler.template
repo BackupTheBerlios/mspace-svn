@@ -6,7 +6,7 @@ using System;
 using ComponentModel.Interfaces;
 using ComponentModel.DTO;
 
-namespace ${component_name}.Forms {
+namespace ${prefix}${component_name}.Forms {
     public sealed class ${view_name} : IViewHandler {
         public void LoadDataForm (IDataTransferObject dto) {
         }

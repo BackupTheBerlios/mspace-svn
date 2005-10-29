@@ -12,5 +12,6 @@ namespace ComponentBuilder.DTO {
         internal const string MethodName = "${method_name}";
         internal const string Body = "${body}";
         internal const string Parameters = "${parameters}";
+        internal const string Prefix = "${prefix}";
     }
 }

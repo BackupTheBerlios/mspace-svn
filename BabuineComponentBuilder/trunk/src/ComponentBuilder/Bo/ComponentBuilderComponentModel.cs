@@ -99,7 +99,9 @@ namespace ComponentBuilder.Bo {
                 componentTable.Add (currentView + ".cs", templateTable[TemplateNamesDTO.ViewHandler]); 
             }
             //Añadimos el file nant.
-            componentTable.Add (componentSettingsDTO.ComponentName+".build", templateTable[TemplateNamesDTO.NAntBuildfile]);
+            if (preferencesDTO.GenerateBuildfile) {
+                componentTable.Add (componentSettingsDTO.ComponentName+".build", templateTable[TemplateNamesDTO.NAntBuildfile]);
+            }
             return componentTable;
         }
 
@@ -119,6 +121,16 @@ namespace ComponentBuilder.Bo {
                 else 
                     stringBuilder = stringBuilder.Replace (TagValuesDTO.ComponentName, componentSettingsDTO.ComponentName);
                 stringBuilder = stringBuilder.Replace (TagValuesDTO.ExceptionManager, componentSettingsDTO.ClassExceptionManager);
+                if (preferencesDTO.PrefixNamespace.Length != 0) {
+                    //Lo seteará y añadirá un punto.
+                    StringBuilder prefixBuilder = new StringBuilder (preferencesDTO.PrefixNamespace);
+                    prefixBuilder = prefixBuilder.Append (".");
+                    stringBuilder = stringBuilder.Replace (TagValuesDTO.Prefix, prefixBuilder.ToString ());
+                }
+                else {
+                    //No lo seteara el prefix namespace
+                    stringBuilder = stringBuilder.Replace (TagValuesDTO.Prefix, preferencesDTO.PrefixNamespace);
+                }
                 //Ahora para las vistas se discernira para cada una.
                 foreach (String view in componentSettingsDTO.ViewsCollection) { 
                     if (currentKey.StartsWith (view)) {

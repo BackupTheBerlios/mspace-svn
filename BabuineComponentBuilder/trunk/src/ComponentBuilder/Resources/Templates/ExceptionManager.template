@@ -5,7 +5,7 @@
 using System;
 using ComponentModel.Interfaces;
 
-namespace ${component_name}.Exceptions {
+namespace ${prefix}${component_name}.Exceptions {
     public sealed class ${exception_manager_class_name} : IExceptionManager {
         public void ProcessException (Exception exception) {
         }

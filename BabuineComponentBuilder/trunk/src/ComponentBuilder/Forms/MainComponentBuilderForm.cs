@@ -224,8 +224,27 @@ namespace ComponentBuilder.Forms {
             newMethodDialog = null;
         }
 
+        private void OnBrowseButtonClicked (object sender, EventArgs args) {
+            Entry defaultOutputPathEntry = (Entry) preferencesDialog ["defaultOutputPathEntry"]; 
+            FileChooserDialog chooser = new FileChooserDialog ("Select a path:", (Window)preferencesDialog["preferencesDialog"], FileChooserAction.SelectFolder, Stock.Ok);
+            if (defaultOutputPathEntry.Text.Length != 0) {
+                chooser.SetCurrentFolder (defaultOutputPathEntry.Text);
+            }
+            chooser.AddButton (Stock.Ok, ResponseType.Accept);
+            ResponseType responseType = (ResponseType) chooser.Run ();
+            switch (responseType) {
+                case ResponseType.Accept:
+                    defaultOutputPathEntry.Text = chooser.CurrentFolder;
+                    break;
+                default:
+                    break;
+            }
+            chooser.Destroy ();
+        }
+
         private void OnPreferencesClicked (object sender, EventArgs args) {
             preferencesDialog = new Glade.XML (null, "MainComponentBuilderForm.glade", "preferencesDialog", null);
+            preferencesDialog.Autoconnect (this);
             Dialog dialog = (Dialog) preferencesDialog  ["preferencesDialog"];
             Entry defaultOutputPathEntry = (Entry) preferencesDialog ["defaultOutputPathEntry"];
             Entry prefixNamespaceEntry = (Entry) preferencesDialog ["prefixNamespaceEntry"];
