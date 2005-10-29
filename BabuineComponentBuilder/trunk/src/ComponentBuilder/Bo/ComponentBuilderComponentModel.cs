@@ -4,12 +4,48 @@ using System.Collections.Specialized;
 using System.Reflection;
 using System.IO;
 using System.Text;
+using System.Xml;
+using System.Xml.Serialization;
 using ComponentModel;
 using ComponentBuilder.DTO;
 
 namespace ComponentBuilder.Bo {
     [Component ("ComponentBuilder", "ComponentBuilder.Exceptions.ComponentBuilderExceptionManager")]
     public sealed class ComponentBuilderComponentModel : DefaultComponentModel {
+        
+        private PreferencesDTO preferencesDTO;
+        
+        public PreferencesDTO PreferencesDTO {
+            get {return preferencesDTO;}
+            set {preferencesDTO = value;}
+        }
+
+        public ComponentBuilderComponentModel () {
+            try {
+                preferencesDTO = DeserializePreferences ();
+            }
+            catch (Exception exception) {
+                preferencesDTO = new PreferencesDTO ();
+            }
+        }
+        
+        [ComponentMethod ("ComponentBuilder.Forms.MainComponentBuilderForm", "ResponseSerializePreferences")]
+        public void SerializePreferences () {
+            XmlSerializer xmlSerializer = new XmlSerializer (typeof (PreferencesDTO));
+            StreamWriter streamWriter = new StreamWriter (Path.Combine ("resources", "ComponentBuilder.config"));
+            xmlSerializer.Serialize (streamWriter, preferencesDTO);
+            streamWriter.Close ();
+        }
+
+        [ComponentMethod ("ComponentBuilder.Forms.MainComponentBuilderForm", "ResponseDeserializePreferences")]
+        public PreferencesDTO DeserializePreferences () {
+            XmlSerializer xmlSerializer = new XmlSerializer (typeof (PreferencesDTO));
+            FileStream fileStream = new FileStream (Path.Combine ("resources", "ComponentBuilder.config"), FileMode.Open);
+            preferencesDTO = (PreferencesDTO) xmlSerializer.Deserialize (fileStream);
+            fileStream.Close ();
+            return preferencesDTO;
+        }
+
         
         [ComponentMethod ("ComponentBuilder.Forms.MainComponentBuilderForm", "ResponseShowForm")]
         public void ShowForm () {

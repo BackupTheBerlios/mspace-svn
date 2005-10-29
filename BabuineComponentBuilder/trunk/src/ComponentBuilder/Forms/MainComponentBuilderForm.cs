@@ -9,7 +9,7 @@ using Glade;
 
 namespace ComponentBuilder.Forms {
     public sealed class MainComponentBuilderForm : IViewHandler {
-        Glade.XML gxml, newViewDialog, newMethodDialog, newParameterDialog = null;
+        Glade.XML gxml, newViewDialog, newMethodDialog, newParameterDialog, preferencesDialog = null;
         [Widget] Statusbar statusbar1;
         [Widget] TreeView viewsTreeView, methodsTreeView;
         [Widget] Entry componentNameEntry, exceptionManagerClassNameEntry;
@@ -92,6 +92,18 @@ namespace ComponentBuilder.Forms {
         public void ResponseGenerateComponent (ResponseMethodDTO response) {
             if (response.ExecutionSuccess) {
                 Console.WriteLine ("Todo ha ido bien :)");
+            }
+        }
+
+        public void ResponseSerializePreferences (ResponseMethodDTO response) {
+            if (response.ExecutionSuccess) {
+                Console.WriteLine ("Configuration saved.");
+            }
+        }
+
+        public void ResponseDeserializePreferences (ResponseMethodDTO response) {
+            if (response.ExecutionSuccess) {
+                Console.WriteLine ("Configuracion guardada.");
             }
         }
 
@@ -210,6 +222,38 @@ namespace ComponentBuilder.Forms {
             parameterTableModel = null;
             dialog.Destroy ();
             newMethodDialog = null;
+        }
+
+        private void OnPreferencesClicked (object sender, EventArgs args) {
+            preferencesDialog = new Glade.XML (null, "MainComponentBuilderForm.glade", "preferencesDialog", null);
+            Dialog dialog = (Dialog) preferencesDialog  ["preferencesDialog"];
+            Entry defaultOutputPathEntry = (Entry) preferencesDialog ["defaultOutputPathEntry"];
+            Entry prefixNamespaceEntry = (Entry) preferencesDialog ["prefixNamespaceEntry"];
+            CheckButton generateCheck = (CheckButton) preferencesDialog ["generateCheck"];
+            IComponentModel componentModel = DefaultContainer.Instance.GetComponentByName ("ComponentBuilder");
+            PreferencesDTO preferencesDTO = (PreferencesDTO) componentModel.GetProperty ("PreferencesDTO"); 
+            // Vamos a cargar los datos.
+            defaultOutputPathEntry.Text = preferencesDTO.OutputPath;
+            prefixNamespaceEntry.Text = preferencesDTO.PrefixNamespace;
+            generateCheck.Active = preferencesDTO.GenerateBuildfile;
+            //
+            switch (dialog.Run ()) {
+                case (int) ResponseType.Ok:
+                    preferencesDTO = new PreferencesDTO ();
+                    preferencesDTO.OutputPath = defaultOutputPathEntry.Text;
+                    preferencesDTO.PrefixNamespace = prefixNamespaceEntry.Text;
+                    preferencesDTO.GenerateBuildfile = generateCheck.Active;
+                    //Primero asignar la propiedad y luego salvar.
+                    componentModel.SetProperty ("PreferencesDTO", preferencesDTO);
+                    componentModel.Execute ("SerializePreferences", null, this);
+                    break;
+                case (int) ResponseType.Cancel:
+                    break;
+                default:
+                    break;
+            }
+            dialog.Destroy ();
+            preferencesDialog = null;
         }
     }
 }
