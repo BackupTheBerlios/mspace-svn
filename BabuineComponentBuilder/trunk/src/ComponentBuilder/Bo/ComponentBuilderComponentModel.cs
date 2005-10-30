@@ -161,7 +161,20 @@ namespace ComponentBuilder.Bo {
                     methodStringBuilder.Remove (methodStringBuilder.Length -2, 2);
                 stringBuilder = stringBuilder.Replace (TagValuesDTO.Parameters, methodStringBuilder.ToString ());
                 //Attributes.
+                //Set up prefix
+                
+                if (preferencesDTO.PrefixNamespace.Length != 0) {
+                    //Lo seteará y añadirá un punto.
+                    StringBuilder prefixBuilder = new StringBuilder (preferencesDTO.PrefixNamespace);
+                    prefixBuilder = prefixBuilder.Append (".");
+                    stringBuilder = stringBuilder.Replace (TagValuesDTO.Prefix, prefixBuilder.ToString ());
+                }
+                else {
+                    //No lo seteara el prefix namespace
+                    stringBuilder = stringBuilder.Replace (TagValuesDTO.Prefix, preferencesDTO.PrefixNamespace);
+                } 
                 stringBuilder = stringBuilder.Replace (TagValuesDTO.ComponentName, componentSettingsDTO.ComponentName);
+            
                 stringBuilder = stringBuilder.Replace (TagValuesDTO.ViewName, methodDTO.ViewToResponse);
                 stringBuilder = stringBuilder.Replace (TagValuesDTO.ResponseName, methodDTO.ResponseMethod);
             }
