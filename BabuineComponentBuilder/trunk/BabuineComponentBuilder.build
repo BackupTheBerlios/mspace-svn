@@ -76,6 +76,7 @@
             <resources>
                 <include name="**/*.glade"/>
                 <include name="**/*.template"/>
+                <include name="**/*.png"/>
             </resources>
         </csc>
         <tstamp/>

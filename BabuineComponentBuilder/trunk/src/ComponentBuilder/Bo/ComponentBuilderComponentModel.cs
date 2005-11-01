@@ -219,6 +219,64 @@ namespace ComponentBuilder.Bo {
             return componentTable;
         }
         
+        private DirectoryInfo CreateSkeleton (ComponentSettingsDTO componentSettingsDTO) {
+            DirectoryInfo directoryInfo = new DirectoryInfo (preferencesDTO.OutputPath); 
+            DirectoryInfo componentDirectoryInfo = directoryInfo.CreateSubdirectory (componentSettingsDTO.ComponentName);
+            //Ahora crearemos uno para cada cosa, Bo, Forms, Dto, Exceptions ...
+            componentDirectoryInfo.CreateSubdirectory ("Bo");
+            componentDirectoryInfo.CreateSubdirectory ("Forms");
+            componentDirectoryInfo.CreateSubdirectory ("Dto");
+            componentDirectoryInfo.CreateSubdirectory ("Exceptions");
+            componentDirectoryInfo.CreateSubdirectory ("Resources");
+        
+            return componentDirectoryInfo;
+        }
+
+        private void WriteFiles (Hashtable componentTable, DirectoryInfo componentDirectory, ComponentSettingsDTO componentSettingsDTO) {
+            StringCollection stringCollection = new StringCollection ();
+            IEnumerator enumerator = componentTable.Keys.GetEnumerator ();
+            while (enumerator.MoveNext ()) {
+                stringCollection.Add ((string) enumerator.Current);
+            }
+           
+            enumerator = (stringCollection as IEnumerable).GetEnumerator ();
+            while (enumerator.MoveNext ()) {
+                string fileName = (string) enumerator.Current;
+                string content = (string) componentTable[fileName];
+                if (fileName.EndsWith ("ComponentModel.cs")) {
+                    WriteFileAt (fileName, componentDirectory.GetDirectories ("Bo")[0], content);
+                }
+                if (fileName.StartsWith (componentSettingsDTO.ClassExceptionManager)) {
+                    WriteFileAt (fileName, componentDirectory.GetDirectories ("Exceptions")[0], content);
+                }
+                IEnumerator auxEnumerator = (componentSettingsDTO.ViewsCollection as IEnumerable).GetEnumerator ();
+                while (auxEnumerator.MoveNext ()) {
+                    if (fileName.StartsWith ((string)auxEnumerator.Current)) {
+                        WriteFileAt (fileName, componentDirectory.GetDirectories ("Forms")[0], content);
+                    }
+                }
+            } 
+
+            if (preferencesDTO.GenerateBuildfile) {
+                enumerator.Reset ();
+                while (enumerator.MoveNext ()) {
+                    string fileName = (string) enumerator.Current;
+                    if (fileName.StartsWith (componentSettingsDTO.ComponentName) && fileName.EndsWith (".build")) {
+                        string content = (string) componentTable [fileName];
+                        WriteFileAt (fileName, componentDirectory, content);
+                    }
+                }
+            }
+        }
+
+        private void WriteFileAt (string fileName, DirectoryInfo directoryTo, string content) {
+            FileStream fileStream = new FileStream (Path.Combine (directoryTo.ToString (),fileName), FileMode.Create);
+            StreamWriter streamWriter = new StreamWriter (fileStream);
+            streamWriter.Write (content);
+            streamWriter.Close ();
+            fileStream.Close ();
+        }
+        
         [ComponentMethod ("ComponentBuilder.Forms.MainComponentBuilderForm", "ResponseGenerateComponent")]
         public void GenerateComponent (ComponentSettingsDTO componentSettingsDTO) {
             Hashtable templateTable = GetTemplates ();
@@ -231,10 +289,8 @@ namespace ComponentBuilder.Bo {
             
             //Ahora solo resta guardarlo en archivos.  Con la ruta por
             //defecto que se haya configurado.
-            
-
-            //Se contemplará también el escribir un fichero nant con la
-            //información necesaria.
+            DirectoryInfo componentDirectory = CreateSkeleton (componentSettingsDTO); 
+            WriteFiles (componentTable, componentDirectory, componentSettingsDTO); 
             
             IDictionaryEnumerator enumerator = componentTable.GetEnumerator ();
             while (enumerator.MoveNext ()) {
