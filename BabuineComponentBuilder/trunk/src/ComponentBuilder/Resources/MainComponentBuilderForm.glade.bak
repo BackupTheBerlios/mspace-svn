@@ -1330,8 +1330,7 @@
 
 	  <child>
 	    <widget class="GtkCheckButton" id="generateCheck">
-	      <property name="visible">True</property>
-	      <property name="can_focus">True</property>
+	      <property name="sensitive">False</property>
 	      <property name="label" translatable="yes">Generate</property>
 	      <property name="use_underline">True</property>
 	      <property name="relief">GTK_RELIEF_NORMAL</property>

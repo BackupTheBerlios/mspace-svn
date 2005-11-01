@@ -11,11 +11,15 @@ namespace ComponentBuilder.DTO {
         public PreferencesDTO () {
             OutputPath = String.Empty;
             PrefixNamespace = String.Empty;
-            GenerateBuildfile = true;
+            //GenerateBuildfile = true;
+            GenerateBuildfile = false;
         }
         
         public bool GenerateBuildfile {
-            get {return generateBuildfile;}
+            get {
+                //return generateBuildfile;
+                return false;
+            }
             set {generateBuildfile = value;}
         }
         

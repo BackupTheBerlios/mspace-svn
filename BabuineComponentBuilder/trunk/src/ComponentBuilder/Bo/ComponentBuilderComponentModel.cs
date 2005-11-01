@@ -292,10 +292,12 @@ namespace ComponentBuilder.Bo {
             DirectoryInfo componentDirectory = CreateSkeleton (componentSettingsDTO); 
             WriteFiles (componentTable, componentDirectory, componentSettingsDTO); 
             
+            /**
             IDictionaryEnumerator enumerator = componentTable.GetEnumerator ();
             while (enumerator.MoveNext ()) {
                 Console.WriteLine (enumerator.Key + "\n" + enumerator.Value);
             }
+            */
         }
     }
 }
