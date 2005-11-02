@@ -76,6 +76,7 @@ namespace ComponentBuilder.Bo {
             hashtable = AddToTemplateTable (hashtable, TemplateNamesDTO.ResponseMethod);
             hashtable = AddToTemplateTable (hashtable, TemplateNamesDTO.ViewHandler);
             hashtable = AddToTemplateTable (hashtable, TemplateNamesDTO.NAntBuildfile);
+            //hashtable = AddToTemplateTable (hashtable, TemplateNamesDTO.AssemblyInfo);
             return hashtable;
         }
 
@@ -92,6 +93,12 @@ namespace ComponentBuilder.Bo {
             componentTable.Add (componentSettingsDTO.ComponentName+"ComponentModel.cs", templateTable[TemplateNamesDTO.BusinessObject]);
             //Añadimos el gestor de exceptions
             componentTable.Add (componentSettingsDTO.ClassExceptionManager+".cs", templateTable[TemplateNamesDTO.ExceptionManager]); 
+            //Añadimos el manifiesto.
+            /**
+            StringBuilder manifestBuilder = new StringBuilder (TemplateNamesDTO.AssemblyInfo);
+            manifestBuilder = manifestBuilder.Replace ("template", "cs");
+            componentTable.Add (manifestBuilder.ToString (), templateTable[TemplateNamesDTO.AssemblyInfo]);
+            */
             //Añaidmos las vistas
             StringEnumerator enumerator = componentSettingsDTO.ViewsCollection.GetEnumerator ();
             while (enumerator.MoveNext ()) {
@@ -248,6 +255,9 @@ namespace ComponentBuilder.Bo {
                 }
                 if (fileName.StartsWith (componentSettingsDTO.ClassExceptionManager)) {
                     WriteFileAt (fileName, componentDirectory.GetDirectories ("Exceptions")[0], content);
+                }
+                if (fileName.StartsWith ("AssemblyInfo")) {
+                    WriteFileAt (fileName, componentDirectory, content);
                 }
                 IEnumerator auxEnumerator = (componentSettingsDTO.ViewsCollection as IEnumerable).GetEnumerator ();
                 while (auxEnumerator.MoveNext ()) {

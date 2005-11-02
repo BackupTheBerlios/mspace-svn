@@ -9,7 +9,7 @@ using Glade;
 
 namespace ComponentBuilder.Forms {
     public sealed class MainComponentBuilderForm : IViewHandler {
-        Glade.XML gxml, newViewDialog, newMethodDialog, newParameterDialog, preferencesDialog = null;
+        Glade.XML gxml, newViewDialog, newMethodDialog, newParameterDialog, preferencesDialog, aboutDialog = null;
         [Widget] Statusbar statusbar1;
         [Widget] TreeView viewsTreeView, methodsTreeView;
         [Widget] Entry componentNameEntry, exceptionManagerClassNameEntry;
@@ -111,6 +111,28 @@ namespace ComponentBuilder.Forms {
         
         private void OnWindow1DeleteEvent (object sender, DeleteEventArgs args) {
             Application.Quit ();
+        }
+
+        /*Menu Bar*/
+        private void OnMenuNewActivate (object sender, EventArgs args) {
+        }
+
+        private void OnMenuOpenActivate (object sender, EventArgs args) {
+        }
+
+        private void OnMenuSaveActivate (object sender, EventArgs args) {
+        }
+
+        private void OnMenuSaveAsActivate (object sender, EventArgs args) {
+        }
+
+        private void OnMenuExitActivate (object sender, EventArgs args) {
+            Application.Quit ();
+        }
+        
+        private void OnMenuAboutActivate (object sender, EventArgs args) {
+            aboutDialog = new Glade.XML (null, "MainComponentBuilderForm.glade", "aboutDialog", null);
+            aboutDialog = null;
         }
 
         /*Toolbar*/

@@ -29,7 +29,155 @@
       <property name="spacing">0</property>
 
       <child>
-	<placeholder/>
+	<widget class="GtkMenuBar" id="menubar1">
+	  <property name="visible">True</property>
+	  <property name="pack_direction">GTK_PACK_DIRECTION_LTR</property>
+	  <property name="child_pack_direction">GTK_PACK_DIRECTION_LTR</property>
+
+	  <child>
+	    <widget class="GtkMenuItem" id="menuitem1">
+	      <property name="visible">True</property>
+	      <property name="label" translatable="yes">_Archivo</property>
+	      <property name="use_underline">True</property>
+
+	      <child>
+		<widget class="GtkMenu" id="menuitem1_menu">
+
+		  <child>
+		    <widget class="GtkImageMenuItem" id="nuevo1">
+		      <property name="visible">True</property>
+		      <property name="label">gtk-new</property>
+		      <property name="use_stock">True</property>
+		      <signal name="activate" handler="OnMenuNewActivate" last_modification_time="Wed, 02 Nov 2005 23:23:31 GMT"/>
+		    </widget>
+		  </child>
+
+		  <child>
+		    <widget class="GtkImageMenuItem" id="abrir1">
+		      <property name="visible">True</property>
+		      <property name="label">gtk-open</property>
+		      <property name="use_stock">True</property>
+		      <signal name="activate" handler="OnMenuOpenActivate" last_modification_time="Wed, 02 Nov 2005 23:23:31 GMT"/>
+		    </widget>
+		  </child>
+
+		  <child>
+		    <widget class="GtkImageMenuItem" id="guardar1">
+		      <property name="visible">True</property>
+		      <property name="label">gtk-save</property>
+		      <property name="use_stock">True</property>
+		      <signal name="activate" handler="OnMenuSaveActivate" last_modification_time="Wed, 02 Nov 2005 23:23:31 GMT"/>
+		    </widget>
+		  </child>
+
+		  <child>
+		    <widget class="GtkImageMenuItem" id="guardar_como1">
+		      <property name="visible">True</property>
+		      <property name="label">gtk-save-as</property>
+		      <property name="use_stock">True</property>
+		      <signal name="activate" handler="OnMenuSaveAsActivate" last_modification_time="Wed, 02 Nov 2005 23:23:31 GMT"/>
+		    </widget>
+		  </child>
+
+		  <child>
+		    <widget class="GtkSeparatorMenuItem" id="separatormenuitem1">
+		      <property name="visible">True</property>
+		    </widget>
+		  </child>
+
+		  <child>
+		    <widget class="GtkImageMenuItem" id="salir1">
+		      <property name="visible">True</property>
+		      <property name="label">gtk-quit</property>
+		      <property name="use_stock">True</property>
+		      <signal name="activate" handler="OnMenuExitActivate" last_modification_time="Wed, 02 Nov 2005 23:23:31 GMT"/>
+		    </widget>
+		  </child>
+		</widget>
+	      </child>
+	    </widget>
+	  </child>
+
+	  <child>
+	    <widget class="GtkMenuItem" id="menuitem2">
+	      <property name="visible">True</property>
+	      <property name="label" translatable="yes">_Editar</property>
+	      <property name="use_underline">True</property>
+
+	      <child>
+		<widget class="GtkMenu" id="menuitem2_menu">
+
+		  <child>
+		    <widget class="GtkImageMenuItem" id="cortar1">
+		      <property name="visible">True</property>
+		      <property name="label">gtk-cut</property>
+		      <property name="use_stock">True</property>
+		    </widget>
+		  </child>
+
+		  <child>
+		    <widget class="GtkImageMenuItem" id="copiar1">
+		      <property name="visible">True</property>
+		      <property name="label">gtk-copy</property>
+		      <property name="use_stock">True</property>
+		    </widget>
+		  </child>
+
+		  <child>
+		    <widget class="GtkImageMenuItem" id="pegar1">
+		      <property name="visible">True</property>
+		      <property name="label">gtk-paste</property>
+		      <property name="use_stock">True</property>
+		    </widget>
+		  </child>
+
+		  <child>
+		    <widget class="GtkImageMenuItem" id="borrar1">
+		      <property name="visible">True</property>
+		      <property name="label">gtk-delete</property>
+		      <property name="use_stock">True</property>
+		    </widget>
+		  </child>
+		</widget>
+	      </child>
+	    </widget>
+	  </child>
+
+	  <child>
+	    <widget class="GtkMenuItem" id="menuitem3">
+	      <property name="visible">True</property>
+	      <property name="label" translatable="yes">_Ver</property>
+	      <property name="use_underline">True</property>
+	    </widget>
+	  </child>
+
+	  <child>
+	    <widget class="GtkMenuItem" id="menuitem4">
+	      <property name="visible">True</property>
+	      <property name="label" translatable="yes">A_yuda</property>
+	      <property name="use_underline">True</property>
+
+	      <child>
+		<widget class="GtkMenu" id="menuitem4_menu">
+
+		  <child>
+		    <widget class="GtkMenuItem" id="acerca_de1">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">A_cerca de</property>
+		      <property name="use_underline">True</property>
+		      <signal name="activate" handler="OnMenuAboutActivate" last_modification_time="Wed, 02 Nov 2005 23:23:31 GMT"/>
+		    </widget>
+		  </child>
+		</widget>
+	      </child>
+	    </widget>
+	  </child>
+	</widget>
+	<packing>
+	  <property name="padding">0</property>
+	  <property name="expand">False</property>
+	  <property name="fill">False</property>
+	</packing>
       </child>
 
       <child>
@@ -1205,7 +1353,7 @@
 	  <child>
 	    <widget class="GtkLabel" id="label13">
 	      <property name="visible">True</property>
-	      <property name="label" translatable="yes">&lt;b&gt;Default Output Path: &lt;/b&gt;</property>
+	      <property name="label" translatable="yes">&lt;b&gt;Output Path: &lt;/b&gt;</property>
 	      <property name="use_underline">False</property>
 	      <property name="use_markup">True</property>
 	      <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -1260,7 +1408,6 @@
 
 	  <child>
 	    <widget class="GtkLabel" id="label15">
-	      <property name="visible">True</property>
 	      <property name="label" translatable="yes">&lt;b&gt;Generate NAnt Buildfile: &lt;/b&gt;</property>
 	      <property name="use_underline">False</property>
 	      <property name="use_markup">True</property>
@@ -1330,7 +1477,6 @@
 
 	  <child>
 	    <widget class="GtkCheckButton" id="generateCheck">
-	      <property name="sensitive">False</property>
 	      <property name="label" translatable="yes">Generate</property>
 	      <property name="use_underline">True</property>
 	      <property name="relief">GTK_RELIEF_NORMAL</property>
@@ -1439,6 +1585,23 @@
       </child>
     </widget>
   </child>
+</widget>
+
+<widget class="GtkAboutDialog" id="aboutdialog1">
+  <property name="visible">True</property>
+  <property name="destroy_with_parent">True</property>
+  <property name="name" translatable="yes">Babuine Component Builder</property>
+  <property name="copyright" translatable="yes">(c) 2005 Néstor Salceda Alonso
+nestor.salceda@gmail.com</property>
+  <property name="comments" translatable="yes">Un constructor para la generación de esqueletos de componentes babuine.</property>
+  <property name="license" translatable="yes">LGPL License</property>
+  <property name="wrap_license">True</property>
+  <property name="website">http://wizito.is-a-geek.net</property>
+  <property name="website_label" translatable="yes">Babuine Home Page</property>
+  <property name="authors">Néstor Salceda Alonso</property>
+  <property name="documenters">Néstor Salceda Alonso</property>
+  <property name="artists">Néstor Salceda Alonso</property>
+  <property name="translator_credits" translatable="yes" comments="TRANSLATORS: Replace this string with your names, one name per line.">Néstor Salceda Alonso</property>
 </widget>
 
 </glade-interface>
