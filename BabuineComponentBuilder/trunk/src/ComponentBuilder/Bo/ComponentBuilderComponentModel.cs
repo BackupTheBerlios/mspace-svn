@@ -87,12 +87,12 @@ namespace ComponentBuilder.Bo {
             return hashtable;
         }
 
-        private Hashtable InitComponentTable (ComponentSettingsDTO componentSettingsDTO, Hashtable templateTable) {
+        private Hashtable InitComponentTable (ComponentDTO componentDTO, Hashtable templateTable) {
             Hashtable componentTable = new Hashtable ();
             //Key fileName without path, string value. 
-            componentTable.Add (componentSettingsDTO.ComponentName+"ComponentModel.cs", templateTable[TemplateNamesDTO.BusinessObject]);
+            componentTable.Add (componentDTO.ComponentName+"ComponentModel.cs", templateTable[TemplateNamesDTO.BusinessObject]);
             //Añadimos el gestor de exceptions
-            componentTable.Add (componentSettingsDTO.ClassExceptionManager+".cs", templateTable[TemplateNamesDTO.ExceptionManager]); 
+            componentTable.Add (componentDTO.ClassExceptionManager+".cs", templateTable[TemplateNamesDTO.ExceptionManager]); 
             //Añadimos el manifiesto.
             /**
             StringBuilder manifestBuilder = new StringBuilder (TemplateNamesDTO.AssemblyInfo);
@@ -100,19 +100,19 @@ namespace ComponentBuilder.Bo {
             componentTable.Add (manifestBuilder.ToString (), templateTable[TemplateNamesDTO.AssemblyInfo]);
             */
             //Añaidmos las vistas
-            StringEnumerator enumerator = componentSettingsDTO.ViewsCollection.GetEnumerator ();
+            StringEnumerator enumerator = componentDTO.ViewCollection.GetEnumerator ();
             while (enumerator.MoveNext ()) {
                 string currentView = enumerator.Current;
                 componentTable.Add (currentView + ".cs", templateTable[TemplateNamesDTO.ViewHandler]); 
             }
             //Añadimos el file nant.
             if (preferencesDTO.GenerateBuildfile) {
-                componentTable.Add (componentSettingsDTO.ComponentName+".build", templateTable[TemplateNamesDTO.NAntBuildfile]);
+                componentTable.Add (componentDTO.ComponentName+".build", templateTable[TemplateNamesDTO.NAntBuildfile]);
             }
             return componentTable;
         }
 
-        private Hashtable FillTable (ComponentSettingsDTO componentSettingsDTO, Hashtable componentTable) {
+        private Hashtable FillTable (ComponentDTO componentDTO, Hashtable componentTable) {
             StringCollection stringCollection = new StringCollection ();
             IEnumerator enumerator = componentTable.Keys.GetEnumerator ();
             while (enumerator.MoveNext ()) {
@@ -124,10 +124,10 @@ namespace ComponentBuilder.Bo {
                 string currentKey = (string)enumerator.Current;
                 StringBuilder stringBuilder = new StringBuilder ((string)componentTable[currentKey]);
                 if (currentKey.EndsWith (".build")) 
-                    stringBuilder = stringBuilder.Replace (TagValuesDTO.NAntComponentName, componentSettingsDTO.ComponentName);
+                    stringBuilder = stringBuilder.Replace (TagValuesDTO.NAntComponentName, componentDTO.ComponentName);
                 else 
-                    stringBuilder = stringBuilder.Replace (TagValuesDTO.ComponentName, componentSettingsDTO.ComponentName);
-                stringBuilder = stringBuilder.Replace (TagValuesDTO.ExceptionManager, componentSettingsDTO.ClassExceptionManager);
+                    stringBuilder = stringBuilder.Replace (TagValuesDTO.ComponentName, componentDTO.ComponentName);
+                stringBuilder = stringBuilder.Replace (TagValuesDTO.ExceptionManager, componentDTO.ClassExceptionManager);
                 if (preferencesDTO.PrefixNamespace.Length != 0) {
                     //Lo seteará y añadirá un punto.
                     StringBuilder prefixBuilder = new StringBuilder (preferencesDTO.PrefixNamespace);
@@ -139,7 +139,7 @@ namespace ComponentBuilder.Bo {
                     stringBuilder = stringBuilder.Replace (TagValuesDTO.Prefix, preferencesDTO.PrefixNamespace);
                 }
                 //Ahora para las vistas se discernira para cada una.
-                foreach (String view in componentSettingsDTO.ViewsCollection) { 
+                foreach (String view in componentDTO.ViewCollection) { 
                     if (currentKey.StartsWith (view)) {
                         stringBuilder = stringBuilder.Replace (TagValuesDTO.ViewName, view);
                     }
@@ -149,9 +149,9 @@ namespace ComponentBuilder.Bo {
             return componentTable;
         }
         
-        private Hashtable FillMethods (ComponentSettingsDTO componentSettingsDTO, Hashtable componentTable, Hashtable templateTable) {
+        private Hashtable FillMethods (ComponentDTO componentDTO, Hashtable componentTable, Hashtable templateTable) {
             StringBuilder stringBuilder = new StringBuilder ();
-            foreach (MethodDTO methodDTO in componentSettingsDTO.MethodsCollection) {
+            foreach (MethodDTO methodDTO in componentDTO.MethodCollection) {
                 stringBuilder = stringBuilder.Append (templateTable[TemplateNamesDTO.MethodBody]);
                 stringBuilder = stringBuilder.Replace (TagValuesDTO.ReturnType, methodDTO.ReturnType);
                 stringBuilder = stringBuilder.Replace (TagValuesDTO.MethodName, methodDTO.MethodName);
@@ -180,7 +180,7 @@ namespace ComponentBuilder.Bo {
                     //No lo seteara el prefix namespace
                     stringBuilder = stringBuilder.Replace (TagValuesDTO.Prefix, preferencesDTO.PrefixNamespace);
                 } 
-                stringBuilder = stringBuilder.Replace (TagValuesDTO.ComponentName, componentSettingsDTO.ComponentName);
+                stringBuilder = stringBuilder.Replace (TagValuesDTO.ComponentName, componentDTO.ComponentName);
             
                 stringBuilder = stringBuilder.Replace (TagValuesDTO.ViewName, methodDTO.ViewToResponse);
                 stringBuilder = stringBuilder.Replace (TagValuesDTO.ResponseName, methodDTO.ResponseMethod);
@@ -210,10 +210,10 @@ namespace ComponentBuilder.Bo {
             return componentTable;
         }
         
-        private Hashtable FillResponses (ComponentSettingsDTO componentSettingsDTO, Hashtable componentTable, Hashtable templateTable) {
-            foreach (string viewName in componentSettingsDTO.ViewsCollection) {
+        private Hashtable FillResponses (ComponentDTO componentDTO, Hashtable componentTable, Hashtable templateTable) {
+            foreach (string viewName in componentDTO.ViewCollection) {
                 StringBuilder responseBuilder = new StringBuilder ();
-                foreach (MethodDTO methodDTO in componentSettingsDTO.MethodsCollection) {
+                foreach (MethodDTO methodDTO in componentDTO.MethodCollection) {
                     if (methodDTO.ViewToResponse.Equals (viewName)) {
                         responseBuilder = responseBuilder.Append (templateTable[TemplateNamesDTO.ResponseMethod]);
                         responseBuilder = responseBuilder.Replace (TagValuesDTO.ResponseName, methodDTO.ResponseMethod);
@@ -226,9 +226,9 @@ namespace ComponentBuilder.Bo {
             return componentTable;
         }
         
-        private DirectoryInfo CreateSkeleton (ComponentSettingsDTO componentSettingsDTO) {
+        private DirectoryInfo CreateSkeleton (ComponentDTO componentDTO) {
             DirectoryInfo directoryInfo = new DirectoryInfo (preferencesDTO.OutputPath); 
-            DirectoryInfo componentDirectoryInfo = directoryInfo.CreateSubdirectory (componentSettingsDTO.ComponentName);
+            DirectoryInfo componentDirectoryInfo = directoryInfo.CreateSubdirectory (componentDTO.ComponentName);
             //Ahora crearemos uno para cada cosa, Bo, Forms, Dto, Exceptions ...
             componentDirectoryInfo.CreateSubdirectory ("Bo");
             componentDirectoryInfo.CreateSubdirectory ("Forms");
@@ -239,7 +239,7 @@ namespace ComponentBuilder.Bo {
             return componentDirectoryInfo;
         }
 
-        private void WriteFiles (Hashtable componentTable, DirectoryInfo componentDirectory, ComponentSettingsDTO componentSettingsDTO) {
+        private void WriteFiles (Hashtable componentTable, DirectoryInfo componentDirectory, ComponentDTO componentDTO) {
             StringCollection stringCollection = new StringCollection ();
             IEnumerator enumerator = componentTable.Keys.GetEnumerator ();
             while (enumerator.MoveNext ()) {
@@ -253,13 +253,13 @@ namespace ComponentBuilder.Bo {
                 if (fileName.EndsWith ("ComponentModel.cs")) {
                     WriteFileAt (fileName, componentDirectory.GetDirectories ("Bo")[0], content);
                 }
-                if (fileName.StartsWith (componentSettingsDTO.ClassExceptionManager)) {
+                if (fileName.StartsWith (componentDTO.ClassExceptionManager)) {
                     WriteFileAt (fileName, componentDirectory.GetDirectories ("Exceptions")[0], content);
                 }
                 if (fileName.StartsWith ("AssemblyInfo")) {
                     WriteFileAt (fileName, componentDirectory, content);
                 }
-                IEnumerator auxEnumerator = (componentSettingsDTO.ViewsCollection as IEnumerable).GetEnumerator ();
+                IEnumerator auxEnumerator = (componentDTO.ViewCollection as IEnumerable).GetEnumerator ();
                 while (auxEnumerator.MoveNext ()) {
                     if (fileName.StartsWith ((string)auxEnumerator.Current)) {
                         WriteFileAt (fileName, componentDirectory.GetDirectories ("Forms")[0], content);
@@ -271,7 +271,7 @@ namespace ComponentBuilder.Bo {
                 enumerator.Reset ();
                 while (enumerator.MoveNext ()) {
                     string fileName = (string) enumerator.Current;
-                    if (fileName.StartsWith (componentSettingsDTO.ComponentName) && fileName.EndsWith (".build")) {
+                    if (fileName.StartsWith (componentDTO.ComponentName) && fileName.EndsWith (".build")) {
                         string content = (string) componentTable [fileName];
                         WriteFileAt (fileName, componentDirectory, content);
                     }
@@ -288,19 +288,19 @@ namespace ComponentBuilder.Bo {
         }
         
         [ComponentMethod ("ComponentBuilder.Forms.MainComponentBuilderForm", "ResponseGenerateComponent")]
-        public void GenerateComponent (ComponentSettingsDTO componentSettingsDTO) {
+        public void GenerateComponent (ComponentDTO componentDTO) {
             Hashtable templateTable = GetTemplates ();
-            Hashtable componentTable = InitComponentTable (componentSettingsDTO, templateTable);
-            componentTable = FillTable (componentSettingsDTO, componentTable);
+            Hashtable componentTable = InitComponentTable (componentDTO, templateTable);
+            componentTable = FillTable (componentDTO, componentTable);
             //Haremos una segunda pasada para construir los métodos.
-            componentTable = FillMethods (componentSettingsDTO, componentTable, templateTable);
+            componentTable = FillMethods (componentDTO, componentTable, templateTable);
             //Tercera pasada para conseguir las respuestas.
-            componentTable = FillResponses (componentSettingsDTO, componentTable, templateTable);
+            componentTable = FillResponses (componentDTO, componentTable, templateTable);
             
             //Ahora solo resta guardarlo en archivos.  Con la ruta por
             //defecto que se haya configurado.
-            DirectoryInfo componentDirectory = CreateSkeleton (componentSettingsDTO); 
-            WriteFiles (componentTable, componentDirectory, componentSettingsDTO); 
+            DirectoryInfo componentDirectory = CreateSkeleton (componentDTO); 
+            WriteFiles (componentTable, componentDirectory, componentDTO); 
             
             /**
             IDictionaryEnumerator enumerator = componentTable.GetEnumerator ();

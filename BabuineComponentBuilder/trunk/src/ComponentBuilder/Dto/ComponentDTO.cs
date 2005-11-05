@@ -5,24 +5,24 @@ using ComponentModel.Interfaces;
 
 namespace ComponentBuilder.DTO {
     [Serializable]
-    public sealed class ComponentSettingsDTO : IDataTransferObject {
+    public sealed class ComponentDTO : IDataTransferObject {
         //Nombre del componente
         private string componentName;
         //Gestor de exceptions
         private string classExceptionManager;
         //Collection de vistas
-        private StringCollection viewsCollection; 
+        private StringCollection viewCollection; 
         //Collection de casos de uso
-        private IList methodsCollection;
+        private IList methodCollection;
 
-        public IList MethodsCollection {
-            get {return methodsCollection;}
-            set {methodsCollection = value;}
+        public IList MethodCollection {
+            get {return methodCollection;}
+            set {methodCollection = value;}
         }
 
-        public StringCollection ViewsCollection {
-            get {return viewsCollection;}
-            set {viewsCollection = value;}
+        public StringCollection ViewCollection {
+            get {return viewCollection;}
+            set {viewCollection = value;}
         }
 
         public string ClassExceptionManager {
@@ -34,7 +34,6 @@ namespace ComponentBuilder.DTO {
             get {return componentName;}
             set {componentName = value;}
         }
-
         
     }
 }

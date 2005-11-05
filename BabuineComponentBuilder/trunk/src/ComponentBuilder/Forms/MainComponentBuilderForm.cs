@@ -40,12 +40,12 @@ namespace ComponentBuilder.Forms {
 
         public IDataTransferObject GetDataForm () {
             if (ValidateForm ()) {
-                ComponentSettingsDTO componentSettingsDTO = new ComponentSettingsDTO ();                
-                componentSettingsDTO.ComponentName = componentNameEntry.Text;
-                componentSettingsDTO.ClassExceptionManager = exceptionManagerClassNameEntry.Text;
-                componentSettingsDTO.ViewsCollection = viewTableModel.ListModel;
-                componentSettingsDTO.MethodsCollection = methodTableModel.ListModel;
-                return componentSettingsDTO;
+                ComponentDTO componentDTO = new ComponentDTO ();                
+                componentDTO.ComponentName = componentNameEntry.Text;
+                componentDTO.ClassExceptionManager = exceptionManagerClassNameEntry.Text;
+                componentDTO.ViewCollection = viewTableModel.ListModel;
+                componentDTO.MethodCollection = methodTableModel.ListModel;
+                return componentDTO;
             }
             return null;
         }
@@ -61,8 +61,8 @@ namespace ComponentBuilder.Forms {
         }
 
         public void LoadDataForm (IDataTransferObject dto) {
-            if (dto is ComponentSettingsDTO) {
-                ComponentSettingsDTO componentSettingsDTO = (ComponentSettingsDTO) dto;
+            if (dto is ComponentDTO) {
+                ComponentDTO componentDTO = (ComponentDTO) dto;
             }
         }
 
@@ -142,9 +142,9 @@ namespace ComponentBuilder.Forms {
         }
 
         private void OnGenerateComponentClicked (object sender, EventArgs args) {
-            ComponentSettingsDTO componentSettingsDTO = (ComponentSettingsDTO) GetDataForm (); 
-            if (componentSettingsDTO != null) {
-                DefaultContainer.Instance.Execute ("ComponentBuilder", "GenerateComponent", new object[]{componentSettingsDTO}, this);
+            ComponentDTO componentDTO = (ComponentDTO) GetDataForm (); 
+            if (componentDTO != null) {
+                DefaultContainer.Instance.Execute ("ComponentBuilder", "GenerateComponent", new object[]{componentDTO}, this);
             }
         }
         /*Views & Methods buttons*/
