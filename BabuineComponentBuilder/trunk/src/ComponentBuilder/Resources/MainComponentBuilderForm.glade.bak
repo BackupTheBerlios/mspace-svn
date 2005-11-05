@@ -1587,7 +1587,7 @@
   </child>
 </widget>
 
-<widget class="GtkAboutDialog" id="aboutdialog1">
+<widget class="GtkAboutDialog" id="aboutDialog">
   <property name="visible">True</property>
   <property name="destroy_with_parent">True</property>
   <property name="name" translatable="yes">Babuine Component Builder</property>
