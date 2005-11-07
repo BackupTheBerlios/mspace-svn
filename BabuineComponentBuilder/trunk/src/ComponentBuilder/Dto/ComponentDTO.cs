@@ -15,6 +15,11 @@ namespace ComponentBuilder.DTO {
         //Collection de casos de uso
         private IList methodCollection;
 
+        public ComponentDTO () {
+            viewCollection = new StringCollection ();
+            methodCollection = new ArrayList ();
+        }
+        
         public IList MethodCollection {
             get {return methodCollection;}
             set {methodCollection = value;}

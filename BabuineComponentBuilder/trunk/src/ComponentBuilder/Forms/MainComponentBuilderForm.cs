@@ -1,9 +1,11 @@
 using System;
+using System.Collections;
 using ComponentModel.Interfaces;
 using ComponentModel.DTO;
 using ComponentModel.Container;
 using ComponentBuilder.DTO;
 using ComponentBuilder.Forms.TableModel;
+using ComponentBuilder.Forms.NodeModel;
 using Gtk;
 using Glade;
 
@@ -13,11 +15,15 @@ namespace ComponentBuilder.Forms {
         [Widget] Statusbar statusbar1;
         [Widget] TreeView viewsTreeView, methodsTreeView;
         [Widget] Entry componentNameEntry, exceptionManagerClassNameEntry;
+        [Widget] ScrolledWindow componentScrolledWindow;
+        
+        NodeView componentNodeView;
+        NodeStore componentNodeStore;
         
         ViewTableModel viewTableModel;
         MethodTableModel methodTableModel;
         ParameterTableModel parameterTableModel;
-        
+       
         /* Ctor */
         public MainComponentBuilderForm () {
             //La gracia sería sacar el VBox y pasarlo como si fuera un
@@ -33,12 +39,20 @@ namespace ComponentBuilder.Forms {
             methodsTreeView.AppendColumn ("View To Reponse", new CellRendererText (), "text", 2);
             methodsTreeView.AppendColumn ("Response Method", new CellRendererText (), "text", 3);
             methodsTreeView.AppendColumn ("Parameters", new CellRendererText (), "text", 4);
+
+            //
+            componentNodeStore = new NodeStore (typeof (GenericNode));
+            componentNodeView = new NodeView (componentNodeStore);
+            componentNodeView.AppendColumn ("Project Tree", new CellRendererText (), "text", 0);
+            componentScrolledWindow.Add (componentNodeView);
+            componentScrolledWindow.ShowAll ();
         }
         
         /*Helpers implementation*/
 
 
         public IDataTransferObject GetDataForm () {
+            /**
             if (ValidateForm ()) {
                 ComponentDTO componentDTO = new ComponentDTO ();                
                 componentDTO.ComponentName = componentNameEntry.Text;
@@ -46,6 +60,14 @@ namespace ComponentBuilder.Forms {
                 componentDTO.ViewCollection = viewTableModel.ListModel;
                 componentDTO.MethodCollection = methodTableModel.ListModel;
                 return componentDTO;
+            }
+            return null;
+        
+            */
+            IEnumerator enumerator = componentNodeStore.GetEnumerator ();
+            if (enumerator.MoveNext ()) {
+                Console.WriteLine (enumerator.Current.GetType ());
+                return ((ProjectNode) enumerator.Current).DataTransferObject;
             }
             return null;
         }
@@ -63,6 +85,9 @@ namespace ComponentBuilder.Forms {
         public void LoadDataForm (IDataTransferObject dto) {
             if (dto is ComponentDTO) {
                 ComponentDTO componentDTO = (ComponentDTO) dto;
+            }
+            if (dto is ProjectDTO) {
+                ProjectDTO projectDTO = (ProjectDTO) dto;
             }
         }
 
@@ -106,6 +131,12 @@ namespace ComponentBuilder.Forms {
                 Console.WriteLine ("Configuracion guardada.");
             }
         }
+        
+        public void ResponseSerializeProject (ResponseMethodDTO response) {
+            if (response.ExecutionSuccess) {
+                Console.WriteLine ("Project serialized successfully :)");
+            }
+        }
 
         /*Gui Events*/
         
@@ -124,6 +155,17 @@ namespace ComponentBuilder.Forms {
         }
 
         private void OnMenuSaveAsActivate (object sender, EventArgs args) {
+            FileChooserDialog chooser = new FileChooserDialog ("Selecciona un fichero para guardar", (Window)gxml["window1"], FileChooserAction.Save, Stock.Save);
+            chooser.AddButton (Stock.Save, ResponseType.Accept);
+            chooser.AddButton (Stock.Cancel, ResponseType.Cancel);
+            chooser.SelectMultiple = false;
+            ResponseType response = (ResponseType)chooser.Run ();
+            if (response.Equals (ResponseType.Accept)) {
+                if (chooser.Filename.Length != 0) {
+                    DefaultContainer.Instance.Execute ("ComponentBuilder","SerializeProject", new object[]{(ProjectDTO)this.GetDataForm (), chooser.Filename}, this);
+                }
+            }
+            chooser.Destroy ();
         }
 
         private void OnMenuExitActivate (object sender, EventArgs args) {
@@ -139,6 +181,15 @@ namespace ComponentBuilder.Forms {
 
         private void OnNewComponentClicked (object sender, EventArgs args) {
             ClearForm ();
+            ProjectDTO projectDTO = new ProjectDTO ();
+            projectDTO.ProjectName = "Empty Project";
+            
+            ComponentDTO componentDTO1 = new ComponentDTO ();
+            componentDTO1.ComponentName = "Lapava";
+            projectDTO.ComponentCollection.Add (componentDTO1);
+
+            componentNodeStore.Clear ();
+            componentNodeStore.AddNode (new ProjectNode (projectDTO));
         }
 
         private void OnGenerateComponentClicked (object sender, EventArgs args) {

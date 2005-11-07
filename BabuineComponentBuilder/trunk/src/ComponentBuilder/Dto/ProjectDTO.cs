@@ -1,4 +1,5 @@
 using System;
+using System.Xml.Serialization;
 using System.Collections;
 using ComponentModel.Interfaces;
 
@@ -16,6 +17,10 @@ namespace ComponentBuilder.DTO {
         IList componentCollection;
         DeployMode deployMode;    
 
+        public ProjectDTO () {
+            componentCollection = new ArrayList ();
+        }
+        
         public DeployMode DeployMode {
             get {return deployMode;}
             set {deployMode = value;}

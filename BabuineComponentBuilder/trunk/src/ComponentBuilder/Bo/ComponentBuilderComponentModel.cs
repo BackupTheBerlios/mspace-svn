@@ -4,10 +4,11 @@ using System.Collections.Specialized;
 using System.Reflection;
 using System.IO;
 using System.Text;
-using System.Xml;
 using System.Xml.Serialization;
 using ComponentModel;
 using ComponentBuilder.DTO;
+using ComponentBuilder.DAO;
+using ComponentBuilder.Interfaces;
 
 namespace ComponentBuilder.Bo {
     [Component ("ComponentBuilder", "ComponentBuilder.Exceptions.ComponentBuilderExceptionManager")]
@@ -27,6 +28,23 @@ namespace ComponentBuilder.Bo {
             catch (Exception exception) {
                 preferencesDTO = new PreferencesDTO ();
             }
+        }
+
+        [ComponentMethod ("ComponentBuilder.Forms.MainComponentBuilderForm", "ResponseDeserializeProject")]
+        public ProjectDTO DeserializeProject (string fileName) {
+            IFileDAO projectDAO = new ProjectDAO ();
+            FileStream fileStream = new FileStream (fileName, FileMode.Open);
+            ProjectDTO projectDTO = (ProjectDTO) projectDAO.Deserialize (fileStream);
+            fileStream.Close ();
+            return projectDTO;
+        }
+            
+        [ComponentMethod ("ComponentBuilder.Forms.MainComponentBuilderForm", "ResponseSerializeProject")]
+        public void SerializeProject (ProjectDTO projectDTO, string fileName) {
+            IFileDAO projectDAO = new ProjectDAO ();
+            FileStream fileStream = new FileStream (fileName, FileMode.Create);
+            projectDAO.Serialize (fileStream, projectDTO);
+            fileStream.Close ();
         }
         
         [ComponentMethod ("ComponentBuilder.Forms.MainComponentBuilderForm", "ResponseSerializePreferences")]
