@@ -12,6 +12,7 @@ namespace ComponentBuilder.DTO {
     }
     
     [Serializable]
+    [XmlInclude (typeof (ComponentDTO))]
     public sealed class ProjectDTO : IDataTransferObject {
         string projectName;
         IList componentCollection;
