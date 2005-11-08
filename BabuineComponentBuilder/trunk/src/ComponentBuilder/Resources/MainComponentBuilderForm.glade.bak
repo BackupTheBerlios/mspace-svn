@@ -1316,7 +1316,7 @@ nestor.salceda@gmail.com</property>
       <property name="column_spacing">0</property>
 
       <child>
-	<widget class="GtkEntry" id="entry1">
+	<widget class="GtkEntry" id="componentNameEntry">
 	  <property name="visible">True</property>
 	  <property name="can_focus">True</property>
 	  <property name="editable">True</property>
@@ -1337,7 +1337,7 @@ nestor.salceda@gmail.com</property>
       </child>
 
       <child>
-	<widget class="GtkEntry" id="entry2">
+	<widget class="GtkEntry" id="exceptionManangerEntry">
 	  <property name="visible">True</property>
 	  <property name="can_focus">True</property>
 	  <property name="editable">True</property>
@@ -1367,7 +1367,7 @@ nestor.salceda@gmail.com</property>
 	  <property name="window_placement">GTK_CORNER_TOP_LEFT</property>
 
 	  <child>
-	    <widget class="GtkTreeView" id="treeview1">
+	    <widget class="GtkTreeView" id="viewsTreeView">
 	      <property name="visible">True</property>
 	      <property name="can_focus">True</property>
 	      <property name="headers_visible">True</property>
@@ -1451,7 +1451,7 @@ nestor.salceda@gmail.com</property>
 	  <property name="window_placement">GTK_CORNER_TOP_LEFT</property>
 
 	  <child>
-	    <widget class="GtkTreeView" id="treeview2">
+	    <widget class="GtkTreeView" id="methodsTreeView">
 	      <property name="visible">True</property>
 	      <property name="can_focus">True</property>
 	      <property name="headers_visible">True</property>
@@ -1529,7 +1529,8 @@ nestor.salceda@gmail.com</property>
       <child>
 	<widget class="GtkLabel" id="label17">
 	  <property name="visible">True</property>
-	  <property name="label" translatable="yes">&lt;b&gt;Exception Manager Class Name:&lt;/b&gt;</property>
+	  <property name="label" translatable="yes">&lt;b&gt;Exception Manager
+ Class Name:&lt;/b&gt;</property>
 	  <property name="use_underline">False</property>
 	  <property name="use_markup">True</property>
 	  <property name="justify">GTK_JUSTIFY_CENTER</property>

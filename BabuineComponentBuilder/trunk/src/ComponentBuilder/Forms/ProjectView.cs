@@ -18,7 +18,6 @@ namespace ComponentBuilder.Forms {
             componentNodeView.AppendColumn ("Project Tree", new CellRendererText (),"text", 0);
             componentScrolledWindow = new ScrolledWindow ();
             componentScrolledWindow.Add (componentNodeView);
-
         }
         
         /* Interface Implementation */
@@ -26,6 +25,7 @@ namespace ComponentBuilder.Forms {
         }
 
         public void ClearForm () {
+            componentNodeStore.Clear ();
         }
 
         public IDataTransferObject GetDataForm () {
