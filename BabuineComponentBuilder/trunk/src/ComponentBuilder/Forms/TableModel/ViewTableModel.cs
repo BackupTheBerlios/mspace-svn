@@ -11,7 +11,6 @@ namespace ComponentBuilder.Forms.TableModel {
         private ListStore listStore; 
         private Type[] tipos;
         private IList list;
-
         public ViewTableModel () {
             list = new ArrayList ();
             tipos = new Type[1];
@@ -22,18 +21,17 @@ namespace ComponentBuilder.Forms.TableModel {
         }
 
         public ViewTableModel (IList list) {
-            foreach (string view in list) {
+            foreach (ViewDTO view in list) {
                 this.Add (view);
             }
         }
 
-        public void Add (string view) {
-            listStore.AppendValues (view);
-            list.Add (view);
-        }
-        
         public void Add (IDataTransferObject dto) {
-            //Ojo aqui !
+            if (dto is ViewDTO) {
+                ViewDTO viewDTO = (ViewDTO) dto;
+                listStore.AppendValues (viewDTO.ViewName);
+                list.Add (viewDTO);
+            }
         }
 
         public void Clear () {
@@ -44,18 +42,8 @@ namespace ComponentBuilder.Forms.TableModel {
         public ListStore ListStore {
             get {return listStore;}
         }
-
-        public StringCollection ListModel {
-            get {
-                StringCollection stringCollection = new StringCollection ();
-                foreach (string view in list) {
-                    stringCollection.Add (view);
-                }
-                return stringCollection;
-            }
-        }
         
-        IList ITableModel.ListModel {
+        public IList ListModel {
             get {return list;}
         }
 

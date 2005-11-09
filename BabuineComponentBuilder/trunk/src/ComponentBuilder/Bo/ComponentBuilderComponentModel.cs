@@ -118,10 +118,10 @@ namespace ComponentBuilder.Bo {
             componentTable.Add (manifestBuilder.ToString (), templateTable[TemplateNamesDTO.AssemblyInfo]);
             */
             //Añaidmos las vistas
-            StringEnumerator enumerator = componentDTO.ViewCollection.GetEnumerator ();
+            IEnumerator enumerator = componentDTO.ViewCollection.GetEnumerator ();
             while (enumerator.MoveNext ()) {
-                string currentView = enumerator.Current;
-                componentTable.Add (currentView + ".cs", templateTable[TemplateNamesDTO.ViewHandler]); 
+                ViewDTO currentView = (ViewDTO) enumerator.Current;
+                componentTable.Add (currentView.ViewName + ".cs", templateTable[TemplateNamesDTO.ViewHandler]); 
             }
             //Añadimos el file nant.
             if (preferencesDTO.GenerateBuildfile) {
@@ -157,7 +157,8 @@ namespace ComponentBuilder.Bo {
                     stringBuilder = stringBuilder.Replace (TagValuesDTO.Prefix, preferencesDTO.PrefixNamespace);
                 }
                 //Ahora para las vistas se discernira para cada una.
-                foreach (String view in componentDTO.ViewCollection) { 
+                foreach (ViewDTO viewDTO in componentDTO.ViewCollection) { 
+                    string view = viewDTO.ViewName;
                     if (currentKey.StartsWith (view)) {
                         stringBuilder = stringBuilder.Replace (TagValuesDTO.ViewName, view);
                     }
@@ -229,7 +230,9 @@ namespace ComponentBuilder.Bo {
         }
         
         private Hashtable FillResponses (ComponentDTO componentDTO, Hashtable componentTable, Hashtable templateTable) {
-            foreach (string viewName in componentDTO.ViewCollection) {
+            
+            foreach (ViewDTO viewDTO in componentDTO.ViewCollection) {
+                string viewName = viewDTO.ViewName;
                 StringBuilder responseBuilder = new StringBuilder ();
                 foreach (MethodDTO methodDTO in componentDTO.MethodCollection) {
                     if (methodDTO.ViewToResponse.Equals (viewName)) {

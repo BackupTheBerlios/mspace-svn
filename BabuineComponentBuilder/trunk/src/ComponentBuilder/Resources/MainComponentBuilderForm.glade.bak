@@ -195,12 +195,31 @@
 	      <property name="visible_horizontal">True</property>
 	      <property name="visible_vertical">True</property>
 	      <property name="is_important">False</property>
-	      <signal name="clicked" handler="OnNewComponentClicked" last_modification_time="Sun, 23 Oct 2005 11:45:01 GMT"/>
+	      <signal name="clicked" handler="OnNewProjectClicked" last_modification_time="Wed, 09 Nov 2005 11:36:07 GMT"/>
 	    </widget>
 	    <packing>
 	      <property name="expand">False</property>
 	      <property name="homogeneous">True</property>
 	    </packing>
+	  </child>
+
+	  <child>
+	    <widget class="GtkToolButton" id="toolbutton4">
+	      <property name="visible">True</property>
+	      <property name="stock_id">gtk-add</property>
+	      <property name="visible_horizontal">True</property>
+	      <property name="visible_vertical">True</property>
+	      <property name="is_important">False</property>
+	      <signal name="clicked" handler="OnAddComponentClicked" last_modification_time="Wed, 09 Nov 2005 11:36:19 GMT"/>
+	    </widget>
+	    <packing>
+	      <property name="expand">False</property>
+	      <property name="homogeneous">True</property>
+	    </packing>
+	  </child>
+
+	  <child>
+	    <placeholder/>
 	  </child>
 
 	  <child>
@@ -1337,7 +1356,7 @@ nestor.salceda@gmail.com</property>
       </child>
 
       <child>
-	<widget class="GtkEntry" id="exceptionManangerEntry">
+	<widget class="GtkEntry" id="exceptionManagerEntry">
 	  <property name="visible">True</property>
 	  <property name="can_focus">True</property>
 	  <property name="editable">True</property>

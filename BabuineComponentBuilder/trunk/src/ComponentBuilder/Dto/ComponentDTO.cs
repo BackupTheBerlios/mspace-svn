@@ -11,7 +11,7 @@ namespace ComponentBuilder.DTO {
         //Gestor de exceptions
         private string classExceptionManager;
         //Collection de vistas
-        private StringCollection viewCollection; 
+        private IList viewCollection; 
         //Collection de casos de uso
         private IList methodCollection;
 
@@ -25,7 +25,7 @@ namespace ComponentBuilder.DTO {
             set {methodCollection = value;}
         }
 
-        public StringCollection ViewCollection {
+        public IList ViewCollection {
             get {return viewCollection;}
             set {viewCollection = value;}
         }

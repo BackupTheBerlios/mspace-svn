@@ -15,6 +15,9 @@ namespace ComponentBuilder.Forms {
         ViewTableModel viewTableModel;
         MethodTableModel methodTableModel;
         
+        FormView formView;
+        MethodView methodView;
+        
         internal ComponentView () {
             componentView = new Glade.XML (null, "MainComponentBuilderForm.glade", "table5", null);
             componentView.Autoconnect (this);
@@ -39,9 +42,18 @@ namespace ComponentBuilder.Forms {
        
         /* GUI Events */
         private void OnNewMethodClicked (object sender, EventArgs args) {
+            methodView = new MethodView ();
+            MethodDTO methodDTO = (MethodDTO) methodView.GetDataForm ();
+            methodView = null;
         }
 
         private void OnNewViewClicked (object sender, EventArgs args) {
+            formView = new FormView ();
+            ViewDTO viewDTO = (ViewDTO) formView.GetDataForm ();
+            if (viewDTO != null) {
+                viewTableModel.Add (viewDTO);
+            }
+            formView = null;
         }
         
         /* Interface Implementation */

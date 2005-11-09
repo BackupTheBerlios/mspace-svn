@@ -2,6 +2,7 @@ using System;
 using ComponentModel.Interfaces;
 using ComponentBuilder.Interfaces;
 using ComponentBuilder.Forms.NodeModel;
+using ComponentBuilder.DTO;
 using Gtk;
 
 namespace ComponentBuilder.Forms {
@@ -22,6 +23,16 @@ namespace ComponentBuilder.Forms {
         
         /* Interface Implementation */
         public void LoadDataForm (IDataTransferObject dto) {
+            if (dto is ProjectDTO) {
+                ProjectDTO projectDTO = (ProjectDTO) dto;
+                ClearForm ();
+                componentNodeStore.AddNode (new ProjectNode (projectDTO));
+            }
+            else if (dto is ComponentDTO) {
+                ComponentDTO componentDTO = (ComponentDTO) dto;
+                ProjectNode projectNode = (ProjectNode) componentNodeStore.GetNode (TreePath.NewFirst ());
+                projectNode.AddChild (new ComponentNode (componentDTO)); 
+            }
         }
 
         public void ClearForm () {
@@ -29,7 +40,7 @@ namespace ComponentBuilder.Forms {
         }
 
         public IDataTransferObject GetDataForm () {
-            return null;
+            return ((GenericNode)componentNodeStore.GetNode (TreePath.NewFirst ())).DataTransferObject;
         }
 
         public Widget GetWidget () {

@@ -1,6 +1,8 @@
 using System;
+using ComponentModel.Container;
 using ComponentModel.Interfaces;
 using ComponentModel.DTO;
+using ComponentBuilder.DTO;
 using Gtk;
 using Glade;
 
@@ -42,6 +44,18 @@ namespace ComponentBuilder.Forms {
         }
 
         private void OnMenuSaveAsActivate (object sender, EventArgs args) {
+            //Serialization.
+            FileChooserDialog chooser = new FileChooserDialog ("Selecciona un fichero para guardar", (Window)mainComponentBuilderForm["mainView"], FileChooserAction.Save, Stock.Save);
+            chooser.AddButton (Stock.Save, ResponseType.Accept);
+            chooser.AddButton (Stock.Cancel, ResponseType.Cancel);
+            chooser.SelectMultiple = false;
+            ResponseType response = (ResponseType)chooser.Run ();
+            if (response.Equals (ResponseType.Accept)) {
+                if (chooser.Filename.Length != 0) {
+                    DefaultContainer.Instance.Execute ("ComponentBuilder","SerializeProject", new object[]{(ProjectDTO)this.GetDataForm (), chooser.Filename}, this);
+                }
+            }
+            chooser.Destroy ();
         }
 
         private void OnMenuExitActivate (object sender, EventArgs args) {
@@ -53,8 +67,21 @@ namespace ComponentBuilder.Forms {
 
         /*Toolbar*/
 
-        private void OnNewComponentClicked (object sender, EventArgs args) {
+        private void OnNewProjectClicked (object sender, EventArgs args) {
             ClearForm ();
+            ProjectDTO projectDTO = new ProjectDTO ();
+            projectDTO.ProjectName = "New Project";
+            LoadDataForm (projectDTO);
+        }
+        
+        private void OnAddComponentClicked (object sender, EventArgs args) {
+            ProjectDTO projectDTO = (ProjectDTO) projectView.GetDataForm ();
+            ComponentDTO componentDTO = new ComponentDTO ();
+            componentDTO.ComponentName = "New Component";
+            projectDTO.ComponentCollection.Add (componentDTO);
+            //Hago el refresco aquí, explícito.
+            projectView.LoadDataForm (componentDTO);
+            LoadDataForm (componentDTO);
         }
 
         private void OnGenerateComponentClicked (object sender, EventArgs args) {
@@ -71,16 +98,33 @@ namespace ComponentBuilder.Forms {
                 statusbar1.Push (0, String.Format ("Welcome to Babuine Component Builder: {0}@{1}", Environment.UserName, Environment.MachineName));
             }
         }
+
+        public void ResponseSerializeProject (ResponseMethodDTO response) {
+            if (response.ExecutionSuccess) {
+                Console.WriteLine ("Project
+        }
+    }
+} has been serialized successfully");
+            }
+        }
         
         /* Interface Implementation */
         public void LoadDataForm (IDataTransferObject dto) {
+            if (dto is ProjectDTO) {
+                projectView.LoadDataForm (dto);
+            }
+            else if (dto is ComponentDTO) {
+                componentView.LoadDataForm (dto);
+            }
         }
 
         public void ClearForm () {
+            projectView.ClearForm ();
+            componentView.ClearForm ();
         }
 
         public IDataTransferObject GetDataForm () {
-            return null;
+            return projectView.GetDataForm ();
         }
     }
 }
