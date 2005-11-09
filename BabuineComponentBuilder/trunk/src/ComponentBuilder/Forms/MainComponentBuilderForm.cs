@@ -101,10 +101,7 @@ namespace ComponentBuilder.Forms {
 
         public void ResponseSerializeProject (ResponseMethodDTO response) {
             if (response.ExecutionSuccess) {
-                Console.WriteLine ("Project
-        }
-    }
-} has been serialized successfully");
+                Console.WriteLine ("Project serialized");
             }
         }
         
