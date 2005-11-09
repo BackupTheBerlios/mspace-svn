@@ -20,7 +20,7 @@ namespace ComponentBuilder.Forms.TableModel {
             list = new ArrayList ();
         }
 
-        public ParameterTableModel (IList list) {
+        public ParameterTableModel (IList list) : this () {
             foreach (ParameterDTO parameterDTO in list) {
                 this.Add (parameterDTO);
             }

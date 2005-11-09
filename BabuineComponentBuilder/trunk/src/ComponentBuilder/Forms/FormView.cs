@@ -18,6 +18,7 @@ namespace ComponentBuilder.Forms {
         /* Interface Implementation */
 
         public void ClearForm () {
+            viewNameEntry.Text = String.Empty;
         }
 
         public IDataTransferObject GetDataForm () {

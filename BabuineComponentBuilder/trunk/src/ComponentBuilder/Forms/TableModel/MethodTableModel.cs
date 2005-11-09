@@ -21,7 +21,7 @@ namespace ComponentBuilder.Forms.TableModel {
             list = new ArrayList ();
         }
 
-        public MethodTableModel (IList list) {
+        public MethodTableModel (IList list) : this () {
             foreach (MethodDTO methodDTO in list) {
                 this.Add (methodDTO);
             }
@@ -47,7 +47,6 @@ namespace ComponentBuilder.Forms.TableModel {
                         methodDTO.ViewToResponse,
                         methodDTO.ResponseMethod,
                         stringBuilder.ToString ()
-                        //methodDTO.ParametersCollection.ToString ()
                         );
                 list.Add (methodDTO);
             }

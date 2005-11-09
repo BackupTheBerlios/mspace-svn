@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Specialized;
 using ComponentModel.Interfaces;
 
 namespace ComponentBuilder.DTO {
@@ -16,7 +15,9 @@ namespace ComponentBuilder.DTO {
         private IList methodCollection;
 
         public ComponentDTO () {
-            viewCollection = new StringCollection ();
+            componentName = String.Empty;
+            classExceptionManager = String.Empty;
+            viewCollection = new ArrayList ();
             methodCollection = new ArrayList ();
         }
         

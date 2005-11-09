@@ -11,6 +11,7 @@ namespace ComponentBuilder.Forms.TableModel {
         private ListStore listStore; 
         private Type[] tipos;
         private IList list;
+
         public ViewTableModel () {
             list = new ArrayList ();
             tipos = new Type[1];
@@ -20,9 +21,9 @@ namespace ComponentBuilder.Forms.TableModel {
             listStore = new ListStore (tipos);
         }
 
-        public ViewTableModel (IList list) {
-            foreach (ViewDTO view in list) {
-                this.Add (view);
+        public ViewTableModel (IList list) : this () {
+            foreach (ViewDTO viewDTO in list) {
+                this.Add (viewDTO);
             }
         }
 

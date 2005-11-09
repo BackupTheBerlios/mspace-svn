@@ -33,7 +33,7 @@ namespace ComponentBuilder.Forms {
             methodsTreeView.AppendColumn ("Parameters", new CellRendererText (), "text", 4);
 
             //Vamos a instanciar también los modelos de las vistas.
-        
+
             viewTableModel = new ViewTableModel ();
             viewsTreeView.Model = viewTableModel.ListStore;
             methodTableModel = new MethodTableModel ();
@@ -43,7 +43,11 @@ namespace ComponentBuilder.Forms {
         /* GUI Events */
         private void OnNewMethodClicked (object sender, EventArgs args) {
             methodView = new MethodView ();
+            methodView.LoadDataForm ((ComponentDTO) GetDataForm ());
             MethodDTO methodDTO = (MethodDTO) methodView.GetDataForm ();
+            if (methodDTO != null) {
+                methodTableModel.Add (methodDTO);
+            }
             methodView = null;
         }
 
@@ -65,7 +69,7 @@ namespace ComponentBuilder.Forms {
                 viewTableModel = new ViewTableModel (componentDTO.ViewCollection);
                 viewsTreeView.Model = viewTableModel.ListStore;
                 methodTableModel = new MethodTableModel (componentDTO.MethodCollection);
-                methodsTreeView.Model = viewTableModel.ListStore;
+                methodsTreeView.Model = methodTableModel.ListStore;
             }
         }
 
@@ -79,7 +83,12 @@ namespace ComponentBuilder.Forms {
         }
 
         public IDataTransferObject GetDataForm () {
-            return null;
+            ComponentDTO componentDTO = new ComponentDTO ();
+            componentDTO.ComponentName = componentNameEntry.Text;
+            componentDTO.ClassExceptionManager = exceptionManagerEntry.Text;
+            componentDTO.ViewCollection = viewTableModel.ListModel;
+            componentDTO.MethodCollection = methodTableModel.ListModel;
+            return componentDTO;
         }
 
         public Widget GetWidget () {
