@@ -63,6 +63,14 @@ namespace ComponentBuilder.Forms {
         }
         
         private void OnMenuAboutActivate (object sender, EventArgs args) {
+            Glade.XML aboutForm = new Glade.XML (null, "MainComponentBuilderForm.glade", "aboutDialog", null);
+            //AboutDialog no existe todavia en GTK#.
+            //Gtk.AboutDialog aboutDialog = (Gtk.AboutDialog) aboutForm ["aboutDialog"];
+            //aboutDialog.Logo = Gdk.PixBuf.LoadFromResource ("mono-powered.png");
+            //aboutDialog.Run ();
+            //aboutDialog.Destroy ();
+            //aboutDialog = null;
+            aboutForm = null;
         }
 
         /*Toolbar*/
