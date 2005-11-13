@@ -1,9 +1,11 @@
 using System;
+using System.Xml.Serialization;
 using System.Collections;
 using ComponentModel.Interfaces;
 
 namespace ComponentBuilder.DTO {
     [Serializable]
+    [XmlInclude (typeof (ParameterDTO))]
     public sealed class MethodDTO : IDataTransferObject {
         private string returnType;
         private string methodName;

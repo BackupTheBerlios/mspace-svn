@@ -38,6 +38,24 @@ namespace ComponentBuilder.Forms {
         }
 
         private void OnMenuOpenActivate (object sender, EventArgs args) {
+            FileChooserDialog chooser = new FileChooserDialog ("Selecciona un fichero para abrir", (Window)mainComponentBuilderForm["mainView"], FileChooserAction.Open, Stock.Open);
+            chooser.AddButton (Stock.Open, ResponseType.Accept);
+            chooser.AddButton (Stock.Cancel, ResponseType.Cancel);
+            chooser.SelectMultiple = false;
+            ResponseType response = (ResponseType) chooser.Run ();
+            switch (response) {
+                case ResponseType.Accept:
+                    if (chooser.Filename.Length != 0) {
+                        DefaultContainer.Instance.Execute ("ComponentBuilder", "DeserializeProject", new object[]{chooser.Filename}, this);
+                    }
+                    break;
+                case ResponseType.Cancel:
+                    break;
+                default:
+                    break;
+            }
+            chooser.Destroy ();
+            chooser = null;
         }
 
         private void OnMenuSaveActivate (object sender, EventArgs args) {
@@ -56,6 +74,7 @@ namespace ComponentBuilder.Forms {
                 }
             }
             chooser.Destroy ();
+            chooser = null;
         }
 
         private void OnMenuExitActivate (object sender, EventArgs args) {
@@ -84,12 +103,12 @@ namespace ComponentBuilder.Forms {
         
         private void OnAddComponentClicked (object sender, EventArgs args) {
             ProjectDTO projectDTO = (ProjectDTO) projectView.GetDataForm ();
-            ComponentDTO componentDTO = new ComponentDTO ();
-            componentDTO.ComponentName = "New Component";
-            projectDTO.ComponentCollection.Add (componentDTO);
-            //Hago el refresco aquí, explícito.
-            projectView.LoadDataForm (componentDTO);
-            LoadDataForm (componentDTO);
+            if (projectDTO != null) {
+                ComponentDTO componentDTO = (ComponentDTO) componentView.GetDataForm ();
+                projectDTO.ComponentCollection.Add (componentDTO);
+                LoadDataForm (projectDTO);
+                componentView.ClearForm ();
+            }
         }
 
         private void OnGenerateComponentClicked (object sender, EventArgs args) {
@@ -110,6 +129,13 @@ namespace ComponentBuilder.Forms {
         public void ResponseSerializeProject (ResponseMethodDTO response) {
             if (response.ExecutionSuccess) {
                 Console.WriteLine ("Project serialized");
+            }
+        }
+        
+        public void ResponseDeserializeProject (ResponseMethodDTO response) {
+            if (response.ExecutionSuccess) {
+                ProjectDTO projectDTO = (ProjectDTO) response.MethodResult;
+                LoadDataForm (projectDTO);
             }
         }
         

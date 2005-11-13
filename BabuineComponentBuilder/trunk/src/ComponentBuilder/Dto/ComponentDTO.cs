@@ -1,9 +1,12 @@
 using System;
+using System.Xml.Serialization;
 using System.Collections;
 using ComponentModel.Interfaces;
 
 namespace ComponentBuilder.DTO {
     [Serializable]
+    [XmlInclude (typeof (MethodDTO))]
+    [XmlInclude (typeof (ViewDTO))]
     public sealed class ComponentDTO : IDataTransferObject {
         //Nombre del componente
         private string componentName;
