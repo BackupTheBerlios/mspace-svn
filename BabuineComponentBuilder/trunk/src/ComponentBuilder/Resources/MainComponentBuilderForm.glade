@@ -401,6 +401,7 @@
 	      <property name="has_frame">True</property>
 	      <property name="invisible_char">*</property>
 	      <property name="activates_default">False</property>
+	      <signal name="activate" handler="OnViewNameEntryActivate" last_modification_time="Mon, 14 Nov 2005 09:14:31 GMT"/>
 	    </widget>
 	    <packing>
 	      <property name="padding">0</property>
@@ -1436,6 +1437,7 @@ nestor.salceda@gmail.com</property>
 	      <property name="use_stock">True</property>
 	      <property name="relief">GTK_RELIEF_NORMAL</property>
 	      <property name="focus_on_click">True</property>
+	      <signal name="clicked" handler="OnDeleteMethodClicked" last_modification_time="Mon, 14 Nov 2005 09:45:32 GMT"/>
 	    </widget>
 	  </child>
 
@@ -1448,6 +1450,7 @@ nestor.salceda@gmail.com</property>
 	      <property name="use_stock">True</property>
 	      <property name="relief">GTK_RELIEF_NORMAL</property>
 	      <property name="focus_on_click">True</property>
+	      <signal name="clicked" handler="OnClearMethodsClicked" last_modification_time="Mon, 14 Nov 2005 11:39:54 GMT"/>
 	    </widget>
 	  </child>
 	</widget>
@@ -1521,6 +1524,7 @@ nestor.salceda@gmail.com</property>
 	      <property name="use_stock">True</property>
 	      <property name="relief">GTK_RELIEF_NORMAL</property>
 	      <property name="focus_on_click">True</property>
+	      <signal name="clicked" handler="OnDeleteViewClicked" last_modification_time="Mon, 14 Nov 2005 09:20:20 GMT"/>
 	    </widget>
 	  </child>
 
@@ -1533,6 +1537,7 @@ nestor.salceda@gmail.com</property>
 	      <property name="use_stock">True</property>
 	      <property name="relief">GTK_RELIEF_NORMAL</property>
 	      <property name="focus_on_click">True</property>
+	      <signal name="clicked" handler="OnClearViewsClicked" last_modification_time="Mon, 14 Nov 2005 09:41:21 GMT"/>
 	    </widget>
 	  </child>
 	</widget>

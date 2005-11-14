@@ -8,8 +8,6 @@ using Glade;
 
 namespace ComponentBuilder.Forms {
     internal class ComponentView : IViewHandler, IGtkView {
-        private static ComponentView instance;
-        
         Glade.XML componentView;
         [Widget] TreeView viewsTreeView, methodsTreeView;
         [Widget] Entry componentNameEntry, exceptionManagerEntry;
@@ -20,7 +18,7 @@ namespace ComponentBuilder.Forms {
         FormView formView;
         MethodView methodView;
         
-        private ComponentView () {
+        internal ComponentView () {
             componentView = new Glade.XML (null, "MainComponentBuilderForm.glade", "table5", null);
             componentView.Autoconnect (this);
 
@@ -40,15 +38,6 @@ namespace ComponentBuilder.Forms {
             viewsTreeView.Model = viewTableModel.ListStore;
             methodTableModel = new MethodTableModel ();
             methodsTreeView.Model = methodTableModel.ListStore;
-        }
-       
-        internal static ComponentView Instance {
-            get {
-                if (instance == null) {
-                    instance = new ComponentView ();
-                }
-                return instance;
-            }
         }
         
         /* GUI Events */
@@ -79,6 +68,10 @@ namespace ComponentBuilder.Forms {
                     methodsTreeView.Model = methodTableModel.ListStore;
                 }
             }
+        }
+
+        private void OnClearMethodsClicked (object sender, EventArgs args) {
+            methodTableModel.Clear ();
         }
 
         private void OnNewViewClicked (object sender, EventArgs args) {

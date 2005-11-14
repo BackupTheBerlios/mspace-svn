@@ -8,14 +8,13 @@ using Gtk;
 
 namespace ComponentBuilder.Forms {
     internal class ProjectView : IViewHandler, IGtkView {
-        private static ProjectView instance;     
         
         /*Contenenedor*/
         ScrolledWindow componentScrolledWindow;
         NodeView componentNodeView;
         NodeStore componentNodeStore;
         
-        private ProjectView () {
+        internal ProjectView () {
             componentNodeStore = new NodeStore (typeof (GenericNode));
             componentNodeView = new NodeView (componentNodeStore);
             componentNodeView.AppendColumn ("Project Tree", new CellRendererText (),"text", 0);
@@ -27,15 +26,6 @@ namespace ComponentBuilder.Forms {
             componentNodeView.NodeSelection.Changed += new EventHandler (OnSelectionChanged);
         }
 
-        internal static ProjectView Instance {
-            get {
-                if (instance == null) {
-                    instance = new ProjectView ();
-                }
-                return instance;
-            }
-        }
-        
         /* Interface Implementation */
         public void LoadDataForm (IDataTransferObject dto) {
             if (dto is ProjectDTO) {

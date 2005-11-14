@@ -14,15 +14,16 @@ namespace ComponentBuilder.Forms {
         
         ProjectView projectView;
         ComponentView componentView;
+        PreferencesView preferencesView;
         
         public MainComponentBuilderForm () {
             mainComponentBuilderForm = new Glade.XML (null, "MainComponentBuilderForm.glade", "mainView", null);
             mainComponentBuilderForm.Autoconnect (this);
 
             //Terminamos de construir el gui.
-            projectView = ProjectView.Instance;
+            projectView = new ProjectView ();
             hpaned1.Pack1 (projectView.GetWidget (), true, true);
-            componentView = ComponentView.Instance;
+            componentView = new ComponentView ();
             hpaned1.Pack2 (componentView.GetWidget (), true, true);
             hpaned1.ShowAll ();
         }
@@ -115,6 +116,15 @@ namespace ComponentBuilder.Forms {
         }
 
         private void OnPreferencesClicked (object sender, EventArgs args) {
+            preferencesView = new PreferencesView ();
+            IComponentModel componentModel = DefaultContainer.Instance["ComponentBuilder"];
+            preferencesView.LoadDataForm ((IDataTransferObject) componentModel.GetProperty ("PreferencesDTO"));
+            PreferencesDTO preferencesDTO = (PreferencesDTO) preferencesView.GetDataForm ();
+            if (preferencesDTO != null) {
+                componentModel.SetProperty ("PreferencesDTO", preferencesDTO);
+                componentModel.Execute ("SerializePreferences", null, this);
+            }
+            preferencesView = null;
         }        
         
         /* Response Notifications */
@@ -136,6 +146,12 @@ namespace ComponentBuilder.Forms {
             if (response.ExecutionSuccess) {
                 ProjectDTO projectDTO = (ProjectDTO) response.MethodResult;
                 LoadDataForm (projectDTO);
+            }
+        }
+
+        public void ResponseSerializePreferences (ResponseMethodDTO response) {
+            if (response.ExecutionSuccess) {
+                Console.WriteLine ("Serialized settings.");
             }
         }
         
