@@ -23,6 +23,7 @@ using ComponentModel.DTO;
 namespace ComponentModel.Interfaces {
     //Igual si extendemos de System.ComponentModel.IContainer está bien también.
     public interface IContainer {
+        IComponentModel this [string index] {get;}
         IComponentModel GetComponentByName (string componentName);
         
         void Add (IComponentModel componentModel);

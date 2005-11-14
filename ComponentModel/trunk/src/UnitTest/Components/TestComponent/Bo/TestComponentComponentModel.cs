@@ -26,5 +26,9 @@ namespace UnitTest.Components.TestComponent {
             throw new Exception ("Testing exception Manager, and flags");
         }
 
+        [ComponentMethod ("UnitTest.Components.TestComponent.Form.MainTestComponentForm", "ResponseNoResponse")]
+        public void NoResponse () {
+        }
+
     }
 }

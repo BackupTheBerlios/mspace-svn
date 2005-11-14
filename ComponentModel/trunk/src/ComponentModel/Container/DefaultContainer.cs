@@ -121,6 +121,12 @@ namespace ComponentModel.Container {
             //}
         }
 
+        public IComponentModel this [string componentName] {
+            get {
+                return GetComponentByName (componentName);
+            }
+        }
+
         public void Add (IComponentModel component) {
             componentHashtable.Add (component.ComponentModelDTO.ComponentName, component);
             logger.Info ("Registering component: " + component + " as Name: " + component.ComponentModelDTO.ComponentName);

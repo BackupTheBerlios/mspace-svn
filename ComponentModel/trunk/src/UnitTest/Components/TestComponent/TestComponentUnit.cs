@@ -2,6 +2,7 @@ using System;
 using ComponentModel.Container;
 using ComponentModel.Interfaces;
 using ComponentModel.DTO;
+using ComponentModel.Exceptions;
 using NUnit.Framework;
 
 namespace UnitTest.Components.TestComponent {
@@ -99,6 +100,20 @@ namespace UnitTest.Components.TestComponent {
             responseMethodDTO = componentModel.Execute ("TestException", null, false);
             Assert.AreEqual (responseMethodDTO.ExecutionSuccess, false);
             Assert.IsNull (responseMethodDTO.MethodResult);
+        }
+
+        [Test]
+        [ExpectedException (typeof (MethodNotFoundException))]
+        public void MethodNotFound () {
+            IComponentModel componentModel = DefaultContainer.Instance.GetComponentByName ("TestUnidad1");
+            ResponseMethodDTO response = componentModel.Execute ("NotFoundedMethod", null, false);
+        }
+
+        [Test]
+        [ExpectedException (typeof (ResponseNotFoundException))]
+        public void ResponseNotFound () {
+            IComponentModel componentModel = DefaultContainer.Instance.GetComponentByName ("TestUnidad1");
+            ResponseMethodDTO response = componentModel.Execute ("NoResponse", null);
         }
     }
 }
