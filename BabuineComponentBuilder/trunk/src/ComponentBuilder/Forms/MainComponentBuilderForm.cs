@@ -20,9 +20,9 @@ namespace ComponentBuilder.Forms {
             mainComponentBuilderForm.Autoconnect (this);
 
             //Terminamos de construir el gui.
-            projectView = new ProjectView ();
+            projectView = ProjectView.Instance;
             hpaned1.Pack1 (projectView.GetWidget (), true, true);
-            componentView = new ComponentView ();
+            componentView = ComponentView.Instance;
             hpaned1.Pack2 (componentView.GetWidget (), true, true);
             hpaned1.ShowAll ();
         }

@@ -8,13 +8,14 @@ using Gtk;
 
 namespace ComponentBuilder.Forms {
     internal class ProjectView : IViewHandler, IGtkView {
-             
+        private static ProjectView instance;     
+        
         /*Contenenedor*/
         ScrolledWindow componentScrolledWindow;
         NodeView componentNodeView;
         NodeStore componentNodeStore;
         
-        internal ProjectView () {
+        private ProjectView () {
             componentNodeStore = new NodeStore (typeof (GenericNode));
             componentNodeView = new NodeView (componentNodeStore);
             componentNodeView.AppendColumn ("Project Tree", new CellRendererText (),"text", 0);
@@ -24,7 +25,15 @@ namespace ComponentBuilder.Forms {
             //Event Handling
             componentNodeView.NodeSelection.Mode = SelectionMode.Single;
             componentNodeView.NodeSelection.Changed += new EventHandler (OnSelectionChanged);
-            
+        }
+
+        internal static ProjectView Instance {
+            get {
+                if (instance == null) {
+                    instance = new ProjectView ();
+                }
+                return instance;
+            }
         }
         
         /* Interface Implementation */
@@ -67,7 +76,8 @@ namespace ComponentBuilder.Forms {
                     ComponentNode componentNode = (ComponentNode) nodeSelection.SelectedNode;
                     ComponentDTO componentDTO = (ComponentDTO) componentNode.DataTransferObject;
                     //Ahora truco de gestion de vista.
-                    IComponentModel componentModel = DefaultContainer.Instance.GetComponentByName ("ComponentBuilder");
+                    //IComponentModel componentModel = DefaultContainer.Instance.GetComponentByName ("ComponentBuilder");
+                    IComponentModel componentModel = DefaultContainer.Instance["ComponentBuilder"];
                     //Responderá a la vista y ejecutará el loadDataForm de
                     //MainComponentForm
                     componentModel.ViewHandlerCollection[0].LoadDataForm (componentDTO);

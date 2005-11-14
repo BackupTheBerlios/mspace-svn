@@ -43,11 +43,19 @@ namespace ComponentBuilder.Forms {
 
         public void LoadDataForm (IDataTransferObject dto) {
             if (dto is ViewDTO) {
+                ViewDTO viewDTO = (ViewDTO) dto;
+                viewNameEntry.Text = viewDTO.ViewName;
             }
         }
 
         public Widget GetWidget () {
             return newViewForm ["newViewDialog"];
+        }
+
+        private void OnViewNameEntryActivate (object sender, EventArgs args) {
+            Dialog dialog = (Dialog) GetWidget ();
+            dialog.Respond (ResponseType.Ok);
+            dialog = null;
         }
     }
 }
