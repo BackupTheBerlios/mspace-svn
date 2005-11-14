@@ -36,6 +36,32 @@ namespace ComponentBuilder.Forms {
             parameterView = null;
         }
 
+        private void OnDeleteParameterClicked (object sender, EventArgs args) {
+            TreeIter iter;
+            if (parametersTreeView.Selection.GetSelected (out iter)) {
+                string typeName = parameterTableModel.ListStore.GetValue (iter, 0).ToString ();
+                string varName = parameterTableModel.ListStore.GetValue (iter, 1).ToString ();
+                ParameterDTO auxParameterDTO = null;
+                foreach (ParameterDTO parameterDTO in parameterTableModel.ListModel) {
+                    if (parameterDTO.TypeName.Equals (typeName)) {
+                        if (parameterDTO.VarName.Equals (varName)) {
+                            auxParameterDTO = parameterDTO;
+                            break;
+                        }
+                    }
+                }
+                if (auxParameterDTO != null) {
+                    parameterTableModel.ListModel.Remove (auxParameterDTO);
+                    parameterTableModel = new ParameterTableModel (parameterTableModel.ListModel);
+                    parametersTreeView.Model = parameterTableModel.ListStore;
+                }
+            }
+        }
+
+        private void OnClearParametersClicked (object sender, EventArgs args) {
+            parameterTableModel.Clear ();
+        }
+
         /* Interface Implementation */
 
         public void ClearForm () {

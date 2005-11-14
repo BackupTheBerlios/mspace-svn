@@ -219,7 +219,18 @@
 	  </child>
 
 	  <child>
-	    <placeholder/>
+	    <widget class="GtkToolButton" id="toolbutton5">
+	      <property name="visible">True</property>
+	      <property name="stock_id">gtk-remove</property>
+	      <property name="visible_horizontal">True</property>
+	      <property name="visible_vertical">True</property>
+	      <property name="is_important">False</property>
+	      <signal name="clicked" handler="OnDeleteComponentClicked" last_modification_time="Mon, 14 Nov 2005 23:15:34 GMT"/>
+	    </widget>
+	    <packing>
+	      <property name="expand">False</property>
+	      <property name="homogeneous">True</property>
+	    </packing>
 	  </child>
 
 	  <child>
@@ -659,6 +670,7 @@
 		  <property name="use_stock">True</property>
 		  <property name="relief">GTK_RELIEF_NORMAL</property>
 		  <property name="focus_on_click">True</property>
+		  <signal name="clicked" handler="OnDeleteParameterClicked" last_modification_time="Mon, 14 Nov 2005 13:19:03 GMT"/>
 		</widget>
 	      </child>
 
@@ -671,6 +683,7 @@
 		  <property name="use_stock">True</property>
 		  <property name="relief">GTK_RELIEF_NORMAL</property>
 		  <property name="focus_on_click">True</property>
+		  <signal name="clicked" handler="OnClearParametersClicked" last_modification_time="Mon, 14 Nov 2005 13:19:44 GMT"/>
 		</widget>
 	      </child>
 	    </widget>
@@ -1656,6 +1669,26 @@ nestor.salceda@gmail.com</property>
 	  <property name="top_attach">0</property>
 	  <property name="bottom_attach">1</property>
 	  <property name="y_options">expand</property>
+	</packing>
+      </child>
+
+      <child>
+	<widget class="GtkButton" id="button17">
+	  <property name="visible">True</property>
+	  <property name="can_focus">True</property>
+	  <property name="label" translatable="yes">button17</property>
+	  <property name="use_underline">True</property>
+	  <property name="relief">GTK_RELIEF_NORMAL</property>
+	  <property name="focus_on_click">True</property>
+	  <signal name="clicked" handler="OnTestClicked" last_modification_time="Mon, 14 Nov 2005 23:31:40 GMT"/>
+	</widget>
+	<packing>
+	  <property name="left_attach">0</property>
+	  <property name="right_attach">1</property>
+	  <property name="top_attach">5</property>
+	  <property name="bottom_attach">6</property>
+	  <property name="x_options">fill</property>
+	  <property name="y_options"></property>
 	</packing>
       </child>
     </widget>

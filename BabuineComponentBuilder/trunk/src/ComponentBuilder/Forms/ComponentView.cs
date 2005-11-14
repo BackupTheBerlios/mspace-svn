@@ -17,6 +17,8 @@ namespace ComponentBuilder.Forms {
         
         FormView formView;
         MethodView methodView;
+       
+        ComponentDTO componentDTO;
         
         internal ComponentView () {
             componentView = new Glade.XML (null, "MainComponentBuilderForm.glade", "table5", null);
@@ -110,12 +112,17 @@ namespace ComponentBuilder.Forms {
         public void LoadDataForm (IDataTransferObject dto) {
             if (dto is ComponentDTO) {
                 ComponentDTO componentDTO = (ComponentDTO) dto; 
+                this.componentDTO = componentDTO;
                 componentNameEntry.Text = componentDTO.ComponentName;
                 exceptionManagerEntry.Text = componentDTO.ClassExceptionManager;
                 viewTableModel = new ViewTableModel (componentDTO.ViewCollection);
                 viewsTreeView.Model = viewTableModel.ListStore;
                 methodTableModel = new MethodTableModel (componentDTO.MethodCollection);
                 methodsTreeView.Model = methodTableModel.ListStore;
+            }
+            else {
+                //Lo ponemos en modo de creación de uno nuevo.
+                this.componentDTO = null;
             }
         }
 
@@ -129,12 +136,42 @@ namespace ComponentBuilder.Forms {
         }
 
         public IDataTransferObject GetDataForm () {
-            ComponentDTO componentDTO = new ComponentDTO ();
-            componentDTO.ComponentName = componentNameEntry.Text;
-            componentDTO.ClassExceptionManager = exceptionManagerEntry.Text;
-            componentDTO.ViewCollection = viewTableModel.ListModel;
-            componentDTO.MethodCollection = methodTableModel.ListModel;
-            return componentDTO;
+            if (ValidateForm ()) {
+                //Hay una referencia asociada para este componente.
+                if (this.componentDTO != null) {
+                    //Ejecución del modo edición.
+                    this.componentDTO.ComponentName = componentNameEntry.Text;
+                    this.componentDTO.ClassExceptionManager = exceptionManagerEntry.Text;
+                    this.componentDTO.ViewCollection = viewTableModel.ListModel;
+                    this.componentDTO.MethodCollection = methodTableModel.ListModel;
+                    //Recogemos y devolvemos los nuevos datos editados.
+                    return componentDTO;
+                }
+                //No existe una referencia asociada al componentDTO.
+                else {
+                    //Creamos uno nuevo.
+                    ComponentDTO componentDTO = new ComponentDTO ();
+                    componentDTO.ComponentName = componentNameEntry.Text;
+                    componentDTO.ClassExceptionManager = exceptionManagerEntry.Text;
+                    componentDTO.ViewCollection = viewTableModel.ListModel;
+                    componentDTO.MethodCollection = methodTableModel.ListModel;
+                    return componentDTO;
+                }
+            }
+            this.componentDTO = null;
+            return null;
+        }
+
+        private void OnTestClicked (object sender, EventArgs args) {
+            componentDTO = (ComponentDTO) GetDataForm ();
+        }
+        
+        private bool ValidateForm () {
+            //Diremos que un componente debe solo tener completo el nombre.
+            if (componentNameEntry.Text.Length != 0) {
+                return true;
+            }
+            return false;
         }
 
         public Widget GetWidget () {

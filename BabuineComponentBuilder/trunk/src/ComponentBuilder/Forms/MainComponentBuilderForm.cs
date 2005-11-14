@@ -105,8 +105,31 @@ namespace ComponentBuilder.Forms {
         private void OnAddComponentClicked (object sender, EventArgs args) {
             ProjectDTO projectDTO = (ProjectDTO) projectView.GetDataForm ();
             if (projectDTO != null) {
+                //Con esta linea decimos que vamos a añadir uno nuevo.
+                componentView.LoadDataForm (null);
                 ComponentDTO componentDTO = (ComponentDTO) componentView.GetDataForm ();
-                projectDTO.ComponentCollection.Add (componentDTO);
+                if (componentDTO != null) {
+                    projectDTO.ComponentCollection.Add (componentDTO);
+                    LoadDataForm (projectDTO);
+                    componentView.ClearForm ();
+                }
+            }
+        }
+
+        private void OnDeleteComponentClicked (object sender, EventArgs args) {
+            ComponentDTO componentDTO = (ComponentDTO) componentView.GetDataForm ();
+            if (componentDTO != null) {
+                ProjectDTO projectDTO = (ProjectDTO) projectView.GetDataForm ();
+                if (projectDTO != null) {
+                    foreach (ComponentDTO auxComponentDTO in projectDTO.ComponentCollection) {
+                        if (componentDTO.ComponentName.Equals (auxComponentDTO.ComponentName)) {
+                            //Igual se deberian añadir más condiciones
+                            componentDTO = auxComponentDTO;
+                            break;
+                        }
+                    }
+                }
+                projectDTO.ComponentCollection.Remove (componentDTO);
                 LoadDataForm (projectDTO);
                 componentView.ClearForm ();
             }
