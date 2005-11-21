@@ -3,6 +3,7 @@ using ComponentModel.Container;
 using ComponentModel.Interfaces;
 using ComponentModel.DTO;
 using ComponentBuilder.DTO;
+using ComponentBuilder.Interfaces;
 using Gtk;
 using Glade;
 
@@ -106,7 +107,8 @@ namespace ComponentBuilder.Forms {
             ProjectDTO projectDTO = (ProjectDTO) projectView.GetDataForm ();
             if (projectDTO != null) {
                 //Con esta linea decimos que vamos a añadir uno nuevo.
-                componentView.LoadDataForm (null);
+                //OJO AQUI!!
+                componentView.ActionState = ActionState.Create;
                 ComponentDTO componentDTO = (ComponentDTO) componentView.GetDataForm ();
                 if (componentDTO != null) {
                     projectDTO.ComponentCollection.Add (componentDTO);

@@ -7,7 +7,8 @@ using Gtk;
 using Glade;
 
 namespace ComponentBuilder.Forms {
-    internal class ComponentView : IViewHandler, IGtkView {
+    internal class ComponentView : IViewHandler, IGtkView, IViewHandlerActionState {
+        ActionState actionState;
         Glade.XML componentView;
         [Widget] TreeView viewsTreeView, methodsTreeView;
         [Widget] Entry componentNameEntry, exceptionManagerEntry;
@@ -40,11 +41,13 @@ namespace ComponentBuilder.Forms {
             viewsTreeView.Model = viewTableModel.ListStore;
             methodTableModel = new MethodTableModel ();
             methodsTreeView.Model = methodTableModel.ListStore;
+            actionState = ActionState.None;
         }
         
         /* GUI Events */
         private void OnNewMethodClicked (object sender, EventArgs args) {
             methodView = new MethodView ();
+            ActionState = ActionState.Create;
             methodView.LoadDataForm ((ComponentDTO) GetDataForm ());
             MethodDTO methodDTO = (MethodDTO) methodView.GetDataForm ();
             if (methodDTO != null) {
@@ -120,10 +123,6 @@ namespace ComponentBuilder.Forms {
                 methodTableModel = new MethodTableModel (componentDTO.MethodCollection);
                 methodsTreeView.Model = methodTableModel.ListStore;
             }
-            else {
-                //Lo ponemos en modo de creación de uno nuevo.
-                this.componentDTO = null;
-            }
         }
 
         public void ClearForm () {
@@ -137,32 +136,34 @@ namespace ComponentBuilder.Forms {
 
         public IDataTransferObject GetDataForm () {
             if (ValidateForm ()) {
-                //Hay una referencia asociada para este componente.
-                if (this.componentDTO != null) {
-                    //Ejecución del modo edición.
-                    this.componentDTO.ComponentName = componentNameEntry.Text;
-                    this.componentDTO.ClassExceptionManager = exceptionManagerEntry.Text;
-                    this.componentDTO.ViewCollection = viewTableModel.ListModel;
-                    this.componentDTO.MethodCollection = methodTableModel.ListModel;
-                    //Recogemos y devolvemos los nuevos datos editados.
-                    return componentDTO;
-                }
-                //No existe una referencia asociada al componentDTO.
-                else {
-                    //Creamos uno nuevo.
-                    ComponentDTO componentDTO = new ComponentDTO ();
-                    componentDTO.ComponentName = componentNameEntry.Text;
-                    componentDTO.ClassExceptionManager = exceptionManagerEntry.Text;
-                    componentDTO.ViewCollection = viewTableModel.ListModel;
-                    componentDTO.MethodCollection = methodTableModel.ListModel;
-                    return componentDTO;
+                switch (ActionState) {
+                    case ActionState.Create:
+                        ComponentDTO componentDTO = new ComponentDTO ();
+                        componentDTO.ComponentName = componentNameEntry.Text;
+                        componentDTO.ClassExceptionManager = exceptionManagerEntry.Text;
+                        componentDTO.ViewCollection = viewTableModel.ListModel;
+                        componentDTO.MethodCollection = methodTableModel.ListModel;
+                        ActionState = ActionState.None;
+                        return componentDTO;
+                    case ActionState.Edit:
+                        this.componentDTO.ComponentName = componentNameEntry.Text;
+                        this.componentDTO.ClassExceptionManager = exceptionManagerEntry.Text;
+                        this.componentDTO.ViewCollection = viewTableModel.ListModel;
+                        this.componentDTO.MethodCollection = methodTableModel.ListModel;
+                        ActionState = ActionState.None;
+                        return this.componentDTO; 
+                    case ActionState.None:
+                        break;
+                    default:
+                        ActionState = ActionState.None;
+                        break;
                 }
             }
-            this.componentDTO = null;
             return null;
         }
 
-        private void OnTestClicked (object sender, EventArgs args) {
+        private void RefreshComponent (object sender, EventArgs args) {
+            ActionState = ActionState.Edit;
             componentDTO = (ComponentDTO) GetDataForm ();
         }
         
@@ -177,5 +178,14 @@ namespace ComponentBuilder.Forms {
         public Widget GetWidget () {
             return componentView["table5"];
         }
-    }
+
+        public ActionState ActionState {
+            get {
+                return actionState;
+            }
+            set{
+                actionState = value;
+            }
+        }
+    }   
 }
