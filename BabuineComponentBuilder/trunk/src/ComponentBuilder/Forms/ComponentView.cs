@@ -162,7 +162,7 @@ namespace ComponentBuilder.Forms {
             return null;
         }
 
-        private void RefreshComponent (object sender, EventArgs args) {
+        private void OnTestClicked (object sender, EventArgs args) {
             ActionState = ActionState.Edit;
             componentDTO = (ComponentDTO) GetDataForm ();
         }
