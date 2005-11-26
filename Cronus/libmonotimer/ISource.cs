@@ -6,9 +6,10 @@ namespace libmonotimer
 	 * 	A XML-RPC source must implement all this functions in order to work remotely.
 	*/
 	public interface ISource {
-		SProject[] getProjects ();
+		SProject[] Projects { get; }
 		Project loadProject ();
 		void saveProject (SProject[] projects);
+		
 	}
 }
 

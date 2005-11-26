@@ -1,4 +1,4 @@
-using System.XML;
+using System.Xml.Serilization;
 using System.IO;
 
 namespace libmonotimer
@@ -6,26 +6,28 @@ namespace libmonotimer
 	public class XMLSource : ISource {
 
 		string filename;
+		SProject[] projects;
 
 		public XMLSource (string filename) {
 			this.filename = filename;
-			loadProject ();
+			this.projects = this.Projects;
 		}
 
-		SProject[] getProjects () {
-			SProject[] projects;
-			XmlSerializer serializer = new XmlSerializer (projects.getType ());
-			FileStream stream = new FileStream (FileMode.Open, FileAccess.Read);
-			projects = (SProject[]) serializer.Deserialize (stream);
-			return projects;
-		}
+		public SProject[] Projects {
+			get {
+				XmlSerializer serializer = new XmlSerializer (typeof (SProject[]));
+				FileStream stream = new FileStream (FileMode.Open, FileAccess.Read);
+				projects = (SProject[]) serializer.Deserialize (stream);
+				return projects;
+			}
+		}	
 		
 		Project loadProject () {
 		
 		}
 		
 		void saveProject (SProject[] projects) {
-			XmlSerializer serializer = new XmlSerializer (projets.getType ());
+			XmlSerializer serializer = new XmlSerializer (projets.GetType ());
 			FileStream stream = new FileStream (this.filename, FileMode.Create);
 			serializer.Serialize (stream, projects);
 		}
