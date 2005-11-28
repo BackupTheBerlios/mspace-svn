@@ -60,6 +60,7 @@
     
     <!-- Compila el componente y lo guarda en bin -->
     <target name="build" depends="create-skeleton">
+        <sysinfo verbose="true" />
         <csc target="library" output="${bin}/${component_name}.dll" debug="true"
         verbose="false">
             <sources basedir="${src_component}">

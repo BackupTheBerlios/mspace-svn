@@ -18,7 +18,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 using System;
-using ComponentModel.VO;
 using ComponentModel.DTO;
 using ComponentModel.Collections;
 
@@ -26,8 +25,6 @@ namespace ComponentModel.Interfaces {
     public delegate void VirtualMethod (ResponseMethodDTO responseMethodDTO);
     
     public interface IComponentModel {
-        [Obsolete("Property Deprecated.  Use ComponentModelDTO instead")]
-        ComponentModelVO VO {get;}
 
         ComponentModelDTO ComponentModelDTO {get;}
         VirtualMethod VirtualMethod {get; set;}
