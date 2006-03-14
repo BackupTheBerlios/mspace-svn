@@ -1,0 +1,28 @@
+#!/bin/bash
+
+BASE_PATH=/etc/HA/
+BIN_PATH=/usr/local/sbin/HA/
+PATH_LOG=/var/log/ha_log
+
+IFCONFIG=/sbin/ifconfig
+PING=/bin/ping
+
+SLEEP_TIME=15
+
+### Recursos de HA
+IFACES="eth0:0_10.1.1.1/255.255.0.0
+eth0:1_10.99.1.1/255.255.255.0
+eth1:0_10.20.1.12/255.255.0.0"
+
+SERVICES="bind9
+dhcp3-server"
+
+### Modulos de precheck de servicios
+IPS_SERVICE_PRECHECK=${BIN_PATH}ips_service_precheck.sh
+
+### Modulos de comprobacion de los recursos
+IP_CHECK=${BIN_PATH}ip_check.sh
+ROUTES_CHECK=${BIN_PATH}routes_check.sh
+FW_CHECK=${BIN_PATH}fw_check.sh
+SERVICE_CHECK=${BIN_PATH}service_check.sh
+

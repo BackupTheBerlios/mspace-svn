@@ -1,0 +1,84 @@
+#!/bin/bash
+
+#####################################
+# Script de init para la comprobacion
+# del nodoA y sustitucion en caso de
+# perdida.
+# 
+# AUTHOR: Luis Bosque
+# DATE:   20060309.
+# NAME:   remote_ha
+#
+
+
+BASE_PATH=/etc/HA/
+BIN_PATH=/usr/local/sbin/HA/
+CONF_FILE=${BASE_PATH}ha.cf
+REMOTE_HA_PIDFILE=/var/run/remote_ha.pid
+REMOTE_HA_SCRIPT=${BIN_PATH}remote_ha.sh
+
+#######
+# Comprobaciones basicas
+#
+if [ ! -f ${REMOTE_HA_SCRIPT} ]
+then
+        echo "No se encuentra el script de HA. Se suspende."
+        exit 1
+fi
+
+if [ ! -f ${CONF_FILE} ]
+then
+        echo "No se encuentra el script de HA. Se suspende."
+        exit 1
+else
+	. ${CONF_FILE}
+fi
+
+
+Usage ()
+{
+  PROGRAM="$0"
+  echo "Usage: ${PROGRAM} {start|stop|restart|status|help}"
+}
+
+. ${CONF_FILE}
+
+
+Start ()
+{
+	${REMOTE_HA_SCRIPT} &	
+}
+
+Stop ()
+{
+	echo "Stopping"
+}
+
+
+case "$1" in
+  start)
+        Start
+	sleep 5
+	ps ax | grep ha.sh |grep -v ps | grep -v grep |awk '{print $1}' > ${REMOTE_HA_PIDFILE}
+	;;
+  stop)
+	kill `cat ${REMOTE_HA_PIDFILE}`
+	rm ${REMOTE_HA_PIDFILE}
+        Stop
+        ;;
+  restart)
+        Stop
+	Start
+        ;;
+  status)
+	if [ -f ${REMOTE_HA_PIDFILE} ]
+	then
+		echo "OK"
+	else
+		echo "stopped"
+	fi
+	;;
+  *)
+        Usage
+	;;
+esac

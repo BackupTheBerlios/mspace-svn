@@ -1,0 +1,55 @@
+#!/bin/bash
+
+###################################
+# Script de init para las rutas.
+# 
+# AUTHOR: Luis Bosque
+# DATE:   20060309.
+# NAME:   routes
+#
+
+ROUTES_SCRIPT=/usr/local/sbin/routes.sh
+ROUTES_PIDFILE=/var/run/routes.pid
+
+######
+# Comprobaciones basicas
+#
+if test ! -f ${ROUTES_SCRIPT};
+then
+  echo "No se encuentra el script de las rutas. Se suspende."
+  exit 1
+else
+  . ${ROUTES_SCRIPT}
+fi
+
+
+case ${1} in
+  start)
+  	Rutas add
+	if [ ${?} = 0 ]
+	then
+		touch ${ROUTES_PIDFILE}
+	else
+		Rutas del > /dev/null
+		exit 1
+	fi
+	;;
+  stop)
+  	Rutas del
+	rm ${ROUTES_PIDFILE}
+	;;
+  restart)
+  	Rutas del
+	Rutas add
+	;;
+   status)
+	if [ -f ${ROUTES_PIDFILE} ]
+	then
+		echo "OK"
+	else
+		echo "stopped"
+	fi
+	;;
+  *)
+  	Usage
+esac

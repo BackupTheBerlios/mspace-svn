@@ -1,0 +1,90 @@
+#!/bin/bash
+
+#################################
+# Script de init para la HA.
+# 
+# AUTHOR: Luis Bosque
+# DATE:   20060309.
+# NAME:   ha
+#
+
+
+BASE_PATH=/etc/HA/
+BIN_PATH=/usr/local/sbin/HA/
+CONF_FILE=${BASE_PATH}ha.cf
+HA_PIDFILE=/var/run/ha.pid
+HA_SCRIPT=${BIN_PATH}ha.sh
+
+#######
+# Comprobaciones basicas
+#
+if [ ! -f ${HA_SCRIPT} ]
+then
+        echo "No se encuentra el script de HA. Se suspende."
+        exit 1
+fi
+
+if [ ! -f ${CONF_FILE} ]
+then
+        echo "No se encuentra el script de HA. Se suspende."
+        exit 1
+else
+	. ${CONF_FILE}
+fi
+
+
+Usage ()
+{
+  PROGRAM="$0"
+  echo "Usage: ${PROGRAM} {start|stop|restart|status|help}"
+}
+
+. ${CONF_FILE}
+
+
+Start ()
+{
+	${HA_SCRIPT} &	
+}
+
+Stop ()
+{
+	/etc/init.d/dhcp3-server stop
+	/etc/init.d/bind9 stop
+	/etc/init.d/firewall stop
+	/etc/init.d/routes stop
+	for i in ${IFACES}
+	do
+		IFACE=`echo ${i} |cut -d_ -f1`
+		${IFCONFIG} ${IFACE} down
+	done
+}
+
+
+case "$1" in
+  start)
+        Start
+	sleep 5
+	ps ax | grep ha.sh |grep -v ps | grep -v grep |awk '{print $1}' > ${HA_PIDFILE}
+	;;
+  stop)
+	kill `cat ${HA_PIDFILE}`
+	rm ${HA_PIDFILE}
+        Stop
+        ;;
+  restart)
+        Stop
+	Start
+        ;;
+  status)
+	if [ -f ${HA_PIDFILE} ]
+	then
+		echo "OK"
+	else
+		echo "stopped"
+	fi
+	;;
+  *)
+        Usage
+	;;
+esac

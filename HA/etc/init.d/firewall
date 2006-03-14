@@ -1,0 +1,56 @@
+#!/bin/bash
+
+###################################
+# Script de init para el Firewall.
+# 
+# AUTHOR: Luis Bosque
+# DATE:   20060309.
+# NAME:   firewall
+#
+
+
+FIREWALL_SCRIPT=/usr/local/sbin/firewall/firewall.sh
+FW_PIDFILE=/var/run/firewall.pid
+
+#######
+# Comprobaciones basicas
+#
+if test ! -f ${FIREWALL_SCRIPT};
+then
+	echo "No se encuentra el script del firewall. Se suspende."
+	exit 1
+else
+	. ${FIREWALL_SCRIPT}
+fi
+
+
+case "${1}" in
+  start)
+        Start
+        if [ ${?} = 0 ]
+	then
+		touch ${FW_PIDFILE}
+	fi	
+	;;
+  stop)
+        Stop
+        if [ ${?} = 0 ]
+	then
+		rm -f ${FW_PIDFILE}
+	fi	
+	;;
+  restart)
+        Stop
+	Start
+        ;;
+  status)
+	if [ -f ${FW_PIDFILE} ]
+	then
+		echo "OK"
+	else
+		echo "stopped"
+	fi
+	;;
+  *)
+        Usage
+esac
