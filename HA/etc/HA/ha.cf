@@ -30,3 +30,10 @@ SERVICE_CHECK=${BIN_PATH}service_check.sh
 STONITH_USER=
 STONITH_PRIVATE_KEY=
 STONITH_COMMAND=
+
+### Datos para el envio de mails cuando se realiza el failover
+# Direcciones de correo a las que se les envia el mail, separadas por un espacio
+MAIL=/usr/bin/mail
+MAILTO=""
+SUBJECT="Failover a la maquina ${HOSTNAME}"
+BODY="`date +'A las %X del %x'` el nodo Activo ha caido. La máquina Activa ahora es ${HOSTNAME}"

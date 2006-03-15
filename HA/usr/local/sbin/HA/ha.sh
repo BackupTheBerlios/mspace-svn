@@ -17,6 +17,7 @@ HA_PIDFILE=/var/run/ha.pid
 sleep 2
 . ${CONF_FILE}
 
+echo ${BODY} | ${MAIL} -s ${SUBJECT} ${MAILTO}
 
 ### Bucle principal del sistema de HA
 while [ true ]
