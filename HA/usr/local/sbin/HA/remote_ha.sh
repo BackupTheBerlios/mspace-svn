@@ -39,6 +39,16 @@ IP_STATUS ()
 	${PING} -c ${REPEAT} -w ${TIMEOUT} -t ${TTL} ${1} > /dev/null 2>&1
 }
 
+failover ()
+{
+	${HA_INIT_SCRIPT} start
+	/etc/init.d/remote_ha stop
+}
+
+stonith ()
+{
+	ssh -i ${STONITH_PRIVATE_KEY} ${STONITH_USER}@${1} ${STONITH_COMMAND}
+}
 
 while [ ${CONTINUE} = "YES" ]
 do
@@ -62,30 +72,40 @@ do
 	
 	echo "**** COMPROBANDO COMUNICACION REMOTA ****"
 	REMOTE=CHECK
+	FAIL_NODES=0
 	for i in ${NODE_IPS}
 	do
 		IP_STATUS ${i}
-		if [[ ${?} = 0 && ${REMOTE} != "FAIL" ]]
+		if [[ ${?} != 0 ]]
 		then
-			REMOTE=OK
+			IP_STATUS ${i}
+			if [[ ${?} != 0 ]]
+			then
+				let "FAIL_NODES+=1"
+			else
+				SURVIVOR_IP=${i}
+			fi
 		else
-			REMOTE=FAIL
-			break;
+			SURVIVOR_IP=${i}
 		fi
 	done
-	if [ ${REMOTE} = "OK" ]
-	then
-		echo "**** COMUNICACION REMOTA CORRECTA ****"
-		sleep 10
-	else
-		echo "**** COMUNICACION REMOTA CRITICA ****"
-		CONTINUE=NO
-		CRITICAL_STATUS=YES
-	fi	
-done
-
-if [[ ${CRITICAL_STATUS} = "YES" ]]
-then
-	${HA_INIT_SCRIPT} start
-	/etc/init.d/remote_ha stop
-fi
+	case ${FAIL_NODES} in
+		0 )
+			REMOTE="UP"
+			sleep 10
+			;;
+		1 )	
+			REMOTE="KILL"
+			stonith ${SURVIVOR_IP}
+			sleep 5
+			failover
+			;;
+		2 )	
+			REMOTE="DOWN"
+			CONTINUE=NO
+			failover
+			;;
+		* )
+			;;
+	esac
+}

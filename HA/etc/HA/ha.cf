@@ -26,3 +26,7 @@ ROUTES_CHECK=${BIN_PATH}routes_check.sh
 FW_CHECK=${BIN_PATH}fw_check.sh
 SERVICE_CHECK=${BIN_PATH}service_check.sh
 
+### Datos para realizar el stonith
+STONITH_USER=
+STONITH_PRIVATE_KEY=
+STONITH_COMMAND=
