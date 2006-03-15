@@ -9,6 +9,11 @@ PING=/bin/ping
 
 SLEEP_TIME=15
 
+
+#### IPs que usaremos como maquinas de referencia para ver si la red funciona correctamente
+SECURE_IPS="ip_fija1
+ip_fija2"
+
 ### Recursos de HA
 IFACES="eth0:0_10.1.1.1/255.255.0.0
 eth0:1_10.99.1.1/255.255.255.0
@@ -32,8 +37,8 @@ STONITH_PRIVATE_KEY=
 STONITH_COMMAND=
 
 ### Datos para el envio de mails cuando se realiza el failover
-# Direcciones de correo a las que se les envia el mail, separadas por un espacio
 MAIL=/usr/bin/mail
+# Direcciones de correo a las que se les envia el mail, separadas por un espacio
 MAILTO=""
 SUBJECT="Failover a la maquina ${HOSTNAME}"
 BODY="`date +'A las %X del %x'` el nodo Activo ha caido. La máquina Activa ahora es ${HOSTNAME}"

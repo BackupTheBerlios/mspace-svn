@@ -26,17 +26,13 @@ TTL=1
 CONTINUE=YES
 CRITICAL_STATUS=NO
 
-CHECK_IPS="ip_fija1
-ip_fija2"
-
-NODE_IPS="virtual_ip1
-virtual_ip2
-virtual_ip3"
+TOTAL_SERVICE_IPS=`echo ${IFACES} |wc -w`
 
 
 IP_STATUS ()
 {
-	${PING} -c ${REPEAT} -w ${TIMEOUT} -t ${TTL} ${1} > /dev/null 2>&1
+        HOST=`echo ${1} |cut -d_ -f2 |cut -d/ -f1`
+	${PING} -c ${REPEAT} -w ${TIMEOUT} -t ${TTL} ${HOST} > /dev/null 2>&1
 }
 
 failover ()
@@ -57,7 +53,7 @@ do
 	while [[ ${LOCAL} != "OK" ]]
 	do
 		LOCAL=CHECK
-		for i in ${CHECK_IPS}
+		for i in ${SECURE_IPS}
 		do
 			IP_STATUS ${i}
 			if [[ ${?} = 0 && ${LOCAL} != "FAIL" ]]
@@ -72,8 +68,8 @@ do
 	
 	echo "**** COMPROBANDO COMUNICACION REMOTA ****"
 	REMOTE=CHECK
-	FAIL_NODES=0
-	for i in ${NODE_IPS}
+	FAIL_IPS=0
+	for i in ${IFACES}
 	do
 		IP_STATUS ${i}
 		if [[ ${?} != 0 ]]
@@ -81,7 +77,7 @@ do
 			IP_STATUS ${i}
 			if [[ ${?} != 0 ]]
 			then
-				let "FAIL_NODES+=1"
+				let "FAIL_IPS+=1"
 			else
 				SURVIVOR_IP=${i}
 			fi
@@ -89,23 +85,20 @@ do
 			SURVIVOR_IP=${i}
 		fi
 	done
-	case ${FAIL_NODES} in
-		0 )
-			REMOTE="UP"
-			sleep 10
-			;;
-		1 )	
-			REMOTE="KILL"
-			stonith ${SURVIVOR_IP}
-			sleep 5
-			failover
-			;;
-		2 )	
-			REMOTE="DOWN"
-			CONTINUE=NO
-			failover
-			;;
-		* )
-			;;
-	esac
+	
+	if [[ ${FAIL_IPS} = 0 ]]
+	then
+		REMOTE="UP"
+		sleep 10
+	elif [[ ${FAIL_IPS} = ${TOTAL_SERVICE_IPS} ]]
+	then
+		REMOTE="DOWN"
+		CONTINUE=NO
+		failover
+	else
+		REMOTE="KILL"
+		stonith ${SURVIVOR_IP}
+		sleep 5
+		failover
+	fi
 }
