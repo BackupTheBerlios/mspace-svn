@@ -11,7 +11,7 @@ client = GConf::Client.default
 if client.dir_exists?(gconfPath.chomp("\/"))
 	config = readConfig(client)
 else
-	WindowPreferences.new(client, false)
+	writeConfig(client, gconfPath, "user", "pass", 2, true )
 end
 
 initState = true
