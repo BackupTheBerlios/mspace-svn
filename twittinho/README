@@ -1,0 +1,19 @@
+Las dependencias de este software son las siguientes:
+
+* ruby-gnome2 >= 0.16
+* ruby-libnotify >= 0.32
+* Bindng de twitter en ruby (http://rubyforge.org/projects/twitter/)
+
+Este software todavía está en su versión Alpha. Es usable, solo que requiere algunos cuidados para ejecutarlo.
+Para iniciar el software hay que ejecutar lo siguiente:
+
+$ ruby controller.rb
+
+Cualquier duda, bug, comentario o sugerencia, por favor, comentar en la siguiente página:
+
+http://lbosque.wordpress.com/twittinho/
+
+En esa misma página se puede encontrar la información del proyecto.
+
+
+
