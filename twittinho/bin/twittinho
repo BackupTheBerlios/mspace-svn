@@ -1,9 +1,9 @@
+#! /usr/bin/ruby1.8
+
 $KCODE = 'u'
 
 require 'gconf2'
-require 'gui'
-require 'model'
-require 'nucleo'
+require 'twittinho'
 
 gconfPath = "/apps/twitinho/"
 client = GConf::Client.default

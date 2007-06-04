@@ -4,7 +4,6 @@ require 'gtk2'
 require 'twitter'
 require 'curb'
 require 'fileutils'
-require 'model'
 
 class Nucleo
 
