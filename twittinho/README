@@ -6,7 +6,7 @@ Las dependencias de este software son las siguientes:
 
 Este software todavía está en su versión Alpha. Es usable, solo que requiere algunos cuidados para instalarlo y ejecutarlo.
 
-Para instalar ruby-gnome2 (probablemente hará falta instalar varias librerias de desarrollo de gnome):
+La versión 0.16 de ruby-gnome2 todavía no está disponible en ubuntu. Acaba de ser empaquetado en la rama unstable de Debian. En caso de que no esté empaquetado para tu distribución, habrá que compilar los fuentes. Para compilarlo probablemente hará falta instalar varias librerias de desarrollo de gnome:
 
 $ wget http://sourceforge.net/project/downloading.php?group_id=53614&use_mirror=ufpr&filename=ruby-gnome2-all-0.16.0.tar.gz&31758507
 $ cd ruby-gnome2-all-0.16.0
