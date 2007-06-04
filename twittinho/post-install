@@ -16,7 +16,7 @@ File.open("#{p.realpath}/bin/twittinho", 'r+') { |f|
 	lines = f.readlines
 	lines.each do |line|
 		if line.include? "## PREFIX ##"
-			line.replace "prefix = #{p.realpath}"
+			line.replace "prefix = \"#{p.realpath}\""
 		end
 	end
 	f.pos = 0

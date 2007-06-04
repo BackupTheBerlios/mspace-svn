@@ -4,15 +4,42 @@ Las dependencias de este software son las siguientes:
 * ruby-libnotify >= 0.32
 * Bindng de twitter en ruby (http://rubyforge.org/projects/twitter/)
 
-Este software todavía está en su versión Alpha. Es usable, solo que requiere algunos cuidados para ejecutarlo.
+Este software todavía está en su versión Alpha. Es usable, solo que requiere algunos cuidados para instalarlo y ejecutarlo.
 
-Para instalar la aplicación, ejecutar lo siguiente:
+Para instalar ruby-gnome2 (probablemente hará falta instalar varias librerias de desarrollo de gnome):
 
+$ wget http://sourceforge.net/project/downloading.php?group_id=53614&use_mirror=ufpr&filename=ruby-gnome2-all-0.16.0.tar.gz&31758507
+$ cd ruby-gnome2-all-0.16.0
+$ ruby extconf.rb
+$ make
+# make install
+
+
+Antes de instalar el binding de twitter para ruby hay que tener instalado rubygems que es un sistema de gestión de paquetes de ruby (http://rubyforge.org/projects/rubygems/). En ubuntu el paquete se llama rubygems. Para instalar el binding de twitter.
+
+$ wget http://rubyforge.org/frs/download.php/20878/twitter-0.1.1.gem
+# gem install twitter-0.1.1.gem
+
+Para instalar ruby-libnotify:
+
+$ wget http://ruby-libnotify.rubyforge.org/ruby-libnotify-0.3.2.tar.bz2
+$ tar xjf ruby-libnotify-0.3.2.tar.bz2
+$ cd ruby-libnotify-0.3.2
+$ ruby extconf.rb
+$ make
+# make install
+
+
+Para instalar Twittinho:
+
+$ svn checkout http://svn.berlios.de/svnroot/repos/mspace/twittinho
+$ cd twittinho
 $ ruby setup.rb config --prefix=/usr/local	(El parametro --prefix es opcional. Por defecto el prefix es /usr)
 $ ruby setup.rb setup
 # ruby setup.rb install
 
-Una vez instalado, para ejecutar:
+
+Para ejecutar twittinho:
 
 $ twittinho
 
@@ -21,6 +48,3 @@ Cualquier duda, bug, comentario o sugerencia, por favor, comentar en la siguient
 http://lbosque.wordpress.com/twittinho/
 
 En esa misma página se puede encontrar la información del proyecto.
-
-
-
