@@ -5,9 +5,16 @@ Las dependencias de este software son las siguientes:
 * Bindng de twitter en ruby (http://rubyforge.org/projects/twitter/)
 
 Este software todavía está en su versión Alpha. Es usable, solo que requiere algunos cuidados para ejecutarlo.
-Para iniciar el software hay que ejecutar lo siguiente:
 
-$ ruby controller.rb
+Para instalar la aplicación, ejecutar lo siguiente:
+
+$ ruby setup.rb config --prefix=/usr/local	(El parametro --prefix es opcional. Por defecto el prefix es /usr)
+$ ruby setup.rb setup
+# ruby setup.rb install
+
+Una vez instalado, para ejecutar:
+
+$ twittinho
 
 Cualquier duda, bug, comentario o sugerencia, por favor, comentar en la siguiente página:
 
