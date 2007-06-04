@@ -622,7 +622,7 @@ module FileOperations
   def install(from, dest, mode, prefix = nil)
     $stderr.puts "install #{from} #{dest}" if verbose?
     return if no_harm?
-
+    
     realdest = prefix ? prefix + File.expand_path(dest) : dest
     realdest = File.join(realdest, File.basename(from)) if File.dir?(realdest)
     str = File.binread(from)

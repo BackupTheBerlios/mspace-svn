@@ -5,6 +5,8 @@ $KCODE = 'u'
 require 'gconf2'
 require 'twittinho'
 
+## PREFIX ##
+
 gconfPath = "/apps/twitinho/"
 client = GConf::Client.default
 
@@ -16,7 +18,7 @@ end
 
 initState = true
 
-nucleo = Nucleo.new(config)
+nucleo = Nucleo.new(config, prefix)
 mainWindow = MainWindow.new(nucleo, config)
 statusIcon = StatusIcon.new(mainWindow, client)
 

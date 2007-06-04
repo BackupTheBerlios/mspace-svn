@@ -7,7 +7,8 @@ require 'fileutils'
 
 class Nucleo
 
-	def initialize(config)
+	def initialize(config, prefix)
+		@prefix = prefix
 		@connection = connect(config["user"], config["password"])
 		@lastStatusID = 0
 		@listStore = Gtk::ListStore.new(Gdk::Pixbuf, String)
@@ -73,7 +74,7 @@ class Nucleo
         	if File.exist?(face(user.screen_name))
         	        return
         	else
-			from = ENV['HOME'] + '/.twitinho/default_face.png'
+			from = @prefix + '/share/twittinho/images/default_face.png'
 			FileUtils.copy(from, face(user.screen_name))
 			Thread.new do
 	        	        sleep(1)

@@ -1,0 +1,25 @@
+require 'pathname'
+
+config_prefix = get_config('prefix')
+
+p = Pathname.new(config_prefix)
+
+prefix = ''
+
+if p.realpath == '/usr'
+	prefix = "#{config_prefix}/lib/ruby/"
+else
+	prefix = "#{config_prefix}/lib/site_ruby/"
+end
+	
+File.open("#{p.realpath}/bin/twittinho", 'r+') { |f|
+	lines = f.readlines
+	lines.each do |line|
+		if line.include? "## PREFIX ##"
+			line.replace "prefix = #{p.realpath}"
+		end
+	end
+	f.pos = 0
+	f.print lines
+	f.truncate(f.pos)
+}
